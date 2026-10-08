@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <title>Schild Adblocker</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <img src="../icons/icon32.png" alt="" width="24" height="24">
+    <h1>Schild</h1>
+    <label class="switch" title="Adblocker komplett ein-/ausschalten">
+      <input type="checkbox" id="global">
+      <span></span>
+    </label>
+  </header>
+
+  <main>
+    <section class="site">
+      <div class="host" id="host">–</div>
+      <div class="status" id="status"></div>
+    </section>
+
+    <section class="count">
+      <div class="number" id="blocked">0</div>
+      <div class="label">blockierte Anfragen auf dieser Seite</div>
+    </section>
+
+    <button id="siteToggle" class="primary">Auf dieser Seite deaktivieren</button>
+    <p class="reload" id="reload" hidden>Seite neu laden, um die Änderung zu sehen.
+      <button id="reloadBtn" class="link">Jetzt neu laden</button></p>
+
+    <div class="actions">
+      <button id="picker">Element ausblenden</button>
+      <button id="options">Einstellungen</button>
+    </div>
+  </main>
+
+  <footer id="footer"></footer>
+  <script src="popup.js" type="module"></script>
+</body>
+</html>
