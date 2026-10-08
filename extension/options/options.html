@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Schild – Einstellungen</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <header>
+    <img src="../icons/icon48.png" alt="" width="40" height="40">
+    <div>
+      <h1>Schild Adblocker</h1>
+      <p class="sub">Einstellungen</p>
+    </div>
+  </header>
+
+  <main>
+    <section id="permissionBox" class="card warn" hidden>
+      <h2>Zugriff auf Webseiten erlauben</h2>
+      <p>Damit Schild Werbung auf allen Webseiten ausblenden kann, braucht es Zugriff auf die Seiten.
+        Schild liest dabei keine Daten aus und sendet nichts ins Internet.</p>
+      <button id="grant" class="primary">Zugriff erlauben</button>
+    </section>
+
+    <section id="errorBox" class="card warn" hidden>
+      <h2>Hinweis</h2>
+      <p id="errorText"></p>
+    </section>
+
+    <section class="card">
+      <h2>Schutz</h2>
+      <label class="row"><input type="checkbox" id="enabled"> <span><b>Schild aktiv</b><small>Ausschalten pausiert alle Filter auf allen Seiten.</small></span></label>
+      <label class="row"><input type="checkbox" id="popupBlocking"> <span><b>Pop-up- und Pop-under-Blocker</b><small>Schließt Werbe-Fenster, die Seiten ungefragt öffnen.</small></span></label>
+      <label class="row"><input type="checkbox" id="youtube"> <span><b>YouTube-Werbung</b><small>Entfernt Video-Werbung und überspringt Werbeclips automatisch.</small></span></label>
+    </section>
+
+    <section class="card">
+      <h2>Filterlisten</h2>
+      <div id="lists"></div>
+      <p class="hint">Die Listen sind in die Erweiterung eingebaut und werden mit jedem Update der Erweiterung aktualisiert.</p>
+    </section>
+
+    <section class="card">
+      <h2>Ausnahmen (Seiten ohne Blocker)</h2>
+      <p class="hint">Eine Domain pro Zeile, z.&nbsp;B. <code>example.com</code>. Gilt auch für Subdomains.</p>
+      <textarea id="allowlist" rows="6" spellcheck="false" placeholder="example.com"></textarea>
+      <button id="saveAllowlist" class="primary">Ausnahmen speichern</button>
+      <span class="saved" id="allowlistSaved" hidden>Gespeichert ✓</span>
+    </section>
+
+    <section class="card">
+      <h2>Eigene Filter</h2>
+      <p class="hint">Adblock-Plus-Syntax, ein Filter pro Zeile. Beispiele:<br>
+        <code>||werbung.example.com^</code> – Domain blockieren<br>
+        <code>example.com##.werbebanner</code> – Element auf einer Seite ausblenden<br>
+        <code>##.sponsored-box</code> – Element überall ausblenden<br>
+        <code>@@||example.com/ad.js</code> – Ausnahme</p>
+      <textarea id="customFilters" rows="10" spellcheck="false" placeholder="! Kommentar"></textarea>
+      <button id="saveFilters" class="primary">Filter speichern</button>
+      <span class="saved" id="filtersSaved" hidden>Gespeichert ✓</span>
+      <ul id="filterErrors" class="errors"></ul>
+    </section>
+
+    <section class="card">
+      <h2>Sichern &amp; Wiederherstellen</h2>
+      <div class="buttons">
+        <button id="export">Einstellungen exportieren</button>
+        <label class="button">Einstellungen importieren<input type="file" id="import" accept="application/json" hidden></label>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Statistik</h2>
+      <p id="stats"></p>
+    </section>
+  </main>
+  <script src="options.js" type="module"></script>
+</body>
+</html>

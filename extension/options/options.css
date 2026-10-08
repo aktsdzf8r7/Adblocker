@@ -1,0 +1,31 @@
+:root {
+  --bg: #f8f9fa; --fg: #202124; --muted: #5f6368; --card: #ffffff; --line: #dadce0;
+  --accent: #d93025; --warn-bg: #fef7e0; --warn-line: #f9ab00;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #17181a; --fg: #e8eaed; --muted: #9aa0a6; --card: #202124; --line: #3c4043; --accent: #f28b82; --warn-bg: #3a3000; --warn-line: #fdd663; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+header { display: flex; align-items: center; gap: 14px; max-width: 760px; margin: 0 auto; padding: 28px 16px 8px; }
+h1 { margin: 0; font-size: 24px; }
+.sub { margin: 0; color: var(--muted); }
+main { max-width: 760px; margin: 0 auto; padding: 8px 16px 48px; display: grid; gap: 16px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; }
+.card.warn { background: var(--warn-bg); border-color: var(--warn-line); }
+h2 { margin: 0 0 10px; font-size: 17px; }
+.row { display: flex; gap: 12px; align-items: flex-start; padding: 8px 0; cursor: pointer; }
+.row + .row { border-top: 1px solid var(--line); }
+.row input { margin-top: 4px; width: 18px; height: 18px; accent-color: var(--accent); flex: none; }
+.row small { display: block; color: var(--muted); font-size: 13px; }
+.row .meta { color: var(--muted); font-size: 12px; }
+.hint { color: var(--muted); font-size: 13px; }
+code { background: var(--bg); border: 1px solid var(--line); border-radius: 4px; padding: 0 4px; font-size: 13px; }
+textarea { width: 100%; font: 13px/1.5 ui-monospace, SFMono-Regular, Consolas, monospace; background: var(--bg); color: var(--fg); border: 1px solid var(--line); border-radius: 8px; padding: 10px; resize: vertical; margin-bottom: 10px; }
+button, .button { font: inherit; cursor: pointer; border-radius: 8px; border: 1px solid var(--line); background: var(--bg); color: var(--fg); padding: 8px 14px; display: inline-block; }
+button.primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+@media (prefers-color-scheme: dark) { button.primary { color: #202124; } }
+.buttons { display: flex; gap: 10px; flex-wrap: wrap; }
+.saved { margin-left: 10px; color: #188038; font-size: 14px; }
+.errors { color: var(--accent); font-size: 13px; padding-left: 18px; }
