@@ -1,0 +1,248 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+  "name": "Fokuskanone Beta",
+  "starSystem": "SolarSystem",
+  "canShowOnTitle": false,
+  "Base": {
+    "surfaceSize": 27.0,
+    "surfaceGravity": 4,
+    "gravityFallOff": "linear",
+    "showMinimap": false
+  },
+  "Orbit": {
+    "primaryBody": "Interstellare Sonden Aussendungseinheit",
+    "isMoon": true,
+    "semiMajorAxis": 340,
+    "eccentricity": 0,
+    "inclination": 0,
+    "longitudeOfAscendingNode": 0,
+    "argumentOfPeriapsis": 0,
+    "trueAnomaly": 120,
+    "axialTilt": 0,
+    "siderealPeriod": 0,
+    "dottedOrbitLine": true,
+    "tint": {
+      "r": 255,
+      "g": 170,
+      "b": 120,
+      "a": 255
+    }
+  },
+  "HeightMap": {
+    "heightMap": "planets/assets/terrain/fokus_b_height.png",
+    "textureMap": "planets/assets/terrain/fokus_b_color.png",
+    "minHeight": 22.0,
+    "maxHeight": 27.0,
+    "resolution": 128,
+    "smoothness": 0.1,
+    "metallic": 0.2
+  },
+  "MapMarker": {
+    "enabled": true
+  },
+  "ShipLog": {
+    "mapMode": {
+      "remove": true
+    }
+  },
+  "Props": {
+    "details": [
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_GravityCannon/Geometry_GravityCannon/ControlledByProxy_OPC/Structure_NOM_GravityCannon_BH",
+        "position": {
+          "x": 0.443,
+          "y": 25.378,
+          "z": 0.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "scale": 0.55,
+        "rename": "Fokuskanone_Beta_Struktur",
+        "keepLoaded": true
+      },
+      {
+        "path": "CaveTwin_Body/Sector_CaveTwin/Sector_SouthHemisphere/Sector_EscapePod/Interactables_EscapePod/EscapePod_VisibleFrom_Far/DistressBeaconTransmitter/LightBeam",
+        "position": {
+          "x": 0.514,
+          "y": 29.427,
+          "z": 0.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "scale": 2.5,
+        "rename": "Fokusstrahl_Beta",
+        "keepLoaded": true,
+        "activationCondition": "ZEKISAE_ENTZUG"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector Quantum Pole Path/Fragment QuantumPolePath 2/Interactables_QPP2/Prefab_NOM_GravityCrystal",
+        "position": {
+          "x": 3.292,
+          "y": 24.261,
+          "z": -6.693
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 336.9,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Phasenkoppler_Beta",
+        "deactivationCondition": "ZEKISAE_KOPPLER_B",
+        "blinkWhenActiveChanged": true
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector Quantum Pole Path/Fragment QuantumPolePath 2/Interactables_QPP2/Prefab_NOM_GravityCrystal_Cracked",
+        "position": {
+          "x": 3.26,
+          "y": 24.022,
+          "z": -6.627
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 336.9,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Phasenkoppler_Beta_getrennt",
+        "activationCondition": "ZEKISAE_KOPPLER_B"
+      },
+      {
+        "path": "TowerTwin_Body/Sector_TowerTwin/Sector_TimeLoopInterior/Interactables_TimeLoopInterior/WarpCoreSocket/Prefab_NOM_WarpCoreVessel/Effects_NOM_AdvancedWarpCore/Effects_NOM_WarpParticlesWhite",
+        "position": {
+          "x": 3.584,
+          "y": 26.411,
+          "z": -7.286
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "scale": 0.3,
+        "rename": "Kopplerlicht_Beta",
+        "deactivationCondition": "ZEKISAE_KOPPLER_B"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
+        "position": {
+          "x": -7.257,
+          "y": 23.084,
+          "z": 7.659
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Fokuslampe_Beta_1"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
+        "position": {
+          "x": -7.257,
+          "y": 23.084,
+          "z": -7.659
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Fokuslampe_Beta_2"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
+        "position": {
+          "x": 8.058,
+          "y": 22.817,
+          "z": -7.659
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Fokuslampe_Beta_3"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
+        "position": {
+          "x": 8.058,
+          "y": 22.817,
+          "z": 7.659
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Fokuslampe_Beta_4"
+      }
+    ],
+    "translatorText": [
+      {
+        "type": "computer",
+        "xmlFile": "planets/text/Fokus_Beta.xml",
+        "position": {
+          "x": -2.448,
+          "y": 24.409,
+          "z": 6.706
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 156.7,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Computer_Fokus_Beta"
+      }
+    ]
+  },
+  "Volumes": {
+    "interactionVolumes": [
+      {
+        "position": {
+          "x": 3.454,
+          "y": 25.456,
+          "z": -7.022
+        },
+        "radius": 1.5,
+        "range": 3,
+        "prompt": "Phasenkoppler trennen",
+        "condition": "ZEKISAE_KOPPLER_B",
+        "persistent": true,
+        "reusable": false,
+        "audio": "NomaiPowerSwitch",
+        "rename": "Koppler_Beta_Volumen"
+      }
+    ],
+    "revealVolumes": [
+      {
+        "position": {
+          "x": 0.496,
+          "y": 28.427,
+          "z": 0.0
+        },
+        "radius": 30,
+        "revealOn": "enter",
+        "reveals": [
+          "ZEKISAE_FOKUS_FOUND"
+        ]
+      }
+    ]
+  }
+}

@@ -73,7 +73,7 @@ X `1-0-5-4`, Y `2-5-3`, Z `0-3-4-1`. Wer mit dem Nomai-Schiff aus Dark Bramble h
 
 | Problem in 2.0 | Behebung |
 | --- | --- |
-| Props schwebten ein Stück über dem Boden oder steckten darin. Das Terrain selbst stimmt auf den Bauplätzen exakt; Ursache sind die Drehpunkte der Vanilla-Props, die nicht immer am Boden liegen. | Pro Prop-Typ gibt es jetzt eine Bodenkorrektur (Tabelle `GROUND` in `tools/schleier_build.py`). Einzelne Werte lassen sich nach einem Test leicht nachjustieren. |
+| Props schwebten ein Stück über dem Boden oder steckten darin. Das Terrain selbst stimmt auf den Bauplätzen exakt; Ursache sind die Drehpunkte der Vanilla-Props, die nicht immer am Boden liegen. | Pro Prop-Typ gibt es jetzt eine Bodenkorrektur (Tabelle `GROUND` in `tools/nh_props.py`). Einzelne Werte lassen sich nach einem Test leicht nachjustieren. |
 | Nomai-Texte liefen über den Rand der Whiteboards. NH verteilt die Spiralen in einem 5,4 × 3,6 m großen Feld, eine Tafel ist deutlich kleiner. | Whiteboards tragen höchstens 3 Blöcke; lange Gespräche liegen als Bodenschrift auf freien Plätzen. Der Validator prüft beides. |
 | Zwei Texte waren nicht lesbar: Lose Schriftrollen lassen sich erst in einer Tafel übersetzen. Auf dem Mond gab es keine Tafel, auf Schleiersee war sie schon belegt. | Beide Texte stehen jetzt auf eigenen Whiteboards. |
 | Ilex' Text über das „Augenlid“ lag unter Wasser. | Liegt jetzt trocken am Ufer neben dem Warp. |
@@ -107,7 +107,7 @@ Terrain, Texturen, Logbuchbilder und alle JSON-Konfigurationen werden von `tools
 pip install numpy pillow jsonschema lxml
 python tools/schleier_texts.py Zeki.Schleiersystem
 python tools/schleier_build.py Zeki.Schleiersystem
-python tools/schleier_validate.py Zeki.Schleiersystem
+python tools/nh_validate.py Zeki.Schleiersystem
 ```
 
 Der Validator prüft alle Dateien gegen die offiziellen New-Horizons-Schemas und kontrolliert zusätzlich Fact-IDs, Logbuch-Verknüpfungen, Warp-Paare, Projektionssteine, Dateiverweise, Prop-Pfade, Blockgrenzen für Tafeln, den Freiraum um Bodenschriften, Bramble-Verknüpfungen (inklusive Endlosschleifen) und die Platzierung jedes Objekts auf dem Terrain.

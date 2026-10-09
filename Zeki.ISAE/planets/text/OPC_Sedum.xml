@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Computer im Kontrollmodul der Orbitalen Sondenkanone (Hinweis auf die Aussendungseinheit) -->
+<NomaiObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/text_schema.xsd">
+  <TextBlock>
+    <ID>1</ID>
+    <Text>Notiz von Sedum: Die Kanone ist fertig. Sie wird das Signal des Auges in diesem System suchen.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>2</ID>
+    <ParentID>1</ParentID>
+    <Text>Aber dieses System ist klein. Wenn das Auge nicht hier ist, brauchen wir eine Sonde, die zu anderen Sternen fliegt.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>3</ID>
+    <ParentID>2</ParentID>
+    <Text>Mein Entwurf dafür, die Interstellare Sonden Aussendungseinheit, braucht mehr Energie, als ein lebender Stern hergibt.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>4</ID>
+    <ParentID>3</ParentID>
+    <Text>Pye hat ihn verboten. Ich baue ihn trotzdem – dort, wo die Sonne am hellsten ist.</Text>
+  </TextBlock>
+  <ShipLogConditions>
+    <RevealFact>
+      <FactID>ZEKISAE_SEDUM_PLAN</FactID>
+      <Condition>1,2,3</Condition>
+    </RevealFact>
+    <RevealFact>
+      <FactID>ZEKISAE_RUMOR</FactID>
+      <Condition>1,2,3,4</Condition>
+    </RevealFact>
+  </ShipLogConditions>
+</NomaiObject>

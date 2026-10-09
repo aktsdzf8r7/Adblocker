@@ -1,0 +1,20 @@
+{
+  "$schema": "https://raw.githubusercontent.com/ow-mods/owml/master/schemas/config_schema.json",
+  "enabled": true,
+  "settings": {
+    "onlyAfterDiscovery": {
+      "type": "toggle",
+      "value": false,
+      "title": "Erst nach der Entdeckung scharf",
+      "tooltip": "Die Sonne wird erst entzogen, wenn du die Aussendungseinheit einmal besucht hast."
+    },
+    "drainSeconds": {
+      "type": "slider",
+      "value": 45,
+      "min": 10,
+      "max": 180,
+      "title": "Dauer des Energieentzugs (Sekunden)",
+      "tooltip": "Wie lange die Sonne am Ende der Schleife schrumpft, bevor sie erlischt."
+    }
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/star_system_schema.json",
+  "initialReveal": [
+    "ZEKISAE_SIGNATUR"
+  ],
+  "curiosities": [
+    {
+      "id": "ZEKISAE_ISAE",
+      "color": {
+        "r": 235,
+        "g": 90,
+        "b": 50,
+        "a": 255
+      },
+      "highlightColor": {
+        "r": 255,
+        "g": 170,
+        "b": 120,
+        "a": 255
+      }
+    }
+  ],
+  "entryPositions": [
+    {
+      "id": "ZEKISAE_ISAE",
+      "position": {
+        "x": 1650,
+        "y": 450
+      }
+    },
+    {
+      "id": "ZEKISAE_FOKUS",
+      "position": {
+        "x": 2100,
+        "y": 700
+      }
+    },
+    {
+      "id": "ZEKISAE_SEDUM",
+      "position": {
+        "x": 2100,
+        "y": 200
+      }
+    }
+  ],
+  "conditionalChecks": [
+    {
+      "check": {
+        "allFactsRevealed": [
+          "ZEKISAE_FOUND"
+        ]
+      },
+      "then": {
+        "setPersistentConditions": [
+          "ZEKISAE_ENTDECKT"
+        ]
+      }
+    },
+    {
+      "check": {
+        "allPersistentConditionsSet": [
+          "ZEKISAE_KOPPLER_A",
+          "ZEKISAE_KOPPLER_B",
+          "ZEKISAE_KOPPLER_C"
+        ]
+      },
+      "then": {
+        "setPersistentConditions": [
+          "ZEKISAE_KOPPLER_ALLE"
+        ]
+      }
+    },
+    {
+      "check": {
+        "allPersistentConditionsSet": [
+          "ZEKISAE_KOPPLER_A"
+        ]
+      },
+      "then": {
+        "revealFacts": [
+          "ZEKISAE_KOPPLER_A_FACT"
+        ]
+      }
+    },
+    {
+      "check": {
+        "allPersistentConditionsSet": [
+          "ZEKISAE_KOPPLER_B"
+        ]
+      },
+      "then": {
+        "revealFacts": [
+          "ZEKISAE_KOPPLER_B_FACT"
+        ]
+      }
+    },
+    {
+      "check": {
+        "allPersistentConditionsSet": [
+          "ZEKISAE_KOPPLER_C"
+        ]
+      },
+      "then": {
+        "revealFacts": [
+          "ZEKISAE_KOPPLER_C_FACT"
+        ]
+      }
+    },
+    {
+      "check": {
+        "allPersistentConditionsSet": [
+          "ZEKISAE_DEAKTIVIERT"
+        ]
+      },
+      "then": {
+        "revealFacts": [
+          "ZEKISAE_ABGESCHALTET"
+        ]
+      }
+    }
+  ]
+}

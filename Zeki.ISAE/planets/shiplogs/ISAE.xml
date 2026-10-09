@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Logbuch: die Interstellare Sonden Aussendungseinheit im Sonnensystem -->
+<AstroObjectEntry xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/shiplog_schema.xsd">
+  <ID>ISAE</ID>
+  <Entry>
+    <ID>ZEKISAE_ISAE</ID>
+    <Name>Interstellare Sonden Aussendungseinheit</Name>
+    <IsCuriosity/>
+    <RumorFact>
+      <ID>ZEKISAE_SIGNATUR</ID>
+      <RumorName>Eine fremde Energiesignatur</RumorName>
+      <Text>Seit dem Start meldet mein Schiff eine unbekannte Nomai-Energiesignatur zwischen der Sonne und Timber Hearth, weit über der Bahnebene der Planeten. Mein Signalskop empfängt sie auf der Frequenz „Energiesignaturen“.</Text>
+    </RumorFact>
+    <RumorFact>
+      <ID>ZEKISAE_RUMOR</ID>
+      <RumorName>Sedums verbotener Entwurf</RumorName>
+      <Text>In der Orbitalen Sondenkanone hat ein Nomai namens Sedum notiert, dass er eine zweite, stärkere Kanone baut – gegen Pyes Verbot. Sie soll Sonden zu anderen Sternen schicken und braucht dafür mehr Energie, als ein lebender Stern hergibt.</Text>
+    </RumorFact>
+    <ExploreFact>
+      <ID>ZEKISAE_FOUND</ID>
+      <Text>Eine zweite Orbitale Sondenkanone kreist um die Sonne. Drei kleine Schwerkraftkanonen umkreisen sie im Dreieck, und alle vier zielen in dieselbe Richtung.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKISAE_ZWECK</ID>
+      <Text>Die Aussendungseinheit wartet auf den Zusammenbruch der Sonne. Sobald der Stern stirbt, entzieht sie ihm alle verbleibende Energie für einen einzigen Schuss zu einem fremden Stern.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKISAE_GEFAHR</ID>
+      <Text>Linum hat erkannt: Nimmt die Einheit der Sonne ihre Energie, gibt es keine Supernova. Ohne Supernova schickt das Aschezwilling-Projekt keine Erinnerungen zurück. Die Schleife endet – und ich mit ihr.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKISAE_ANLEITUNG</ID>
+      <Text>Um die Einheit abzuschalten, muss ich die Phasenkoppler auf allen drei Fokuskanonen trennen. Danach erwacht im Kontrollmodul der Hauptschalter.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKISAE_ABGESCHALTET</ID>
+      <Text>Ich habe die Aussendungseinheit abgeschaltet. Ihr Energiekern ist erloschen. Die Sonne darf wieder so sterben, wie sie es immer tut.</Text>
+    </ExploreFact>
+    <Entry>
+      <ID>ZEKISAE_FOKUS</ID>
+      <Name>Die Fokuskanonen</Name>
+      <RumorFact>
+        <ID>ZEKISAE_FOKUS_RUMOR</ID>
+        <RumorName>Drei Fokuskanonen</RumorName>
+        <Text>Drei kleinere Kanonen namens Alpha, Beta und Gamma umkreisen die Aussendungseinheit. Ihre Phasenkoppler sind noch verbunden.</Text>
+      </RumorFact>
+      <ExploreFact>
+        <ID>ZEKISAE_FOKUS_FOUND</ID>
+        <Text>Jede Fokuskanone ist eine Nomai-Schwerkraftkanone auf einem kleinen Felsen. Neben ihr leuchtet ein Kristall: der Phasenkoppler.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKISAE_FOKUS_ZWECK</ID>
+        <Text>Die Fokuskanonen bündeln den Energiestrom des Sterns und lenken ihn in die Hauptkanone. Solange ein Kristall leuchtet, kann der Strom fließen.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKISAE_FOKUS_DREIECK</ID>
+        <Text>Nur alle drei gemeinsam halten den Strom eines ganzen Sterns. Fehlt einer, bricht das Dreieck.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKISAE_KOPPLER_A_FACT</ID>
+        <Text>Der Phasenkoppler von Fokuskanone Alpha ist getrennt.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKISAE_KOPPLER_B_FACT</ID>
+        <Text>Der Phasenkoppler von Fokuskanone Beta ist getrennt.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKISAE_KOPPLER_C_FACT</ID>
+        <Text>Der Phasenkoppler von Fokuskanone Gamma ist getrennt.</Text>
+      </ExploreFact>
+    </Entry>
+    <Entry>
+      <ID>ZEKISAE_SEDUM</ID>
+      <Name>Sedum und Linum</Name>
+      <ExploreFact>
+        <ID>ZEKISAE_SEDUM_PLAN</ID>
+        <Text>Sedum baute die Aussendungseinheit, weil das Auge vielleicht nicht in diesem System liegt. Eine Sonde zu den Sternen schien ihm wichtiger als alles andere.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKISAE_LINUM_REUE</ID>
+        <Text>Linum half Sedum, prüfte seine Rechnungen und entschied sich am Ende gegen ihn: Niemand darf das Ende eines anderen wählen.</Text>
+      </ExploreFact>
+    </Entry>
+  </Entry>
+</AstroObjectEntry>

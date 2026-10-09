@@ -19,6 +19,7 @@ import glob
 import json
 import math
 import os
+import re
 import sys
 import urllib.request
 import xml.etree.ElementTree as ET
@@ -27,7 +28,7 @@ import numpy as np
 from PIL import Image
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from schleier_build import GROUND, P, SCENE_PROPS  # noqa: E402
+from nh_props import GROUND, P, SCENE_PROPS  # noqa: E402
 
 args = [a for a in sys.argv[1:] if not a.startswith("--")]
 MOD = os.path.abspath(args[0] if args else os.path.join(os.path.dirname(__file__), "..", "Zeki.Schleiersystem"))
@@ -87,6 +88,8 @@ def check_schemas(bodies, systems):
             err(f"{rel(path)}: {'/'.join(map(str, e.path))}: {e.message[:160]}")
     for name in ("addon-manifest.json", "title-screen.json"):
         path = os.path.join(MOD, name)
+        if not os.path.exists(path):
+            continue
         sch = json.loads(schema_text(name.replace("-", "_").replace(".json", "_schema.json")))
         for e in jsonschema.Draft7Validator(sch).iter_errors(load_json(path)):
             err(f"{name}: {e.message[:160]}")
@@ -174,7 +177,7 @@ def check_consistency(bodies, systems):
             seen[fid] = sysname
 
     revealed_somewhere = set()
-    conditions_set = set()
+    conditions_set = set(code_conditions())
 
     for sysname, s in per_system.items():
         for xml_path, src in s["rumor_sources"]:
@@ -220,6 +223,9 @@ def check_consistency(bodies, systems):
         for path, data in s["bodies"]:
             props = data.get("Props", {})
             vols = data.get("Volumes", {})
+            for v in vols.get("interactionVolumes", []) + vols.get("conditionTriggerVolumes", []):
+                if v.get("condition"):
+                    conditions_set.add(v["condition"])
             for v in vols.get("revealVolumes", []):
                 for fid in v["reveals"]:
                     need_fact(rel(path) + " revealVolume", fid)
@@ -374,7 +380,7 @@ def check_placement(bodies):
         items = []
         path_key = {v: k for k, v in P.items()}
         for d in props.get("details", []):
-            if d.get("alignRadial") and not d.get("isRelativeToParent") and d.get("rename") not in FLOATING_OK:
+            if d.get("alignRadial") and not d.get("isRelativeToParent") and d.get("rename") not in FLOATING_OK and d.get("path") not in EFFECTS:
                 sink = abs(GROUND.get(path_key.get(d.get("path")), GROUND["default"])) * max(d.get("scale", 1.0), 1.0)
                 items.append((d.get("rename") or d.get("path", "")[-40:], d["position"], sink))
         for t in props.get("translatorText", []):
@@ -415,6 +421,17 @@ def check_placement(bodies):
 
 # structures that are placed above the ground on purpose (station and wreck hang next to their rock)
 FLOATING_OK = {"Sondenkanone_Wrack", "Sonnenwacht_Station"}
+# light effects that may hang in the air
+EFFECTS = {P["light_beam"], P["warp_particles"]}
+
+
+def code_conditions():
+    """Conditions a C# part of the addon sets itself (string constants in <mod>.Source/*.cs)."""
+    found = set()
+    for path in glob.glob(MOD.rstrip(os.sep) + ".Source/**/*.cs", recursive=True):
+        with open(path, encoding="utf-8") as f:
+            found.update(re.findall(r'"([A-Z][A-Z0-9_]{3,})"', f.read()))
+    return found
 
 
 def main():

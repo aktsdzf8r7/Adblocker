@@ -1,0 +1,290 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+  "name": "Interstellare Sonden Aussendungseinheit",
+  "starSystem": "SolarSystem",
+  "canShowOnTitle": false,
+  "Base": {
+    "surfaceSize": 120,
+    "surfaceGravity": 0.6,
+    "gravityFallOff": "linear",
+    "showMinimap": false
+  },
+  "Orbit": {
+    "primaryBody": "Sun",
+    "semiMajorAxis": 6200,
+    "eccentricity": 0,
+    "inclination": 62,
+    "longitudeOfAscendingNode": 35,
+    "trueAnomaly": 210,
+    "axialTilt": 0,
+    "siderealPeriod": 0,
+    "tint": {
+      "r": 235,
+      "g": 90,
+      "b": 50,
+      "a": 255
+    }
+  },
+  "MapMarker": {
+    "enabled": true
+  },
+  "ShipLog": {
+    "xmlFile": "planets/shiplogs/ISAE.xml",
+    "spriteFolder": "planets/assets/shiplog/entries",
+    "mapMode": {
+      "revealedSprite": "planets/assets/shiplog/map/isae.png",
+      "outlineSprite": "planets/assets/shiplog/map/isae_outline.png",
+      "scale": 0.9
+    }
+  },
+  "Props": {
+    "details": [
+      {
+        "path": "OrbitalProbeCannon_Body/Sector_OrbitalProbeCannon",
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "ISAE_Hauptkanone",
+        "keepLoaded": true,
+        "removeComponents": true,
+        "removeChildren": [
+          "Sector_Module_Intact/Interactables_Module_Intact",
+          "Sector_Module_Broken/Interactables_Module_Broken"
+        ]
+      },
+      {
+        "path": "TowerTwin_Body/Sector_TowerTwin/Sector_TimeLoopInterior/Interactables_TimeLoopInterior/WarpCoreSocket/Prefab_NOM_WarpCoreVessel/Effects_NOM_AdvancedWarpCore/Effects_NOM_WarpParticlesWhite",
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "scale": 5,
+        "rename": "ISAE_Energiekern",
+        "keepLoaded": true,
+        "deactivationCondition": "ZEKISAE_DEAKTIVIERT",
+        "blinkWhenActiveChanged": true
+      },
+      {
+        "path": "CaveTwin_Body/Sector_CaveTwin/Sector_SouthHemisphere/Sector_EscapePod/Interactables_EscapePod/EscapePod_VisibleFrom_Far/DistressBeaconTransmitter/LightBeam",
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "scale": 5,
+        "rename": "ISAE_Entzugsstrahl",
+        "keepLoaded": true,
+        "activationCondition": "ZEKISAE_ENTZUG"
+      },
+      {
+        "parentPath": "Sector/ISAE_Hauptkanone/Sector_Module_Intact",
+        "isRelativeToParent": true,
+        "position": {
+          "x": -8.881,
+          "y": -4.881,
+          "z": 8.732
+        },
+        "rotation": {
+          "x": 270.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "path": "",
+        "rename": "ISAE_Hauptschalter",
+        "activationCondition": "ZEKISAE_KOPPLER_ALLE",
+        "deactivationCondition": "ZEKISAE_DEAKTIVIERT"
+      },
+      {
+        "parentPath": "Sector/ISAE_Hauptkanone/Sector_Module_Intact/ISAE_Hauptschalter",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 1.2,
+          "z": 0.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "path": "TowerTwin_Body/Sector_TowerTwin/Sector_TimeLoopInterior/Interactables_TimeLoopInterior/WarpCoreSocket/Prefab_NOM_WarpCoreVessel/Effects_NOM_AdvancedWarpCore/Effects_NOM_WarpParticlesWhite",
+        "scale": 0.35,
+        "rename": "Schalterlicht"
+      },
+      {
+        "parentPath": "Sector/ISAE_Hauptkanone/Sector_Module_Intact/ISAE_Hauptschalter",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "path": "DB_VesselDimension_Body/Sector_VesselDimension/Sector_VesselBridge/Interactibles_VesselBridge/UNSORTED/Wall Lamps/Prefab_NOM_Lamp_Glow_Vessel_Wall",
+        "rename": "Schalterlampe"
+      }
+    ],
+    "translatorText": [
+      {
+        "parentPath": "Sector/ISAE_Hauptkanone/Sector_Module_Intact",
+        "isRelativeToParent": true,
+        "position": {
+          "x": -10.435,
+          "y": -3.059,
+          "z": 8.171
+        },
+        "rotation": {
+          "x": 270.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "type": "recorder",
+        "xmlFile": "planets/text/ISAE_Linum.xml",
+        "rename": "Recorder_Linum"
+      },
+      {
+        "parentPath": "Sector/ISAE_Hauptkanone/Sector_Module_Intact",
+        "isRelativeToParent": true,
+        "position": {
+          "x": -6.881,
+          "y": -6.93,
+          "z": 8.714
+        },
+        "rotation": {
+          "x": 270.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "type": "computer",
+        "xmlFile": "planets/text/ISAE_Status.xml",
+        "rename": "Computer_Status"
+      },
+      {
+        "parentPath": "Sector/ISAE_Hauptkanone/Sector_Module_Intact/ISAE_Hauptschalter",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 1.3,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "type": "trailmarker",
+        "xmlFile": "planets/text/ISAE_Hauptschalter.xml",
+        "rename": "Wegmarke_Hauptschalter"
+      }
+    ],
+    "signals": [
+      {
+        "frequency": "Energiesignaturen",
+        "name": "Aussendungseinheit",
+        "audio": "OW_NM_WhiteHoleAmbienceL",
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "sourceRadius": 5,
+        "detectionRadius": 7000,
+        "identificationRadius": 400
+      }
+    ],
+    "entryLocation": [
+      {
+        "id": "ZEKISAE_ISAE",
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        }
+      },
+      {
+        "id": "ZEKISAE_SEDUM",
+        "position": {
+          "x": 0.0,
+          "y": 6.0,
+          "z": 0.0
+        }
+      }
+    ]
+  },
+  "Volumes": {
+    "interactionVolumes": [
+      {
+        "parentPath": "Sector/ISAE_Hauptkanone/Sector_Module_Intact/ISAE_Hauptschalter",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 1.2,
+          "z": 0.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "radius": 1.2,
+        "range": 3,
+        "prompt": "Aussendungseinheit abschalten",
+        "condition": "ZEKISAE_DEAKTIVIERT",
+        "persistent": true,
+        "reusable": false,
+        "audio": "NomaiPowerOff",
+        "rename": "Hauptschalter_Volumen"
+      }
+    ],
+    "revealVolumes": [
+      {
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "radius": 260,
+        "revealOn": "enter",
+        "reveals": [
+          "ZEKISAE_FOUND"
+        ]
+      },
+      {
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "radius": 120,
+        "revealOn": "observe",
+        "reveals": [
+          "ZEKISAE_FOKUS_RUMOR"
+        ],
+        "maxDistance": 2500,
+        "maxAngle": 25
+      }
+    ]
+  }
+}
