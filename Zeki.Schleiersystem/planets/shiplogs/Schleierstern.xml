@@ -27,7 +27,7 @@
       <Name>Worte für den Beobachter</Name>
       <ExploreFact>
         <ID>ZEKSCHLEIER_EPILOG</ID>
-        <Text>Nachdem sich der Schleier gehoben hatte, erschien im Archiv ein Text, der schon immer dort gewesen war. Sorrel dankt mir. Daneben waren die Koordinaten des Schleiers eingraviert – genug, um auch mit dem Nomai-Schiff hierher zurückzufinden.</Text>
+        <Text>Nachdem sich der Schleier gehoben hatte, erschien im Archiv ein Text, der schon immer dort gewesen war. Sorrel dankt mir. Er erinnert daran, dass die Koordinaten des Schleiers auch in der Laterne gespeichert sind.</Text>
       </ExploreFact>
     </Entry>
   </Entry>
@@ -37,7 +37,7 @@
     <IsCuriosity/>
     <ExploreFact>
       <ID>ZEKSCHLEIER_LATERNE</ID>
-      <Text>Die Nomai kamen mit einem Schiff namens „Laterne“ auf der Wasserwelt an. Beim Durchqueren des Schleiers erlosch sein Warpkern.</Text>
+      <Text>Beim Durchqueren des Schleiers erlosch der Warpkern des Nomai-Schiffs „Laterne“. Ein Dornenplanet zog es in sein Inneres; nur drei Rettungskapseln entkamen.</Text>
     </ExploreFact>
     <ExploreFact>
       <ID>ZEKSCHLEIER_ECHO_FALSCH</ID>

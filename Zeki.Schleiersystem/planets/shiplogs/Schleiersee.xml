@@ -8,12 +8,24 @@
     <Curiosity>ZEKSCHLEIER_EXPEDITION</Curiosity>
     <ExploreFact>
       <ID>ZEKSCHLEIER_SEE_FOUND</ID>
-      <Text>Auf einer Insel der Wasserwelt liegt die Siedlung der Nomai mit ihrem Archiv. Hier landete die Laterne, und hier lebte der Clan.</Text>
+      <Text>Auf einer Insel der Wasserwelt liegt die Siedlung der Nomai mit ihrem Archiv. Hier landete die Rettungskapsel mit Ilex, Sorrel, Tansy und den Kindern, und hier lebte der Clan.</Text>
     </ExploreFact>
     <ExploreFact>
       <ID>ZEKSCHLEIER_SEE_ARCHIV</ID>
       <Text>Sorrels Archiv berichtet: Die Splitter des äußeren Planeten wandern, und ohne einen Beobachter von außen verliert das ganze System seinen Ort.</Text>
     </ExploreFact>
+    <Entry>
+      <ID>ZEKSCHLEIER_KAPSEL2</ID>
+      <Name>Kapsel 2</Name>
+      <ExploreFact>
+        <ID>ZEKSCHLEIER_KAPSEL2_FOUND</ID>
+        <Text>Neben der Siedlung liegt das Wrack einer Nomai-Rettungskapsel. Mit ihr kamen die Gründer der Siedlung hierher.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKSCHLEIER_KAPSEL2_LOG</ID>
+        <Text>Als die Laterne in den Dorn gezogen wurde, lösten sich drei Kapseln. Kapsel 2 erreichte die Wasserwelt.</Text>
+      </ExploreFact>
+    </Entry>
     <Entry>
       <ID>ZEKSCHLEIER_SEE_INSEL</ID>
       <Name>Yarrows Insel</Name>

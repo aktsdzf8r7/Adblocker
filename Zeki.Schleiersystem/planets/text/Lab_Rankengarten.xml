@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Recorder in Kerrias Lager (Rankengarten) -->
+<NomaiObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/text_schema.xsd">
+  <TextBlock>
+    <ID>1</ID>
+    <Text>Kerrias Lager, Tag zwölf. Ich habe die Halle, den Rankengarten und eine rote Kammer gefunden. Die rote Kammer betrete ich nie wieder.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>2</ID>
+    <ParentID>1</ParentID>
+    <Text>Die Ranken bewegen sich nicht, aber der Weg ändert sich trotzdem, wenn ich zu lange wegsehe. Der Schleier reicht bis hier herein.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>3</ID>
+    <ParentID>2</ParentID>
+    <Text>Melisses Signal kommt aus der goldenen Kammer. Ich gehe morgen hinein.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>4</ID>
+    <ParentID>3</ParentID>
+    <Text>Falls dies jemand hört: Ich habe meine Zeichen hinterlassen. Folge dem Gold.</Text>
+  </TextBlock>
+  <ShipLogConditions>
+    <RevealFact>
+      <FactID>ZEKSCHLEIER_LAB_KERRIA</FactID>
+      <Condition>1,2,3,4</Condition>
+    </RevealFact>
+  </ShipLogConditions>
+</NomaiObject>

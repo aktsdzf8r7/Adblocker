@@ -13,12 +13,12 @@
   <TextBlock>
     <ID>3</ID>
     <ParentID>2</ParentID>
-    <Text>Der Schleier lässt alles herein, aber nichts hinaus. Unser Warpkern erlosch, kaum dass wir ihn durchquert hatten. Was den Schleier verlassen will, fällt zurück. Nur diese Sonde ist klein genug, um übersehen zu werden. [DATENFEHLER]</Text>
+    <Text>Der Schleier lässt alles herein, aber nichts hinaus. Unser Schiff, die Laterne, verlor beim Eintritt seinen Warpkern und wurde von einem Dornenplaneten verschlungen. Nur unsere Kapseln entkamen. [DATENFEHLER]</Text>
   </TextBlock>
   <TextBlock>
     <ID>4</ID>
     <ParentID>3</ParentID>
-    <Text>Drei Welten umkreisen den blassen Stern. Auf der inneren bündelt Tansy das Sternenlicht. Auf der Welt der stillen Wasser bewahrt Sorrel unser Archiv. Die äußere zerbricht – und in ihrem Herzen liegt der Grund für all das.</Text>
+    <Text>Drei Welten umkreisen den blassen Stern, dazu der Dorn. Auf der inneren bündelt Tansy das Sternenlicht. Auf der Welt der stillen Wasser bewahrt Sorrel unser Archiv. Die äußere zerbricht – in ihrem Herzen liegt der Grund für all das.</Text>
   </TextBlock>
   <TextBlock>
     <ID>5</ID>

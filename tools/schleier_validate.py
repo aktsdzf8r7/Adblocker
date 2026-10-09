@@ -27,7 +27,7 @@ import numpy as np
 from PIL import Image
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from schleier_build import SCENE_PROPS  # noqa: E402
+from schleier_build import GROUND, P, SCENE_PROPS  # noqa: E402
 
 args = [a for a in sys.argv[1:] if not a.startswith("--")]
 MOD = os.path.abspath(args[0] if args else os.path.join(os.path.dirname(__file__), "..", "Zeki.Schleiersystem"))
@@ -140,7 +140,7 @@ def check_consistency(bodies, systems):
                                             "sprites": set()})
         s["bodies"].append((path, data))
         sl = data.get("ShipLog")
-        if not sl:
+        if not sl or not sl.get("xmlFile"):
             continue
         if sl.get("spriteFolder"):
             s["sprites"].add(sl["spriteFolder"])
@@ -262,6 +262,38 @@ def check_consistency(bodies, systems):
             if len(platforms.get(rid, [])) != 1:
                 err(f"{sysname}: projection stones {rid} need exactly one platform")
 
+        # bramble: nodes link to dimensions, dimensions exit through named nodes, no recursion
+        dims = {d["name"]: d for _, d in s["bodies"] if d.get("Bramble", {}).get("dimension")}
+        node_names, edges = {}, {}
+        for path, d in s["bodies"]:
+            for nd in d.get("Bramble", {}).get("nodes", []):
+                if nd.get("name"):
+                    if nd["name"] in node_names:
+                        err(f"{rel(path)}: bramble node name {nd['name']} is used twice")
+                    node_names[nd["name"]] = d["name"]
+                if nd["linksTo"] not in dims:
+                    err(f"{rel(path)}: bramble node links to {nd['linksTo']}, which is not a dimension of {sysname}")
+                edges.setdefault(d["name"], []).append(nd["linksTo"])
+        for name, d in dims.items():
+            exit_node = d["Bramble"]["dimension"].get("linksTo")
+            if exit_node not in node_names:
+                err(f"{name}: dimension exit node {exit_node} does not exist")
+            if "staticPosition" not in d.get("Orbit", {}):
+                err(f"{name}: bramble dimensions need Orbit.staticPosition")
+
+        def cycle(n, stack):
+            if n in stack:
+                return True
+            return any(cycle(m, stack | {n}) for m in edges.get(n, []))
+        for name in dims:
+            if cycle(name, frozenset()):
+                err(f"{name}: dimensions link to each other in a loop - this hard-crashes the game unless preventRecursionCrash is set")
+        vparent = sysdata.get("Vessel", {}).get("vesselSpawn", {}).get("parentBody")
+        if vparent and vparent not in {d["name"] for _, d in s["bodies"]}:
+            err(f"systems/{sysname}.json: Vessel parentBody {vparent} does not exist")
+        if sysdata.get("Vessel", {}).get("promptFact"):
+            need_fact(f"systems/{sysname}.json Vessel.promptFact", sysdata["Vessel"]["promptFact"])
+
         spawn_ids = {sp.get("id") for _, d in s["bodies"] for sp in d.get("Spawn", {}).get("shipSpawnPoints", [])}
         if sysdata.get("warpDriveSpawnPointID") and sysdata["warpDriveSpawnPointID"] not in spawn_ids:
             err(f"systems/{sysname}.json: warpDriveSpawnPointID {sysdata['warpDriveSpawnPointID']} does not exist")
@@ -298,8 +330,14 @@ def check_text(body_path, t, need_fact):
     if t["type"].startswith("cairn") or t["type"] == "trailmarker":
         if len(blocks) != 1:
             err(f"{rel(path)}: {t['type']} supports exactly one text block")
-    if "arcInfo" in t and len(t["arcInfo"]) > len(blocks):
-        err(f"{rel(body_path)}: arcInfo of {t['xmlFile']} has more entries than text blocks")
+    # NH refuses to build a text whose arcInfo count differs from its block count
+    if "arcInfo" in t and len(t["arcInfo"]) != len(blocks):
+        err(f"{rel(body_path)}: arcInfo of {t['xmlFile']} has {len(t['arcInfo'])} entries but the text has {len(blocks)} blocks")
+    limits = {"whiteboard": 3, "wall": 6, "preCrashComputer": 5, "scroll": 3}
+    if t["type"] in limits and len(blocks) > limits[t["type"]]:
+        err(f"{rel(path)}: {len(blocks)} blocks do not fit on a {t['type']} (max {limits[t['type']]}) - the arcs run over the edge")
+    if t["type"] == "scroll":
+        err(f"{rel(body_path)}: loose scroll {t['xmlFile']} can only be read inside a whiteboard socket - use a whiteboard with text instead")
     for rf in root.iter("RevealFact"):
         need_fact(rel(path), rf.findtext("FactID"))
         for c in rf.findtext("Condition").split(","):
@@ -334,33 +372,49 @@ def check_placement(bodies):
 
         props = data.get("Props", {})
         items = []
+        path_key = {v: k for k, v in P.items()}
         for d in props.get("details", []):
-            if d.get("alignRadial") and not d.get("isRelativeToParent"):
-                items.append((d.get("rename") or d.get("path", "")[-40:], d["position"]))
+            if d.get("alignRadial") and not d.get("isRelativeToParent") and d.get("rename") not in FLOATING_OK:
+                sink = abs(GROUND.get(path_key.get(d.get("path")), GROUND["default"])) * max(d.get("scale", 1.0), 1.0)
+                items.append((d.get("rename") or d.get("path", "")[-40:], d["position"], sink))
         for t in props.get("translatorText", []):
             if not t.get("isRelativeToParent"):
-                items.append((t.get("rename", t["xmlFile"]), t["position"]))
+                items.append((t.get("rename", t["xmlFile"]), t["position"], 0))
         for key in ("warpReceivers", "warpTransmitters"):
             for w in props.get(key, []):
-                items.append((w.get("rename", key), w["position"]))
+                items.append((w.get("rename", key), w["position"], 0))
         for r in props.get("remotes", []):
             if "platform" in r:
-                items.append((r["platform"].get("rename", r["id"]), r["platform"]["position"]))
+                items.append((r["platform"].get("rename", r["id"]), r["platform"]["position"], 0))
             for st in r.get("stones", []):
-                items.append((st.get("rename", r["id"]), st["position"]))
+                items.append((st.get("rename", r["id"]), st["position"], 0))
         for g in props.get("socketQuantumGroups", []):
             for i, sck in enumerate(g["sockets"]):
-                items.append((f"{g.get('rename')} socket {i}", sck["position"]))
-        for name, pos in items:
+                items.append((f"{g.get('rename')} socket {i}", sck["position"], 0))
+        for name, pos, sink in items:
             v = np.array([pos["x"], pos["y"], pos["z"]], float)
             r = np.linalg.norm(v)
             tmin, tmax = terrain(v)
-            if r < tmin - 1.0:
+            if r < tmin - 1.0 - sink:
                 err(f"{rel(path)}: '{name}' is buried {tmin - r:.1f} m below the terrain")
             elif r > tmax + 2.5:
                 err(f"{rel(path)}: '{name}' floats {r - tmax:.1f} m above the terrain")
-            if water and r < water - 0.5 and "Augenlid" not in name and "Unterwasser" not in name:
+            if water and r < water - 0.5:
                 warn(f"{rel(path)}: '{name}' is under water ({water - r:.1f} m deep)")
+        # floor text needs its 5.4 x 3.6 m field free of other objects
+        floors = [(t.get("rename"), np.array([t["position"][k] for k in "xyz"])) for t in props.get("translatorText", [])
+                  if t["type"] == "wall" and not t.get("isRelativeToParent")]
+        for fname, fpos in floors:
+            for name, pos, _ in items:
+                if name == fname:
+                    continue
+                dist = np.linalg.norm(np.array([pos[k] for k in "xyz"]) - fpos)
+                if dist < 3.5:
+                    err(f"{rel(path)}: '{name}' stands {dist:.1f} m from the floor text '{fname}' (needs 3.5 m)")
+
+
+# structures that are placed above the ground on purpose (station and wreck hang next to their rock)
+FLOATING_OK = {"Sondenkanone_Wrack", "Sonnenwacht_Station"}
 
 
 def main():

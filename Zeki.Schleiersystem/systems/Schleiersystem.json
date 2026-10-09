@@ -47,11 +47,20 @@
         1
       ]
     },
+    "alwaysPresent": true,
+    "promptFact": "ZEKSCHLEIER_LATERNE_KERRIA",
     "vesselSpawn": {
+      "parentBody": "ZS_Laternenkammer",
+      "isRelativeToParent": true,
       "position": {
-        "x": -6500.0,
-        "y": -3200.0,
-        "z": -15500.0
+        "x": 0.0,
+        "y": -80.0,
+        "z": 0.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 30.0,
+        "z": 0.0
       }
     }
   },
@@ -88,6 +97,21 @@
         "b": 130,
         "a": 255
       }
+    },
+    {
+      "id": "ZEKSCHLEIER_LATERNE_SCHIFF",
+      "color": {
+        "r": 60,
+        "g": 190,
+        "b": 180,
+        "a": 255
+      },
+      "highlightColor": {
+        "r": 140,
+        "g": 255,
+        "b": 240,
+        "a": 255
+      }
     }
   ],
   "entryPositions": [
@@ -95,77 +119,147 @@
       "id": "ZEKSCHLEIER_SYSTEM",
       "position": {
         "x": 0,
-        "y": 300
+        "y": 350
       }
     },
     {
       "id": "ZEKSCHLEIER_KOORDINATEN",
       "position": {
         "x": 0,
-        "y": 720
+        "y": 760
       }
     },
     {
       "id": "ZEKSCHLEIER_KERN",
       "position": {
         "x": -760,
-        "y": 480
+        "y": 520
       }
     },
     {
       "id": "ZEKSCHLEIER_KERN_WACHE",
       "position": {
         "x": -1180,
-        "y": 760
+        "y": 800
       }
     },
     {
       "id": "ZEKSCHLEIER_KERN_RESONANZFELD",
       "position": {
         "x": -1220,
-        "y": 300
+        "y": 360
+      }
+    },
+    {
+      "id": "ZEKSCHLEIER_WACHT",
+      "position": {
+        "x": -420,
+        "y": 940
       }
     },
     {
       "id": "ZEKSCHLEIER_HERZ",
       "position": {
         "x": 760,
-        "y": 480
+        "y": 520
       }
     },
     {
       "id": "ZEKSCHLEIER_EXPEDITION",
       "position": {
         "x": 0,
-        "y": -420
+        "y": -250
       }
     },
     {
       "id": "ZEKSCHLEIER_SEE",
       "position": {
-        "x": -680,
-        "y": -360
+        "x": -700,
+        "y": -200
+      }
+    },
+    {
+      "id": "ZEKSCHLEIER_KAPSEL2",
+      "position": {
+        "x": -1150,
+        "y": -60
       }
     },
     {
       "id": "ZEKSCHLEIER_SEE_INSEL",
       "position": {
-        "x": -1100,
-        "y": -640
+        "x": -1150,
+        "y": -420
       }
     },
     {
       "id": "ZEKSCHLEIER_BRUCH",
       "position": {
-        "x": 680,
-        "y": -360
+        "x": 700,
+        "y": -200
       }
     },
     {
       "id": "ZEKSCHLEIER_SPLITTERFELD",
       "position": {
+        "x": 1150,
+        "y": -60
+      }
+    },
+    {
+      "id": "ZEKSCHLEIER_WRACK",
+      "position": {
+        "x": 1150,
+        "y": -420
+      }
+    },
+    {
+      "id": "ZEKSCHLEIER_LATERNE_SCHIFF",
+      "position": {
+        "x": 0,
+        "y": -1250
+      }
+    },
+    {
+      "id": "ZEKSCHLEIER_DORN",
+      "position": {
+        "x": -650,
+        "y": -900
+      }
+    },
+    {
+      "id": "ZEKSCHLEIER_KAPSEL1",
+      "position": {
+        "x": -1100,
+        "y": -1060
+      }
+    },
+    {
+      "id": "ZEKSCHLEIER_LABYRINTH",
+      "position": {
+        "x": 650,
+        "y": -900
+      }
+    },
+    {
+      "id": "ZEKSCHLEIER_KERRIAS_LAGER",
+      "position": {
         "x": 1100,
-        "y": -640
+        "y": -760
+      }
+    },
+    {
+      "id": "ZEKSCHLEIER_KAPSEL3",
+      "position": {
+        "x": 1100,
+        "y": -1100
+      }
+    },
+    {
+      "id": "ZEKSCHLEIER_ECHOKAMMER_ENTRY",
+      "position": {
+        "x": 650,
+        "y": -1380
       }
     }
   ],

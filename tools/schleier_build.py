@@ -72,6 +72,40 @@ P = {
     "ice_lump": "BrittleHollow_Body/Sector_BH/Sector Great Southern Triangle/Fragment 71_GreatSouthernTriangle/Core_Fragment_71_GreatSouthernTriangle/Props_Core_Fragment_71_GreatSouthernTriangle/Ice_BH_Lump_B",
     "bh_tree": "BrittleHollow_Body/Sector_BH/Sector_GravityCannon/Props_GravityCannon/OtherComponentsGroup/VisibleFrom_BH/Prefab_Tree_BH_Bristle",
     "cactus": "QuantumMoon_Body/Sector_QuantumMoon/State_HT/Interactables_HTState/Interactables_CTState/CTState_Q_Objects/CTState_QCactus/Q_Cactus/Prefab_HGT_Cactus_Single_A",
+    # ---- buildings and large structures (paths used by published NH addons) ----
+    "shrine": "QuantumMoon_Body/Sector_QuantumMoon/QuantumShrine/Structure_NOM_QuantumShrine",
+    "arch": "CaveTwin_Body/Sector_CaveTwin/Sector_SouthHemisphere/Sector_SouthSurface/Sector_WarpReceiver/Geometry_WarpReceiver/OtherComponentsGroup/Prefab_NOM_Arch_B",
+    "stairs_l": "BrittleHollow_Body/Sector_BH/Sector Cannon Path/Fragment CannonPath_3/Core_CannonPath_3/Geometry_Core_CannonPath_3/Architecture_CannonPath_3/OtherComponentsGroup/Prefab_NOM_Stairs_Solid_L",
+    "stairs_r": "BrittleHollow_Body/Sector_BH/Sector Cannon Path/Fragment CannonPath_3/Core_CannonPath_3/Geometry_Core_CannonPath_3/Architecture_CannonPath_3/OtherComponentsGroup/Prefab_NOM_Stairs_Solid_R",
+    "stargazing": "CaveTwin_Body/Sector_CaveTwin/Sector_SouthHemisphere/Sector_SouthSurface/Sector_SouthPole/Interactables_SouthPole/SouthPole_VisibleFromFar/Structure_NOM_StargazingPlatform/StargazingPlatform",
+    "cannon_platform": "CaveTwin_Body/Sector_CaveTwin/Sector_SouthHemisphere/Sector_GravityCannon/Geometry_GravityCannon/ControlledByProxy_Arch/Structure_NOM_GravityCannon_HT/Structure_NOM_GravityCannon/Structure_NOM_GravityCannon_LaunchingPlatform",
+    "escape_pod": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_CrashFragment/EscapePod_Socket",
+    "escape_pod_geo": "DB_EscapePodDimension_Body/Sector_EscapePodDimension/Sector_EscapePodBody/Geometry_EscapePodBody",
+    "dead_suit": "Comet_Body/Sector_CO/Sector_CometInterior/Props_CometInterior/Prefab_NOM_Dead_Suit (1)",
+    "skeleton_child": "CaveTwin_Body/Sector_CaveTwin/Sector_SouthHemisphere/Sector_SouthUnderground/Sector_FossilCave/Geometry_FossilCave/OtherComponentsGroup/Child Skeletons/Prefab_NOM_Skeleton_Child_Pile_A",
+    "opc_module": "OrbitalProbeCannon_Body/Sector_OrbitalProbeCannon/Sector_Module_Broken",
+    "nomai_probe": "NomaiProbe_Body/Structure_NOM_Probe_Renderer",
+    "sunstation": "SunStation_Body/Sector_SunStation/Geometry_SunStation",
+    "statue_head": "SunStation_Body/Sector_SunStation/Sector_ControlModule/Props/OtherComponentsGroup/StatueHead/Prefab_NOM_StatueHead",
+    "whs_geo": "WhiteholeStation_Body/Sector_WhiteholeStation/Geometry_WhiteholeStation",
+    "vessel_lamp": "DB_VesselDimension_Body/Sector_VesselDimension/Sector_VesselBridge/Interactibles_VesselBridge/UNSORTED/Wall Lamps/Prefab_NOM_Lamp_Glow_Vessel_Wall",
+    "warpcore_broken": "CaveTwin_Body/Sector_CaveTwin/Sector_NorthHemisphere/Sector_NorthSurface/Sector_TimeLoopExperiment/WarpCoreWallSockets/WarpCoreSocket/Props_NOM_WarpCoreBroken (1)/Props_NOM_WarpCore_Simple",
+    "bramble_seed": "TimberHearth_Body/Sector_TH/Sector_ImpactCrater/Interactables_ImpactCrater/ControlledByProxy_Structures/Terrain_DB_BrambleSphere_Seed_V2",
+    "angler": "DB_HubDimension_Body/Sector_HubDimension/Interactables_HubDimension/Anglerfish_Body",
+    "wall_lamp": "CaveTwin_Body/Sector_CaveTwin/Sector_SouthHemisphere/Sector_SouthUnderground/Sector_City/Lighting_City/Lights_FossilDistrict/Prefab_NOM_Lamp_Glow_Diamond_Wall",
+    "gravity_crystal": "BrittleHollow_Body/Sector_BH/Sector Quantum Pole Path/Fragment QuantumPolePath 2/Interactables_QPP2/Prefab_NOM_GravityCrystal",
+}
+
+# Vertical correction per prop (metres along the local up axis). Vanilla props do not all have their pivot
+# at the base, so small objects are sunk a few centimetres and large structures a bit more: a prop that is
+# slightly embedded looks right, a floating one does not. Tune single values here after testing in game.
+GROUND = {
+    "default": -0.05,
+    "doorway": -0.15, "doorway_fancy": -0.15, "gateway": -0.2, "arch": -0.2,
+    "shrine": -0.35, "stargazing": -0.2, "cannon_platform": -0.3, "gravity_cannon": -0.5,
+    "escape_pod": -0.9, "escape_pod_geo": -0.6, "crystal_cracked": -0.3, "probe_window": -0.1,
+    "transponder": -0.2, "bramble_seed": -1.5, "purple_rock": -0.5, "ice_lump": -0.3,
+    "stairs_l": -0.1, "stairs_r": -0.1,
 }
 
 SCENE_PROPS = set(P.values()) | {P["pottery"] % i for i in range(1, 15)}
@@ -284,7 +318,10 @@ class Body:
     def vol(self, kind, item):
         self.volumes.setdefault(kind, []).append(item)
 
-    def detail(self, key, pos, yaw=0.0, scale=1.0, rename=None, pitch=0.0, roll=0.0, **extra):
+    def detail(self, key, pos, yaw=0.0, scale=1.0, rename=None, pitch=0.0, roll=0.0, ground=True, **extra):
+        pos = np.asarray(pos, float)
+        if ground and key in P and np.linalg.norm(pos) > 1:
+            pos = pos + norm(pos) * GROUND.get(key, GROUND["default"]) * max(scale, 1.0)
         d = {"path": P[key] if key in P else key, "position": vec(pos), "rotation": vec([pitch, yaw, roll], 1), "alignRadial": True}
         if scale != 1.0:
             d["scale"] = scale
@@ -356,7 +393,6 @@ def build_see():
     # sea level at 690 m = 0.5; keep the shores gentle so islands look like islands
     p.add_site(Site("archiv", 9, -32, 196, 72, 140))          # 716.9 m, settlement plateau
     p.add_site(Site("ufer", 9, -32 + 150 / 716.9 * 57.2958 / math.cos(math.radians(9)), 135, 26, 80))  # 692.9 m, lower shore
-    p.add_site(Site("tiefe", 9, -32 + 206 / 716.9 * 57.2958 / math.cos(math.radians(9)), 112, 16, 40))  # 683.9 m, under water
     p.add_site(Site("yarrow", 31, 22, 150, 22, 58))           # 698.8 m, the children's island
     p.finish(h)
     return p
@@ -387,6 +423,32 @@ def build_bruch():
     p.add_site(Site("herz", -18, 62, 38, 30, 150, kind="funnel"))  # floor at 239.4 m
     p.finish(h)
     p.crack_mask = crack_mask
+    return p
+
+
+def build_dorn():
+    p = Planet("dorn", "Schleierdorn", 230.0, 310.0, 44044)
+    d = p.dirs
+    roots = p.noise.ridged(d, 5, 3.2)
+    base = p.noise.fbm(d, 4, 1.6)
+    h = 0.45 + 0.35 * base + 0.45 * roots
+    h = (h - np.percentile(h, 0.5)) / (np.percentile(h, 99.5) - np.percentile(h, 0.5))
+    h = np.clip(h, 0, 1) * 0.9 + 0.05
+    p.add_site(Site("schlund", -12, 60, 70, 55, 125, kind="funnel"))   # crater floor at 252 m
+    p.add_site(Site("ruine", 10, 92, 196, 34, 70))                     # 291.5 m, at the rim of the maw
+    p.add_site(Site("kapsel1", 30, -58, 190, 40, 85))                  # 289.6 m
+    p.finish(h)
+    p.roots = roots
+    return p
+
+
+def build_rock(key, name, r_min, r_max, seed, site):
+    p = Planet(key, name, r_min, r_max, seed, 512, 256)
+    d = p.dirs
+    h = 0.55 + 0.35 * p.noise.fbm(d, 5, 2.2) + 0.2 * p.noise.ridged(d, 3, 3.0)
+    h = (h - h.min()) / (h.max() - h.min())
+    p.add_site(Site(site, 15, 20, 175, 13, 24))
+    p.finish(h)
     return p
 
 
@@ -476,7 +538,18 @@ def textures(p, kind):
         glow = 1 - smoothstep(herz.r_in * 0.6, herz.r_in * 2.2, ang)
         em = em + np.array([170, 90, 255]) * glow[..., None] * 0.7
         col = col * (1 - 0.5 * glow[..., None]) + np.array([120, 80, 170]) * 0.5 * glow[..., None]
-    else:  # moon
+    elif kind == "dorn":
+        col = ramp(t, [(0, (22, 28, 20)), (0.35, (40, 52, 34)), (0.6, (62, 70, 44)), (0.85, (92, 84, 58)), (1, (120, 110, 84))])
+        vines = smoothstep(0.55, 0.85, p.roots)[..., None]
+        col = col * (1 - 0.7 * vines) + np.array([96, 74, 48]) * 0.7 * vines
+        maw = p.sites["schlund"]
+        ang = np.arccos(np.clip(p.dirs @ maw.c, -1, 1)) * p.radius_of(maw.level)
+        glow = 1 - smoothstep(maw.r_in * 0.4, maw.r_out, ang)
+        em = np.array([140, 100, 220]) * glow[..., None] * 0.6 + np.array([60, 160, 70]) * (smoothstep(0.9, 0.98, p.roots) * 0.35)[..., None]
+    elif kind == "wacht":
+        col = ramp(t, [(0, (70, 40, 30)), (0.5, (140, 96, 70)), (1, (210, 180, 150))])
+        em = np.array([255, 120, 40]) * (smoothstep(0.0, 0.25, 0.3 - t) * 0.5)[..., None]
+    else:  # moon and the wreck rock
         col = ramp(t, [(0, (54, 52, 58)), (0.5, (104, 100, 106)), (1, (164, 160, 168))])
     col = col * (0.82 + 0.3 * n[..., None]) * (0.94 + 0.12 * n2[..., None])
     pm = plaza_mask(p)[..., None]
@@ -622,6 +695,59 @@ def nomai_art(title_seed, motif, size=512):
             pts = [(x + px * math.cos(a) - py * math.sin(a), y + px * math.sin(a) + py * math.cos(a)) for px, py in pts]
             ghost = k % 3 == 0
             d.polygon(pts, fill=(150, 120, 255, 70 if ghost else 220), outline=(230, 220, 255, 120 if ghost else 255))
+    elif motif in ("vines", "pod_vines"):
+        rng = np.random.default_rng(title_seed)
+        for k in range(14):
+            x0, y0 = rng.uniform(0, size), rng.uniform(0, size)
+            pts = [(x0 + 60 * math.sin(t / 3 + k) + t * 9 * math.cos(k), y0 + t * 9 * math.sin(k) + 40 * math.cos(t / 4)) for t in range(40)]
+            d.line(pts, fill=(70, 110, 60, 255), width=int(rng.uniform(6, 16)), joint="curve")
+            for t in range(4, 40, 6):
+                px, py = pts[t]
+                d.polygon([(px, py), (px + 10, py - 18), (px + 4, py)], fill=(110, 140, 80, 255))
+        for k, col in enumerate([(255, 190, 70), (80, 140, 255), (255, 60, 50)]):
+            cx, cy = size * (0.25 + 0.25 * k), size * (0.3 + 0.2 * (k % 2))
+            for r, a in ((46, 60), (30, 120), (14, 255)):
+                d.ellipse([cx - r, cy - r, cx + r, cy + r], fill=col + (a,))
+        if motif == "pod_vines":
+            d.ellipse([c - 70, c + 20, c + 70, c + 120], fill=(200, 190, 170, 255), outline=(120, 110, 100, 255), width=4)
+            d.ellipse([c - 30, c + 45, c + 30, c + 95], fill=(90, 150, 200, 255))
+    elif motif == "vessel":
+        d.polygon([(c - 190, c + 30), (c - 40, c - 50), (c + 170, c - 40), (c + 200, c + 10), (c + 40, c + 70), (c - 150, c + 70)],
+                  fill=(170, 160, 140, 255), outline=(230, 220, 200, 255))
+        for k in range(5):
+            d.ellipse([c - 120 + k * 60, c - 10, c - 104 + k * 60, c + 6], fill=(120, 230, 220, 255))
+        d.ellipse([c + 150, c - 30, c + 210, c + 30], outline=(120, 230, 220, 200), width=5)
+        for k in range(6):
+            a = k * math.pi / 3
+            d.line([(c + 180, c), (c + 180 + 70 * math.cos(a), 70 * math.sin(a) + c)], fill=(60, 110, 60, 180), width=6)
+    elif motif == "pod":
+        d.ellipse([c - 110, c - 70, c + 110, c + 90], fill=(200, 190, 170, 255), outline=(240, 230, 210, 255), width=5)
+        d.ellipse([c - 55, c - 25, c + 55, c + 55], fill=(80, 140, 200, 255))
+        d.line([(c + 80, c - 60), (c + 160, c - 150)], fill=(255, 210, 150, 220), width=4)
+        for k in range(1, 4):
+            d.arc([c + 160 - 25 * k, c - 150 - 25 * k, c + 160 + 25 * k, c - 150 + 25 * k], -100, 10, fill=(255, 200, 120, 255 - 50 * k), width=3)
+    elif motif == "camp":
+        d.rectangle([c - 90, c + 40, c - 30, c + 90], fill=(170, 150, 120, 255))
+        d.rectangle([c - 20, c + 50, c + 40, c + 90], fill=(150, 130, 110, 255))
+        for r, a in ((70, 50), (40, 120), (16, 255)):
+            d.ellipse([c + 70 - r, c - 20 - r, c + 70 + r, c - 20 + r], fill=(120, 200, 255, a))
+        spiral(d, c - 60, c - 60, 50, 1.8, 3, (150, 200, 255, 255))
+    elif motif == "angler":
+        d.ellipse([c - 200, c - 120, c + 160, c + 140], fill=(40, 30, 40, 255))
+        d.polygon([(c - 120, c + 10), (c + 120, c - 40), (c + 120, c + 60)], fill=(10, 8, 10, 255))
+        for k in range(9):
+            x = c - 100 + k * 26
+            d.polygon([(x, c - 10 + k * 3), (x + 10, c + 20), (x + 20, c - 6 + k * 3)], fill=(230, 220, 200, 255))
+        d.line([(c - 60, c - 110), (c + 10, c - 200)], fill=(80, 70, 80, 255), width=6)
+        for r, a in ((40, 70), (20, 160), (8, 255)):
+            d.ellipse([c + 10 - r, c - 200 - r, c + 10 + r, c - 200 + r], fill=(255, 140, 120, a))
+    elif motif == "station":
+        for r, a in ((260, 40), (200, 70), (150, 255)):
+            d.ellipse([c - r - 120, c - r + 140, c + r - 120, c + r + 140], fill=(255, 190, 120, a))
+        d.line([(c + 40, c - 200), (c + 140, c + 120)], fill=(200, 190, 170, 255), width=14)
+        d.rectangle([c + 60, c - 120, c + 150, c - 60], fill=(190, 180, 160, 255))
+        d.ellipse([c + 90, c + 60, c + 190, c + 160], fill=(150, 120, 100, 255))
+        spiral(d, c + 100, c - 90, 26, 1.5, 3, (120, 200, 255, 255))
     elif motif == "children":
         for k in range(4):
             spiral(d, c - 110 + k * 75, c + (k % 2) * 40 - 20, 38, 1.7, 3, (255, 220, 120, 255), reverse=k % 2 == 0)
@@ -700,66 +826,110 @@ def body_header(name, system=SYSTEM):
     return {"$schema": NH + "body_schema.json", "name": name, "starSystem": system}
 
 
+def floor_text(b, xml, pos, rename, **extra):
+    """Nomai text lying on a flat plaza (NH lays the arcs out in a 5.4 x 3.6 m field - keep 4 m clear)."""
+    up = norm(pos)
+    return b.text("wall", xml, np.asarray(pos) + up * 0.08, rename=rename, normal=up, **extra)
+
+
+def house(b, p, site, e, n, name, scale=1.0, angle=0.0):
+    """A Nomai building (walls, roof, doorway) from the Quantum Moon shrine, turned towards the plaza."""
+    pos = p.at(site, e, n)
+    return b.detail("shrine", pos, p.facing(site, pos, angle=angle), scale, name)
+
+
+def escape_pod(b, pos, yaw, name, pitch=14.0, roll=6.0):
+    """Escape pod 1 from Brittle Hollow, without its vanilla computer (our own text stands next to it)."""
+    return b.detail("escape_pod", pos, yaw, 1.0, name, pitch=pitch, roll=roll,
+                    removeChildren=["Interactibles_EscapePod/Prefab_NOM_Vessel_Computer", "Proxy_EscapePod"])
+
+
+def remote(b, rid, decal, platform=None, stones=(), reveals=None):
+    r = {"id": rid, "decalPath": f"planets/assets/decals/{decal}.png"}
+    if platform is not None:
+        pos, yaw, name = platform
+        r["platform"] = {"position": vec(pos), "rotation": vec([0, yaw, 0], 1), "alignRadial": True, "rename": name}
+        if reveals:
+            r["platform"]["reveals"] = reveals
+    if stones:
+        r["stones"] = [{"position": vec(pos), "alignRadial": True, "rename": name} for pos, name in stones]
+    b.prop("remotes", r)
+
+
+def receiver(b, p, site, e, n, freq, name, computer=None):
+    pos = p.at(site, e, n)
+    r = {"frequency": freq, "position": vec(pos), "rotation": vec([0, p.facing(site, pos), 0], 1), "alignRadial": True, "detailed": True, "rename": name}
+    if computer:
+        cpos = p.at(site, *computer)
+        r["computer"] = {"position": vec(cpos), "rotation": vec([0, p.facing(site, cpos), 0], 1), "alignRadial": True}
+    b.prop("warpReceivers", r)
+
+
+def transmitter(b, p, site, e, n, freq, name):
+    pos = p.at(site, e, n)
+    b.prop("warpTransmitters", {"frequency": freq, "position": vec(pos), "rotation": vec([0, p.facing(site, pos), 0], 1),
+                                "alignRadial": True, "alignmentWindow": 360, "rename": name})
+
+
+def furnish(b, p, site, items):
+    for e, n, k in items:
+        pos = p.at(site, e, n)
+        b.detail(k, pos, p.facing(site, pos), 1.0)
+
+
 def kern_config(p, has_em):
     b = Body(p)
-    O = "observatorium"
+    O, R = "observatorium", "resonanzfeld"
     # ---- Spiegelring / Lichtbündler: ring of glowing arches around a glass dish ----
-    centre = p.at(O)
-    b.detail("probe_window", p.at(O, up=0.05), 0, 2.2, "Lichtbuendler_Spiegelschale")
+    b.detail("probe_window", p.at(O), 0, 2.2, "Lichtbuendler_Spiegelschale")
     for i, (e, n) in enumerate(p.ring(O, 15, 6, 15)):
         pos = p.at(O, e, n)
         b.detail("doorway_fancy", pos, p.facing(O, pos), 1.6, f"Lichtbuendler_Spiegelbogen_{i + 1}")
-    # beam that only burns once the veil is lifted (Tansy's wish)
-    b.detail("light_beam", p.at(O, up=1.0), 0, 3.0, "Lichtbuendler_Strahl", activationCondition="ZEKSCHLEIER_SCHLEIER_GEHOBEN", keepLoaded=True)
+    # beam and torches that only burn once the veil is lifted (Tansy's wish)
+    b.detail("light_beam", p.at(O, up=1.0), 0, 3.0, "Lichtbuendler_Strahl", ground=False, activationCondition="ZEKSCHLEIER_SCHLEIER_GEHOBEN", keepLoaded=True)
     for i, (e, n) in enumerate(p.ring(O, 9, 6, 45)):
         b.detail("torch", p.at(O, e, n), 0, 1.0, f"Lichtbuendler_Fackel_{i + 1}", activationCondition="ZEKSCHLEIER_SCHLEIER_GEHOBEN")
-    # ---- observatory plaza ----
-    pos = p.at(O, -30, 22)
-    b.text("whiteboard", "Kern_Beobachtung.xml", pos, p.facing(O, pos), "Whiteboard_Beobachtung", arcInfo=arcs("adult", "adult", "adult", "adult", "child"), seed=101)
+    # ---- buildings ----
+    house(b, p, O, 42, -12, "Tansys_Werkstatt")
+    house(b, p, O, -44, 8, "Sternwarte")
+    pos = p.at(O, 30, -6)
+    b.text("whiteboard", "Kern_Werkstatt.xml", pos, p.facing(O, pos), "Whiteboard_Werkstatt", seed=111)
+    # ---- texts on the plaza ----
+    floor_text(b, "Kern_Beobachtung.xml", p.at(O, -28, 26), "Bodenschrift_Beobachtung", seed=101, arcInfo=arcs("adult", "adult", "adult", "adult", "child"))
     pos = p.at(O, 28, 20)
     b.text("computer", "Kern_Lichtbuendler.xml", pos, p.facing(O, pos), "Computer_Lichtbuendler")
     # Tansy's last watch: skeleton, recorder, a dry tree
-    tansy = p.at(O, 34, -26)
+    tansy = p.at(O, 22, -34)
     b.detail("skeleton", tansy, p.facing(O, tansy), 1.0, "Tansy")
-    b.text("recorder", "Kern_Tansy.xml", p.at(O, 36.5, -23), 0, "Recorder_Tansy")
-    b.detail("dry_tree", p.at(O, 30, -31), 40, 1.0, "Tansys_Baum")
-    b.detail("staff", p.at(O, 32, -22, 0.1), 0, 1.0, "Tansys_Stab", pitch=85)
-    # projection pool of the observatory + stones to the archive and to the signal tower
+    b.text("recorder", "Kern_Tansy.xml", p.at(O, 24.5, -31), 0, "Recorder_Tansy")
+    b.detail("dry_tree", p.at(O, 18, -38), 40, 1.0, "Tansys_Baum")
+    b.detail("staff", p.at(O, 20, -30, 0.1), 0, 1.0, "Tansys_Stab", pitch=85)
+    # projection pool + stones to the archive and the signal tower
     pool = p.at(O, -36, -18)
-    b.prop("remotes", {"id": "ZEKSCHLEIER_REMOTE_KERN", "decalPath": "planets/assets/decals/kern.png",
-                       "platform": {"position": vec(pool), "rotation": vec([0, p.facing(O, pool), 0], 1), "alignRadial": True, "rename": "Projektionsbecken_Kern"}})
-    b.prop("remotes", {"id": "ZEKSCHLEIER_REMOTE_SEE", "decalPath": "planets/assets/decals/see.png",
-                       "stones": [{"position": vec(p.at(O, -27, -24, 0.15)), "alignRadial": True, "rename": "Projektionsstein_See"}]})
-    b.prop("remotes", {"id": "ZEKSCHLEIER_REMOTE_BRUCH", "decalPath": "planets/assets/decals/bruch.png",
-                       "stones": [{"position": vec(p.at(O, -25, -21, 0.15)), "alignRadial": True, "rename": "Projektionsstein_Bruch"}]})
-    # warp: observatory -> archive (and back via the receiver's return function)
-    pad = p.at(O, 0, 40)
-    b.prop("warpTransmitters", {"frequency": "ZEKSCHLEIER_KERN_SEE", "position": vec(pad), "rotation": vec([0, p.facing(O, pad), 0], 1),
-                                "alignRadial": True, "alignmentWindow": 360, "rename": "Warp_zum_Archiv"})
-    # warp receiver for the signal tower on the outer planet
-    rec = p.at(O, 0, -40)
-    b.prop("warpReceivers", {"frequency": "ZEKSCHLEIER_BRUCH_KERN", "position": vec(rec), "rotation": vec([0, p.facing(O, rec), 0], 1), "alignRadial": True,
-                             "detailed": True, "rename": "Warpempfaenger_Observatorium",
-                             "computer": {"position": vec(p.at(O, 13, -46)), "rotation": vec([0, p.facing(O, p.at(O, 13, -46)), 0], 1), "alignRadial": True}})
-    # furniture & lamps around the plaza
-    for i, (e, n) in enumerate([(-48, 6), (48, 4), (-26, -48), (27, -49), (-46, -32), (46, -30)]):
+    remote(b, "ZEKSCHLEIER_REMOTE_KERN", "kern", platform=(pool, p.facing(O, pool), "Projektionsbecken_Kern"))
+    remote(b, "ZEKSCHLEIER_REMOTE_SEE", "see", stones=[(p.at(O, -27, -24, 0.15), "Projektionsstein_See")])
+    remote(b, "ZEKSCHLEIER_REMOTE_BRUCH", "bruch", stones=[(p.at(O, -25, -21, 0.15), "Projektionsstein_Bruch")])
+    # warps: observatory -> archive; receiver for the signal tower
+    transmitter(b, p, O, 0, 40, "ZEKSCHLEIER_KERN_SEE", "Warp_zum_Archiv")
+    receiver(b, p, O, 0, -40, "ZEKSCHLEIER_BRUCH_KERN", "Warpempfaenger_Observatorium", computer=(13, -46))
+    for i, (e, n) in enumerate([(-50, 22), (50, 22), (-26, -50), (27, -50), (52, -32), (-50, -36)]):
         pos = p.at(O, e, n)
         b.detail("doorway", pos, p.facing(O, pos), 1.0, f"Leuchtbogen_{i + 1}")
-    for i, (e, n, k) in enumerate([(-20, 30, "vase_thick"), (-18, 33, "vase_thin"), (22, 28, "potted_tree"), (40, 14, "treepot"),
-                                     (-42, -6, "bench"), (-40, -10, "bench"), (-14, -34, "table"), (-11, -37, "container"), (-6, 36, "box")]):
-        pos = p.at(O, e, n)
-        b.detail(k, pos, p.facing(O, pos), 1.0)
+    furnish(b, p, O, [(-16, 34, "vase_thick"), (-13, 36, "vase_thin"), (20, 30, "potted_tree"), (40, 12, "treepot"),
+                      (6, -24, "bench"), (10, -22, "bench"), (-14, -34, "table"), (-11, -37, "container"), (-6, 36, "box")])
     # ---- ridge cairn on the way up ----
     b.text("cairnCT", "Kern_Wegweiser.xml", p.at("grat"), 0, "Steinmaennchen_Grat")
-    # ---- resonance field: giant cracked crystals ----
-    R = "resonanzfeld"
+    # ---- resonance field: giant cracked crystals, and the warp up to the sun watch ----
     for i, (e, n, s, yw) in enumerate([(0, 0, 4.5, 0), (14, 6, 3.0, 50), (-12, 9, 3.4, 120), (6, -15, 2.6, 200), (-16, -10, 2.2, 290), (24, -8, 2.0, 30)]):
         b.detail("crystal_cracked", p.at(R, e, n), yw, s, "Strahlungsresonator" if i == 0 else f"Resonanzkristall_{i}")
     b.text("trailmarker", "Kern_Resonator.xml", p.at(R, -4, 22), 0, "Wegmarke_Yarrow")
     b.detail("toys", p.at(R, -2, 25), 10, 1.0, "Yarrows_Spielzeug")
+    transmitter(b, p, R, 2, -28, "ZEKSCHLEIER_KERN_WACHT", "Warp_zur_Sonnenwacht")
+    pos = p.at(R, 2, -18)
+    b.detail("arch", pos, p.facing(R, pos), 1.0, "Bogen_Sonnenwacht")
     b.prop("signals", {"frequency": "Quantum", "name": "Resonanzkristall", "audio": "NomaiGravCrystalFlickerAmbient_LP",
                        "position": vec(p.at(R, 0, 0, 4)), "sourceRadius": 3, "detectionRadius": 400, "identificationRadius": 40})
-    # ---- volumes ----
+    # ---- volumes / entry locations ----
     b.vol("revealVolumes", reveal(p.at(O, up=8), 60, ["ZEKSCHLEIER_KERN_FOUND"]))
     b.prop("entryLocation", {"id": "ZEKSCHLEIER_KERN", "position": vec(p.at(O, up=4))})
     b.prop("entryLocation", {"id": "ZEKSCHLEIER_KERN_WACHE", "position": vec(tansy)})
@@ -792,72 +962,70 @@ def kern_config(p, has_em):
 
 def see_config(p, has_em):
     b = Body(p)
-    A, U, T, Y = "archiv", "ufer", "tiefe", "yarrow"
-    # ---- the settlement on the plateau: an arc of buildings around the archive ----
+    A, U, Y = "archiv", "ufer", "yarrow"
+    # ---- the settlement: houses, gate, ring of arches ----
     b.detail("gateway", p.at(A, 0, -60), p.facing(A, p.at(A, 0, -60)), 1.0, "Tor_der_Siedlung")
-    for i, (e, n) in enumerate(p.ring(A, 52, 9, 200)):
-        if -20 < e < 40 and n > 0:
+    house(b, p, A, 0, 48, "Sorrels_Archivhaus", 1.2)
+    house(b, p, A, -46, 26, "Wohnhaus_West")
+    house(b, p, A, 46, 26, "Wohnhaus_Ost")
+    for i, (e, n) in enumerate(p.ring(A, 56, 9, 200)):
+        if n > 10:
             continue
         pos = p.at(A, e, n)
         b.detail("doorway", pos, p.facing(A, pos), 1.2, f"Siedlungsbogen_{i + 1}")
-    # archive core: shelves, computer, scroll, the projection pool
+    # archive core: shelves, computer, the story of the two clans
     for i, (e, n) in enumerate([(-14, 10), (-10, 14), (-6, 17), (6, 17), (10, 14), (14, 10)]):
         pos = p.at(A, e, n)
         b.detail("shelf", pos, p.facing(A, pos), 1.0, f"Archivregal_{i + 1}")
     pos = p.at(A, 0, 12)
     b.text("computer", "See_Archiv.xml", pos, p.facing(A, pos), "Computer_Archiv")
-    b.text("scroll", "See_Geschwister.xml", p.at(A, -8, 9, 0.2), 30, "Schriftrolle_Geschwister")
-    pos = p.at(A, -26, -14)
-    b.text("whiteboard", "See_Ankunft.xml", pos, p.facing(A, pos), "Whiteboard_Ankunft", arcInfo=arcs("adult", "adult", "adult", "adult", "child"), seed=202)
-    # gardens, homes, everyday things
-    for i, (e, n, k) in enumerate([(-36, 4, "potted_tree"), (-38, -2, "potted_tree2"), (36, 2, "potted_tree"), (38, -6, "potted_tree2"),
-                                     (-20, -36, "bench"), (-16, -38, "bench"), (20, -34, "table"), (24, -30, "bowl"), (18, -38, "vase_thick"),
-                                     (-30, 24, "vase_thin"), (30, 24, "vase_thick"), (0, -24, "treepot"), (-44, -20, "box"), (44, -24, "container")]):
-        pos = p.at(A, e, n)
-        b.detail(k, pos, p.facing(A, pos), 1.0)
+    pos = p.at(A, 0, 26)
+    b.text("whiteboard", "See_Geschwister.xml", pos, p.facing(A, pos), "Whiteboard_Geschwister", seed=203)
+    floor_text(b, "See_Ankunft.xml", p.at(A, -26, -12), "Bodenschrift_Ankunft", seed=202, arcInfo=arcs("adult", "adult", "adult", "adult", "child"))
+    # escape pod 2 at the edge of the plateau
+    pod = p.at(A, -50, -38)
+    escape_pod(b, pod, p.facing(A, pod, angle=90), "Kapsel_2")
+    pos = p.at(A, -36, -30)
+    b.text("whiteboard", "See_Kapsel.xml", pos, p.facing(A, pos), "Whiteboard_Kapsel", seed=204)
+    # gardens, everyday things
+    furnish(b, p, A, [(-36, 4, "potted_tree"), (-38, -2, "potted_tree2"), (36, 2, "potted_tree"), (38, -6, "potted_tree2"),
+                      (-20, -40, "bench"), (-16, -42, "bench"), (20, -34, "table"), (24, -30, "bowl"), (16, -38, "vase_thick"),
+                      (-30, 22, "vase_thin"), (30, 22, "vase_thick"), (0, -26, "treepot"), (-44, -16, "box"), (46, -20, "container")])
     for i, (e, n) in enumerate(p.ring(A, 24, 6, 0)):
         b.detail("torch", p.at(A, e, n), 0, 1.0, f"Archivfackel_{i + 1}", activationCondition="ZEKSCHLEIER_SCHLEIER_GEHOBEN")
     pool = p.at(A, 28, -12)
-    b.prop("remotes", {"id": "ZEKSCHLEIER_REMOTE_SEE", "decalPath": "planets/assets/decals/see.png",
-                       "platform": {"position": vec(pool), "rotation": vec([0, p.facing(A, pool), 0], 1), "alignRadial": True, "rename": "Projektionsbecken_Archiv"}})
-    b.prop("remotes", {"id": "ZEKSCHLEIER_REMOTE_KERN", "decalPath": "planets/assets/decals/kern.png",
-                       "stones": [{"position": vec(p.at(A, 19, -18, 0.15)), "alignRadial": True, "rename": "Projektionsstein_Kern"}]})
-    b.prop("remotes", {"id": "ZEKSCHLEIER_REMOTE_HERZ", "decalPath": "planets/assets/decals/herz.png",
-                       "stones": [{"position": vec(p.at(A, 21, -21, 0.15)), "alignRadial": True, "rename": "Projektionsstein_Herz"}]})
-    # warp receiver from the observatory, with a computer that logs arrivals
-    rec = p.at(A, -8, -44)
-    b.prop("warpReceivers", {"frequency": "ZEKSCHLEIER_KERN_SEE", "position": vec(rec), "rotation": vec([0, p.facing(A, rec), 0], 1), "alignRadial": True,
-                             "detailed": True, "rename": "Warpempfaenger_Archiv",
-                             "computer": {"position": vec(p.at(A, 4, -46)), "rotation": vec([0, p.facing(A, p.at(A, 4, -46)), 0], 1), "alignRadial": True}})
-    # ---- lower shore: the warp into the heart ----
-    pad = p.at(U)
-    b.prop("warpTransmitters", {"frequency": "ZEKSCHLEIER_SEE_HERZ", "position": vec(pad), "rotation": vec([0, p.facing(U, pad, p.at(A)), 0], 1),
-                                "alignRadial": True, "alignmentWindow": 360, "rename": "Warp_zum_Herz"})
-    for i, (e, n) in enumerate(p.ring(U, 12, 4, 45)):
+    remote(b, "ZEKSCHLEIER_REMOTE_SEE", "see", platform=(pool, p.facing(A, pool), "Projektionsbecken_Archiv"))
+    remote(b, "ZEKSCHLEIER_REMOTE_KERN", "kern", stones=[(p.at(A, 19, -18, 0.15), "Projektionsstein_Kern")])
+    remote(b, "ZEKSCHLEIER_REMOTE_HERZ", "herz", stones=[(p.at(A, 21, -21, 0.15), "Projektionsstein_Herz")])
+    receiver(b, p, A, -8, -46, "ZEKSCHLEIER_KERN_SEE", "Warpempfaenger_Observatorium", computer=(4, -48))
+    receiver(b, p, A, 22, -50, "ZEKSCHLEIER_DORN_SEE", "Warpempfaenger_Dorn")
+    # ---- lower shore: the warp into the heart and Ilex' message ----
+    transmitter(b, p, U, 0, 0, "ZEKSCHLEIER_SEE_HERZ", "Warp_zum_Herz")
+    for i, (e, n) in enumerate(p.ring(U, 10, 4, 45)):
         b.detail("lamp_flare", p.at(U, e, n), 0, 1.0, f"Uferlampe_{i + 1}")
     b.detail("eye_symbol", p.at(U, -16, 0, 0.1), p.facing(U, p.at(U, -16, 0)), 1.5, "Augensymbol_Ufer")
-    # ---- under water: Ilex' message on the sea floor ----
-    b.text("wall", "See_Augenlid.xml", p.at(T, up=0.15), rename="Bodenschrift_Augenlid", seed=303)
-    b.detail("lamp_flare", p.at(T, 6, 0), 0, 1.0, "Unterwasserlampe")
+    floor_text(b, "See_Augenlid.xml", p.at(U, 4, 17), "Bodenschrift_Augenlid", seed=303)
     # ---- Yarrow's island ----
-    b.text("wall", "See_Kinder.xml", p.at(Y, 0, 0, 0.12), rename="Bodenschrift_Kinder", seed=404, arcInfo=arcs("child", "child", "child", "child", "child"))
+    floor_text(b, "See_Kinder.xml", p.at(Y, 0, 0), "Bodenschrift_Kinder", seed=404, arcInfo=arcs("child", "child", "child", "child", "child"))
     b.text("cairnTH", "See_Steinturm.xml", p.at(Y, 9, 6), 0, "Yarrows_Steinturm")
-    b.detail("toys", p.at(Y, -6, 5), 0, 1.0, "Spielzeug_1")
-    b.detail("toys", p.at(Y, 7, -6), 140, 1.0, "Spielzeug_2")
-    b.detail("bowl", p.at(Y, -8, -4), 0, 1.0, "Schale")
-    b.detail("potted_tree2", p.at(Y, 12, -10), 0, 1.0, "Inselbaum")
+    b.detail("toys", p.at(Y, -7, 5), 0, 1.0, "Spielzeug_1")
+    b.detail("toys", p.at(Y, 7, -7), 140, 1.0, "Spielzeug_2")
+    b.detail("bowl", p.at(Y, -9, -5), 0, 1.0, "Schale")
+    b.detail("potted_tree2", p.at(Y, 13, -10), 0, 1.0, "Inselbaum")
     # ---- epilogue: text that only becomes observable once the veil lifts ----
-    epilog = p.at(A, 0, -10)
-    b.detail("", epilog, 0, 1.0, "Epilog", activationCondition="ZEKSCHLEIER_SCHLEIER_GEHOBEN")
+    epilog = p.at(A, 0, -4)
+    b.detail("", epilog, 0, 1.0, "Epilog", ground=False, activationCondition="ZEKSCHLEIER_SCHLEIER_GEHOBEN")
     b.details[-1].pop("path")  # no path: NH creates an empty object that the epilogue text hangs off
     # NH reads `normal` in planet space even for parented text, so it is the radial direction here
     b.text("wall", "See_Epilog.xml", [0, 0.12, 0], rename="Bodenschrift_Epilog", seed=505, parentPath="Sector/Epilog", isRelativeToParent=True,
            arcInfo=arcs("adult", "adult", "adult", "child"), normal=norm(epilog))
     # ---- volumes ----
     b.vol("revealVolumes", reveal(p.at(A, up=6), 75, ["ZEKSCHLEIER_SEE_FOUND"]))
+    b.vol("revealVolumes", reveal(pod, 10, ["ZEKSCHLEIER_KAPSEL2_FOUND"]))
     b.prop("entryLocation", {"id": "ZEKSCHLEIER_SEE", "position": vec(p.at(A, up=4))})
     b.prop("entryLocation", {"id": "ZEKSCHLEIER_SEE_INSEL", "position": vec(p.at(Y, up=3))})
-    b.prop("entryLocation", {"id": "ZEKSCHLEIER_KOORDINATEN", "position": vec(p.at(A, 0, -10, 2))})
+    b.prop("entryLocation", {"id": "ZEKSCHLEIER_KAPSEL2", "position": vec(pod)})
+    b.prop("entryLocation", {"id": "ZEKSCHLEIER_KOORDINATEN", "position": vec(p.at(A, 0, -4, 2))})
 
     cfg = body_header("Schleiersee")
     cfg.update({
@@ -889,40 +1057,30 @@ def see_config(p, has_em):
 def bruch_config(p, has_em):
     b = Body(p)
     S, F, H = "signalturm", "splitterfeld", "herz"
-    # ---- signal tower: the probe launcher (a Nomai cannon structure) and the transmitter ----
-    cannon = p.at(S, 4, 34)
-    b.detail("gravity_cannon", cannon, p.facing(S, cannon, toward=False), 1.0, "Sondenkatapult")
-    tower = p.at(S)
-    b.detail("transponder", tower, 0, 4.0, "Signalturm_Sender")
-    b.detail("light_beam", p.at(S, 0, 0, 2), 0, 1.5, "Signalturm_Strahl", activationCondition="ZEKSCHLEIER_SCHLEIER_GEHOBEN", keepLoaded=True)
+    # ---- signal tower: transmitter in the centre, the probe launcher and Borago's workshop ----
+    b.detail("transponder", p.at(S), 0, 4.0, "Signalturm_Sender")
+    b.detail("light_beam", p.at(S, 0, 0, 2), 0, 1.5, "Signalturm_Strahl", ground=False, activationCondition="ZEKSCHLEIER_SCHLEIER_GEHOBEN", keepLoaded=True)
     b.prop("signals", {"frequency": "Schleier-Echo", "name": "Signalturm", "audio": "NomaiEscapePodDistressSignal_LP",
                        "position": vec(p.at(S, 0, 0, 6)), "sourceRadius": 4, "detectionRadius": 6000, "identificationRadius": 120,
                        "reveals": "ZEKSCHLEIER_BRUCH_FOUND"})
-    pos = p.at(S, 16, -20)
-    b.text("whiteboard", "Bruch_Signalturm.xml", pos, p.facing(S, pos), "Whiteboard_Sonden", seed=606)
-    pos = p.at(S, -4, -30)
-    b.text("whiteboard", "Bruch_Abschied.xml", pos, p.facing(S, pos), "Whiteboard_Abschied", seed=707)
-    for i, (e, n, k) in enumerate([(30, 4, "box_broken"), (32, 8, "box"), (28, 10, "container"), (-30, -6, "platform_broken"),
-                                     (-34, -18, "vase_broken"), (10, -36, "bench")]):
-        pos = p.at(S, e, n)
-        b.detail(k, pos, p.facing(S, pos), 1.0)
+    cannon = p.at(S, 4, 34)
+    b.detail("gravity_cannon", cannon, p.facing(S, cannon, toward=False), 1.0, "Sondenkatapult")
+    house(b, p, S, -40, 6, "Boragos_Werkstatt")
+    floor_text(b, "Bruch_Signalturm.xml", p.at(S, 16, -18), "Bodenschrift_Sonden", seed=606)
+    floor_text(b, "Bruch_Abschied.xml", p.at(S, -10, -30), "Bodenschrift_Abschied", seed=707)
+    furnish(b, p, S, [(30, 4, "box_broken"), (32, 8, "box"), (28, 10, "container"), (-30, -10, "platform_broken"),
+                      (-34, -20, "vase_broken"), (12, -38, "bench")])
     for i, ang in enumerate((200, 235, 270, 300, 340)):
-        e, n = 46 * math.cos(math.radians(ang)), 46 * math.sin(math.radians(ang))
-        pos = p.at(S, e, n)
+        pos = p.at(S, 48 * math.cos(math.radians(ang)), 48 * math.sin(math.radians(ang)))
         b.detail("doorway", pos, p.facing(S, pos), 1.0, f"Turmbogen_{i + 1}")
-    pool = p.at(S, 30, -26)
-    b.prop("remotes", {"id": "ZEKSCHLEIER_REMOTE_BRUCH", "decalPath": "planets/assets/decals/bruch.png",
-                       "platform": {"position": vec(pool), "rotation": vec([0, p.facing(S, pool), 0], 1), "alignRadial": True, "rename": "Projektionsbecken_Signalturm"}})
-    b.prop("remotes", {"id": "ZEKSCHLEIER_REMOTE_SEE", "decalPath": "planets/assets/decals/see.png",
-                       "stones": [{"position": vec(p.at(S, 22, -30, 0.15)), "alignRadial": True, "rename": "Projektionsstein_See_2"}]})
-    pad = p.at(S, -36, 22)
-    b.prop("warpTransmitters", {"frequency": "ZEKSCHLEIER_BRUCH_KERN", "position": vec(pad), "rotation": vec([0, p.facing(S, pad), 0], 1),
-                                "alignRadial": True, "alignmentWindow": 360, "rename": "Warp_zum_Observatorium"})
+    pool = p.at(S, 32, -26)
+    remote(b, "ZEKSCHLEIER_REMOTE_BRUCH", "bruch", platform=(pool, p.facing(S, pool), "Projektionsbecken_Signalturm"))
+    remote(b, "ZEKSCHLEIER_REMOTE_SEE", "see", stones=[(p.at(S, 24, -32, 0.15), "Projektionsstein_See_2")])
+    transmitter(b, p, S, -34, 24, "ZEKSCHLEIER_BRUCH_KERN", "Warp_zum_Observatorium")
     # ---- shard field: quantum shards that wander when nobody looks ----
     sockets = []
     for i, (e, n) in enumerate([(0, 0), (16, 8), (-14, 12), (8, -18), (-20, -8), (26, -10), (-4, 26), (-28, 16)]):
-        pos = p.at(F, e, n)
-        sockets.append({"position": vec(pos), "rotation": vec([0, (i * 47) % 360, 0], 1), "alignRadial": True, "probability": 1})
+        sockets.append({"position": vec(p.at(F, e, n)), "rotation": vec([0, (i * 47) % 360, 0], 1), "alignRadial": True, "probability": 1})
     b.prop("socketQuantumGroups", {"rename": "Wandernde_Splitter", "sockets": sockets, "details": [
         {"path": P["crystal_cracked"], "rename": f"Splitter_{k + 1}", "scale": 2.4, "keepLoaded": True, "alignWithGravity": True} for k in range(4)]})
     b.text("trailmarker", "Bruch_Splitter.xml", p.at(F, 6, -34), 0, "Wegmarke_Splitter")
@@ -931,38 +1089,29 @@ def bruch_config(p, has_em):
     b.vol("revealVolumes", reveal(p.at(F, up=4), 30, ["ZEKSCHLEIER_SPLITTER_GESEHEN"], "observe", maxDistance=90, maxAngle=50))
     # ---- the maw and the heart at its floor ----
     hs = p.sites[H]
-    floor = p.at(H)
     rim = norm(hs.c * p.radius_of(hs.level) + hs.north * 170)
     rim = rim * p.sample(rim)
     b.text("cairnBH", "Bruch_Warnung.xml", rim, p.facing(H, rim), "Steinmaennchen_Schlund")
     b.vol("revealVolumes", reveal(p.at(H, up=20), 60, ["ZEKSCHLEIER_SCHLUND"], "observe", maxDistance=320, maxAngle=35))
-    b.detail("crystal_cracked", p.at(H, up=-0.5), 0, 9.0, "Herzsplitter")
+    b.detail("crystal_cracked", p.at(H), 0, 9.0, "Herzsplitter")
     for i, (e, n) in enumerate(p.ring(H, 25, 5, 18)):
         pos = p.at(H, e, n)
         b.detail("doorway_fancy", pos, p.facing(H, pos), 1.3, f"Herzbogen_{i + 1}")
     ilex = p.at(H, 0, -8)
     b.detail("bench_skeleton", ilex, p.facing(H, ilex), 1.0, "Ilex")
     b.text("recorder", "Herz_Ilex.xml", p.at(H, 2.5, -9), 0, "Recorder_Ilex")
-    rec = p.at(H, -10, 11)
-    b.prop("warpReceivers", {"frequency": "ZEKSCHLEIER_SEE_HERZ", "position": vec(rec), "rotation": vec([0, p.facing(H, rec), 0], 1), "alignRadial": True,
-                             "detailed": True, "rename": "Warpempfaenger_Herz",
-                             "computer": {"position": vec(p.at(H, -17, 3)), "rotation": vec([0, p.facing(H, p.at(H, -17, 3)), 0], 1), "alignRadial": True}})
+    receiver(b, p, H, -10, 11, "ZEKSCHLEIER_SEE_HERZ", "Warpempfaenger_Herz", computer=(-17, 3))
     pool = p.at(H, 11, 10)
-    b.prop("remotes", {"id": "ZEKSCHLEIER_REMOTE_HERZ", "decalPath": "planets/assets/decals/herz.png",
-                       "platform": {"position": vec(pool), "rotation": vec([0, p.facing(H, pool), 0], 1), "alignRadial": True,
-                                    "rename": "Projektionsbecken_Herz", "reveals": "ZEKSCHLEIER_HERZ_GESEHEN"}})
+    remote(b, "ZEKSCHLEIER_REMOTE_HERZ", "herz", platform=(pool, p.facing(H, pool), "Projektionsbecken_Herz"), reveals="ZEKSCHLEIER_HERZ_GESEHEN")
     for i, (e, n) in enumerate(p.ring(H, 28, 5, 54)):
         b.detail("lamp_flare", p.at(H, e, n), 0, 1.0, f"Herzlampe_{i + 1}")
     b.vol("revealVolumes", reveal(p.at(H, up=6), 28, ["ZEKSCHLEIER_HERZ_FOUND"]))
     b.prop("signals", {"frequency": "Schleier-Echo", "name": "Herz des Bruchs", "audio": "NomaiRecorderAmbient_LP", "position": vec(p.at(H, up=4)),
                        "sourceRadius": 6, "detectionRadius": 0, "identificationRadius": 40})
     # ---- volcanoes far away from all sites ----
-    volcanoes = []
-    for lat, lon in [(55, -40), (-48, -70), (5, -95), (-60, 160)]:
-        pos = direction(lat, lon) * (p.sample(direction(lat, lon)) - 1)
-        volcanoes.append({"position": vec(pos), "alignRadial": True, "minInterval": 6, "maxInterval": 16, "minLaunchSpeed": 40, "maxLaunchSpeed": 70,
-                          "lavaTint": color(255, 120, 40), "stoneTint": color(70, 50, 70)})
-    b.props["volcanoes"] = volcanoes
+    b.props["volcanoes"] = [{"position": vec(direction(lat, lon) * (p.sample(direction(lat, lon)) - 1)), "alignRadial": True, "minInterval": 6, "maxInterval": 16,
+                             "minLaunchSpeed": 40, "maxLaunchSpeed": 70, "lavaTint": color(255, 120, 40), "stoneTint": color(70, 50, 70)}
+                            for lat, lon in [(55, -40), (-48, -70), (5, -95), (-60, 160)]]
     b.prop("entryLocation", {"id": "ZEKSCHLEIER_BRUCH", "position": vec(p.at(S, up=4))})
     b.prop("entryLocation", {"id": "ZEKSCHLEIER_SPLITTERFELD", "position": vec(p.at(F, up=4))})
     b.prop("entryLocation", {"id": "ZEKSCHLEIER_HERZ", "position": vec(p.at(H, up=4))})
@@ -993,6 +1142,204 @@ def bruch_config(p, has_em):
     return cfg
 
 
+def dorn_config(p, has_em):
+    b = Body(p)
+    K, R, Sch = "kapsel1", "ruine", "schlund"
+    # ---- the maw: a bramble node in the crater floor leads into the labyrinth ----
+    node_pos = p.at(Sch, up=26)
+    b.props.setdefault("_bramble", []).append({"position": vec(node_pos), "rotation": vec([0, 0, 0]), "alignRadial": True, "scale": 1.2,
+                                               "linksTo": "ZS_Dornenhalle", "name": "ZS_Dornenschlund",
+                                               "fogTint": color(120, 90, 160), "lightTint": color(180, 140, 255)})
+    b.vol("revealVolumes", reveal(node_pos, 120, ["ZEKSCHLEIER_DORN_FOUND"], "observe", maxDistance=900, maxAngle=30))
+    # ---- crash site of escape pod 1 and the camp of its survivors ----
+    pod = p.at(K, 0, 0)
+    escape_pod(b, pod, 30, "Kapsel_1", pitch=22, roll=10)
+    pos = p.at(K, 9, 6)
+    b.text("preCrashComputer", "Dorn_Kapsel1.xml", pos, p.facing(K, pos, pod), "Computer_Kapsel_1")
+    pos = p.at(K, -14, 10)
+    b.text("whiteboard", "Dorn_Lager.xml", pos, p.facing(K, pos), "Whiteboard_Lager", seed=801)
+    house(b, p, K, -24, -16, "Hysops_Unterstand")
+    transmitter(b, p, K, 20, -18, "ZEKSCHLEIER_DORN_SEE", "Warp_zum_Archiv")
+    furnish(b, p, K, [(14, 12, "box_broken"), (17, 10, "container"), (-6, -20, "warpcore_broken"), (-30, 6, "vase_broken"), (6, -26, "bench")])
+    for i, (e, n) in enumerate(p.ring(K, 30, 5, 70)):
+        b.detail("lamp_flare", p.at(K, e, n), 0, 1.0, f"Notlicht_{i + 1}")
+    b.prop("signals", {"frequency": "EscapePod", "name": "Kapsel 1", "audio": "NomaiEscapePodDistressSignal_LP", "position": vec(p.at(K, up=3)),
+                       "sourceRadius": 3, "detectionRadius": 4000, "identificationRadius": 80, "reveals": "ZEKSCHLEIER_KAPSEL1_FOUND"})
+    b.vol("revealVolumes", reveal(p.at(K, up=4), 25, ["ZEKSCHLEIER_KAPSEL1_FOUND", "ZEKSCHLEIER_DORN_FOUND"]))
+    # ---- Kerria's research station at the rim of the maw ----
+    house(b, p, R, 0, 22, "Kerrias_Forschungsstation", 1.2)
+    floor_text(b, "Dorn_Forschung.xml", p.at(R, 0, 0), "Bodenschrift_Forschung", seed=802)
+    toward_maw = p.at(Sch)
+    b.detail("stargazing", p.at(R, -24, -12), p.facing(R, p.at(R, -24, -12), toward_maw), 1.0, "Aussichtsplattform")
+    rim = p.at(R, -18, -26)
+    b.text("cairnTH", "Dorn_Abschied.xml", rim, p.facing(R, rim, toward_maw), "Steinmaennchen_Kerria")
+    for i, (e, n) in enumerate([(-20, 14), (20, 14), (24, -10)]):
+        pos = p.at(R, e, n)
+        b.detail("arch", pos, p.facing(R, pos), 1.0, f"Ruinenbogen_{i + 1}")
+    furnish(b, p, R, [(12, 10, "table"), (15, 12, "box"), (-12, 8, "vase_thick"), (10, -16, "shelf")])
+    b.prop("entryLocation", {"id": "ZEKSCHLEIER_DORN", "position": vec(p.at(R, up=3))})
+    b.prop("entryLocation", {"id": "ZEKSCHLEIER_KAPSEL1", "position": vec(p.at(K, up=3))})
+    b.prop("entryLocation", {"id": "ZEKSCHLEIER_LABYRINTH", "position": vec(node_pos)})
+
+    bramble = b.props.pop("_bramble")
+    cfg = body_header("Schleierdorn")
+    cfg.update({
+        "Base": {"surfaceSize": 270, "surfaceGravity": 8, "gravityFallOff": "linear"},
+        "Orbit": {"primaryBody": "Schleierstern", "semiMajorAxis": 15200, "eccentricity": 0.05, "inclination": -6, "longitudeOfAscendingNode": 300,
+                  "trueAnomaly": 120, "siderealPeriod": 6, "axialTilt": 30, "tint": color(130, 190, 120)},
+        "Atmosphere": {"size": 340, "atmosphereTint": color(90, 120, 90), "atmosphereSunIntensity": 0.6, "useAtmosphereShader": True,
+                       "fogTint": color(70, 90, 70, 255), "fogSize": 330, "fogDensity": 0.7, "hasOxygen": False},
+        "HeightMap": heightmap_module(p, has_em, 0.1, 0.0, color(150, 255, 160)),
+        "AmbientLights": [{"intensity": 0.4, "tint": color(140, 200, 140), "outerRadius": 360, "innerRadius": 270}],
+        "MapMarker": {"enabled": True},
+        "ShipLog": ship_log("dorn", "Schleierdorn.xml", "dorn"),
+        "Bramble": {"nodes": bramble},
+        "Props": {
+            "details": b.details,
+            "translatorText": b.texts,
+            "scatter": [
+                {"path": P["bramble_seed"], "count": 18, "seed": 4401, "minHeight": 258, "maxHeight": 292, "scale": 1.0, "preventOverlap": True},
+                {"path": P["bh_tree"], "count": 34, "seed": 4402, "minHeight": 256, "maxHeight": 294, "scale": 1.4, "preventOverlap": True},
+                {"path": P["purple_rock"], "count": 8, "seed": 4403, "minHeight": 250, "maxHeight": 290, "scale": 0.8, "preventOverlap": True},
+            ],
+            **b.props,
+        },
+        "Volumes": b.volumes,
+    })
+    return cfg
+
+
+def rock_config(p, has_em, name, orbit, xml, map_sprite, build):
+    """Small asteroid used as a foundation for a station or a wreck (walkable ground with a known surface)."""
+    b = Body(p)
+    build(b, p)
+    cfg = body_header(name)
+    cfg.update({
+        "Base": {"surfaceSize": p.hmax, "surfaceGravity": 1.5, "gravityFallOff": "linear"},
+        "Orbit": orbit,
+        "HeightMap": heightmap_module(p, has_em, 0.05),
+        "MapMarker": {"enabled": True},
+        "ShipLog": ship_log(p.key, xml, map_sprite),
+        "Props": {"details": b.details, "translatorText": b.texts, **b.props},
+        "Volumes": b.volumes,
+    })
+    return cfg
+
+
+def build_wrack_props(b, p):
+    W = "wrack"
+    wreck_pos = norm(p.sites[W].c * -1 + p.sites[W].north * 0.4) * (p.hmax + 30)
+    b.detail("opc_module", wreck_pos, 0, 1.0, "Sondenkanone_Wrack", ground=False, pitch=35, roll=70, keepLoaded=True,
+             removeChildren=["Interactables_Module_Broken"])
+    b.detail("nomai_probe", p.at(W, 0, -6, -0.4), 20, 1.0, "Zurueckgeschossene_Sonde", pitch=62)
+    pos = p.at(W, 6, 4)
+    b.text("computer", "Wrack_Protokoll.xml", pos, p.facing(W, pos), "Computer_Kanone")
+    pos = p.at(W, -6, 5)
+    b.text("whiteboard", "Wrack_Tafel.xml", pos, p.facing(W, pos), "Whiteboard_Spiegel", seed=901)
+    for i, (e, n) in enumerate(p.ring(W, 9, 4, 20)):
+        b.detail("lamp_flare", p.at(W, e, n), 0, 1.0, f"Wracklampe_{i + 1}")
+    furnish(b, p, W, [(-2, 9, "box_broken"), (3, -10, "platform_broken")])
+    b.vol("revealVolumes", reveal(p.at(W, up=3), 14, ["ZEKSCHLEIER_WRACK_FOUND"]))
+    b.vol("revealVolumes", reveal([0, 0, 0], 60, ["ZEKSCHLEIER_WRACK_RUMOR"], "observe", maxDistance=3000, maxAngle=20))
+    b.prop("entryLocation", {"id": "ZEKSCHLEIER_WRACK", "position": vec(p.at(W, up=3))})
+
+
+def build_wacht_props(b, p):
+    W = "wacht"
+    station_pos = norm(p.sites[W].c * -1) * (p.hmax + 45)
+    b.detail("sunstation", station_pos, 0, 1.0, "Sonnenwacht_Station", ground=False, pitch=90, keepLoaded=True, removeComponents=True)
+    b.detail("statue_head", p.at(W, -6, -4), p.facing(W, p.at(W, -6, -4)), 1.0, "Nomai_Statuenkopf")
+    receiver(b, p, W, 0, 0, "ZEKSCHLEIER_KERN_WACHT", "Warpempfaenger_Sonnenwacht", computer=(7, -3))
+    pos = p.at(W, 6, 6)
+    b.text("computer", "Wacht_Messung.xml", pos, p.facing(W, pos), "Computer_Messreihe")
+    b.text("recorder", "Wacht_Ilex.xml", p.at(W, -7, 5), 0, "Recorder_Ilex_Wacht")
+    for i, (e, n) in enumerate(p.ring(W, 11, 4, 0)):
+        b.detail("lamp_flare", p.at(W, e, n), 0, 1.0, f"Wachtlampe_{i + 1}")
+    b.vol("revealVolumes", reveal(p.at(W, up=3), 14, ["ZEKSCHLEIER_WACHT_FOUND"]))
+    b.prop("entryLocation", {"id": "ZEKSCHLEIER_WACHT", "position": vec(p.at(W, up=3))})
+
+
+# ---------------------------------------------------------------------------------- labyrinth
+def dimension(name, radius, vines, fog, exit_node, static_pos, nodes=(), details=(), texts=(), signals=(), volumes=()):
+    cfg = body_header(name)
+    cfg.update({
+        "canShowOnTitle": False,
+        "Orbit": {"staticPosition": vec(static_pos)},
+        "Bramble": {"dimension": {"radius": radius, "vinePrefab": vines, "fogTint": fog, "fogDensity": 4.5, "linksTo": exit_node}},
+        "ShipLog": {"mapMode": {"remove": True}},
+    })
+    if nodes:
+        cfg["Bramble"]["nodes"] = list(nodes)
+    props = {}
+    if details:
+        props["details"] = list(details)
+    if texts:
+        props["translatorText"] = list(texts)
+    if signals:
+        props["signals"] = list(signals)
+    if props:
+        cfg["Props"] = props
+    if volumes:
+        cfg["Volumes"] = {"revealVolumes": list(volumes)}
+    return cfg
+
+
+GOLD_FOG, BLUE_FOG, RED_FOG = color(255, 190, 70), color(80, 140, 255), color(255, 60, 50)
+
+
+def node(pos, links, name, fog, scale=1.0):
+    return {"position": vec(pos), "rotation": vec([0, 0, 0]), "linksTo": links, "name": name, "fogTint": fog, "lightTint": fog, "scale": scale}
+
+
+def floating(key, pos, rot, name, scale=1.0, **extra):
+    d = {"path": P[key], "position": vec(pos), "rotation": vec(rot, 1), "rename": name}
+    if scale != 1.0:
+        d["scale"] = scale
+    d.update(extra)
+    return d
+
+
+def floating_text(kind, xml, pos, rot, name):
+    return {"type": kind, "xmlFile": "planets/text/" + xml, "position": vec(pos), "rotation": vec(rot, 1), "rename": name}
+
+
+def labyrinth_configs():
+    halle = dimension(
+        "ZS_Dornenhalle", 750, "hub", color(70, 50, 90), "ZS_Dornenschlund", [42000, 6000, 0],
+        nodes=[node([260, 120, -180], "ZS_Kapselgrund", "ZS_Knoten_Gold", GOLD_FOG),
+               node([-280, 60, 200], "ZS_Rankengarten", "ZS_Knoten_Blau", BLUE_FOG),
+               node([60, -300, 220], "ZS_Echokammer", "ZS_Knoten_Rot", RED_FOG)],
+        details=[floating("vessel_lamp", [0, -30, 0], [0, 0, 0], "Kerrias_Lampe")],
+        texts=[floating_text("trailmarker", "Lab_Halle.xml", [0, -34, 0], [0, 0, 0], "Wegmarke_Farben")],
+        volumes=[reveal([0, 0, 0], 600, ["ZEKSCHLEIER_LAB_FOUND"])])
+    kapselgrund = dimension(
+        "ZS_Kapselgrund", 500, "cluster", color(110, 80, 30), "ZS_Knoten_Gold", [-42000, 6000, 0],
+        nodes=[node([-200, -60, 180], "ZS_Laternenkammer", "ZS_Knoten_Laterne", GOLD_FOG, 0.8)],
+        details=[floating("escape_pod_geo", [40, 10, -30], [339, 171, 314], "Kapsel_3"),
+                 floating("dead_suit", [30, 14, -18], [20, 80, 160], "Melisse")],
+        texts=[floating_text("preCrashRecorder", "Lab_Melisse.xml", [34, 12, -22], [0, 40, 0], "Aufzeichnung_Melisse")],
+        signals=[{"frequency": "EscapePod", "name": "Kapsel 3", "audio": "NomaiEscapePodDistressSignal_LP", "position": vec([40, 10, -30]),
+                  "sourceRadius": 3, "detectionRadius": 2000, "identificationRadius": 60, "reveals": "ZEKSCHLEIER_KAPSEL3_FOUND"}],
+        volumes=[reveal([40, 10, -30], 40, ["ZEKSCHLEIER_KAPSEL3_FOUND"])])
+    rankengarten = dimension(
+        "ZS_Rankengarten", 500, "smallNest", color(40, 60, 110), "ZS_Knoten_Blau", [0, 6000, 42000],
+        details=[floating("box", [0, -12, 0], [0, 0, 0], "Kerrias_Kiste"), floating("container", [3, -12, 2], [0, 40, 0], "Kerrias_Behaelter"),
+                 floating("vessel_lamp", [-3, -10, 1], [0, 0, 0], "Kerrias_Lagerlicht"), floating("vase_thin", [2, -11, -3], [10, 0, 0], "Kerrias_Vase")],
+        texts=[floating_text("recorder", "Lab_Rankengarten.xml", [-1, -11, -2], [0, 0, 0], "Recorder_Kerria_Lager")])
+    echokammer = dimension(
+        "ZS_Echokammer", 500, "cluster", color(90, 20, 20), "ZS_Knoten_Rot", [0, 6000, -42000],
+        details=[floating("angler", [-150, 40, 120], [0, 140, 0], "Blindes_Wesen")],
+        texts=[floating_text("recorder", "Lab_Echokammer.xml", [0, -6, 0], [0, 0, 0], "Recorder_Warnung")])
+    laternenkammer = dimension(
+        "ZS_Laternenkammer", 600, "hub", color(30, 80, 80), "ZS_Knoten_Laterne", [30000, -25000, 30000],
+        details=[floating("dead_suit", [26, -60, 18], [0, 210, 30], "Kerria"),
+                 floating("vessel_lamp", [22, -62, 14], [0, 0, 0], "Kerrias_letztes_Licht")],
+        texts=[floating_text("preCrashComputer", "Lab_Laterne.xml", [30, -64, 10], [0, 220, 0], "Logbuch_Laterne"),
+               floating_text("preCrashRecorder", "Lab_Kerria.xml", [24, -63, 20], [0, 200, 0], "Aufzeichnung_Kerria")],
+        volumes=[reveal([0, -60, 0], 160, ["ZEKSCHLEIER_LATERNE_FOUND"])])
+    return [halle, kapselgrund, rankengarten, echokammer, laternenkammer]
+
+
 def star_config():
     cfg = body_header("Schleierstern")
     spawn = [0, 2600, 9300]
@@ -1013,12 +1360,13 @@ def moon_config(p, has_em):
     b = Body(p)
     A = "absturz"
     probe = p.at(A, 0, 0, 0.6)
-    b.detail("transponder", probe, 35, 2.2, "Sonde_Elf", pitch=24, roll=8)
-    b.detail("light_beam", p.at(A, 0, 0, 1.5), 0, 1.2, "Sonde_Leuchtfeuer", keepLoaded=True)
+    b.detail("transponder", probe, 35, 2.2, "Sonde_Elf", pitch=24, roll=8, ground=False)
+    b.detail("light_beam", p.at(A, 0, 0, 1.5), 0, 1.2, "Sonde_Leuchtfeuer", ground=False, keepLoaded=True)
     b.detail("box_broken", p.at(A, 5, 3), 80, 1.0, "Sondentruemmer_1")
     b.detail("platform_broken", p.at(A, -6, 6, -0.3), 200, 0.6, "Sondentruemmer_2", pitch=12)
     b.text("recorder", "Sonde_Aufzeichnung.xml", p.at(A, 3, -3), 0, "Beschaedigter_Nomai_Recorder")
-    b.text("scroll", "Sonde_Protokoll.xml", p.at(A, -3.5, -2.5, 0.2), 60, "Schriftrolle_Startprotokoll")
+    pos = p.at(A, -5, -4)
+    b.text("whiteboard", "Sonde_Protokoll.xml", pos, p.facing(A, pos), "Whiteboard_Startprotokoll", seed=71)
     b.prop("signals", {"frequency": "Schleier-Echo", "name": "Nomai-Sonde", "audio": "NomaiEscapePodDistressSignal_LP", "position": vec(p.at(A, up=3)),
                        "sourceRadius": 2, "detectionRadius": 1500, "identificationRadius": 180, "reveals": "ZEKSCHLEIER_ECHO_RUMOR"})
     b.vol("revealVolumes", reveal(p.at(A, up=3), 22, ["ZEKSCHLEIER_SONDE"]))
@@ -1044,6 +1392,7 @@ def moon_config(p, has_em):
 # ============================================================================================
 VIOLET = (color(150, 110, 255), color(205, 180, 255))
 GOLD = (color(220, 160, 60), color(255, 215, 130))
+TEAL = (color(60, 190, 180), color(140, 255, 240))
 
 
 def curiosity(cid, pair):
@@ -1052,11 +1401,17 @@ def curiosity(cid, pair):
 
 def system_configs():
     entries = {
-        "ZEKSCHLEIER_SYSTEM": (0, 300), "ZEKSCHLEIER_KOORDINATEN": (0, 720),
-        "ZEKSCHLEIER_KERN": (-760, 480), "ZEKSCHLEIER_KERN_WACHE": (-1180, 760), "ZEKSCHLEIER_KERN_RESONANZFELD": (-1220, 300),
-        "ZEKSCHLEIER_HERZ": (760, 480),
-        "ZEKSCHLEIER_EXPEDITION": (0, -420), "ZEKSCHLEIER_SEE": (-680, -360), "ZEKSCHLEIER_SEE_INSEL": (-1100, -640),
-        "ZEKSCHLEIER_BRUCH": (680, -360), "ZEKSCHLEIER_SPLITTERFELD": (1100, -640),
+        # the veil (violet)
+        "ZEKSCHLEIER_SYSTEM": (0, 350), "ZEKSCHLEIER_KOORDINATEN": (0, 760),
+        "ZEKSCHLEIER_KERN": (-760, 520), "ZEKSCHLEIER_KERN_WACHE": (-1180, 800), "ZEKSCHLEIER_KERN_RESONANZFELD": (-1220, 360),
+        "ZEKSCHLEIER_WACHT": (-420, 940), "ZEKSCHLEIER_HERZ": (760, 520),
+        # the clan (gold)
+        "ZEKSCHLEIER_EXPEDITION": (0, -250), "ZEKSCHLEIER_SEE": (-700, -200), "ZEKSCHLEIER_KAPSEL2": (-1150, -60), "ZEKSCHLEIER_SEE_INSEL": (-1150, -420),
+        "ZEKSCHLEIER_BRUCH": (700, -200), "ZEKSCHLEIER_SPLITTERFELD": (1150, -60), "ZEKSCHLEIER_WRACK": (1150, -420),
+        # the lost ship (teal)
+        "ZEKSCHLEIER_LATERNE_SCHIFF": (0, -1250), "ZEKSCHLEIER_DORN": (-650, -900), "ZEKSCHLEIER_KAPSEL1": (-1100, -1060),
+        "ZEKSCHLEIER_LABYRINTH": (650, -900), "ZEKSCHLEIER_KERRIAS_LAGER": (1100, -760), "ZEKSCHLEIER_KAPSEL3": (1100, -1100),
+        "ZEKSCHLEIER_ECHOKAMMER_ENTRY": (650, -1380),
     }
     system = {
         "$schema": NH + "star_system_schema.json",
@@ -1075,11 +1430,14 @@ def system_configs():
         "StarChart": {"position": {"x": 7, "y": -5}, "color": color(170, 140, 255)},
         "GlobalMusic": {"travelAudio": "TravelerNomai"},
         "Vessel": {
+            # the clan's ship "Laterne" drifts deep inside the thorn labyrinth - it is still powered
             "coords": COORDS,
-            "vesselSpawn": {"position": vec([-6500, -3200, -15500])},
+            "alwaysPresent": True,
+            "promptFact": "ZEKSCHLEIER_LATERNE_KERRIA",
+            "vesselSpawn": {"parentBody": "ZS_Laternenkammer", "isRelativeToParent": True, "position": vec([0, -80, 0]), "rotation": vec([0, 30, 0])},
         },
         "initialReveal": ["ZEKSCHLEIER_ANKUNFT"],
-        "curiosities": [curiosity("ZEKSCHLEIER_SYSTEM", VIOLET), curiosity("ZEKSCHLEIER_EXPEDITION", GOLD)],
+        "curiosities": [curiosity("ZEKSCHLEIER_SYSTEM", VIOLET), curiosity("ZEKSCHLEIER_EXPEDITION", GOLD), curiosity("ZEKSCHLEIER_LATERNE_SCHIFF", TEAL)],
         "entryPositions": [{"id": k, "position": {"x": v[0], "y": v[1]}} for k, v in entries.items()],
         "conditionalChecks": [
             {"check": {"allFactsRevealed": ["ZEKSCHLEIER_FINALE"]},
@@ -1098,51 +1456,74 @@ def system_configs():
 
 # ============================================================================================
 def main():
-    kern, see, bruch, moon = build_kern(), build_see(), build_bruch(), build_moon()
-    em = {p.key: textures(p, p.key) for p in (kern, see, bruch, moon)}
+    kern, see, bruch, moon, dorn = build_kern(), build_see(), build_bruch(), build_moon(), build_dorn()
+    wrack = build_rock("wrack", "Kanonenwrack", 26.0, 34.0, 5505, "wrack")
+    wacht = build_rock("wacht", "Sonnenwacht", 22.0, 30.0, 6606, "wacht")
+    bodies = (kern, see, bruch, moon, dorn, wrack, wacht)
+    em = {p.key: textures(p, p.key) for p in bodies}
 
     write_json("planets/Schleierstern.json", star_config())
     write_json("planets/Schleierkern.json", kern_config(kern, em["kern"]))
     write_json("planets/Schleiersee.json", see_config(see, em["see"]))
     write_json("planets/Schleierbruch.json", bruch_config(bruch, em["bruch"]))
+    write_json("planets/Schleierdorn.json", dorn_config(dorn, em["dorn"]))
+    write_json("planets/Kanonenwrack.json", rock_config(
+        wrack, em["wrack"], "Kanonenwrack",
+        {"primaryBody": "Schleierdorn", "isMoon": True, "semiMajorAxis": 1250, "eccentricity": 0.02, "inclination": 25, "trueAnomaly": 40,
+         "siderealPeriod": 3, "tint": color(200, 200, 210)},
+        "Kanonenwrack.xml", "wrack", build_wrack_props))
+    write_json("planets/Sonnenwacht.json", rock_config(
+        wacht, em["wacht"], "Sonnenwacht",
+        {"primaryBody": "Schleierstern", "semiMajorAxis": 3000, "eccentricity": 0, "inclination": 2, "trueAnomaly": 250,
+         "isTidallyLocked": True, "alignmentAxis": vec([-1, 0, 0]), "tint": color(255, 200, 150)},
+        "Sonnenwacht.xml", "wacht", build_wacht_props))
+    for dim in labyrinth_configs():
+        write_json(f"planets/Labyrinth/{dim['name']}.json", dim)
     write_json("planets/Schleiersignal.json", moon_config(moon, em["signal"]))
     system, solar = system_configs()
     write_json(f"systems/{SYSTEM}.json", system)
     write_json("systems/SolarSystem.json", solar)
 
     # ship log: map mode sprites
-    for p, glow in ((kern, (90, 140, 255)), (see, (90, 200, 230)), (bruch, (200, 110, 255)), (moon, (200, 180, 255))):
-        img = render_planet(p, 256, glow=glow)
+    glows = {"kern": (90, 140, 255), "see": (90, 200, 230), "bruch": (200, 110, 255), "signal": (200, 180, 255),
+             "dorn": (120, 200, 120), "wrack": (180, 180, 200), "wacht": (255, 170, 90)}
+    for p in bodies:
+        img = render_planet(p, 256, glow=glows[p.key])
         save(img, f"planets/assets/shiplog/map/{p.key}.png")
         outline = Image.new("RGBA", img.size, (0, 0, 0, 0))
         ImageDraw.Draw(outline).ellipse([3, 3, 252, 252], outline=(255, 255, 255, 255), width=5)
         save(outline, f"planets/assets/shiplog/map/{p.key}_outline.png")
 
     # ship log: entry photos
-    def photo(p, lat, lon, zoom, seed, glow=None):
+    def photo(p, site, seed, zoom=1.05):
+        st = p.sites[site]
         img = starfield(512, seed)
-        img.alpha_composite(render_planet(p, 512, view_lat=lat, view_lon=lon, zoom=zoom, glow=glow))
+        img.alpha_composite(render_planet(p, 512, view_lat=st.lat, view_lon=st.lon, zoom=zoom, glow=glows[p.key]))
         return img
     E = "planets/assets/shiplog/entries/"
-    k, s, b, m = kern.sites, see.sites, bruch.sites, moon.sites
-    save(photo(kern, k["observatorium"].lat, k["observatorium"].lon, 1.05, 1, (90, 140, 255)), E + "ZEKSCHLEIER_KERN.png")
-    save(nomai_art(2, "beam"), E + "ZEKSCHLEIER_KERN_WACHE.png")
-    save(nomai_art(3, "crystal"), E + "ZEKSCHLEIER_KERN_RESONANZFELD.png")
-    save(photo(see, s["archiv"].lat, s["archiv"].lon, 1.05, 4, (90, 200, 230)), E + "ZEKSCHLEIER_SEE.png")
-    save(nomai_art(5, "children"), E + "ZEKSCHLEIER_SEE_INSEL.png")
-    save(photo(bruch, b["signalturm"].lat, b["signalturm"].lon, 1.05, 6, (200, 110, 255)), E + "ZEKSCHLEIER_BRUCH.png")
-    save(nomai_art(7, "shards"), E + "ZEKSCHLEIER_SPLITTERFELD.png")
-    save(nomai_art(8, "eye"), E + "ZEKSCHLEIER_HERZ.png")
-    save(nomai_art(9, "veil"), E + "ZEKSCHLEIER_SYSTEM.png")
-    save(nomai_art(10, "clan"), E + "ZEKSCHLEIER_EXPEDITION.png")
-    save(coordinates_image(), E + "ZEKSCHLEIER_KOORDINATEN.png")
-    save(nomai_art(11, "probe"), E + "ZEKSCHLEIER_SIGNAL.png")
+    for f in os.listdir(os.path.join(MOD, E)) if os.path.isdir(os.path.join(MOD, E)) else []:
+        os.remove(os.path.join(MOD, E, f))
+    shots = {
+        "ZEKSCHLEIER_KERN": photo(kern, "observatorium", 1), "ZEKSCHLEIER_KERN_WACHE": nomai_art(2, "beam"),
+        "ZEKSCHLEIER_KERN_RESONANZFELD": nomai_art(3, "crystal"), "ZEKSCHLEIER_SEE": photo(see, "archiv", 4),
+        "ZEKSCHLEIER_SEE_INSEL": nomai_art(5, "children"), "ZEKSCHLEIER_BRUCH": photo(bruch, "signalturm", 6),
+        "ZEKSCHLEIER_SPLITTERFELD": nomai_art(7, "shards"), "ZEKSCHLEIER_HERZ": nomai_art(8, "eye"),
+        "ZEKSCHLEIER_SYSTEM": nomai_art(9, "veil"), "ZEKSCHLEIER_EXPEDITION": nomai_art(10, "clan"),
+        "ZEKSCHLEIER_KOORDINATEN": coordinates_image(), "ZEKSCHLEIER_SIGNAL": nomai_art(11, "probe"),
+        "ZEKSCHLEIER_DORN": photo(dorn, "schlund", 12), "ZEKSCHLEIER_LABYRINTH": nomai_art(13, "vines"),
+        "ZEKSCHLEIER_LATERNE_SCHIFF": nomai_art(14, "vessel"), "ZEKSCHLEIER_KAPSEL1": nomai_art(15, "pod"),
+        "ZEKSCHLEIER_KAPSEL2": nomai_art(16, "pod"), "ZEKSCHLEIER_KAPSEL3": nomai_art(17, "pod_vines"),
+        "ZEKSCHLEIER_KERRIAS_LAGER": nomai_art(18, "camp"), "ZEKSCHLEIER_ECHOKAMMER_ENTRY": nomai_art(19, "angler"),
+        "ZEKSCHLEIER_WRACK": photo(wrack, "wrack", 20, 0.9), "ZEKSCHLEIER_WACHT": nomai_art(21, "station"),
+    }
+    for entry, img in shots.items():
+        save(img, E + entry + ".png")
 
     for sym in ("kern", "see", "bruch", "herz"):
         save(decal(sym), f"planets/assets/decals/{sym}.png")
 
     # site report for the README / debugging
-    for p in (kern, see, bruch, moon):
+    for p in bodies:
         for st in p.sites.values():
             print(f"{p.name:15s} {st.name:14s} lat {st.lat:6.1f} lon {st.lon:7.1f} radius {p.radius_of(st.level):7.2f} m")
 

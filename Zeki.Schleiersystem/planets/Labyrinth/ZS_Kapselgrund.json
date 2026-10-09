@@ -1,0 +1,142 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+  "name": "ZS_Kapselgrund",
+  "starSystem": "Schleiersystem",
+  "canShowOnTitle": false,
+  "Orbit": {
+    "staticPosition": {
+      "x": -42000.0,
+      "y": 6000.0,
+      "z": 0.0
+    }
+  },
+  "Bramble": {
+    "dimension": {
+      "radius": 500,
+      "vinePrefab": "cluster",
+      "fogTint": {
+        "r": 110,
+        "g": 80,
+        "b": 30,
+        "a": 255
+      },
+      "fogDensity": 4.5,
+      "linksTo": "ZS_Knoten_Gold"
+    },
+    "nodes": [
+      {
+        "position": {
+          "x": -200.0,
+          "y": -60.0,
+          "z": 180.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "linksTo": "ZS_Laternenkammer",
+        "name": "ZS_Knoten_Laterne",
+        "fogTint": {
+          "r": 255,
+          "g": 190,
+          "b": 70,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 255,
+          "g": 190,
+          "b": 70,
+          "a": 255
+        },
+        "scale": 0.8
+      }
+    ]
+  },
+  "ShipLog": {
+    "mapMode": {
+      "remove": true
+    }
+  },
+  "Props": {
+    "details": [
+      {
+        "path": "DB_EscapePodDimension_Body/Sector_EscapePodDimension/Sector_EscapePodBody/Geometry_EscapePodBody",
+        "position": {
+          "x": 40.0,
+          "y": 10.0,
+          "z": -30.0
+        },
+        "rotation": {
+          "x": 339.0,
+          "y": 171.0,
+          "z": 314.0
+        },
+        "rename": "Kapsel_3"
+      },
+      {
+        "path": "Comet_Body/Sector_CO/Sector_CometInterior/Props_CometInterior/Prefab_NOM_Dead_Suit (1)",
+        "position": {
+          "x": 30.0,
+          "y": 14.0,
+          "z": -18.0
+        },
+        "rotation": {
+          "x": 20.0,
+          "y": 80.0,
+          "z": 160.0
+        },
+        "rename": "Melisse"
+      }
+    ],
+    "translatorText": [
+      {
+        "type": "preCrashRecorder",
+        "xmlFile": "planets/text/Lab_Melisse.xml",
+        "position": {
+          "x": 34.0,
+          "y": 12.0,
+          "z": -22.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 40.0,
+          "z": 0.0
+        },
+        "rename": "Aufzeichnung_Melisse"
+      }
+    ],
+    "signals": [
+      {
+        "frequency": "EscapePod",
+        "name": "Kapsel 3",
+        "audio": "NomaiEscapePodDistressSignal_LP",
+        "position": {
+          "x": 40.0,
+          "y": 10.0,
+          "z": -30.0
+        },
+        "sourceRadius": 3,
+        "detectionRadius": 2000,
+        "identificationRadius": 60,
+        "reveals": "ZEKSCHLEIER_KAPSEL3_FOUND"
+      }
+    ]
+  },
+  "Volumes": {
+    "revealVolumes": [
+      {
+        "position": {
+          "x": 40.0,
+          "y": 10.0,
+          "z": -30.0
+        },
+        "radius": 40,
+        "revealOn": "enter",
+        "reveals": [
+          "ZEKSCHLEIER_KAPSEL3_FOUND"
+        ]
+      }
+    ]
+  }
+}

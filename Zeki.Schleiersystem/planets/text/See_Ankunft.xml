@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Whiteboard am Landeplatz der Laterne -->
+<!-- Bodenschrift auf dem Platz der Siedlung: die Ankunft -->
 <NomaiObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/text_schema.xsd">
   <TextBlock>
     <ID>1</ID>
-    <Text>Ilex: Wir sind gelandet. Die Laterne wird nicht wieder starten – ihr Warpkern erlosch, kaum dass wir den Schleier durchquert hatten.</Text>
+    <Text>Ilex: Wir haben es geschafft. Die Kapsel hat die Wasserwelt erreicht. Aber die Laterne ist verloren – der Dornenplanet hat sie verschlungen.</Text>
   </TextBlock>
   <TextBlock>
     <ID>2</ID>
     <ParentID>1</ParentID>
-    <Text>Sorrel: Aber hier gibt es Wasser und Bäume. Wir können atmen. Wir können bleiben, bis wir verstehen, was geschehen ist.</Text>
+    <Text>Sorrel: Hier gibt es Wasser und Bäume. Wir können atmen. Wir können bleiben, bis wir verstehen, was geschehen ist.</Text>
   </TextBlock>
   <TextBlock>
     <ID>3</ID>
     <ParentID>2</ParentID>
-    <Text>Borago: Bleiben? Das Echo, dem wir gefolgt sind, war falsch. Das Auge ist nicht hier. Es war nie hier.</Text>
+    <Text>Borago (über Funk vom Dorn): Bleiben? Das Echo, dem wir gefolgt sind, war falsch. Das Auge ist nicht hier. Es war nie hier.</Text>
   </TextBlock>
   <TextBlock>
     <ID>4</ID>

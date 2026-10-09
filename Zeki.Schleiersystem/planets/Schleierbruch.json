@@ -83,26 +83,11 @@
   "Props": {
     "details": [
       {
-        "path": "CaveTwin_Body/Sector_CaveTwin/Sector_SouthHemisphere/Sector_GravityCannon/Geometry_GravityCannon/ControlledByProxy_Arch/Structure_NOM_GravityCannon_HT",
-        "position": {
-          "x": -235.147,
-          "y": 208.122,
-          "z": 131.166
-        },
-        "rotation": {
-          "x": 0.0,
-          "y": 126.3,
-          "z": 0.0
-        },
-        "alignRadial": true,
-        "rename": "Sondenkatapult"
-      },
-      {
         "path": "CaveTwin_Body/Sector_CaveTwin/Sector_SouthHemisphere/Sector_EscapePod/Interactables_EscapePod/EscapePod_VisibleFrom_Far/DistressBeaconTransmitter/Props_NOM_Transponder",
         "position": {
-          "x": -249.937,
-          "y": 180.339,
-          "z": 144.301
+          "x": -249.349,
+          "y": 179.915,
+          "z": 143.962
         },
         "rotation": {
           "x": 0.0,
@@ -132,11 +117,41 @@
         "keepLoaded": true
       },
       {
+        "path": "CaveTwin_Body/Sector_CaveTwin/Sector_SouthHemisphere/Sector_GravityCannon/Geometry_GravityCannon/ControlledByProxy_Arch/Structure_NOM_GravityCannon_HT",
+        "position": {
+          "x": -234.801,
+          "y": 207.816,
+          "z": 130.974
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 126.3,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Sondenkatapult"
+      },
+      {
+        "path": "QuantumMoon_Body/Sector_QuantumMoon/QuantumShrine/Structure_NOM_QuantumShrine",
+        "position": {
+          "x": -225.364,
+          "y": 183.942,
+          "z": 175.932
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 222.2,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Boragos_Werkstatt"
+      },
+      {
         "path": "Comet_Body/Sector_CO/Sector_CometInterior/Props_CometInterior/Prefab_NOM_BoxBroken",
         "position": {
-          "x": -262.067,
-          "y": 183.009,
-          "z": 116.8
+          "x": -262.028,
+          "y": 182.982,
+          "z": 116.782
         },
         "rotation": {
           "x": 0.0,
@@ -148,9 +163,9 @@
       {
         "path": "Comet_Body/Sector_CO/Sector_CometInterior/Props_CometInterior/Prefab_NOM_Box",
         "position": {
-          "x": -261.042,
-          "y": 186.25,
-          "z": 113.935
+          "x": -261.004,
+          "y": 186.223,
+          "z": 113.918
         },
         "rotation": {
           "x": 0.0,
@@ -162,9 +177,9 @@
       {
         "path": "Comet_Body/Sector_CO/Sector_CometInterior/Props_CometInterior/Prefab_NOM_Container",
         "position": {
-          "x": -258.364,
-          "y": 188.103,
-          "z": 116.957
+          "x": -258.326,
+          "y": 188.075,
+          "z": 116.94
         },
         "rotation": {
           "x": 0.0,
@@ -176,13 +191,13 @@
       {
         "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_CrashFragment/Interactables_CrashFragment/Platforms/Prefab_NOM_BrokenPlatform",
         "position": {
-          "x": -236.736,
-          "y": 174.547,
-          "z": 171.181
+          "x": -238.464,
+          "y": 171.096,
+          "z": 172.164
         },
         "rotation": {
           "x": 0.0,
-          "y": 201.5,
+          "y": 194.4,
           "z": 0.0
         },
         "alignRadial": true
@@ -190,13 +205,13 @@
       {
         "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge/BlackHoleForgePivot/Props_BlackHoleForge/Prefab_NOM_VaseThick_Broken",
         "position": {
-          "x": -239.671,
-          "y": 164.029,
-          "z": 177.386
+          "x": -240.47,
+          "y": 162.267,
+          "z": 177.828
         },
         "rotation": {
           "x": 0.0,
-          "y": 185.3,
+          "y": 182.7,
           "z": 0.0
         },
         "alignRadial": true
@@ -204,13 +219,13 @@
       {
         "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge/BlackHoleForgePivot/Props_BlackHoleForge/Prefab_NOM_SimpleChair_NoSkeleton (1)",
         "position": {
-          "x": -269.837,
-          "y": 148.914,
-          "z": 144.312
+          "x": -271.481,
+          "y": 147.086,
+          "z": 142.979
         },
         "rotation": {
           "x": 0.0,
-          "y": 103.5,
+          "y": 101.3,
           "z": 0.0
         },
         "alignRadial": true
@@ -218,13 +233,13 @@
       {
         "path": "BrittleHollow_Body/Sector_BH/Sector_GravityCannon/Lighting_GravityCannon/Prefab_NOM_Doorway",
         "position": {
-          "x": -233.422,
-          "y": 165.492,
-          "z": 184.229
+          "x": -232.514,
+          "y": 164.713,
+          "z": 185.792
         },
         "rotation": {
           "x": 0.0,
-          "y": 194.1,
+          "y": 194.2,
           "z": 0.0
         },
         "alignRadial": true,
@@ -233,13 +248,13 @@
       {
         "path": "BrittleHollow_Body/Sector_BH/Sector_GravityCannon/Lighting_GravityCannon/Prefab_NOM_Doorway",
         "position": {
-          "x": -251.748,
-          "y": 147.046,
-          "z": 175.538
+          "x": -251.613,
+          "y": 145.489,
+          "z": 176.734
         },
         "rotation": {
           "x": 0.0,
-          "y": 157.5,
+          "y": 157.6,
           "z": 0.0
         },
         "alignRadial": true,
@@ -248,9 +263,9 @@
       {
         "path": "BrittleHollow_Body/Sector_BH/Sector_GravityCannon/Lighting_GravityCannon/Prefab_NOM_Doorway",
         "position": {
-          "x": -268.605,
-          "y": 140.055,
-          "z": 155.079
+          "x": -269.181,
+          "y": 138.203,
+          "z": 155.412
         },
         "rotation": {
           "x": 0.0,
@@ -263,13 +278,13 @@
       {
         "path": "BrittleHollow_Body/Sector_BH/Sector_GravityCannon/Lighting_GravityCannon/Prefab_NOM_Doorway",
         "position": {
-          "x": -277.198,
-          "y": 145.234,
-          "z": 133.722
+          "x": -278.137,
+          "y": 143.601,
+          "z": 133.154
         },
         "rotation": {
           "x": 0.0,
-          "y": 87.8,
+          "y": 87.7,
           "z": 0.0
         },
         "alignRadial": true,
@@ -278,13 +293,13 @@
       {
         "path": "BrittleHollow_Body/Sector_BH/Sector_GravityCannon/Lighting_GravityCannon/Prefab_NOM_Doorway",
         "position": {
-          "x": -276.258,
-          "y": 165.492,
-          "z": 110.034
+          "x": -277.157,
+          "y": 164.713,
+          "z": 108.467
         },
         "rotation": {
           "x": 0.0,
-          "y": 45.9,
+          "y": 45.8,
           "z": 0.0
         },
         "alignRadial": true,
@@ -293,9 +308,9 @@
       {
         "path": "BrittleHollow_Body/Sector_BH/Sector Quantum Pole Path/Fragment QuantumPolePath 2/Interactables_QPP2/Prefab_NOM_GravityCrystal_Cracked",
         "position": {
-          "x": 106.655,
-          "y": -73.816,
-          "z": 200.589
+          "x": 105.673,
+          "y": -73.136,
+          "z": 198.742
         },
         "rotation": {
           "x": 0.0,
@@ -309,9 +324,9 @@
       {
         "path": "CaveTwin_Body/Sector_CaveTwin/Sector_SouthHemisphere/Sector_SouthUnderground/Sector_City/Lighting_City/Lights_ForumDistrict/TractorBeamFacadeDoors/Prefab_NOM_Doorway_Fancy",
         "position": {
-          "x": 86.535,
-          "y": -66.262,
-          "z": 213.12
+          "x": 86.465,
+          "y": -66.208,
+          "z": 212.946
         },
         "rotation": {
           "x": 0.0,
@@ -325,9 +340,9 @@
       {
         "path": "CaveTwin_Body/Sector_CaveTwin/Sector_SouthHemisphere/Sector_SouthUnderground/Sector_City/Lighting_City/Lights_ForumDistrict/TractorBeamFacadeDoors/Prefab_NOM_Doorway_Fancy",
         "position": {
-          "x": 109.907,
-          "y": -49.922,
-          "z": 206.706
+          "x": 109.818,
+          "y": -49.882,
+          "z": 206.538
         },
         "rotation": {
           "x": 0.0,
@@ -341,9 +356,9 @@
       {
         "path": "CaveTwin_Body/Sector_CaveTwin/Sector_SouthHemisphere/Sector_SouthUnderground/Sector_City/Lighting_City/Lights_ForumDistrict/TractorBeamFacadeDoors/Prefab_NOM_Doorway_Fancy",
         "position": {
-          "x": 128.295,
-          "y": -66.262,
-          "z": 190.916
+          "x": 128.19,
+          "y": -66.208,
+          "z": 190.761
         },
         "rotation": {
           "x": 0.0,
@@ -357,9 +372,9 @@
       {
         "path": "CaveTwin_Body/Sector_CaveTwin/Sector_SouthHemisphere/Sector_SouthUnderground/Sector_City/Lighting_City/Lights_ForumDistrict/TractorBeamFacadeDoors/Prefab_NOM_Doorway_Fancy",
         "position": {
-          "x": 116.286,
-          "y": -92.702,
-          "z": 187.572
+          "x": 116.192,
+          "y": -92.626,
+          "z": 187.419
         },
         "rotation": {
           "x": 0.0,
@@ -373,9 +388,9 @@
       {
         "path": "CaveTwin_Body/Sector_CaveTwin/Sector_SouthHemisphere/Sector_SouthUnderground/Sector_City/Lighting_City/Lights_ForumDistrict/TractorBeamFacadeDoors/Prefab_NOM_Doorway_Fancy",
         "position": {
-          "x": 90.478,
-          "y": -92.702,
-          "z": 201.294
+          "x": 90.404,
+          "y": -92.626,
+          "z": 201.131
         },
         "rotation": {
           "x": 0.0,
@@ -389,9 +404,9 @@
       {
         "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_NorthPoleSurface/Props_NorthPoleSurface/OtherComponentsGroup/LowBuilding/Prefab_NOM_SimpleChair",
         "position": {
-          "x": 105.659,
-          "y": -81.533,
-          "z": 198.715
+          "x": 105.637,
+          "y": -81.516,
+          "z": 198.674
         },
         "rotation": {
           "x": 0.0,
@@ -404,9 +419,9 @@
       {
         "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
         "position": {
-          "x": 94.986,
-          "y": -52.071,
-          "z": 213.461
+          "x": 94.966,
+          "y": -52.06,
+          "z": 213.416
         },
         "rotation": {
           "x": 0.0,
@@ -419,9 +434,9 @@
       {
         "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
         "position": {
-          "x": 123.852,
-          "y": -52.071,
-          "z": 198.112
+          "x": 123.826,
+          "y": -52.06,
+          "z": 198.071
         },
         "rotation": {
           "x": 0.0,
@@ -434,9 +449,9 @@
       {
         "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
         "position": {
-          "x": 128.261,
-          "y": -81.643,
-          "z": 184.886
+          "x": 128.234,
+          "y": -81.625,
+          "z": 184.847
         },
         "rotation": {
           "x": 0.0,
@@ -449,9 +464,9 @@
       {
         "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
         "position": {
-          "x": 102.12,
-          "y": -99.919,
-          "z": 192.06
+          "x": 102.099,
+          "y": -99.898,
+          "z": 192.02
         },
         "rotation": {
           "x": 0.0,
@@ -464,9 +479,9 @@
       {
         "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
         "position": {
-          "x": 81.555,
-          "y": -81.643,
-          "z": 209.72
+          "x": 81.538,
+          "y": -81.625,
+          "z": 209.676
         },
         "rotation": {
           "x": 0.0,
@@ -479,37 +494,35 @@
     ],
     "translatorText": [
       {
-        "type": "whiteboard",
+        "type": "wall",
         "xmlFile": "planets/text/Bruch_Signalturm.xml",
         "position": {
-          "x": -266.362,
-          "y": 162.917,
-          "z": 135.361
+          "x": -265.596,
+          "y": 164.701,
+          "z": 134.908
         },
-        "rotation": {
-          "x": 0.0,
-          "y": 79.8,
-          "z": 0.0
+        "normal": {
+          "x": -0.7803,
+          "y": 0.4839,
+          "z": 0.3963
         },
-        "alignRadial": true,
-        "rename": "Whiteboard_Sonden",
+        "rename": "Bodenschrift_Sonden",
         "seed": 606
       },
       {
-        "type": "whiteboard",
+        "type": "wall",
         "xmlFile": "planets/text/Bruch_Abschied.xml",
         "position": {
-          "x": -260.676,
-          "y": 154.288,
-          "z": 155.102
+          "x": -257.656,
+          "y": 154.269,
+          "z": 160.258
         },
-        "rotation": {
-          "x": 0.0,
-          "y": 128.0,
-          "z": 0.0
+        "normal": {
+          "x": -0.7569,
+          "y": 0.4532,
+          "z": 0.4708
         },
-        "alignRadial": true,
-        "rename": "Whiteboard_Abschied",
+        "rename": "Bodenschrift_Abschied",
         "seed": 707
       },
       {
@@ -638,13 +651,13 @@
         "decalPath": "planets/assets/decals/bruch.png",
         "platform": {
           "position": {
-            "x": -275.004,
-            "y": 157.223,
-            "z": 124.366
+            "x": -275.852,
+            "y": 157.14,
+            "z": 122.581
           },
           "rotation": {
             "x": 0.0,
-            "y": 68.1,
+            "y": 66.1,
             "z": 0.0
           },
           "alignRadial": true,
@@ -657,9 +670,9 @@
         "stones": [
           {
             "position": {
-              "x": -273.198,
-              "y": 154.048,
-              "z": 132.467
+              "x": -274.852,
+              "y": 152.221,
+              "z": 131.151
             },
             "alignRadial": true,
             "rename": "Projektionsstein_See_2"
@@ -690,13 +703,13 @@
       {
         "frequency": "ZEKSCHLEIER_BRUCH_KERN",
         "position": {
-          "x": -220.155,
-          "y": 197.484,
-          "z": 168.36
+          "x": -220.282,
+          "y": 199.208,
+          "z": 166.149
         },
         "rotation": {
           "x": 0.0,
-          "y": 244.7,
+          "y": 248.3,
           "z": 0.0
         },
         "alignRadial": true,

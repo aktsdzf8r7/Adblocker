@@ -3,6 +3,6 @@
 <NomaiObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/text_schema.xsd">
   <TextBlock>
     <ID>1</ID>
-    <Text>Borago: Der Boden hier ist dünn wie Eierschale. Langsam gehen. Der Schlund führt hinab zum Herz – aber nur Ilex ist je hinuntergestiegen.</Text>
+    <Text>Borago: Der Boden hier ist dünn wie Eierschale. Der Schlund führt hinab zum Herz – aber nur Ilex ist je hinuntergestiegen.</Text>
   </TextBlock>
 </NomaiObject>

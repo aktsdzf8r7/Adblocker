@@ -1,0 +1,246 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+  "name": "Kanonenwrack",
+  "starSystem": "Schleiersystem",
+  "Base": {
+    "surfaceSize": 34.0,
+    "surfaceGravity": 1.5,
+    "gravityFallOff": "linear"
+  },
+  "Orbit": {
+    "primaryBody": "Schleierdorn",
+    "isMoon": true,
+    "semiMajorAxis": 1250,
+    "eccentricity": 0.02,
+    "inclination": 25,
+    "trueAnomaly": 40,
+    "siderealPeriod": 3,
+    "tint": {
+      "r": 200,
+      "g": 200,
+      "b": 210,
+      "a": 255
+    }
+  },
+  "HeightMap": {
+    "heightMap": "planets/assets/terrain/wrack_height.png",
+    "textureMap": "planets/assets/terrain/wrack_color.png",
+    "minHeight": 26.0,
+    "maxHeight": 34.0,
+    "resolution": 128,
+    "smoothness": 0.05,
+    "metallic": 0.0
+  },
+  "MapMarker": {
+    "enabled": true
+  },
+  "ShipLog": {
+    "xmlFile": "planets/shiplogs/Kanonenwrack.xml",
+    "spriteFolder": "planets/assets/shiplog/entries",
+    "mapMode": {
+      "revealedSprite": "planets/assets/shiplog/map/wrack.png",
+      "outlineSprite": "planets/assets/shiplog/map/wrack_outline.png"
+    }
+  },
+  "Props": {
+    "details": [
+      {
+        "path": "OrbitalProbeCannon_Body/Sector_OrbitalProbeCannon/Sector_Module_Broken",
+        "position": {
+          "x": -59.717,
+          "y": 7.579,
+          "z": -21.735
+        },
+        "rotation": {
+          "x": 35.0,
+          "y": 0.0,
+          "z": 70.0
+        },
+        "alignRadial": true,
+        "rename": "Sondenkanone_Wrack",
+        "keepLoaded": true,
+        "removeChildren": [
+          "Interactables_Module_Broken"
+        ]
+      },
+      {
+        "path": "NomaiProbe_Body/Structure_NOM_Probe_Renderer",
+        "position": {
+          "x": 29.089,
+          "y": 2.28,
+          "z": 10.588
+        },
+        "rotation": {
+          "x": 62.0,
+          "y": 20.0,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Zurueckgeschossene_Sonde"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
+        "position": {
+          "x": 23.943,
+          "y": 10.678,
+          "z": 17.354
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Wracklampe_1"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
+        "position": {
+          "x": 26.475,
+          "y": 15.666,
+          "z": 6.491
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Wracklampe_2"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
+        "position": {
+          "x": 30.934,
+          "y": 4.97,
+          "z": 2.619
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Wracklampe_3"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
+        "position": {
+          "x": 28.403,
+          "y": -0.018,
+          "z": 13.482
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Wracklampe_4"
+      },
+      {
+        "path": "Comet_Body/Sector_CO/Sector_CometInterior/Props_CometInterior/Prefab_NOM_BoxBroken",
+        "position": {
+          "x": 25.946,
+          "y": 16.139,
+          "z": 7.404
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 59.9,
+          "z": 0.0
+        },
+        "alignRadial": true
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_CrashFragment/Interactables_CrashFragment/Platforms/Prefab_NOM_BrokenPlatform",
+        "position": {
+          "x": 28.42,
+          "y": -1.43,
+          "z": 13.37
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 228.7,
+          "z": 0.0
+        },
+        "alignRadial": true
+      }
+    ],
+    "translatorText": [
+      {
+        "type": "computer",
+        "xmlFile": "planets/text/Wrack_Protokoll.xml",
+        "position": {
+          "x": 24.913,
+          "y": 11.711,
+          "z": 15.292
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 118.4,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Computer_Kanone"
+      },
+      {
+        "type": "whiteboard",
+        "xmlFile": "planets/text/Wrack_Tafel.xml",
+        "position": {
+          "x": 28.554,
+          "y": 12.598,
+          "z": 4.195
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 27.6,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Whiteboard_Spiegel",
+        "seed": 901
+      }
+    ],
+    "entryLocation": [
+      {
+        "id": "ZEKSCHLEIER_WRACK",
+        "position": {
+          "x": 31.306,
+          "y": 8.927,
+          "z": 11.394
+        }
+      }
+    ]
+  },
+  "Volumes": {
+    "revealVolumes": [
+      {
+        "position": {
+          "x": 31.306,
+          "y": 8.927,
+          "z": 11.394
+        },
+        "radius": 14,
+        "revealOn": "enter",
+        "reveals": [
+          "ZEKSCHLEIER_WRACK_FOUND"
+        ]
+      },
+      {
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "radius": 60,
+        "revealOn": "observe",
+        "reveals": [
+          "ZEKSCHLEIER_WRACK_RUMOR"
+        ],
+        "maxDistance": 3000,
+        "maxAngle": 20
+      }
+    ]
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+  "name": "ZS_Laternenkammer",
+  "starSystem": "Schleiersystem",
+  "canShowOnTitle": false,
+  "Orbit": {
+    "staticPosition": {
+      "x": 30000.0,
+      "y": -25000.0,
+      "z": 30000.0
+    }
+  },
+  "Bramble": {
+    "dimension": {
+      "radius": 600,
+      "vinePrefab": "hub",
+      "fogTint": {
+        "r": 30,
+        "g": 80,
+        "b": 80,
+        "a": 255
+      },
+      "fogDensity": 4.5,
+      "linksTo": "ZS_Knoten_Laterne"
+    }
+  },
+  "ShipLog": {
+    "mapMode": {
+      "remove": true
+    }
+  },
+  "Props": {
+    "details": [
+      {
+        "path": "Comet_Body/Sector_CO/Sector_CometInterior/Props_CometInterior/Prefab_NOM_Dead_Suit (1)",
+        "position": {
+          "x": 26.0,
+          "y": -60.0,
+          "z": 18.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 210.0,
+          "z": 30.0
+        },
+        "rename": "Kerria"
+      },
+      {
+        "path": "DB_VesselDimension_Body/Sector_VesselDimension/Sector_VesselBridge/Interactibles_VesselBridge/UNSORTED/Wall Lamps/Prefab_NOM_Lamp_Glow_Vessel_Wall",
+        "position": {
+          "x": 22.0,
+          "y": -62.0,
+          "z": 14.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "Kerrias_letztes_Licht"
+      }
+    ],
+    "translatorText": [
+      {
+        "type": "preCrashComputer",
+        "xmlFile": "planets/text/Lab_Laterne.xml",
+        "position": {
+          "x": 30.0,
+          "y": -64.0,
+          "z": 10.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 220.0,
+          "z": 0.0
+        },
+        "rename": "Logbuch_Laterne"
+      },
+      {
+        "type": "preCrashRecorder",
+        "xmlFile": "planets/text/Lab_Kerria.xml",
+        "position": {
+          "x": 24.0,
+          "y": -63.0,
+          "z": 20.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 200.0,
+          "z": 0.0
+        },
+        "rename": "Aufzeichnung_Kerria"
+      }
+    ]
+  },
+  "Volumes": {
+    "revealVolumes": [
+      {
+        "position": {
+          "x": 0.0,
+          "y": -60.0,
+          "z": 0.0
+        },
+        "radius": 160,
+        "revealOn": "enter",
+        "reveals": [
+          "ZEKSCHLEIER_LATERNE_FOUND"
+        ]
+      }
+    ]
+  }
+}

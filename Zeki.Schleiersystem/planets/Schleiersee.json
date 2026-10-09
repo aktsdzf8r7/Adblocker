@@ -85,9 +85,9 @@
       {
         "path": "CaveTwin_Body/Sector_CaveTwin/Sector_SouthHemisphere/Sector_SouthUnderground/Sector_City/Interactables_City/CityDoors/Prefab_NOM_Gateway",
         "position": {
-          "x": 606.289,
-          "y": 52.696,
-          "z": -378.852
+          "x": 606.12,
+          "y": 52.682,
+          "z": -378.746
         },
         "rotation": {
           "x": 0.0,
@@ -98,15 +98,61 @@
         "rename": "Tor_der_Siedlung"
       },
       {
-        "path": "BrittleHollow_Body/Sector_BH/Sector_GravityCannon/Lighting_GravityCannon/Prefab_NOM_Doorway",
+        "path": "QuantumMoon_Body/Sector_QuantumMoon/QuantumShrine/Structure_NOM_QuantumShrine",
         "position": {
-          "x": 575.403,
-          "y": 94.328,
-          "z": -417.02
+          "x": 592.407,
+          "y": 159.101,
+          "z": -370.177
         },
         "rotation": {
           "x": 0.0,
-          "y": 15.4,
+          "y": 122.0,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "scale": 1.2,
+        "rename": "Sorrels_Archivhaus"
+      },
+      {
+        "path": "QuantumMoon_Body/Sector_QuantumMoon/QuantumShrine/Structure_NOM_QuantumShrine",
+        "position": {
+          "x": 570.796,
+          "y": 137.382,
+          "z": -410.742
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 64.6,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Wohnhaus_West"
+      },
+      {
+        "path": "QuantumMoon_Body/Sector_QuantumMoon/QuantumShrine/Structure_NOM_QuantumShrine",
+        "position": {
+          "x": 619.393,
+          "y": 137.382,
+          "z": -332.97
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 179.4,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Wohnhaus_Ost"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_GravityCannon/Lighting_GravityCannon/Prefab_NOM_Doorway",
+        "position": {
+          "x": 573.214,
+          "y": 92.918,
+          "z": -420.031
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 15.6,
           "z": 0.0
         },
         "alignRadial": true,
@@ -116,13 +162,13 @@
       {
         "path": "BrittleHollow_Body/Sector_BH/Sector_GravityCannon/Lighting_GravityCannon/Prefab_NOM_Doorway",
         "position": {
-          "x": 591.093,
-          "y": 67.486,
-          "z": -399.934
+          "x": 590.099,
+          "y": 64.03,
+          "z": -401.643
         },
         "rotation": {
           "x": 0.0,
-          "y": 333.8,
+          "y": 334.0,
           "z": 0.0
         },
         "alignRadial": true,
@@ -132,13 +178,13 @@
       {
         "path": "BrittleHollow_Body/Sector_BH/Sector_GravityCannon/Lighting_GravityCannon/Prefab_NOM_Doorway",
         "position": {
-          "x": 610.424,
-          "y": 61.401,
-          "z": -370.816
+          "x": 610.904,
+          "y": 57.482,
+          "z": -370.306
         },
         "rotation": {
           "x": 0.0,
-          "y": 291.4,
+          "y": 291.3,
           "z": 0.0
         },
         "alignRadial": true,
@@ -148,13 +194,13 @@
       {
         "path": "BrittleHollow_Body/Sector_BH/Sector_GravityCannon/Lighting_GravityCannon/Prefab_NOM_Doorway",
         "position": {
-          "x": 624.352,
-          "y": 78.921,
-          "z": -343.29
+          "x": 625.893,
+          "y": 76.337,
+          "z": -340.683
         },
         "rotation": {
           "x": 0.0,
-          "y": 249.2,
+          "y": 249.0,
           "z": 0.0
         },
         "alignRadial": true,
@@ -164,13 +210,13 @@
       {
         "path": "BrittleHollow_Body/Sector_BH/Sector_GravityCannon/Lighting_GravityCannon/Prefab_NOM_Doorway",
         "position": {
-          "x": 626.359,
-          "y": 111.848,
-          "z": -330.236
+          "x": 628.053,
+          "y": 111.773,
+          "z": -326.634
         },
         "rotation": {
           "x": 0.0,
-          "y": 208.5,
+          "y": 208.2,
           "z": 0.0
         },
         "alignRadial": true,
@@ -178,43 +224,11 @@
         "rename": "Siedlungsbogen_5"
       },
       {
-        "path": "BrittleHollow_Body/Sector_BH/Sector_GravityCannon/Lighting_GravityCannon/Prefab_NOM_Doorway",
-        "position": {
-          "x": 579.175,
-          "y": 156.21,
-          "z": -392.487
-        },
-        "rotation": {
-          "x": 0.0,
-          "y": 93.7,
-          "z": 0.0
-        },
-        "alignRadial": true,
-        "scale": 1.2,
-        "rename": "Siedlungsbogen_8"
-      },
-      {
-        "path": "BrittleHollow_Body/Sector_BH/Sector_GravityCannon/Lighting_GravityCannon/Prefab_NOM_Doorway",
-        "position": {
-          "x": 570.697,
-          "y": 129.368,
-          "z": -414.079
-        },
-        "rotation": {
-          "x": 0.0,
-          "y": 55.3,
-          "z": 0.0
-        },
-        "alignRadial": true,
-        "scale": 1.2,
-        "rename": "Siedlungsbogen_9"
-      },
-      {
         "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge/BlackHoleForgePivot/Props_BlackHoleForge/Prefab_NOM_Shelf (2)/Strucutre_NOM_Shelf",
         "position": {
-          "x": 591.534,
-          "y": 121.984,
-          "z": -386.135
+          "x": 591.492,
+          "y": 121.975,
+          "z": -386.108
         },
         "rotation": {
           "x": 0.0,
@@ -227,9 +241,9 @@
       {
         "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge/BlackHoleForgePivot/Props_BlackHoleForge/Prefab_NOM_Shelf (2)/Strucutre_NOM_Shelf",
         "position": {
-          "x": 593.122,
-          "y": 125.933,
-          "z": -382.412
+          "x": 593.081,
+          "y": 125.925,
+          "z": -382.386
         },
         "rotation": {
           "x": 0.0,
@@ -242,9 +256,9 @@
       {
         "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge/BlackHoleForgePivot/Props_BlackHoleForge/Prefab_NOM_Shelf (2)/Strucutre_NOM_Shelf",
         "position": {
-          "x": 594.827,
-          "y": 128.892,
-          "z": -378.762
+          "x": 594.785,
+          "y": 128.883,
+          "z": -378.735
         },
         "rotation": {
           "x": 0.0,
@@ -257,9 +271,9 @@
       {
         "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge/BlackHoleForgePivot/Props_BlackHoleForge/Prefab_NOM_Shelf (2)/Strucutre_NOM_Shelf",
         "position": {
-          "x": 601.184,
-          "y": 128.892,
-          "z": -368.588
+          "x": 601.142,
+          "y": 128.883,
+          "z": -368.563
         },
         "rotation": {
           "x": 0.0,
@@ -272,9 +286,9 @@
       {
         "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge/BlackHoleForgePivot/Props_BlackHoleForge/Prefab_NOM_Shelf (2)/Strucutre_NOM_Shelf",
         "position": {
-          "x": 603.717,
-          "y": 125.933,
-          "z": -365.456
+          "x": 603.675,
+          "y": 125.925,
+          "z": -365.431
         },
         "rotation": {
           "x": 0.0,
@@ -287,9 +301,9 @@
       {
         "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge/BlackHoleForgePivot/Props_BlackHoleForge/Prefab_NOM_Shelf (2)/Strucutre_NOM_Shelf",
         "position": {
-          "x": 606.367,
-          "y": 121.984,
-          "z": -362.396
+          "x": 606.325,
+          "y": 121.975,
+          "z": -362.371
         },
         "rotation": {
           "x": 0.0,
@@ -300,11 +314,30 @@
         "rename": "Archivregal_6"
       },
       {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_CrashFragment/EscapePod_Socket",
+        "position": {
+          "x": 576.061,
+          "y": 74.232,
+          "z": -418.623
+        },
+        "rotation": {
+          "x": 14.0,
+          "y": 88.2,
+          "z": 6.0
+        },
+        "alignRadial": true,
+        "rename": "Kapsel_2",
+        "removeChildren": [
+          "Interactibles_EscapePod/Prefab_NOM_Vessel_Computer",
+          "Proxy_EscapePod"
+        ]
+      },
+      {
         "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge/BlackHoleForgePivot/Props_BlackHoleForge/Prefab_NOM_NomaiTree_Var_1",
         "position": {
-          "x": 580.102,
-          "y": 115.945,
-          "z": -404.884
+          "x": 580.061,
+          "y": 115.937,
+          "z": -404.856
         },
         "rotation": {
           "x": 0.0,
@@ -316,9 +349,9 @@
       {
         "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge/BlackHoleForgePivot/Props_BlackHoleForge/Prefab_NOM_NomaiTree_Var_2",
         "position": {
-          "x": 579.762,
-          "y": 110.012,
-          "z": -407.021
+          "x": 579.721,
+          "y": 110.004,
+          "z": -406.993
         },
         "rotation": {
           "x": 0.0,
@@ -330,9 +363,9 @@
       {
         "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge/BlackHoleForgePivot/Props_BlackHoleForge/Prefab_NOM_NomaiTree_Var_1",
         "position": {
-          "x": 618.479,
-          "y": 113.973,
-          "z": -344.072
+          "x": 618.436,
+          "y": 113.965,
+          "z": -344.048
         },
         "rotation": {
           "x": 0.0,
@@ -344,9 +377,9 @@
       {
         "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge/BlackHoleForgePivot/Props_BlackHoleForge/Prefab_NOM_NomaiTree_Var_2",
         "position": {
-          "x": 620.489,
-          "y": 106.063,
-          "z": -342.98
+          "x": 620.446,
+          "y": 106.056,
+          "z": -342.957
         },
         "rotation": {
           "x": 0.0,
@@ -358,13 +391,13 @@
       {
         "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge/BlackHoleForgePivot/Props_BlackHoleForge/Prefab_NOM_SimpleChair_NoSkeleton (1)",
         "position": {
-          "x": 593.648,
-          "y": 76.459,
-          "z": -394.497
+          "x": 593.961,
+          "y": 72.489,
+          "z": -394.684
         },
         "rotation": {
           "x": 0.0,
-          "y": 332.4,
+          "y": 330.0,
           "z": 0.0
         },
         "alignRadial": true
@@ -372,13 +405,13 @@
       {
         "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge/BlackHoleForgePivot/Props_BlackHoleForge/Prefab_NOM_SimpleChair_NoSkeleton (1)",
         "position": {
-          "x": 596.027,
-          "y": 74.487,
-          "z": -391.275
+          "x": 596.33,
+          "y": 70.516,
+          "z": -391.457
         },
         "rotation": {
           "x": 0.0,
-          "y": 326.0,
+          "y": 324.0,
           "z": 0.0
         },
         "alignRadial": true
@@ -386,9 +419,9 @@
       {
         "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge/BlackHoleForgePivot/Props_BlackHoleForge/Props_NOM_Table",
         "position": {
-          "x": 614.629,
-          "y": 78.442,
-          "z": -360.515
+          "x": 614.586,
+          "y": 78.436,
+          "z": -360.489
         },
         "rotation": {
           "x": 0.0,
@@ -400,9 +433,9 @@
       {
         "path": "BrittleHollow_Body/Sector_BH/Sector_GravityCannon/Props_GravityCannon/OtherComponentsGroup/Prefab_NOM_SmallBowl",
         "position": {
-          "x": 616.263,
-          "y": 82.393,
-          "z": -356.824
+          "x": 616.22,
+          "y": 82.387,
+          "z": -356.799
         },
         "rotation": {
           "x": 0.0,
@@ -414,13 +447,13 @@
       {
         "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge/BlackHoleForgePivot/Props_BlackHoleForge/Prefab_NOM_VaseThick",
         "position": {
-          "x": 613.974,
+          "x": 612.914,
           "y": 74.482,
-          "z": -362.465
+          "z": -364.156
         },
         "rotation": {
           "x": 0.0,
-          "y": 275.4,
+          "y": 278.0,
           "z": 0.0
         },
         "alignRadial": true
@@ -428,13 +461,13 @@
       {
         "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge/BlackHoleForgePivot/Props_BlackHoleForge/Prefab_NOM_VaseThin",
         "position": {
-          "x": 580.535,
-          "y": 135.652,
-          "z": -398.083
+          "x": 580.811,
+          "y": 133.682,
+          "z": -398.256
         },
         "rotation": {
           "x": 0.0,
-          "y": 72.7,
+          "y": 70.3,
           "z": 0.0
         },
         "alignRadial": true
@@ -442,13 +475,13 @@
       {
         "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge/BlackHoleForgePivot/Props_BlackHoleForge/Prefab_NOM_VaseThick",
         "position": {
-          "x": 612.284,
-          "y": 135.652,
-          "z": -347.273
+          "x": 612.561,
+          "y": 133.682,
+          "z": -347.445
         },
         "rotation": {
           "x": 0.0,
-          "y": 171.3,
+          "y": 173.7,
           "z": 0.0
         },
         "alignRadial": true
@@ -456,9 +489,9 @@
       {
         "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge/BlackHoleForgePivot/Props_BlackHoleForge/Prefab_NOM_Treepot",
         "position": {
-          "x": 603.295,
-          "y": 88.388,
-          "z": -376.981
+          "x": 603.46,
+          "y": 86.399,
+          "z": -377.084
         },
         "rotation": {
           "x": 0.0,
@@ -470,13 +503,13 @@
       {
         "path": "Comet_Body/Sector_CO/Sector_CometInterior/Props_CometInterior/Prefab_NOM_Box",
         "position": {
-          "x": 578.473,
-          "y": 92.179,
-          "z": -413.236
+          "x": 577.984,
+          "y": 96.128,
+          "z": -412.934
         },
         "rotation": {
           "x": 0.0,
-          "y": 10.6,
+          "y": 15.0,
           "z": 0.0
         },
         "alignRadial": true
@@ -484,13 +517,13 @@
       {
         "path": "Comet_Body/Sector_CO/Sector_CometInterior/Props_CometInterior/Prefab_NOM_Container",
         "position": {
-          "x": 625.423,
-          "y": 88.222,
-          "z": -339.05
+          "x": 625.905,
+          "y": 92.157,
+          "z": -337.003
         },
         "rotation": {
           "x": 0.0,
-          "y": 237.6,
+          "y": 232.3,
           "z": 0.0
         },
         "alignRadial": true
@@ -498,9 +531,9 @@
       {
         "path": "CaveTwin_Body/Sector_CaveTwin/Sector_SouthHemisphere/Sector_SouthSurface/Sector_SouthPole/Lighting_SouthPole/Prefab_NOM_Torch",
         "position": {
-          "x": 612.824,
-          "y": 112.079,
-          "z": -354.651
+          "x": 612.781,
+          "y": 112.071,
+          "z": -354.626
         },
         "rotation": {
           "x": 0.0,
@@ -514,9 +547,9 @@
       {
         "path": "CaveTwin_Body/Sector_CaveTwin/Sector_SouthHemisphere/Sector_SouthSurface/Sector_SouthPole/Lighting_SouthPole/Prefab_NOM_Torch",
         "position": {
-          "x": 603.713,
-          "y": 132.596,
-          "z": -363.099
+          "x": 603.671,
+          "y": 132.587,
+          "z": -363.074
         },
         "rotation": {
           "x": 0.0,
@@ -530,9 +563,9 @@
       {
         "path": "CaveTwin_Body/Sector_CaveTwin/Sector_SouthHemisphere/Sector_SouthSurface/Sector_SouthPole/Lighting_SouthPole/Prefab_NOM_Torch",
         "position": {
-          "x": 591.002,
-          "y": 132.596,
-          "z": -383.441
+          "x": 590.961,
+          "y": 132.587,
+          "z": -383.414
         },
         "rotation": {
           "x": 0.0,
@@ -546,9 +579,9 @@
       {
         "path": "CaveTwin_Body/Sector_CaveTwin/Sector_SouthHemisphere/Sector_SouthSurface/Sector_SouthPole/Lighting_SouthPole/Prefab_NOM_Torch",
         "position": {
-          "x": 587.402,
-          "y": 112.079,
-          "z": -395.334
+          "x": 587.361,
+          "y": 112.071,
+          "z": -395.307
         },
         "rotation": {
           "x": 0.0,
@@ -562,9 +595,9 @@
       {
         "path": "CaveTwin_Body/Sector_CaveTwin/Sector_SouthHemisphere/Sector_SouthSurface/Sector_SouthPole/Lighting_SouthPole/Prefab_NOM_Torch",
         "position": {
-          "x": 596.514,
-          "y": 91.562,
-          "z": -386.885
+          "x": 596.472,
+          "y": 91.556,
+          "z": -386.858
         },
         "rotation": {
           "x": 0.0,
@@ -578,9 +611,9 @@
       {
         "path": "CaveTwin_Body/Sector_CaveTwin/Sector_SouthHemisphere/Sector_SouthSurface/Sector_SouthPole/Lighting_SouthPole/Prefab_NOM_Torch",
         "position": {
-          "x": 609.224,
-          "y": 91.562,
-          "z": -366.543
+          "x": 609.182,
+          "y": 91.556,
+          "z": -366.518
         },
         "rotation": {
           "x": 0.0,
@@ -594,9 +627,9 @@
       {
         "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
         "position": {
-          "x": 645.233,
-          "y": 116.763,
-          "z": -224.071
+          "x": 644.944,
+          "y": 115.364,
+          "z": -225.47
         },
         "rotation": {
           "x": 0.0,
@@ -609,9 +642,9 @@
       {
         "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
         "position": {
-          "x": 639.468,
-          "y": 116.763,
-          "z": -240.029
+          "x": 640.14,
+          "y": 115.364,
+          "z": -238.768
         },
         "rotation": {
           "x": 0.0,
@@ -624,9 +657,9 @@
       {
         "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
         "position": {
-          "x": 641.965,
-          "y": 100.004,
-          "z": -240.931
+          "x": 642.22,
+          "y": 101.398,
+          "z": -239.52
         },
         "rotation": {
           "x": 0.0,
@@ -639,9 +672,9 @@
       {
         "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
         "position": {
-          "x": 647.73,
-          "y": 100.004,
-          "z": -224.973
+          "x": 647.024,
+          "y": 101.398,
+          "z": -226.221
         },
         "rotation": {
           "x": 0.0,
@@ -654,9 +687,9 @@
       {
         "path": "CaveTwin_Body/Sector_CaveTwin/Sector_SouthHemisphere/Sector_SouthUnderground/Sector_City/Lighting_City/Lights_EyeDistrict/Props_NOM_EyeSymbolCopper",
         "position": {
-          "x": 638.181,
-          "y": 108.387,
-          "z": -247.554
+          "x": 638.112,
+          "y": 108.375,
+          "z": -247.527
         },
         "rotation": {
           "x": 0.0,
@@ -668,26 +701,11 @@
         "rename": "Augensymbol_Ufer"
       },
       {
-        "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
-        "position": {
-          "x": 653.025,
-          "y": 106.985,
-          "z": -172.805
-        },
-        "rotation": {
-          "x": 0.0,
-          "y": 0.0,
-          "z": 0.0
-        },
-        "alignRadial": true,
-        "rename": "Unterwasserlampe"
-      },
-      {
         "path": "BrittleHollow_Body/Sector_BH/Sector_GravityCannon/Props_GravityCannon/OtherComponentsGroup/Prefab_NOM_Toys",
         "position": {
-          "x": 555.216,
-          "y": 364.184,
-          "z": 217.851
+          "x": 555.544,
+          "y": 364.153,
+          "z": 216.906
         },
         "rotation": {
           "x": 0.0,
@@ -700,9 +718,9 @@
       {
         "path": "BrittleHollow_Body/Sector_BH/Sector_GravityCannon/Props_GravityCannon/OtherComponentsGroup/Prefab_NOM_Toys",
         "position": {
-          "x": 555.586,
-          "y": 354.747,
-          "z": 232.02
+          "x": 556.016,
+          "y": 353.86,
+          "z": 232.194
         },
         "rotation": {
           "x": 0.0,
@@ -715,9 +733,9 @@
       {
         "path": "BrittleHollow_Body/Sector_BH/Sector_GravityCannon/Props_GravityCannon/OtherComponentsGroup/Prefab_NOM_SmallBowl",
         "position": {
-          "x": 560.252,
-          "y": 356.463,
-          "z": 217.729
+          "x": 561.049,
+          "y": 355.571,
+          "z": 216.974
         },
         "rotation": {
           "x": 0.0,
@@ -730,9 +748,9 @@
       {
         "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge/BlackHoleForgePivot/Props_BlackHoleForge/Prefab_NOM_NomaiTree_Var_2",
         "position": {
-          "x": 555.532,
-          "y": 351.261,
-          "z": 237.389
+          "x": 555.104,
+          "y": 351.227,
+          "z": 238.293
         },
         "rotation": {
           "x": 0.0,
@@ -744,9 +762,9 @@
       },
       {
         "position": {
-          "x": 601.718,
-          "y": 102.255,
-          "z": -375.995
+          "x": 600.971,
+          "y": 108.19,
+          "z": -375.528
         },
         "rotation": {
           "x": 0.0,
@@ -776,36 +794,37 @@
         "rename": "Computer_Archiv"
       },
       {
-        "type": "scroll",
+        "type": "whiteboard",
         "xmlFile": "planets/text/See_Geschwister.xml",
         "position": {
-          "x": 595.098,
-          "y": 121.048,
-          "z": -381.293
+          "x": 596.608,
+          "y": 137.731,
+          "z": -372.802
         },
         "rotation": {
           "x": 0.0,
-          "y": 30.0,
+          "y": 122.0,
           "z": 0.0
         },
         "alignRadial": true,
-        "rename": "Schriftrolle_Geschwister"
+        "rename": "Whiteboard_Geschwister",
+        "seed": 203
       },
       {
-        "type": "whiteboard",
+        "type": "wall",
         "xmlFile": "planets/text/See_Ankunft.xml",
         "position": {
-          "x": 588.03,
-          "y": 98.231,
-          "z": -398.075
+          "x": 587.86,
+          "y": 100.221,
+          "z": -397.974
         },
-        "rotation": {
-          "x": 0.0,
-          "y": 5.5,
-          "z": 0.0
+        "normal": {
+          "x": 0.82,
+          "y": 0.1398,
+          "z": -0.5551
         },
-        "alignRadial": true,
-        "rename": "Whiteboard_Ankunft",
+        "rename": "Bodenschrift_Ankunft",
+        "seed": 202,
         "arcInfo": [
           {
             "type": "adult"
@@ -822,21 +841,37 @@
           {
             "type": "child"
           }
-        ],
-        "seed": 202
+        ]
+      },
+      {
+        "type": "whiteboard",
+        "xmlFile": "planets/text/See_Kapsel.xml",
+        "position": {
+          "x": 584.106,
+          "y": 82.336,
+          "z": -407.35
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 354.7,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Whiteboard_Kapsel",
+        "seed": 204
       },
       {
         "type": "wall",
         "xmlFile": "planets/text/See_Augenlid.xml",
         "position": {
-          "x": 651.606,
-          "y": 107.012,
-          "z": -178.637
+          "x": 642.424,
+          "y": 125.165,
+          "z": -227.824
         },
         "normal": {
-          "x": 0.9525,
-          "y": 0.1564,
-          "z": -0.2611
+          "x": 0.927,
+          "y": 0.1806,
+          "z": -0.3287
         },
         "rename": "Bodenschrift_Augenlid",
         "seed": 303
@@ -845,9 +880,9 @@
         "type": "wall",
         "xmlFile": "planets/text/See_Kinder.xml",
         "position": {
-          "x": 555.487,
-          "y": 359.983,
-          "z": 224.431
+          "x": 555.455,
+          "y": 359.962,
+          "z": 224.418
         },
         "normal": {
           "x": 0.7948,
@@ -899,9 +934,9 @@
           "z": 0.0
         },
         "normal": {
-          "x": 0.8394,
-          "y": 0.1426,
-          "z": -0.5245
+          "x": 0.8383,
+          "y": 0.1509,
+          "z": -0.5238
         },
         "rename": "Bodenschrift_Epilog",
         "seed": 505,
@@ -1015,31 +1050,47 @@
       {
         "frequency": "ZEKSCHLEIER_KERN_SEE",
         "position": {
-          "x": 600.879,
-          "y": 68.55,
-          "z": -384.886
+          "x": 601.039,
+          "y": 66.567,
+          "z": -384.984
         },
         "rotation": {
           "x": 0.0,
-          "y": 312.9,
+          "y": 312.4,
           "z": 0.0
         },
         "alignRadial": true,
         "detailed": true,
-        "rename": "Warpempfaenger_Archiv",
+        "rename": "Warpempfaenger_Observatorium",
         "computer": {
           "position": {
-            "x": 607.413,
-            "y": 66.57,
-            "z": -374.847
+            "x": 607.567,
+            "y": 64.587,
+            "z": -374.944
           },
           "rotation": {
             "x": 0.0,
-            "y": 296.7,
+            "y": 297.0,
             "z": 0.0
           },
           "alignRadial": true
         }
+      },
+      {
+        "frequency": "ZEKSCHLEIER_DORN_SEE",
+        "position": {
+          "x": 616.952,
+          "y": 62.576,
+          "z": -359.648
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 276.7,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "detailed": true,
+        "rename": "Warpempfaenger_Dorn"
       }
     ],
     "warpTransmitters": [
@@ -1052,7 +1103,7 @@
         },
         "rotation": {
           "x": 0.0,
-          "y": 200.8,
+          "y": 289.9,
           "z": 0.0
         },
         "alignRadial": true,
@@ -1078,11 +1129,19 @@
         }
       },
       {
+        "id": "ZEKSCHLEIER_KAPSEL2",
+        "position": {
+          "x": 576.786,
+          "y": 74.325,
+          "z": -419.15
+        }
+      },
+      {
         "id": "ZEKSCHLEIER_KOORDINATEN",
         "position": {
-          "x": 603.396,
-          "y": 102.54,
-          "z": -377.044
+          "x": 602.647,
+          "y": 108.491,
+          "z": -376.576
         }
       }
     ]
@@ -1099,6 +1158,18 @@
         "revealOn": "enter",
         "reveals": [
           "ZEKSCHLEIER_SEE_FOUND"
+        ]
+      },
+      {
+        "position": {
+          "x": 576.786,
+          "y": 74.325,
+          "z": -419.15
+        },
+        "radius": 10,
+        "revealOn": "enter",
+        "reveals": [
+          "ZEKSCHLEIER_KAPSEL2_FOUND"
         ]
       }
     ]

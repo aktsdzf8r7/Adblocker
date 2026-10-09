@@ -78,9 +78,9 @@
       {
         "path": "Comet_Body/Sector_CO/Sector_CometInterior/Props_CometInterior/Prefab_NOM_BoxBroken",
         "position": {
-          "x": 65.219,
-          "y": 24.947,
-          "z": 16.56
+          "x": 65.174,
+          "y": 24.93,
+          "z": 16.549
         },
         "rotation": {
           "x": 0.0,
@@ -93,9 +93,9 @@
       {
         "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_CrashFragment/Interactables_CrashFragment/Platforms/Prefab_NOM_BrokenPlatform",
         "position": {
-          "x": 65.696,
-          "y": 27.574,
-          "z": 5.559
+          "x": 65.65,
+          "y": 27.555,
+          "z": 5.555
         },
         "rotation": {
           "x": 12.0,
@@ -125,20 +125,21 @@
         "rename": "Beschaedigter_Nomai_Recorder"
       },
       {
-        "type": "scroll",
+        "type": "whiteboard",
         "xmlFile": "planets/text/Sonde_Protokoll.xml",
         "position": {
-          "x": 68.652,
-          "y": 19.818,
-          "z": 8.548
+          "x": 69.027,
+          "y": 18.3,
+          "z": 7.114
         },
         "rotation": {
           "x": 0.0,
-          "y": 60.0,
+          "y": 314.3,
           "z": 0.0
         },
         "alignRadial": true,
-        "rename": "Schriftrolle_Startprotokoll"
+        "rename": "Whiteboard_Startprotokoll",
+        "seed": 71
       }
     ],
     "signals": [
