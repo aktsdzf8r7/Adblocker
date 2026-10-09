@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Logbuch: der Stern und die beiden großen Rätsel des Systems -->
+<AstroObjectEntry xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/shiplog_schema.xsd">
+  <ID>SCHLEIERSTERN</ID>
+  <Entry>
+    <ID>ZEKSCHLEIER_SYSTEM</ID>
+    <Name>Der Schleier</Name>
+    <IsCuriosity/>
+    <ExploreFact>
+      <ID>ZEKSCHLEIER_ANKUNFT</ID>
+      <Text>Ich bin im Schleiersystem angekommen. Der Stern wirkt blass, als läge ein Tuch über ihm. Mein Warpantrieb findet kein Ziel mehr – irgendetwas hält das Schiff hier fest. Zur Not bringt mich die Zeitschleife nach Hause.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKSCHLEIER_SCHLEIER_NATUR</ID>
+      <Text>Der Schleier ist eine Quantenhülle um das ganze System. Von außen kann es niemand beobachten – und was nicht beobachtet wird, ist nicht festgelegt.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKSCHLEIER_SEE_AUGENLID</ID>
+      <Text>Ilex verglich den Schleier mit einem geschlossenen Augenlid. Von innen lässt er sich nicht öffnen – nur von jemandem, der von außen kommt.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKSCHLEIER_FINALE</ID>
+      <Text>Ich bin der Beobachter von außen, auf den die Nomai gewartet haben. Indem ich hergekommen bin und hingesehen habe, hat sich der Schleier gehoben. Mein Warpantrieb funktioniert wieder.</Text>
+    </ExploreFact>
+    <Entry>
+      <ID>ZEKSCHLEIER_KOORDINATEN</ID>
+      <Name>Worte für den Beobachter</Name>
+      <ExploreFact>
+        <ID>ZEKSCHLEIER_EPILOG</ID>
+        <Text>Nachdem sich der Schleier gehoben hatte, erschien im Archiv ein Text, der schon immer dort gewesen war. Sorrel dankt mir. Daneben waren die Koordinaten des Schleiers eingraviert – genug, um auch mit dem Nomai-Schiff hierher zurückzufinden.</Text>
+      </ExploreFact>
+    </Entry>
+  </Entry>
+  <Entry>
+    <ID>ZEKSCHLEIER_EXPEDITION</ID>
+    <Name>Der Clan des Zweiten Echos</Name>
+    <IsCuriosity/>
+    <ExploreFact>
+      <ID>ZEKSCHLEIER_LATERNE</ID>
+      <Text>Die Nomai kamen mit einem Schiff namens „Laterne“ auf der Wasserwelt an. Beim Durchqueren des Schleiers erlosch sein Warpkern.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKSCHLEIER_ECHO_FALSCH</ID>
+      <Text>Sie folgten einem schwachen Echo des Signals vom Auge des Universums. Borago war überzeugt, dass das Echo sie in die Irre geführt hatte – das Auge war nie hier.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKSCHLEIER_SEE_SCHWESTERN</ID>
+      <Text>Der Clan trennte sich in der Heimat vom großen Clan, der mit seinem Schiff dem stärksten Signal des Auges folgte. Ilex hoffte bis zuletzt, dass die Geschwister das Auge gefunden haben.</Text>
+    </ExploreFact>
+  </Entry>
+</AstroObjectEntry>

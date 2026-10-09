@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Schriftrolle neben der Sonde: Boragos Startprotokoll -->
+<NomaiObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/text_schema.xsd">
+  <TextBlock>
+    <ID>1</ID>
+    <Text>Borago: Sonde Nummer elf. Die zehn vor ihr sind in den Stern zurückgefallen. Ich habe ihre Hülle so klein gebaut, dass der Schleier sie vielleicht übersieht.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>2</ID>
+    <ParentID>1</ParentID>
+    <Text>Ilex: Richte sie auf das Signal des Auges. Wenn unsere Geschwister irgendwo sind, dann dort.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>3</ID>
+    <ParentID>2</ParentID>
+    <Text>Borago: Und wenn sie niemand findet? Dann fliegt sie weiter, bis die Sterne ausgehen.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>4</ID>
+    <ParentID>3</ParentID>
+    <Text>Ilex: Dann fliegt sie eben weiter. Eine Nachricht, die niemand liest, ist immer noch mehr als Schweigen.</Text>
+  </TextBlock>
+  <ShipLogConditions>
+    <RevealFact>
+      <FactID>ZEKSCHLEIER_SONDE_ELF</FactID>
+      <Condition>1,2</Condition>
+    </RevealFact>
+  </ShipLogConditions>
+</NomaiObject>

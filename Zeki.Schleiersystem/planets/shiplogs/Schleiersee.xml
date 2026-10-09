@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Logbuch: Schleiersee, die Wasserwelt -->
+<AstroObjectEntry xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/shiplog_schema.xsd">
+  <ID>SCHLEIERSEE</ID>
+  <Entry>
+    <ID>ZEKSCHLEIER_SEE</ID>
+    <Name>Das Archiv der stillen Wasser</Name>
+    <Curiosity>ZEKSCHLEIER_EXPEDITION</Curiosity>
+    <ExploreFact>
+      <ID>ZEKSCHLEIER_SEE_FOUND</ID>
+      <Text>Auf einer Insel der Wasserwelt liegt die Siedlung der Nomai mit ihrem Archiv. Hier landete die Laterne, und hier lebte der Clan.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKSCHLEIER_SEE_ARCHIV</ID>
+      <Text>Sorrels Archiv berichtet: Die Splitter des äußeren Planeten wandern, und ohne einen Beobachter von außen verliert das ganze System seinen Ort.</Text>
+    </ExploreFact>
+    <Entry>
+      <ID>ZEKSCHLEIER_SEE_INSEL</ID>
+      <Name>Yarrows Insel</Name>
+      <RumorFact>
+        <ID>ZEKSCHLEIER_KINDER_RUMOR</ID>
+        <SourceID>ZEKSCHLEIER_SEE</SourceID>
+        <RumorName>Die kleine Insel</RumorName>
+        <Text>Die Nomai-Kinder Yarrow und Myrte schwammen gern zu einer kleinen Insel in der Nähe der Siedlung.</Text>
+      </RumorFact>
+      <ExploreFact>
+        <ID>ZEKSCHLEIER_SEE_KINDER</ID>
+        <Text>Yarrow und Myrte fragten sich, ob es sie noch gibt, wenn niemand von außen sie sieht. Yarrows Antwort: „Wir sehen uns ja gegenseitig. Das zählt auch.“</Text>
+      </ExploreFact>
+    </Entry>
+  </Entry>
+</AstroObjectEntry>

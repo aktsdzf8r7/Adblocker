@@ -4,31 +4,66 @@
   "starSystem": "Schleiersystem",
   "Base": {
     "centerOfSolarSystem": true,
-    "gravityFallOff": "inverseSquared",
     "surfaceSize": 2000,
-    "surfaceGravity": 60
+    "surfaceGravity": 60,
+    "gravityFallOff": "inverseSquared"
   },
   "Star": {
     "size": 2000,
-    "solarLuminosity": 1.15,
-    "tint": { "r": 220, "g": 235, "b": 255, "a": 255 },
-    "lightTint": { "r": 190, "g": 220, "b": 255, "a": 255 },
+    "solarLuminosity": 1.05,
+    "tint": {
+      "r": 220,
+      "g": 228,
+      "b": 255,
+      "a": 255
+    },
+    "lightTint": {
+      "r": 200,
+      "g": 215,
+      "b": 255,
+      "a": 255
+    },
     "stellarDeathType": "none",
     "stellarRemnantType": "none"
   },
   "Spawn": {
     "shipSpawnPoints": [
       {
-        "id": "SCHLEIER_WARP_ARRIVAL",
+        "id": "ZEKSCHLEIER_WARP_ANKUNFT",
         "isDefault": true,
-        "position": { "x": 0, "y": 0, "z": 8000 },
-        "rotation": { "x": 0, "y": 180, "z": 0 },
-        "offset": { "x": 0, "y": 0, "z": 0 },
+        "position": {
+          "x": 0.0,
+          "y": 2600.0,
+          "z": 9300.0
+        },
+        "rotation": {
+          "x": 15.62,
+          "y": 180.0,
+          "z": 0.0
+        },
         "rename": "Warp-Ankunft"
       }
     ]
   },
   "ShipLog": {
-    "xmlFile": "planets/Schleierstern.xml"
+    "xmlFile": "planets/shiplogs/Schleierstern.xml",
+    "spriteFolder": "planets/assets/shiplog/entries"
+  },
+  "Volumes": {
+    "notificationVolumes": [
+      {
+        "position": {
+          "x": 0.0,
+          "y": 2600.0,
+          "z": 9300.0
+        },
+        "radius": 400,
+        "target": "all",
+        "entryNotification": {
+          "displayMessage": "DER SCHLEIER HÄLT DEIN SCHIFF FEST",
+          "duration": 6
+        }
+      }
+    ]
   }
 }

@@ -1,0 +1,29 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/star_system_schema.json",
+  "curiosities": [
+    {
+      "id": "ZEKSCHLEIER_SIGNAL",
+      "color": {
+        "r": 150,
+        "g": 110,
+        "b": 255,
+        "a": 255
+      },
+      "highlightColor": {
+        "r": 205,
+        "g": 180,
+        "b": 255,
+        "a": 255
+      }
+    }
+  ],
+  "entryPositions": [
+    {
+      "id": "ZEKSCHLEIER_SIGNAL",
+      "position": {
+        "x": 1650,
+        "y": -350
+      }
+    }
+  ]
+}

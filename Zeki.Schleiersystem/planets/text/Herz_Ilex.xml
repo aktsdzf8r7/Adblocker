@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Ilex' letzte Aufzeichnung im Herz des Bruchs (Finale) -->
+<NomaiObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/text_schema.xsd">
+  <TextBlock>
+    <ID>1</ID>
+    <Text>Hier spricht Ilex, aus dem Herz des Bruchs. Wenn du diese Aufzeichnung abspielst, bist du hier unten bei mir – oder bei dem, was von mir übrig ist.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>2</ID>
+    <ParentID>1</ParentID>
+    <Text>Ich bin hinabgestiegen, um das Herz zu beobachten. Solange ich hinsah, hielten die Splitter still. Der Bruch hörte auf zu zerbrechen.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>3</ID>
+    <ParentID>2</ParentID>
+    <Text>Aber kein Nomai lebt ewig. Irgendwann werden sich meine Augen schließen, und der Schleier wird uns wieder vergessen.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>4</ID>
+    <ParentID>3</ParentID>
+    <Text>Wir haben einen Fehler gemacht, als wir ein Auge suchten. Das Auge ist kein Ort. Das Auge ist der, der hinsieht.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>5</ID>
+    <ParentID>4</ParentID>
+    <Text>Du bist von außen gekommen. Du hast den Schleier durchschaut, als es niemand sonst konnte. Durch dich sind wir wieder irgendwo.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>6</ID>
+    <ParentID>5</ParentID>
+    <Text>Also sieh uns an. Erinnere dich an Tansy, an Sorrel, an Borago, an Yarrow und Myrte. Und dann erzähl von uns – damit uns noch jemand sieht, wenn du längst weitergezogen bist.</Text>
+  </TextBlock>
+  <ShipLogConditions>
+    <RevealFact>
+      <FactID>ZEKSCHLEIER_HERZ_ILEX</FactID>
+      <Condition>1,2,3</Condition>
+    </RevealFact>
+    <RevealFact>
+      <FactID>ZEKSCHLEIER_FINALE</FactID>
+      <Condition>1,2,3,4,5,6</Condition>
+    </RevealFact>
+  </ShipLogConditions>
+</NomaiObject>

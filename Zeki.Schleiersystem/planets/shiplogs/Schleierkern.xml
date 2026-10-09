@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Logbuch: Schleierkern, die innere Welt -->
+<AstroObjectEntry xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/shiplog_schema.xsd">
+  <ID>SCHLEIERKERN</ID>
+  <Entry>
+    <ID>ZEKSCHLEIER_KERN</ID>
+    <Name>Lichtbündler-Observatorium</Name>
+    <Curiosity>ZEKSCHLEIER_SYSTEM</Curiosity>
+    <RumorFact>
+      <ID>ZEKSCHLEIER_KERN_RUMOR</ID>
+      <SourceID>ZEKSCHLEIER_SEE</SourceID>
+      <RumorName>Tansys Lichtbündler</RumorName>
+      <Text>Laut Sorrels Archiv hat Tansy auf der inneren Welt einen Lichtbündler gebaut. Der Versuch ist gescheitert.</Text>
+    </RumorFact>
+    <ExploreFact>
+      <ID>ZEKSCHLEIER_KERN_FOUND</ID>
+      <Text>Auf einem Grat der inneren Welt steht ein verlassenes Nomai-Observatorium. Ein riesiger Spiegelring zeigt zum Himmel, doch er ist dunkel.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKSCHLEIER_KERN_DRIFT</ID>
+      <Text>Die Nomai bemerkten, dass sich der Stern und die Planeten minimal verändern, solange niemand sie beobachtet.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKSCHLEIER_KERN_LICHTBUENDLER</ID>
+      <Text>Tansy bündelte mit dem Lichtbündler das Sternenlicht und richtete es auf das Herz des äußeren Planeten, um die wandernden Splitter dort festzuhalten.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKSCHLEIER_KERN_FEHLSCHLAG</ID>
+      <Text>Der Lichtbündler scheiterte: Licht ist kein Beobachter. „Ein Auge ohne Geist ist nur ein Fenster.“</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKSCHLEIER_KERN_LICHT</ID>
+      <Text>Seit sich der Schleier gehoben hat, brennt der Lichtbündler wieder. Sein Strahl ist von überall im System zu sehen.</Text>
+    </ExploreFact>
+    <Entry>
+      <ID>ZEKSCHLEIER_KERN_WACHE</ID>
+      <Name>Tansys Wache</Name>
+      <ExploreFact>
+        <ID>ZEKSCHLEIER_KERN_TANSY</ID>
+        <Text>Tansy blieb allein beim Lichtbündler und richtete ihn jede Nacht neu aus, damit Ilex im Herz Licht hatte. Tansys letzter Wunsch: den Lichtbündler wieder zu entzünden, wenn der Schleier fällt.</Text>
+      </ExploreFact>
+    </Entry>
+    <Entry>
+      <ID>ZEKSCHLEIER_KERN_RESONANZFELD</ID>
+      <Name>Das Resonanzfeld</Name>
+      <ExploreFact>
+        <ID>ZEKSCHLEIER_KERN_RESONATOR</ID>
+        <Text>Zwischen riesigen Kristallen hat ein Nomai-Kind namens Yarrow eine Botschaft hinterlassen: Es hat lange zugehört, ob die Kristalle singen.</Text>
+      </ExploreFact>
+    </Entry>
+  </Entry>
+</AstroObjectEntry>
