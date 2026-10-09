@@ -78,6 +78,11 @@ P = {
     "opc_sector": "OrbitalProbeCannon_Body/Sector_OrbitalProbeCannon",
     "grav_cannon_bh": "BrittleHollow_Body/Sector_BH/Sector_GravityCannon/Geometry_GravityCannon/ControlledByProxy_OPC/Structure_NOM_GravityCannon_BH",
     "warp_particles": "TowerTwin_Body/Sector_TowerTwin/Sector_TimeLoopInterior/Interactables_TimeLoopInterior/WarpCoreSocket/Prefab_NOM_WarpCoreVessel/Effects_NOM_AdvancedWarpCore/Effects_NOM_WarpParticlesWhite",
+    # the advanced warp core of the Vessel (in the Ash Twin Project) and the Vessel's coordinate interface
+    "warpcore_vessel": "TowerTwin_Body/Sector_TowerTwin/Sector_TimeLoopInterior/Interactables_TimeLoopInterior/WarpCoreSocket/Prefab_NOM_WarpCoreVessel",
+    "vessel_interface": "DB_VesselDimension_Body/Sector_VesselDimension/Sector_VesselBridge/Interactibles_VesselBridge/WarpController/CoordinateInterface",
+    # the rings of the Construction Yard on Giant's Deep, where the Orbital Probe Cannon was built
+    "construction_rings": "ConstructionYardIsland_Body/Sector_ConstructionYard/Geometry_ConstructionYard/OtherComponentsGroup/ControlledByProxy_ConstructionYard/ConstructionRings",
 }
 
 # Vertical correction per prop (metres along the local up axis). Vanilla props do not all have their pivot

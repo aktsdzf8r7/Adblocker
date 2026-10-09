@@ -22,12 +22,6 @@
       "title": "Filmische Kamera im Finale",
       "tooltip": "Im Finale dreht sich die Kamera zur Sonne und folgt dem Schuss. Aus: Du behältst die Steuerung."
     },
-    "useGameMaterials": {
-      "type": "toggle",
-      "value": true,
-      "title": "Spiel-Materialien für die neuen Modelle",
-      "tooltip": "Die Blender-Modelle nutzen das Nomai-Metall der Sondenkanone. Aus: einfache Farben."
-    },
     "autoAim": {
       "type": "toggle",
       "value": true,

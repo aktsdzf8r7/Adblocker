@@ -12,7 +12,7 @@ namespace ZekiISAE;
 /// the end of the time loop does not end in a supernova. The ISAE drains the dying sun instead (see Finale):
 /// it shrinks until it is gone, the cannon fires, and the game ends with a New Horizons game over.
 /// The ISAE is switched off in game through NH interaction volumes that set persistent conditions.
-/// This class also loads the Blender props (Models.cs) once New Horizons has built the system.
+/// All props are copied from the game by New Horizons; GameProps.cs finishes their placement in game.
 /// </summary>
 public class ZekiISAE : ModBehaviour
 {
@@ -31,7 +31,6 @@ public class ZekiISAE : ModBehaviour
     public bool OnlyAfterDiscovery;
     public float DrainSeconds = 60f;
     public bool Cinematic = true;
-    public bool UseGameMaterials = true;
     public bool AutoAim = true;
 
     private bool _warnedAtStart;
@@ -59,7 +58,6 @@ public class ZekiISAE : ModBehaviour
         OnlyAfterDiscovery = config.GetSettingsValue<bool>("onlyAfterDiscovery");
         DrainSeconds = Mathf.Clamp(config.GetSettingsValue<float>("drainSeconds"), 20f, 180f);
         Cinematic = config.GetSettingsValue<bool>("cinematic");
-        UseGameMaterials = config.GetSettingsValue<bool>("useGameMaterials");
         AutoAim = config.GetSettingsValue<bool>("autoAim");
     }
 
@@ -73,8 +71,7 @@ public class ZekiISAE : ModBehaviour
         if (system != "SolarSystem") return;
         try
         {
-            CannonAim.Apply(this);
-            ModelPlacer.PlaceAll(this);
+            GameProps.Setup(this);
         }
         catch (Exception e)
         {

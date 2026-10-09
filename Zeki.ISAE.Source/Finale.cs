@@ -23,8 +23,7 @@ public class Finale : MonoBehaviour
     public SunController Sun;
 
     private const float CollapseLength = 10f;
-    private const float FocusEmitterHeight = 12.7f; // "emitter" in assets/models/anchors.json
-    private static readonly string[] FocusNames = { "Fokuskanone Alpha", "Fokuskanone Beta", "Fokuskanone Gamma" };
+    private const float FocusStreamHeight = 4f; // the energy streams end a few metres above the launch platform
 
     private float _start, _d;
     private float _startScale, _currentScale, _startRadius, _startSunLight, _startAmbientLight, _startLocalAmbient;
@@ -39,6 +38,7 @@ public class Finale : MonoBehaviour
     private bool _collapseStarted, _sunGone, _fired, _darkness, _eyesClosed, _ended;
     private GameObject _probe;
     private float _probeSpeed;
+    private Vector3 _probeDirection = Vector3.up;
     private LineRenderer _shotBeam;
     private float _shotTime;
     private int _nextLine;
@@ -222,10 +222,10 @@ public class Finale : MonoBehaviour
         var nh = ZekiISAE.Instance.NewHorizons;
         var isae = nh.GetPlanet(ZekiISAE.IsaeName);
         if (isae != null) AddStream(isae.transform, 0f, 70f);
-        foreach (var name in FocusNames)
+        foreach (var name in GameProps.FocusNames)
         {
             var body = nh.GetPlanet(name);
-            if (body != null) AddStream(body.transform, FocusEmitterHeight, 30f);
+            if (body != null) AddStream(body.transform, FocusStreamHeight, 30f);
         }
     }
 
@@ -308,11 +308,14 @@ public class Finale : MonoBehaviour
         _shotBeam.colorGradient = Gradient(new Color(2.5f, 2.5f, 3f, 1f), new Color(1.4f, 2f, 3f, 0.9f), new Color(1f, 1.6f, 3f, 0f));
         _shotBeam.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
 
-        _probe = ModelPlacer.Build(ZekiISAE.Instance, "sonde", "Interstellare_Sonde");
-        if (_probe == null) _probe = new GameObject("Interstellare_Sonde");
+        // the copy of the real Nomai probe (GameProps); it leaves the ISAE and flies on its own
+        _probe = GameProps.Probe != null ? GameProps.Probe : new GameObject("Interstellare_Sonde");
+        _probe.transform.SetParent(null, true);
+        _probe.SetActive(true);
         _probe.transform.position = muzzle;
-        _probe.transform.rotation = Quaternion.FromToRotation(Vector3.up, axis);
+        _probe.transform.rotation = Quaternion.FromToRotation(GameProps.ProbeAxis, axis);
         _probe.transform.localScale = Vector3.one * 6f;
+        _probeDirection = axis;
         var trail = _probe.AddComponent<TrailRenderer>();
         trail.sharedMaterial = _lineMaterial;
         trail.time = 4f;
@@ -341,7 +344,7 @@ public class Finale : MonoBehaviour
         if (_probe != null)
         {
             _probeSpeed = Mathf.Min(_probeSpeed * (1f + 1.4f * Time.deltaTime), 30000f);
-            _probe.transform.position += _probe.transform.up * _probeSpeed * Time.deltaTime;
+            _probe.transform.position += _probeDirection * _probeSpeed * Time.deltaTime;
         }
     }
 

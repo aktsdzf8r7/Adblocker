@@ -23,7 +23,6 @@ Das DLC *Echoes of the Eye* ist nicht nötig.
 | Erst nach der Entdeckung scharf | aus | Wenn an: Die Sonne wird erst entzogen, nachdem du die Aussendungseinheit einmal besucht hast. Gut, wenn du erst das normale Spiel spielen willst. |
 | Dauer des Energieentzugs | 60 s | Wie lange die Sonne am Ende der Schleife schrumpft (20–180 s). |
 | Filmische Kamera im Finale | an | Die Kamera dreht sich zur sterbenden Sonne und folgt dann dem Schuss. Aus: Du behältst die Steuerung, alles andere passiert trotzdem. |
-| Spiel-Materialien für die neuen Modelle | an | Die Blender-Modelle bekommen das Nomai-Metall der Sondenkanone. Aus: einfache Farben (falls die Modelle seltsam aussehen). |
 | Hauptkanone automatisch ausrichten | an | Misst im Spiel, wohin der Lauf der echten Sondenkanone zeigt, und richtet die Kopie parallel zu den Fokuskanonen aus. |
 
 ## Die Geschichte (Spoiler)
@@ -36,9 +35,9 @@ Seine Helferin **Linum** prüfte die Rechnungen und fand den Fehler: Ohne Supern
 
 1. **Signal finden:** Im Signalskop gibt es die neue Frequenz *Energiesignaturen*. Die Quelle ist die Aussendungseinheit. Im Logbuch steht sie ab dem Start als Gerücht.
 2. *(Optional)* **Hinweis in der echten Sondenkanone:** Im Kontrollmodul der Orbitalen Sondenkanone über Giant's Deep steht ein neuer Computer mit Sedums Notiz.
-3. **Kontrollmodul der Aussendungseinheit:** Ein Computer zeigt den Zustand der Einheit, ein Recorder enthält Linums Warnung und die Anleitung.
-4. **Die drei Fokuskanonen** Alpha, Beta und Gamma kreisen 340 m um die Hauptkanone. Es sind schwebende Nomai-Plattformen mit künstlicher Schwerkraft auf dem Deck, auf dem du landen und laufen kannst. Auf jedem Deck steht ein leuchtender Kristall auf einem Sockel, der **Phasenkoppler**. Interaktion: *Phasenkoppler trennen*. Der Kristall zerspringt und sein Licht erlischt.
-5. Sind alle drei Koppler getrennt, erscheint im Kontrollmodul der **Hauptschalter** mit einer Wegmarke. Interaktion: *Aussendungseinheit abschalten*. Der Energiekern erlischt.
+3. **Kontrollmodul der Aussendungseinheit:** Ein Vessel-Computer zeigt den Zustand der Einheit, ein Vessel-Recorder enthält Linums Warnung und die Anleitung.
+4. **Die drei Fokuskanonen** Alpha, Beta und Gamma kreisen 340 m um die Hauptkanone. Es sind schwebende Schwerkraftkanonen ohne Felsen, mit künstlicher Schwerkraft über ihrer Startplattform, auf der du landen und laufen kannst. Auf jeder Plattform leuchtet ein Kristall, der **Phasenkoppler**. Interaktion: *Phasenkoppler trennen*. Der Kristall zerspringt und sein Licht erlischt.
+5. Sind alle drei Koppler getrennt, erscheint im Kontrollmodul der **Hauptschalter**: das Koordinaten-Interface des Vessels mit einem schwebenden Warpkern darüber, daneben eine Wegmarke. Interaktion: *Aussendungseinheit abschalten*. Der Energiekern erlischt.
 
 Das Abschalten ist dauerhaft (im Spielstand gespeichert). Danach endet jede Schleife wieder ganz normal mit der Supernova. Getrennte Koppler bleiben ebenfalls über Schleifen hinweg getrennt.
 
@@ -48,20 +47,28 @@ Gegen Ende der Schleife (5 Minuten vorher) warnt das Schiff noch einmal.
 
 **Eine heile, frei bearbeitbare Orbitale Sondenkanone gibt es nicht öffentlich.** Ich habe GitHub und die Outer-Wilds-Mod-Datenbank durchsucht (über 500 Pfade aus veröffentlichten New-Horizons-Mods ausgewertet). Mods wie *EyeWitness* fügen der Vanilla-Kanone nur Texte hinzu, andere löschen sie. Ein eigenständiges Modell im modernen Vessel-Stil existiert nirgends. Dafür bräuchte man ein selbst gebautes Unity-Asset-Bundle.
 
-Die Aussendungseinheit kopiert deshalb beim Laden **die komplette Kanone aus dem Spiel selbst** (`OrbitalProbeCannon_Body/Sector_OrbitalProbeCannon`: Nabe, Lauf, Kontroll- und Startmodul). Entfernt werden die Vanilla-Texte und das Orb-Interface; an ihre Stelle kommen die neuen Texte. Weil es eine Kopie des Originals ist, trägt das Startmodul dieselben Schäden wie im Spiel. Drei sich drehende Energieringe aus Blender legen sich im Vessel-Stil um den Lauf.
+Die Aussendungseinheit kopiert deshalb beim Laden **die komplette Kanone aus dem Spiel selbst** (`OrbitalProbeCannon_Body/Sector_OrbitalProbeCannon`: Nabe, Lauf, Kontroll- und Startmodul). Entfernt werden die Vanilla-Texte und das Orb-Interface; an ihre Stelle kommen die neuen Texte. Weil es eine Kopie des Originals ist, trägt das Startmodul dieselben Schäden wie im Spiel.
 
-## Die Blender-Modelle
+## Alles aus dem Spiel
 
-Die neuen Teile sind in Blender gebaut. Die Datei `Zeki.ISAE.Source/blender/ISAE_Props.blend` kannst du selbst öffnen und bearbeiten. Das Skript `tools/isae_models.py` erzeugt sie und exportiert sie als OBJ.
+Jedes Bauteil, das es in Outer Wilds schon gibt, wird aus dem Spiel kopiert, im Vessel-Stil, wo es eine Vessel-Variante gibt. Alle Pfade stammen aus veröffentlichten New-Horizons-Mods, in denen sie schon funktionieren.
 
-| Modell | Wo |
+| Bauteil | Original im Spiel |
 |---|---|
-| **Fokuskanone** | Die drei kleinen Kanonen: schwebendes Deck mit Nomai-Rumpf darunter, drei geschwungene Arme, drei Fokusringe übereinander, Emitter in der Mitte, Sockel für den Phasenkoppler. Keine Asteroiden mehr. |
-| **Fokusring** | Drei segmentierte, leuchtende Ringe, die sich um den Lauf der Hauptkanone drehen (im Finale achtmal schneller). |
-| **Hauptschalter** | Konsole mit Hebel im Kontrollmodul, erscheint mit den getrennten Kopplern. |
-| **Sonde** | Die interstellare Sonde, die im Finale abgefeuert wird. |
+| Hauptkanone | die Orbitale Sondenkanone |
+| Ringe um den Lauf | die Bauringe des Konstruktionshofs auf Giant's Deep, mit denen die Nomai die echte Kanone gebaut haben. Sie drehen sich langsam, im Finale achtmal schneller. |
+| Fokuskanonen | die Schwerkraftkanone von Ember Twin mit ihrer Startplattform |
+| Hauptschalter | das Koordinaten-Interface von der Brücke des Vessels und der fortgeschrittene Warpkern des Vessels |
+| Computer und Recorder | Vessel-Computer und Vessel-Recorder, wie in den Rettungskapseln |
+| Interstellare Sonde im Finale | eine Kopie der echten Nomai-Sonde |
+| Lichter, Kristalle, Energiekern | Nomai-Lampen, Schwerkraftkristalle, Warp-Partikel des Vessel-Warpkerns, Lichtsäule einer Rettungskapsel |
 
-Outer Wilds lädt normalerweise nur Unity-Asset-Bundles, und die kann man nur mit dem Unity-Editor bauen. Deshalb lädt die DLL die OBJ-Dateien zur Laufzeit selbst: Sie baut daraus Meshes mit Kollision und gibt ihnen die Materialien der Sondenkanone. Wo die Modelle stehen, steht in `assets/models/placements.json`. Wenn dir ein Material nicht gefällt, kannst du dort einen exakten Materialnamen aus dem Spiel eintragen (zum Beispiel mit Unity Explorer nachsehen).
+Einige Dinge lassen sich nur im laufenden Spiel ausmessen. Das erledigt die DLL (`GameProps.cs`), sobald New Horizons alles gebaut hat:
+
+- Sie richtet die Kanone aus.
+- Sie schiebt die Bauringe auf die Mitte des Laufs.
+- Sie verschiebt jede Schwerkraftkanone so, dass ihre Startplattform genau dort liegt, wo Kristall, Computer, Lampen und Schwerkraftfeld stehen.
+- Sie versteckt die Sonde bis zum Schuss.
 
 Damit die Kopie der echten Nomai-Sonde nicht in die Quere kommt, schaltet die DLL jede Startsteuerung der Sondenkanone ab, die nicht zur Original-Kanone gehört.
 
@@ -77,7 +84,7 @@ New Horizons kann vieles, aber nicht „Sonne schrumpft statt Supernova“. Daf�
   4. In den letzten 10 Sekunden dreht sich die Kamera zur Sonne. Sie verlischt mit einem Blitz.
   5. Die Hauptkanone feuert eine Sonde mit Leuchtspur ab, und die Kamera folgt ihr.
   6. Es wird dunkel, die Augen schließen sich, und New Horizons zeigt „Das Universum endet, aber du endest vor ihm...“. Danach läuft der Abspann mit der Musik des Spielendes, aber ohne den Urknall-Epilog.
-- **Modelle laden:** Die DLL lädt die Blender-Modelle (`Models.cs`) und richtet die kopierte Kanone aus.
+- **Bauteile ausrichten:** Die DLL misst die kopierten Spiel-Bauteile aus und richtet sie aus (`GameProps.cs`).
 - **Echte Sonde schützen:** Die DLL verhindert, dass die Kopie die echte Nomai-Sonde abfeuert.
 - **Der Rest** (Bedingungen, Logbuch, Schalter) läuft über normale New-Horizons-Konfigurationen.
 
@@ -91,14 +98,13 @@ In welche Richtung der Lauf der Vanilla-Sondenkanone zeigt, ist nirgends dokumen
 
 ```bash
 pip install numpy pillow jsonschema lxml
-blender -b -P tools/isae_models.py -- Zeki.ISAE   # Blender 4.2: Modelle, anchors.json, .blend, Logbuchfoto
 python tools/isae_texts.py Zeki.ISAE        # Nomai-Texte
-python tools/isae_build.py Zeki.ISAE        # Körper, System, placements.json, Bilder, Manifeste
+python tools/isae_build.py Zeki.ISAE        # Körper, System, Bilder, Manifeste
 python tools/nh_validate.py Zeki.ISAE       # Schemas, Logbuch, Bedingungen, Platzierung
 cd Zeki.ISAE.Source && dotnet build -c Release   # baut ZekiISAE.dll und kopiert sie nach Zeki.ISAE
 ```
 
-Das Logbuch (`planets/shiplogs/ISAE.xml`) ist handgeschrieben. Der Validator erkennt auch Bedingungen, die von Interaktionsvolumen oder vom C#-Code gesetzt werden. `isae_models.py` schreibt in `anchors.json` die Punkte auf den Modellen (Koppler-Sockel, Konsole, Emitter, Lampen), an denen `isae_build.py` die Spielobjekte platziert. Wer ein Modell in Blender ändert, muss deshalb danach `isae_build.py` erneut ausführen.
+Das Logbuch (`planets/shiplogs/ISAE.xml`) ist handgeschrieben. Der Validator erkennt auch Bedingungen, die von Interaktionsvolumen oder vom C#-Code gesetzt werden.
 
 ## Wichtiger Testhinweis
 
@@ -106,7 +112,8 @@ Alle Dateien sind gegen die offiziellen New-Horizons-Schemas geprüft, die DLL b
 
 - ob die automatische Ausrichtung die Mündung richtig erkennt (das Log zeigt den Messwert),
 - ob alle Teile der kopierten Kanone sauber mitgeladen werden,
-- wie die Spiel-Materialien auf den Blender-Modellen aussehen (notfalls die Einstellung ausschalten oder Namen in `placements.json` eintragen),
+- ob Startplattform und Bauringe richtig vermessen werden (das Log zeigt die Werte),
+- wie die schwebenden Schwerkraftkanonen von unten aussehen (im Spiel stehen sie auf Fels),
 - das Timing und die Kameraführung im Finale.
 
 Am einfachsten passt du das mit dem Debug-Modus von New Horizons (Taste P zeigt die Position unter dem Fadenkreuz) und Unity Explorer an.
