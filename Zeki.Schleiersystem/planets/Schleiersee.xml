@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AstroObjectEntry xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/shiplog_schema.xsd">
+  <ID>SCHLEIERSEE</ID>
+  <Entry>
+    <ID>ZEKSCHLEIER_SEE</ID>
+    <Name>Schleiersee</Name>
+    <ExploreFact>
+      <ID>ZEKSCHLEIER_SEE_FOUND</ID>
+      <Text>Zwischen den Inselketten wachsen fremdartige Bäume. Unter der Wasseroberfläche scheint ein Nomai-Archiv die Signale aus dem Inneren des Systems zu reflektieren.</Text>
+    </ExploreFact>
+  </Entry>
+</AstroObjectEntry>

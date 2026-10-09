@@ -1,0 +1,114 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+  "name": "Schleiersee",
+  "starSystem": "Schleiersystem",
+  "Base": {
+    "groundSize": 680,
+    "surfaceSize": 700,
+    "surfaceGravity": 7,
+    "gravityFallOff": "inverseSquared"
+  },
+  "Orbit": {
+    "semiMajorAxis": 7200,
+    "primaryBody": "Schleierstern",
+    "eccentricity": 0.12,
+    "inclination": -4,
+    "trueAnomaly": 190
+  },
+  "Atmosphere": {
+    "size": 850,
+    "density": 1.2,
+    "tint": {
+      "r": 80,
+      "g": 150,
+      "b": 190,
+      "a": 255
+    }
+  },
+  "Water": {
+    "size": 680,
+    "depth": 110,
+    "tint": {
+      "r": 35,
+      "g": 105,
+      "b": 150,
+      "a": 210
+    }
+  },
+  "MapMarker": {
+    "enabled": true
+  },
+  "ShipLog": {
+    "xmlFile": "planets/Schleiersee.xml"
+  },
+  "HeightMap": {
+    "maxHeight": 38,
+    "minHeight": 0,
+    "stretch": {
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "resolution": 512,
+    "heightMap": "planets/assets/heightmaps/schleiersee_height.png",
+    "textureMap": "planets/assets/heightmaps/schleiersee_color.png",
+    "normalStrength": 0.85,
+    "smoothness": 0.08
+  },
+  "Props": {
+    "scatter": [
+      {
+        "path": "DreamWorld_Body/Sector_DreamWorld/Sector_DreamZone_1/Props_DreamZone_1/OtherComponentsGroup/Trees_Z1/DreamHouseIsland/Tree_DW_M_Var",
+        "count": 34,
+        "seed": 22041,
+        "minHeight": 8,
+        "maxHeight": 30,
+        "scale": 1.15,
+        "preventOverlap": true
+      },
+      {
+        "path": "TimberHearth_Body/Sector_TH/Sector_ConvectionCurrent/Props_TH/Tree_TH_M",
+        "count": 18,
+        "seed": 22042,
+        "minHeight": 4,
+        "maxHeight": 20,
+        "scale": 0.8,
+        "preventOverlap": true
+      }
+    ],
+    "details": [
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge/BlackHoleForgePivot/Props_BlackHoleForge/Prefab_NOM_VaseThick",
+        "position": {
+          "x": 420,
+          "y": -25,
+          "z": -530
+        },
+        "rotation": {
+          "x": 0,
+          "y": 40,
+          "z": 0
+        },
+        "scale": 1.4,
+        "alignRadial": true,
+        "rename": "Versunkene Nomai-Vase"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge/BlackHoleForgePivot/Props_BlackHoleForge/Prefab_NOM_VaseThick",
+        "position": {
+          "x": -480,
+          "y": 35,
+          "z": -480
+        },
+        "rotation": {
+          "x": 0,
+          "y": 210,
+          "z": 0
+        },
+        "scale": 1.1,
+        "alignRadial": true,
+        "rename": "Verwittertes Nomai-Relikt"
+      }
+    ]
+  }
+}

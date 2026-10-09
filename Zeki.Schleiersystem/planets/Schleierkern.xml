@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AstroObjectEntry xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/shiplog_schema.xsd">
+  <ID>SCHLEIERKERN</ID>
+  <Entry>
+    <ID>ZEKSCHLEIER_KERN</ID>
+    <Name>Schleierkern</Name>
+    <ExploreFact>
+      <ID>ZEKSCHLEIER_KERN_FOUND</ID>
+      <Text>Der innere Planet des Systems besitzt scharfkantige Höhenzüge und ein verlassenes Nomai-Observatorium. Die Messgeräte zeigen eine ungewöhnliche Resonanz mit dem Schleierstern.</Text>
+    </ExploreFact>
+  </Entry>
+</AstroObjectEntry>

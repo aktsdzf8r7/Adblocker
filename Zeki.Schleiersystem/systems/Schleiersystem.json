@@ -1,0 +1,46 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/star_system_schema.json",
+  "name": "Schleiersystem",
+  "destroyStockPlanets": true,
+  "canEnterViaWarpDrive": true,
+  "canExitViaWarpDrive": true,
+  "enableTimeLoop": false,
+  "mapRestricted": false,
+  "Vessel": {
+    "coords": {
+      "x": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "y": [
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "z": [
+        1,
+        3,
+        5,
+        0,
+        2,
+        4
+      ]
+    },
+    "vesselSpawn": {
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 8000
+      }
+    }
+  },
+  "factRequiredForWarp": "ZEKSCHLEIER_WARP_UNLOCKED",
+  "farClipPlaneOverride": 50000
+}

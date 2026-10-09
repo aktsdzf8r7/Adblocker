@@ -1,0 +1,83 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+  "name": "Schleierbruch",
+  "starSystem": "Schleiersystem",
+  "Base": {
+    "groundSize": 330,
+    "surfaceSize": 350,
+    "surfaceGravity": 4,
+    "gravityFallOff": "inverseSquared"
+  },
+  "Orbit": {
+    "semiMajorAxis": 10400,
+    "primaryBody": "Schleierstern",
+    "eccentricity": 0.24,
+    "inclination": 7,
+    "trueAnomaly": 275
+  },
+  "Atmosphere": {
+    "size": 440,
+    "density": 0.45,
+    "tint": {
+      "r": 155,
+      "g": 100,
+      "b": 175,
+      "a": 255
+    }
+  },
+  "Lava": {
+    "size": 330,
+    "depth": 30
+  },
+  "MapMarker": {
+    "enabled": true
+  },
+  "ShipLog": {
+    "xmlFile": "planets/Schleierbruch.xml"
+  },
+  "HeightMap": {
+    "maxHeight": 82,
+    "minHeight": 0,
+    "stretch": {
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "resolution": 512,
+    "heightMap": "planets/assets/heightmaps/schleierbruch_height.png",
+    "textureMap": "planets/assets/heightmaps/schleierbruch_color.png",
+    "normalStrength": 1.15,
+    "smoothness": 0.18
+  },
+  "Props": {
+    "scatter": [
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge/BlackHoleForgePivot/Props_BlackHoleForge/Prefab_NOM_VaseThick",
+        "count": 24,
+        "seed": 33033,
+        "minHeight": 10,
+        "maxHeight": 70,
+        "scale": 0.65,
+        "preventOverlap": true
+      }
+    ],
+    "details": [
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge",
+        "position": {
+          "x": -180,
+          "y": 25,
+          "z": 275
+        },
+        "rotation": {
+          "x": 0,
+          "y": 120,
+          "z": 0
+        },
+        "scale": 0.5,
+        "alignRadial": true,
+        "rename": "Zerbrochene Nomai-Ruine"
+      }
+    ]
+  }
+}

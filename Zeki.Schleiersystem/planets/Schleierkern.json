@@ -1,0 +1,95 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+  "name": "Schleierkern",
+  "starSystem": "Schleiersystem",
+  "Base": {
+    "groundSize": 520,
+    "surfaceSize": 540,
+    "surfaceGravity": 10,
+    "gravityFallOff": "inverseSquared"
+  },
+  "Orbit": {
+    "semiMajorAxis": 4300,
+    "primaryBody": "Schleierstern",
+    "eccentricity": 0.06,
+    "inclination": 3,
+    "trueAnomaly": 35
+  },
+  "Atmosphere": {
+    "size": 650,
+    "density": 0.8,
+    "tint": {
+      "r": 115,
+      "g": 135,
+      "b": 165,
+      "a": 255
+    }
+  },
+  "MapMarker": {
+    "enabled": true
+  },
+  "ShipLog": {
+    "xmlFile": "planets/Schleierkern.xml"
+  },
+  "HeightMap": {
+    "maxHeight": 65,
+    "minHeight": 0,
+    "stretch": {
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "resolution": 512,
+    "heightMap": "planets/assets/heightmaps/schleierkern_height.png",
+    "textureMap": "planets/assets/heightmaps/schleierkern_color.png",
+    "normalStrength": 1.15,
+    "smoothness": 0.08
+  },
+  "Props": {
+    "scatter": [
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge/BlackHoleForgePivot/Props_BlackHoleForge/Prefab_NOM_VaseThick",
+        "count": 16,
+        "seed": 11011,
+        "minHeight": 12,
+        "maxHeight": 55,
+        "scale": 0.75,
+        "preventOverlap": true
+      }
+    ],
+    "details": [
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge",
+        "position": {
+          "x": 450,
+          "y": 35,
+          "z": 260
+        },
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": 0.7,
+        "alignRadial": true,
+        "rename": "Nomai-Observatorium der Strahlung"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge/BlackHoleForgePivot/Props_BlackHoleForge/Prefab_NOM_VaseThick",
+        "position": {
+          "x": -300,
+          "y": 120,
+          "z": 410
+        },
+        "rotation": {
+          "x": 0,
+          "y": 90,
+          "z": 0
+        },
+        "scale": 1.8,
+        "alignRadial": true,
+        "rename": "Strahlungsresonator"
+      }
+    ]
+  }
+}

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AstroObjectEntry xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/shiplog_schema.xsd">
+  <ID>SCHLEIERSTERN</ID>
+  <Entry>
+    <ID>ZEKSCHLEIER_SYSTEM</ID>
+    <Name>Das Schleiersystem</Name>
+    <IsCuriosity/>
+    <RumorFact>
+      <ID>ZEKSCHLEIER_WARP_UNLOCKED</ID>
+      <RumorName>Ein System hinter dem Schleier</RumorName>
+      <Text>Eine beschädigte Nomai-Aufzeichnung erwähnt ein verborgenes Sternsystem. Die Koordinaten fehlen, aber die Aufzeichnung behauptet, dass sich die fehlenden Informationen dort selbst finden lassen.</Text>
+    </RumorFact>
+    <ExploreFact>
+      <ID>ZEKSCHLEIER_RECORDING_1</ID>
+      <Text>Die Aufnahme nennt ein System, dessen Daten absichtlich beschädigt wurden.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKSCHLEIER_RECORDING_2</ID>
+      <Text>Die Aufzeichnung spricht von drei Körpern und deutet an, dass der Schleierstern nicht das eigentliche Geheimnis des Systems ist.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKSCHLEIER_WARP_UNLOCKED</ID>
+      <Text>Die vollständige Aufzeichnung ist entschlüsselt. Ein Warp ins Schleiersystem ist jetzt möglich.</Text>
+    </ExploreFact>
+  </Entry>
+</AstroObjectEntry>

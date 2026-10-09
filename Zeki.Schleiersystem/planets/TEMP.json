@@ -1,0 +1,85 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+  "name": "Schleiersignal",
+  "starSystem": "SolarSystem",
+  "canShowOnTitle": false,
+  "Base": {
+    "groundSize": 250,
+    "surfaceSize": 270,
+    "surfaceGravity": 4,
+    "gravityFallOff": "inverseSquared"
+  },
+  "Orbit": {
+    "semiMajorAxis": 1300,
+    "inclination": 0,
+    "primaryBody": "TIMBER_HEARTH",
+    "isMoon": true,
+    "isTidallyLocked": false,
+    "longitudeOfAscendingNode": 0,
+    "eccentricity": 0,
+    "argumentOfPeriapsis": 0
+  },
+  "Props": {
+    "translatorText": [
+      {
+        "type": "recorder",
+        "xmlFile": "planets/SchleierAufzeichnung.xml",
+        "position": {
+          "x": 0,
+          "y": 272,
+          "z": 0
+        },
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "alignRadial": true,
+        "seed": 7331,
+        "rename": "Beschädigter Nomai-Recorder"
+      }
+    ],
+    "details": [
+      {
+        "path": "TimberHearth_Body/Sector_TH/Interactables_TH/Prefab_HEA_Recorder/Props_HEA_Recorder_Geo",
+        "position": {
+          "x": 0,
+          "y": 310,
+          "z": 0
+        },
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": 3,
+        "ignoreSun": true,
+        "keepLoaded": true,
+        "hasPhysics": false,
+        "rename": "SCHLEIER-SENDER"
+      }
+    ]
+  },
+  "Volumes": {
+    "revealVolumes": [
+      {
+        "position": {
+          "x": 0,
+          "y": 272,
+          "z": 0
+        },
+        "radius": 25,
+        "revealOn": "enter",
+        "reveals": [
+          "ZEKSCHLEIER_RECORDING_1"
+        ]
+      }
+    ]
+  },
+  "MapMarker": {
+    "enabled": true
+  },
+  "ShipLog": {
+    "xmlFile": "planets/SchleierSignal_shiplog.xml"
+  }
+}
