@@ -1,7 +1,7 @@
 using HarmonyLib;
 using OWML.Common;
 using OWML.ModHelper;
-using System.Collections;
+using System;
 using System.Reflection;
 using UnityEngine;
 
@@ -9,12 +9,15 @@ namespace ZekiISAE;
 
 /// <summary>
 /// "Die Aussendungseinheit": while the Interstellare Sonden Aussendungseinheit (ISAE) is still running,
-/// the end of the time loop does not end in a supernova. The ISAE drains the dying sun instead: it shrinks
-/// until it is gone, and the game ends with a New Horizons game over (see addon-manifest.json).
+/// the end of the time loop does not end in a supernova. The ISAE drains the dying sun instead (see Finale):
+/// it shrinks until it is gone, the cannon fires, and the game ends with a New Horizons game over.
 /// The ISAE is switched off in game through NH interaction volumes that set persistent conditions.
+/// This class also loads the Blender props (Models.cs) once New Horizons has built the system.
 /// </summary>
 public class ZekiISAE : ModBehaviour
 {
+    public const string IsaeName = "Interstellare Sonden Aussendungseinheit";
+
     // persistent conditions (set by the NH configs of this mod)
     public const string Deactivated = "ZEKISAE_DEAKTIVIERT";
     public const string Discovered = "ZEKISAE_ENTDECKT";
@@ -26,7 +29,10 @@ public class ZekiISAE : ModBehaviour
     public INewHorizons NewHorizons;
 
     public bool OnlyAfterDiscovery;
-    public float DrainSeconds = 45f;
+    public float DrainSeconds = 60f;
+    public bool Cinematic = true;
+    public bool UseGameMaterials = true;
+    public bool AutoAim = true;
 
     private bool _warnedAtStart;
     private bool _warnedBeforeEnd;
@@ -42,15 +48,38 @@ public class ZekiISAE : ModBehaviour
     {
         NewHorizons = ModHelper.Interaction.TryGetModApi<INewHorizons>("xen.NewHorizons");
         NewHorizons.LoadConfigs(this);
+        NewHorizons.GetStarSystemLoadedEvent().AddListener(OnStarSystemLoaded);
         new Harmony("Zeki.ISAE").PatchAll(Assembly.GetExecutingAssembly());
         LoadManager.OnCompleteSceneLoad += OnCompleteSceneLoad;
-        ModHelper.Console.WriteLine("Die Aussendungseinheit ist geladen.", MessageType.Success);
+        Log("Die Aussendungseinheit ist geladen.");
     }
 
     public override void Configure(IModConfig config)
     {
         OnlyAfterDiscovery = config.GetSettingsValue<bool>("onlyAfterDiscovery");
-        DrainSeconds = Mathf.Clamp(config.GetSettingsValue<float>("drainSeconds"), 10f, 180f);
+        DrainSeconds = Mathf.Clamp(config.GetSettingsValue<float>("drainSeconds"), 20f, 180f);
+        Cinematic = config.GetSettingsValue<bool>("cinematic");
+        UseGameMaterials = config.GetSettingsValue<bool>("useGameMaterials");
+        AutoAim = config.GetSettingsValue<bool>("autoAim");
+    }
+
+    public void Log(string message, bool warning = false)
+    {
+        ModHelper.Console.WriteLine(message, warning ? MessageType.Warning : MessageType.Info);
+    }
+
+    private void OnStarSystemLoaded(string system)
+    {
+        if (system != "SolarSystem") return;
+        try
+        {
+            CannonAim.Apply(this);
+            ModelPlacer.PlaceAll(this);
+        }
+        catch (Exception e)
+        {
+            Log("Fehler beim Aufbau der Aussendungseinheit: " + e, true);
+        }
     }
 
     private void OnCompleteSceneLoad(OWScene previousScene, OWScene newScene)
@@ -100,28 +129,35 @@ public class ZekiISAE : ModBehaviour
 }
 
 [HarmonyPatch]
-public static class SunControllerPatches
+public static class SunPatches
 {
-    private static bool IsHearthianSun(SunController sun)
+    private static bool IsHearthianSun(Component sun)
     {
         var astro = sun.GetComponentInParent<AstroObject>();
         return astro != null && astro.GetAstroObjectName() == AstroObject.Name.Sun;
     }
 
-    /// <summary>The loop is over: let the ISAE take the dying sun instead of the supernova.</summary>
+    private static bool Armed => ZekiISAE.Instance != null && ZekiISAE.Instance.IsArmed();
+
+    /// <summary>The loop is over: the ISAE takes the dying sun instead of the supernova.</summary>
     [HarmonyPrefix]
     [HarmonyPatch(typeof(SunController), nameof(SunController.OnTriggerSupernova))]
     public static bool OnTriggerSupernova(SunController __instance)
     {
-        if (ZekiISAE.Instance == null || !ZekiISAE.Instance.IsArmed() || !IsHearthianSun(__instance)) return true;
-        if (__instance.GetComponent<SunDrain>() == null) __instance.gameObject.AddComponent<SunDrain>().Sun = __instance;
+        if (!Armed || !IsHearthianSun(__instance)) return true;
+        if (__instance.GetComponent<Finale>() == null) __instance.gameObject.AddComponent<Finale>().Sun = __instance;
         return false;
     }
 
     /// <summary>While the sun is drained, the vanilla growth/collapse animation must not run.</summary>
     [HarmonyPrefix]
     [HarmonyPatch(typeof(SunController), nameof(SunController.Update))]
-    public static bool Update(SunController __instance) => __instance.GetComponent<SunDrain>() == null;
+    public static bool Update(SunController __instance) => __instance.GetComponent<Finale>() == null;
+
+    /// <summary>The far-away picture of the sun must not explode either; the Finale shrinks it.</summary>
+    [HarmonyPrefix]
+    [HarmonyPatch(typeof(DistantSunController), nameof(DistantSunController.OnTriggerSupernova))]
+    public static bool DistantSupernova() => !Armed;
 }
 
 /// <summary>
@@ -147,10 +183,6 @@ public static class ProbeCannonCopyPatches
     }
 
     [HarmonyPrefix]
-    [HarmonyPatch(nameof(OrbitalProbeLaunchController.FixedUpdate))]
-    public static bool FixedUpdate(OrbitalProbeLaunchController __instance) => !IsCopy(__instance);
-
-    [HarmonyPrefix]
     [HarmonyPatch(nameof(OrbitalProbeLaunchController.OnDestroy))]
     public static bool OnDestroy(OrbitalProbeLaunchController __instance) => !IsCopy(__instance);
 
@@ -159,71 +191,10 @@ public static class ProbeCannonCopyPatches
     public static bool OnStartOfTimeLoop(OrbitalProbeLaunchController __instance) => !IsCopy(__instance);
 
     [HarmonyPrefix]
+    [HarmonyPatch(nameof(OrbitalProbeLaunchController.FixedUpdate))]
+    public static bool FixedUpdate(OrbitalProbeLaunchController __instance) => !IsCopy(__instance);
+
+    [HarmonyPrefix]
     [HarmonyPatch(nameof(OrbitalProbeLaunchController.LaunchProbe))]
     public static bool LaunchProbe(OrbitalProbeLaunchController __instance) => !IsCopy(__instance);
-}
-
-/// <summary>Shrinks the sun to nothing, puts out its light and then ends the game.</summary>
-public class SunDrain : MonoBehaviour
-{
-    public SunController Sun;
-
-    private float _start;
-    private float _startScale;
-    private float _startSunLight, _startAmbientLight, _startLocalAmbient;
-    private bool _finished;
-
-    public void Start()
-    {
-        _start = Time.time;
-        _startScale = Sun._scale > 0f ? Sun._scale : 1f;
-        var light = Sun._sunLight;
-        if (light != null)
-        {
-            _startSunLight = light._sunBaseIntensity;
-            _startAmbientLight = light._ambientBaseIntensity;
-        }
-        if (Sun._ambientLight != null) _startLocalAmbient = Sun._ambientLight.intensity;
-
-        DialogueConditionManager.SharedInstance.SetConditionState(ZekiISAE.DrainActive, true);
-        ZekiISAE.Notify("DIE AUSSENDUNGSEINHEIT ENTZIEHT DER SONNE IHRE ENERGIE", 8f);
-    }
-
-    public void Update()
-    {
-        if (_finished) return;
-        var t = Mathf.Clamp01((Time.time - _start) / ZekiISAE.Instance.DrainSeconds);
-        var remaining = 1f - t * t * (3f - 2f * t);
-
-        Sun.UpdateScale(Mathf.Max(_startScale * remaining, 0.002f));
-        var light = Sun._sunLight;
-        if (light != null)
-        {
-            light._sunBaseIntensity = _startSunLight * remaining;
-            light._ambientBaseIntensity = _startAmbientLight * remaining;
-            light.sunIntensity = _startSunLight * remaining;
-            light.ambientIntensity = _startAmbientLight * remaining;
-        }
-        if (Sun._ambientLight != null) Sun._ambientLight.intensity = _startLocalAmbient * remaining;
-
-        if (t >= 1f)
-        {
-            _finished = true;
-            Sun.SetRenderingEnabled(false);
-            StartCoroutine(EndOfEverything());
-        }
-    }
-
-    private IEnumerator EndOfEverything()
-    {
-        ZekiISAE.Notify("DIE SONNE IST ERLOSCHEN", 5f);
-        yield return new WaitForSeconds(5f);
-        // New Horizons shows the game over text of addon-manifest.json when the player dies while this is set
-        DialogueConditionManager.SharedInstance.SetConditionState(ZekiISAE.UniverseEnds, true);
-        var death = Locator.GetDeathManager();
-        if (death != null && !death.IsPlayerDying() && !death.IsPlayerDead())
-        {
-            death.KillPlayer(DeathType.Energy);
-        }
-    }
 }

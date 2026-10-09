@@ -117,7 +117,7 @@
         "isRelativeToParent": true,
         "position": {
           "x": 0.0,
-          "y": 1.2,
+          "y": 1.9,
           "z": 0.0
         },
         "rotation": {
@@ -126,24 +126,8 @@
           "z": 0.0
         },
         "path": "TowerTwin_Body/Sector_TowerTwin/Sector_TimeLoopInterior/Interactables_TimeLoopInterior/WarpCoreSocket/Prefab_NOM_WarpCoreVessel/Effects_NOM_AdvancedWarpCore/Effects_NOM_WarpParticlesWhite",
-        "scale": 0.35,
+        "scale": 0.3,
         "rename": "Schalterlicht"
-      },
-      {
-        "parentPath": "Sector/ISAE_Hauptkanone/Sector_Module_Intact/ISAE_Hauptschalter",
-        "isRelativeToParent": true,
-        "position": {
-          "x": 0.0,
-          "y": 0.0,
-          "z": 0.0
-        },
-        "rotation": {
-          "x": 0.0,
-          "y": 0.0,
-          "z": 0.0
-        },
-        "path": "DB_VesselDimension_Body/Sector_VesselDimension/Sector_VesselBridge/Interactibles_VesselBridge/UNSORTED/Wall Lamps/Prefab_NOM_Lamp_Glow_Vessel_Wall",
-        "rename": "Schalterlampe"
       }
     ],
     "translatorText": [

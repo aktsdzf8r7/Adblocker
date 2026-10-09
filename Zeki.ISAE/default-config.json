@@ -10,11 +10,29 @@
     },
     "drainSeconds": {
       "type": "slider",
-      "value": 45,
-      "min": 10,
+      "value": 60,
+      "min": 20,
       "max": 180,
       "title": "Dauer des Energieentzugs (Sekunden)",
       "tooltip": "Wie lange die Sonne am Ende der Schleife schrumpft, bevor sie erlischt."
+    },
+    "cinematic": {
+      "type": "toggle",
+      "value": true,
+      "title": "Filmische Kamera im Finale",
+      "tooltip": "Im Finale dreht sich die Kamera zur Sonne und folgt dem Schuss. Aus: Du behältst die Steuerung."
+    },
+    "useGameMaterials": {
+      "type": "toggle",
+      "value": true,
+      "title": "Spiel-Materialien für die neuen Modelle",
+      "tooltip": "Die Blender-Modelle nutzen das Nomai-Metall der Sondenkanone. Aus: einfache Farben."
+    },
+    "autoAim": {
+      "type": "toggle",
+      "value": true,
+      "title": "Hauptkanone automatisch ausrichten",
+      "tooltip": "Misst den Lauf der echten Sondenkanone und richtet die Kopie parallel zu den Fokuskanonen aus."
     }
   }
 }
