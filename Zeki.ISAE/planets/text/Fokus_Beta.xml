@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Computer auf Fokuskanone Beta -->
+<!-- Vessel-Computer auf Fokuskanone Beta -->
 <NomaiObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/text_schema.xsd">
   <TextBlock>
     <ID>1</ID>
-    <Text>FOKUSKANONE BETA. Ausrichtung: parallel zur Hauptkanone.</Text>
+    <Text>FOKUSKANONE BETA. Ausrichtung: parallel zur Hauptkanone, auf den Heimatstern.</Text>
   </TextBlock>
   <TextBlock>
     <ID>2</ID>

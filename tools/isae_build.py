@@ -15,6 +15,7 @@ isae_texts.py, the ship log XML is written by hand.
 Usage:  python tools/isae_build.py [path/to/Zeki.ISAE]
 Needs:  Python 3.9+, numpy, Pillow
 """
+import json
 import math
 import os
 import shutil
@@ -30,17 +31,13 @@ MOD = os.path.abspath(sys.argv[1] if len(sys.argv) > 1 else os.path.join(os.path
 sb.MOD = MOD  # the shared helpers write into this mod
 
 NAME = "Interstellare Sonden Aussendungseinheit"
-VERSION = "1.2.0"
+VERSION = "1.3.0"
 
 # ----------------------------------------------------------------------------------------------
 # Aim. Every body here has axialTilt 0 and siderealPeriod 0, so their local axes are the world axes
-# and never turn. The focus cannons fire along their +y axis; the triangle orbits in the plane
-# perpendicular to it.
-# The DLL measures the barrel of the real Orbital Probe Cannon in game and turns the copy so that it
-# points along +y as well (setting "autoAim"). AIM_OPC is only the starting rotation that stays when
-# "autoAim" is switched off (Euler angles in degrees, Unity order z-x-y).
+# and never turn. The main cannon (Blender) and the focus cannons fire along their bodies' +y axis;
+# the triangle orbits in the plane perpendicular to it.
 # ----------------------------------------------------------------------------------------------
-AIM_OPC = (0.0, 0.0, 0.0)
 FOCUS_DISTANCE = 340     # metres between the main cannon and each focus cannon
 FOCUS_NAMES = (("A", "Alpha", 0), ("B", "Beta", 120), ("C", "Gamma", 240))
 
@@ -48,16 +45,14 @@ FOCUS_NAMES = (("A", "Alpha", 0), ("B", "Beta", 120), ("C", "Gamma", 240))
 DEAKTIVIERT = "ZEKISAE_DEAKTIVIERT"      # persistent: the player switched the ISAE off
 ENTDECKT = "ZEKISAE_ENTDECKT"            # persistent: the player has been at the ISAE once
 ENTZUG = "ZEKISAE_ENTZUG"                # dialogue: set by the DLL while the sun is drained
+VORBOTE = "ZEKISAE_VORBOTE"              # dialogue: set by the DLL two minutes before the end of the loop
 KOPPLER = "ZEKISAE_KOPPLER_%s"           # persistent: one phase coupler cut
 KOPPLER_ALLE = "ZEKISAE_KOPPLER_ALLE"    # persistent: all three cut, the main switch appears
 
-# the control module of the Orbital Probe Cannon; spots inside it that are known to be free
-# (the same ones the published addon "EyeWitness" uses in the vanilla cannon)
-MODULE = "Sector_OrbitalProbeCannon/Sector_Module_Intact"
-SPOT_PEDESTAL = (-8.881, -4.881, 8.7319)
-SPOT_RECORDER = (-10.4348, -3.0591, 8.1713)
-SPOT_COMPUTER = (-6.8811, -6.9297, 8.7142)
-SPOT_ROT = (270, 0, 0)
+# a free spot in the control module of the real Orbital Probe Cannon (used by the published addon EyeWitness)
+OPC_MODULE = "Sector_OrbitalProbeCannon/Sector_Module_Intact"
+OPC_COMPUTER = (-6.8811, -6.9297, 8.7142)
+OPC_ROT = (270, 0, 0)
 
 RED = (color(235, 90, 50), color(255, 170, 120))
 
@@ -82,49 +77,89 @@ def relative(parent, pos, rotation=(0, 0, 0), **extra):
 # ==============================================================================================
 # the main cannon
 # ==============================================================================================
-def isae_config():
-    hub = "Sector/ISAE_Hauptkanone"
-    module = hub + "/Sector_Module_Intact"
-    switch = module + "/ISAE_Hauptschalter"
+def anchors():
+    """Spots on the Blender models (Unity coordinates of the ISAE body), written by tools/isae_models.py."""
+    with open(os.path.join(MOD, "assets", "models", "anchors.json"), encoding="utf-8") as f:
+        return json.load(f)
+
+
+def at(a, up=0.0):
+    p = a["position"]
+    return [p["x"], p["y"] + up, p["z"]]
+
+
+def text_at(kind, xml, a, rename, **extra):
+    t = {"type": kind, "xmlFile": "planets/text/" + xml, "position": vec(at(a)), "rename": rename}
+    if kind == "wall":
+        t["normal"] = a["normal"]
+    else:
+        t["rotation"] = rot((0, a.get("yaw", 0), 0))
+    t.update(extra)
+    return t
+
+
+# what stands in which module: (prop key or text, xml, anchor, rename)
+MODULE_TEXTS = {
+    "kontrolle": [("preCrashComputer", "ISAE_Status.xml", "links", "Computer_Status"),
+                  ("preCrashRecorder", "ISAE_Linum.xml", "rechts", "Recorder_Linum"),
+                  ("wall", "Sedum_Abschied.xml", "wand", "Wandschrift_Sedum")],
+    "start": [("wall", "Start_Bau.xml", "wand", "Wandschrift_Bau"),
+              ("preCrashComputer", "Start_Sonde.xml", "links", "Computer_Sonde")],
+    "navigation": [("preCrashComputer", "Navi_Ziel.xml", "links", "Computer_Ziel"),
+                   ("preCrashRecorder", "Navi_Pye.xml", "rechts", "Recorder_Pye"),
+                   ("wall", "Navi_Wand.xml", "wand", "Wandschrift_Ziel")],
+}
+MODULE_FACTS = {"kontrolle": ("ZEKISAE_KONTROLLE_FOUND", "ZEKISAE_KONTROLLE"), "start": ("ZEKISAE_START_FOUND", "ZEKISAE_START"),
+                "navigation": ("ZEKISAE_NAVI_FOUND", "ZEKISAE_NAVI")}
+
+
+def isae_config(A):
+    I = A["isae"]
+    switch = "Sector/ISAE_Hauptschalter"
     details = [
-        # the whole cannon (hub, barrel, control and launch module), without its vanilla texts and orb interface.
-        # The DLL measures the real cannon's barrel and turns this copy so that it fires along +y.
-        placed(P["opc_sector"], (0, 0, 0), AIM_OPC, rename="ISAE_Hauptkanone", keepLoaded=True, removeComponents=True,
-               removeChildren=["Sector_Module_Intact/Interactables_Module_Intact", "Sector_Module_Broken/Interactables_Module_Broken"]),
-        # the rings of the Construction Yard on Giant's Deep, where the real cannon was built - the DLL slides
-        # them onto the middle of the barrel and lets them turn
-        placed(P["construction_rings"], (0, 0, 0), rename="ISAE_Bauringe", keepLoaded=True),
-        # the interstellar probe: a copy of the real Nomai probe, hidden by the DLL until the finale fires it
-        placed(P["nomai_probe"], (0, 0, 0), rename="Interstellare_Sonde", keepLoaded=True),
-        # its glowing heart - goes out when the ISAE is switched off
-        placed(P["warp_particles"], (0, 0, 0), scale=5, rename="ISAE_Energiekern", keepLoaded=True,
+        # the hub's energy core glows until the ISAE is switched off
+        placed(P["warp_particles"], at(I["kern"]), scale=6, rename="ISAE_Energiekern", keepLoaded=True,
                deactivationCondition=DEAKTIVIERT, blinkWhenActiveChanged=True),
-        # the beam along the firing axis that appears when the drain begins
-        placed(P["light_beam"], (0, 0, 0), scale=5, rename="ISAE_Entzugsstrahl", keepLoaded=True, activationCondition=ENTZUG),
-        # the main switch inside the control module, wakes up once all three couplers are cut:
-        # the Vessel's coordinate interface with an advanced warp core floating above it
-        dict(relative(module, SPOT_PEDESTAL, SPOT_ROT), path="", rename="ISAE_Hauptschalter",
-             activationCondition=KOPPLER_ALLE, deactivationCondition=DEAKTIVIERT),
+        # two minutes before the end the muzzle starts to glow, during the drain a beam leaves it
+        placed(P["warp_particles"], at(I["muendung"]), scale=2.5, rename="ISAE_Muendungsglut", keepLoaded=True, activationCondition=VORBOTE),
+        placed(P["light_beam"], at(I["muendung"]), scale=6, rename="ISAE_Entzugsstrahl", keepLoaded=True, activationCondition=ENTZUG),
+    ]
+    texts, volumes = [], {"interactionVolumes": [], "revealVolumes": [], "forces": {"directionalVolumes": []}}
+    entries = [{"id": "ZEKISAE_ISAE", "position": vec(at(I["kern"], 20))}]
+    for key, m in ((k, A[k]) for k in ("kontrolle", "start", "navigation")):
+        for kind, xml, spot, rename in MODULE_TEXTS[key]:
+            texts.append(text_at(kind, xml, m[spot], rename, **({"seed": 4100 + len(texts)} if kind == "wall" else {})))
+        fact, entry = MODULE_FACTS[key]
+        volumes["revealVolumes"].append(reveal(at(m["boden"], 2), 8, [fact]))
+        entries.append({"id": entry, "position": vec(at(m["boden"], 2))})
+        # Nomai artificial gravity towards the floor of the module
+        volumes["forces"]["directionalVolumes"].append({
+            "force": 9, "normal": vec([0, -1, 0]), "position": vec(at(m["boden"], m["hoehe"] / 2)),
+            "shape": {"type": "cylinder", "radius": m["bodenRadius"] - 0.3, "height": m["hoehe"] - 0.4},
+            "rename": f"Schwerkraft_{m['name']}"})
+    K, S = A["kontrolle"], A["start"]
+    details += [
+        # Sedum's remains in front of his last words
+        placed(P["skeleton"], at(K["hinten_links"]), (0, K["hinten_links"]["yaw"], 0), rename="Sedums_Ueberreste"),
+        placed(P["staff"], at(K["hinten_links"], 0.05), (0, K["hinten_links"]["yaw"] + 70, 90), rename="Sedums_Stab"),
+        # the main switch on the dais, wakes up once all three couplers are cut: the Vessel's coordinate
+        # interface with an advanced warp core floating above it
+        placed("", at(K["schalter"]), (0, K["schalter"]["yaw"], 0), rename="ISAE_Hauptschalter",
+               activationCondition=KOPPLER_ALLE, deactivationCondition=DEAKTIVIERT),
         dict(relative(switch, (0, 0, 0)), path=P["vessel_interface"], rename="Hauptschalter_Vessel_Interface"),
         # removeComponents strips the item from the root, so the copy can not be picked up like the real core
-        dict(relative(switch, (0, 3.0, 0)), path=P["warpcore_vessel"], rename="Hauptschalter_Warpkern", removeComponents=True),
+        dict(relative(switch, (0, 3.2, 0)), path=P["warpcore_vessel"], rename="Hauptschalter_Warpkern", removeComponents=True),
+        # the interstellar probe waits in the launch cradle; the DLL fires it through the barrel in the finale
+        placed(P["nomai_probe"], at(S["wiege"]), rename="Interstellare_Sonde", keepLoaded=True),
     ]
-    texts = [
-        dict(relative(module, SPOT_RECORDER, SPOT_ROT), type="preCrashRecorder",
-             xmlFile="planets/text/ISAE_Linum.xml", rename="Recorder_Linum"),
-        dict(relative(module, SPOT_COMPUTER, SPOT_ROT), type="preCrashComputer",
-             xmlFile="planets/text/ISAE_Status.xml", rename="Computer_Status"),
-        dict(relative(switch, (2.4, 0, 0)), type="trailmarker", xmlFile="planets/text/ISAE_Hauptschalter.xml", rename="Wegmarke_Hauptschalter"),
+    texts.append(dict(relative(switch, (2.6, 0, 0)), type="trailmarker", xmlFile="planets/text/ISAE_Hauptschalter.xml", rename="Wegmarke_Hauptschalter"))
+    volumes["interactionVolumes"].append(dict(relative(switch, (0, 1.6, 0)), radius=1.6, range=3, prompt="Aussendungseinheit abschalten",
+                                              condition=DEAKTIVIERT, persistent=True, reusable=False, audio="NomaiPowerOff",
+                                              rename="Hauptschalter_Volumen"))
+    volumes["revealVolumes"] += [
+        reveal([0, 0, 0], 320, ["ZEKISAE_FOUND"]),
+        reveal([0, 0, 0], 120, ["ZEKISAE_FOKUS_RUMOR"], "observe", maxDistance=2500, maxAngle=25),
     ]
-    volumes = {
-        "interactionVolumes": [dict(relative(switch, (0, 1.6, 0)), radius=1.6, range=3, prompt="Aussendungseinheit abschalten",
-                                    condition=DEAKTIVIERT, persistent=True, reusable=False, audio="NomaiPowerOff",
-                                    rename="Hauptschalter_Volumen")],
-        "revealVolumes": [
-            reveal([0, 0, 0], 260, ["ZEKISAE_FOUND"]),
-            reveal([0, 0, 0], 120, ["ZEKISAE_FOKUS_RUMOR"], "observe", maxDistance=2500, maxAngle=25),
-        ],
-    }
     cfg = sb.body_header(NAME, "SolarSystem")
     cfg.update({
         "canShowOnTitle": False,
@@ -140,12 +175,38 @@ def isae_config():
             "details": details,
             "translatorText": texts,
             "signals": [{"frequency": "Energiesignaturen", "name": "Aussendungseinheit", "audio": "OW_NM_WhiteHoleAmbienceL",
-                         "position": vec([0, 0, 0]), "sourceRadius": 5, "detectionRadius": 7000, "identificationRadius": 400}],
-            "entryLocation": [{"id": "ZEKISAE_ISAE", "position": vec([0, 0, 0])}, {"id": "ZEKISAE_SEDUM", "position": vec([0, 6, 0])}],
+                         "position": vec(at(I["kern"])), "sourceRadius": 5, "detectionRadius": 7000, "identificationRadius": 400}],
+            "entryLocation": entries + [{"id": "ZEKISAE_SEDUM", "position": vec(at(K["hinten_links"], 1))}],
         },
         "Volumes": volumes,
     })
     return cfg
+
+
+def placements(A):
+    """assets/models/placements.json: where the DLL puts the Blender models (all in the ISAE body's frame)."""
+    props = [{"model": "hauptkanone", "name": "ISAE_Hauptkanone", "collider": True},
+             {"model": "laufringe", "name": "ISAE_Laufringe", "spin": 10},
+             {"model": "sternkarte", "name": "ISAE_Sternkarte", "spin": 7, "position": A["navigation"]["karte"]["position"]}]
+    props += [{"model": f"modul_{k}", "name": f"ISAE_{A[k]['name']}", "collider": True} for k in ("kontrolle", "start", "navigation")]
+    for p in props:
+        p["body"] = NAME
+        p.setdefault("position", {"x": 0, "y": 0, "z": 0})
+        p.setdefault("rotation", {"x": 0, "y": 0, "z": 0})
+        p.setdefault("scale", 1)
+    lights = []
+    for k in ("kontrolle", "start", "navigation"):
+        lights.append({"name": f"Licht_{A[k]['name']}", "body": NAME, "position": A[k]["licht1"]["position"],
+                       "color": {"x": 0.75, "y": 0.9, "z": 1.0}, "range": 15, "intensity": 1.5})
+        lights.append({"name": f"Licht_{A[k]['name']}_Tuer", "body": NAME, "position": A[k]["licht2"]["position"],
+                       "color": {"x": 1.0, "y": 0.8, "z": 0.6}, "range": 8, "intensity": 0.8})
+    return {
+        # exact names of game materials for the Blender material slots; empty = taken from the Vessel
+        "materials": {"VesselHuelle": "", "VesselKupfer": "", "VesselDunkel": "", "VesselLeuchten": ""},
+        "props": props,
+        "lights": lights,
+        "points": {"muendung": A["isae"]["muendung"]["position"], "kern": A["isae"]["kern"]["position"]},
+    }
 
 
 # ==============================================================================================
@@ -215,13 +276,14 @@ def focus_config(letter, greek, anomaly):
 # ==============================================================================================
 def opc_config():
     cfg = sb.body_header("ORBITAL_PROBE_CANNON", "SolarSystem")
-    cfg["Props"] = {"translatorText": [dict(relative(MODULE, SPOT_COMPUTER, SPOT_ROT), type="computer",
+    cfg["Props"] = {"translatorText": [dict(relative(OPC_MODULE, OPC_COMPUTER, OPC_ROT), type="computer",
                                             xmlFile="planets/text/OPC_Sedum.xml", rename="Computer_Sedum")]}
     return cfg
 
 
 def solar_system():
-    entries = {"ZEKISAE_ISAE": (1650, 450), "ZEKISAE_FOKUS": (2100, 700), "ZEKISAE_SEDUM": (2100, 200)}
+    entries = {"ZEKISAE_ISAE": (1650, 450), "ZEKISAE_KONTROLLE": (2080, 450), "ZEKISAE_START": (2500, 720),
+               "ZEKISAE_NAVI": (2500, 180), "ZEKISAE_FOKUS": (2080, 880), "ZEKISAE_SEDUM": (2080, 20)}
     checks = [
         {"check": {"allFactsRevealed": ["ZEKISAE_FOUND"]}, "then": {"setPersistentConditions": [ENTDECKT]}},
         {"check": {"allPersistentConditionsSet": [KOPPLER % x for x, _, _ in FOCUS_NAMES]}, "then": {"setPersistentConditions": [KOPPLER_ALLE]}},
@@ -318,8 +380,9 @@ def manifests():
                              "tooltip": "Wie lange die Sonne am Ende der Schleife schrumpft, bevor sie erlischt."},
             "cinematic": {"type": "toggle", "value": True, "title": "Filmische Kamera im Finale",
                           "tooltip": "Im Finale dreht sich die Kamera zur Sonne und folgt dem Schuss. Aus: Du behältst die Steuerung."},
-            "autoAim": {"type": "toggle", "value": True, "title": "Hauptkanone automatisch ausrichten",
-                        "tooltip": "Misst den Lauf der echten Sondenkanone und richtet die Kopie parallel zu den Fokuskanonen aus."},
+            "materialSource": {"type": "selector", "value": "Vessel", "options": ["Vessel", "Sondenkanone", "Einfach"],
+                               "title": "Materialien der Hauptkanone",
+                               "tooltip": "Vessel: die Materialien des Vessels. Sondenkanone: die der echten Sondenkanone. Einfach: schlichte Farben."},
         },
     })
     write_json("addon-manifest.json", {
@@ -335,23 +398,24 @@ def manifests():
 
 
 def main():
-    write_json("planets/ISAE.json", isae_config())
+    A = anchors()
+    write_json("planets/ISAE.json", isae_config(A))
     for x, greek, anomaly in FOCUS_NAMES:
         write_json(f"planets/Fokuskanone_{greek}.json", focus_config(x, greek, anomaly))
     write_json("planets/OrbitalProbeCannon.json", opc_config())
     write_json("systems/SolarSystem.json", solar_system())
+    write_json("assets/models/placements.json", placements(A))
     manifests()
 
+    # ZEKISAE_ISAE, _KONTROLLE, _START, _NAVI and the map sprite are Blender renders (tools/isae_models.py)
     E = "planets/assets/shiplog/entries/"
-    for entry, motif, seed in (("ZEKISAE_ISAE", "isae", 31), ("ZEKISAE_FOKUS", "fokus", 32), ("ZEKISAE_SEDUM", "sedum", 33)):
+    for entry, motif, seed in (("ZEKISAE_FOKUS", "fokus", 32), ("ZEKISAE_SEDUM", "sedum", 33)):
         sb.save(art(seed, motif), E + entry + ".png")
-    img, outline = map_sprite()
-    sb.save(img, "planets/assets/shiplog/map/isae.png")
+    _, outline = map_sprite()
     sb.save(outline, "planets/assets/shiplog/map/isae_outline.png")
-    # left-overs of older versions: rocks under the focus cannons (1.0) and Blender models (1.1)
-    for old in ("planets/assets/terrain", "assets"):
-        if os.path.isdir(os.path.join(MOD, old)):
-            shutil.rmtree(os.path.join(MOD, old))
+    terrain = os.path.join(MOD, "planets", "assets", "terrain")
+    if os.path.isdir(terrain):  # the focus cannons stood on rocks in version 1.0
+        shutil.rmtree(terrain)
 
 
 if __name__ == "__main__":

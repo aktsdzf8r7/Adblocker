@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Linums Aufzeichnung im Kontrollmodul -->
+<!-- Linums Aufzeichnung (Vessel-Recorder) im Kontrollmodul -->
 <NomaiObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/text_schema.xsd">
   <TextBlock>
     <ID>1</ID>
-    <Text>Hier spricht Linum. Ich habe Sedums Rechnungen geprüft. Sie stimmen. Aber Sedum hat etwas übersehen.</Text>
+    <Text>Hier spricht Linum. Ich habe Sedums Rechnungen geprüft. Sie stimmen. Aber er hat etwas übersehen.</Text>
   </TextBlock>
   <TextBlock>
     <ID>2</ID>
@@ -23,7 +23,7 @@
   <TextBlock>
     <ID>5</ID>
     <ParentID>4</ParentID>
-    <Text>Um sie abzuschalten: Trenne die Phasenkoppler auf allen drei Fokuskanonen. Dann erwacht der Hauptschalter hier im Kontrollmodul.</Text>
+    <Text>Ich habe heimlich eine Abschaltung eingebaut: Trenne die Phasenkoppler auf allen drei Fokuskanonen. Dann erwacht der Hauptschalter hier im Kontrollmodul.</Text>
   </TextBlock>
   <ShipLogConditions>
     <RevealFact>
@@ -32,7 +32,7 @@
     </RevealFact>
     <RevealFact>
       <FactID>ZEKISAE_ANLEITUNG</FactID>
-      <Condition>1,2,3,4,5</Condition>
+      <Condition>5</Condition>
     </RevealFact>
   </ShipLogConditions>
 </NomaiObject>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Vessel-Computer im Navigationsmodul: das Ziel -->
+<NomaiObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/text_schema.xsd">
+  <TextBlock>
+    <ID>1</ID>
+    <Text>NAVIGATIONSMODUL. Ziel: der Heimatstern der Nomai.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>2</ID>
+    <ParentID>1</ParentID>
+    <Text>Position nach den Sternkarten des Vessels berechnet. Der Stern ist von hier aus nicht zu sehen; er liegt hinter dem Nebel, aus dem das Signal des Auges kam.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>3</ID>
+    <ParentID>2</ParentID>
+    <Text>Nötige Geschwindigkeit: ein Vielfaches dessen, was ein lebender Stern liefern kann.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>4</ID>
+    <ParentID>3</ParentID>
+    <Text>Lösung: die gesamte Energie eines sterbenden Sterns in einem einzigen Augenblick. Darum warten wir. – Sedum</Text>
+  </TextBlock>
+  <ShipLogConditions>
+    <RevealFact>
+      <FactID>ZEKISAE_NAVI_ZIEL</FactID>
+      <Condition>1,2</Condition>
+    </RevealFact>
+    <RevealFact>
+      <FactID>ZEKISAE_NAVI_ENERGIE</FactID>
+      <Condition>3,4</Condition>
+    </RevealFact>
+  </ShipLogConditions>
+</NomaiObject>

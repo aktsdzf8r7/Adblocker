@@ -29,17 +29,38 @@
       }
     },
     {
+      "id": "ZEKISAE_KONTROLLE",
+      "position": {
+        "x": 2080,
+        "y": 450
+      }
+    },
+    {
+      "id": "ZEKISAE_START",
+      "position": {
+        "x": 2500,
+        "y": 720
+      }
+    },
+    {
+      "id": "ZEKISAE_NAVI",
+      "position": {
+        "x": 2500,
+        "y": 180
+      }
+    },
+    {
       "id": "ZEKISAE_FOKUS",
       "position": {
-        "x": 2100,
-        "y": 700
+        "x": 2080,
+        "y": 880
       }
     },
     {
       "id": "ZEKISAE_SEDUM",
       "position": {
-        "x": 2100,
-        "y": 200
+        "x": 2080,
+        "y": 20
       }
     }
   ],

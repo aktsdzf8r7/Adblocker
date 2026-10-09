@@ -12,7 +12,8 @@ namespace ZekiISAE;
 /// the end of the time loop does not end in a supernova. The ISAE drains the dying sun instead (see Finale):
 /// it shrinks until it is gone, the cannon fires, and the game ends with a New Horizons game over.
 /// The ISAE is switched off in game through NH interaction volumes that set persistent conditions.
-/// All props are copied from the game by New Horizons; GameProps.cs finishes their placement in game.
+/// The centrepiece is a Blender model (Models.cs); every other prop is copied from the game by New Horizons
+/// and GameProps.cs finishes their placement in game.
 /// </summary>
 public class ZekiISAE : ModBehaviour
 {
@@ -24,6 +25,10 @@ public class ZekiISAE : ModBehaviour
     // dialogue conditions (set here)
     public const string DrainActive = "ZEKISAE_ENTZUG";
     public const string UniverseEnds = "ZEKISAE_UNIVERSUM_ENDET";
+    public const string Prelude = "ZEKISAE_VORBOTE";
+
+    /// <summary>Seconds before the end of the loop when the ISAE visibly wakes up.</summary>
+    public const float PreludeSeconds = 120f;
 
     public static ZekiISAE Instance;
     public INewHorizons NewHorizons;
@@ -31,7 +36,9 @@ public class ZekiISAE : ModBehaviour
     public bool OnlyAfterDiscovery;
     public float DrainSeconds = 60f;
     public bool Cinematic = true;
-    public bool AutoAim = true;
+    public string MaterialSource = "Vessel";
+    /// <summary>The last two minutes of the loop: the ISAE charges up.</summary>
+    public bool Awakening;
 
     private bool _warnedAtStart;
     private bool _warnedBeforeEnd;
@@ -58,7 +65,7 @@ public class ZekiISAE : ModBehaviour
         OnlyAfterDiscovery = config.GetSettingsValue<bool>("onlyAfterDiscovery");
         DrainSeconds = Mathf.Clamp(config.GetSettingsValue<float>("drainSeconds"), 20f, 180f);
         Cinematic = config.GetSettingsValue<bool>("cinematic");
-        AutoAim = config.GetSettingsValue<bool>("autoAim");
+        MaterialSource = config.GetSettingsValue<string>("materialSource") ?? "Vessel";
     }
 
     public void Log(string message, bool warning = false)
@@ -71,6 +78,7 @@ public class ZekiISAE : ModBehaviour
         if (system != "SolarSystem") return;
         try
         {
+            ModelPlacer.PlaceAll(this);
             GameProps.Setup(this);
         }
         catch (Exception e)
@@ -83,6 +91,7 @@ public class ZekiISAE : ModBehaviour
     {
         _warnedAtStart = false;
         _warnedBeforeEnd = false;
+        Awakening = false;
         _wasDeactivated = PlayerData.GetPersistentCondition(Deactivated);
         _sceneLoadedAt = newScene == OWScene.SolarSystem ? Time.time : -1f;
     }
@@ -112,10 +121,18 @@ public class ZekiISAE : ModBehaviour
             _warnedAtStart = true;
             Notify("UNBEKANNTE NOMAI-ENERGIESIGNATUR IN DER NÄHE DER SONNE");
         }
-        if (!_warnedBeforeEnd && TimeLoop.GetSecondsRemaining() < 300f && TimeLoop.GetSecondsRemaining() > 0f)
+        var remaining = TimeLoop.GetSecondsRemaining();
+        if (!_warnedBeforeEnd && remaining < 300f && remaining > 0f)
         {
             _warnedBeforeEnd = true;
             Notify("WARNUNG: DIE AUSSENDUNGSEINHEIT BEREITET DEN ENERGIEENTZUG VOR");
+        }
+        if (!Awakening && remaining < PreludeSeconds && remaining > 0f)
+        {
+            // the coil rings speed up, the muzzle starts to glow (NH props with this condition), the focus cannons hum
+            Awakening = true;
+            DialogueConditionManager.SharedInstance.SetConditionState(Prelude, true);
+            Notify("DIE AUSSENDUNGSEINHEIT LÄDT SICH AUF. ZWEI MINUTEN BIS ZUM TOD DER SONNE.", 8f);
         }
     }
 
@@ -155,43 +172,4 @@ public static class SunPatches
     [HarmonyPrefix]
     [HarmonyPatch(typeof(DistantSunController), nameof(DistantSunController.OnTriggerSupernova))]
     public static bool DistantSupernova() => !Armed;
-}
-
-/// <summary>
-/// The ISAE is a copy of the Orbital Probe Cannon's sector. If that copy contains the launch controller, it must
-/// not touch the real Nomai probe: every controller that is not part of the vanilla cannon stays switched off.
-/// </summary>
-[HarmonyPatch(typeof(OrbitalProbeLaunchController))]
-public static class ProbeCannonCopyPatches
-{
-    private static bool IsCopy(Component c)
-    {
-        var astro = c.GetComponentInParent<AstroObject>();
-        return astro != null && astro.GetAstroObjectName() != AstroObject.Name.ProbeCannon;
-    }
-
-    [HarmonyPrefix]
-    [HarmonyPatch(nameof(OrbitalProbeLaunchController.Awake))]
-    public static bool Awake(OrbitalProbeLaunchController __instance)
-    {
-        if (!IsCopy(__instance)) return true;
-        __instance.enabled = false;
-        return false;
-    }
-
-    [HarmonyPrefix]
-    [HarmonyPatch(nameof(OrbitalProbeLaunchController.OnDestroy))]
-    public static bool OnDestroy(OrbitalProbeLaunchController __instance) => !IsCopy(__instance);
-
-    [HarmonyPrefix]
-    [HarmonyPatch(nameof(OrbitalProbeLaunchController.OnStartOfTimeLoop))]
-    public static bool OnStartOfTimeLoop(OrbitalProbeLaunchController __instance) => !IsCopy(__instance);
-
-    [HarmonyPrefix]
-    [HarmonyPatch(nameof(OrbitalProbeLaunchController.FixedUpdate))]
-    public static bool FixedUpdate(OrbitalProbeLaunchController __instance) => !IsCopy(__instance);
-
-    [HarmonyPrefix]
-    [HarmonyPatch(nameof(OrbitalProbeLaunchController.LaunchProbe))]
-    public static bool LaunchProbe(OrbitalProbeLaunchController __instance) => !IsCopy(__instance);
 }

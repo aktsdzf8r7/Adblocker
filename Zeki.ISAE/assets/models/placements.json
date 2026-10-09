@@ -1,0 +1,222 @@
+{
+  "materials": {
+    "VesselHuelle": "",
+    "VesselKupfer": "",
+    "VesselDunkel": "",
+    "VesselLeuchten": ""
+  },
+  "props": [
+    {
+      "model": "hauptkanone",
+      "name": "ISAE_Hauptkanone",
+      "collider": true,
+      "body": "Interstellare Sonden Aussendungseinheit",
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "scale": 1
+    },
+    {
+      "model": "laufringe",
+      "name": "ISAE_Laufringe",
+      "spin": 10,
+      "body": "Interstellare Sonden Aussendungseinheit",
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "scale": 1
+    },
+    {
+      "model": "sternkarte",
+      "name": "ISAE_Sternkarte",
+      "spin": 7,
+      "position": {
+        "x": -25.0,
+        "y": -0.2,
+        "z": 43.301
+      },
+      "body": "Interstellare Sonden Aussendungseinheit",
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "scale": 1
+    },
+    {
+      "model": "modul_kontrolle",
+      "name": "ISAE_Kontrollmodul",
+      "collider": true,
+      "body": "Interstellare Sonden Aussendungseinheit",
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "scale": 1
+    },
+    {
+      "model": "modul_start",
+      "name": "ISAE_Startmodul",
+      "collider": true,
+      "body": "Interstellare Sonden Aussendungseinheit",
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "scale": 1
+    },
+    {
+      "model": "modul_navigation",
+      "name": "ISAE_Navigationsmodul",
+      "collider": true,
+      "body": "Interstellare Sonden Aussendungseinheit",
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "scale": 1
+    }
+  ],
+  "lights": [
+    {
+      "name": "Licht_Kontrollmodul",
+      "body": "Interstellare Sonden Aussendungseinheit",
+      "position": {
+        "x": -25.0,
+        "y": 4.5,
+        "z": -43.301
+      },
+      "color": {
+        "x": 0.75,
+        "y": 0.9,
+        "z": 1.0
+      },
+      "range": 15,
+      "intensity": 1.5
+    },
+    {
+      "name": "Licht_Kontrollmodul_Tuer",
+      "body": "Interstellare Sonden Aussendungseinheit",
+      "position": {
+        "x": -27.25,
+        "y": -1.4,
+        "z": -47.198
+      },
+      "color": {
+        "x": 1.0,
+        "y": 0.8,
+        "z": 0.6
+      },
+      "range": 8,
+      "intensity": 0.8
+    },
+    {
+      "name": "Licht_Startmodul",
+      "body": "Interstellare Sonden Aussendungseinheit",
+      "position": {
+        "x": 50.0,
+        "y": 4.5,
+        "z": -0.0
+      },
+      "color": {
+        "x": 0.75,
+        "y": 0.9,
+        "z": 1.0
+      },
+      "range": 15,
+      "intensity": 1.5
+    },
+    {
+      "name": "Licht_Startmodul_Tuer",
+      "body": "Interstellare Sonden Aussendungseinheit",
+      "position": {
+        "x": 54.5,
+        "y": -1.4,
+        "z": -0.0
+      },
+      "color": {
+        "x": 1.0,
+        "y": 0.8,
+        "z": 0.6
+      },
+      "range": 8,
+      "intensity": 0.8
+    },
+    {
+      "name": "Licht_Navigationsmodul",
+      "body": "Interstellare Sonden Aussendungseinheit",
+      "position": {
+        "x": -25.0,
+        "y": 4.5,
+        "z": 43.301
+      },
+      "color": {
+        "x": 0.75,
+        "y": 0.9,
+        "z": 1.0
+      },
+      "range": 15,
+      "intensity": 1.5
+    },
+    {
+      "name": "Licht_Navigationsmodul_Tuer",
+      "body": "Interstellare Sonden Aussendungseinheit",
+      "position": {
+        "x": -27.25,
+        "y": -1.4,
+        "z": 47.198
+      },
+      "color": {
+        "x": 1.0,
+        "y": 0.8,
+        "z": 0.6
+      },
+      "range": 8,
+      "intensity": 0.8
+    }
+  ],
+  "points": {
+    "muendung": {
+      "x": 0,
+      "y": 161.0,
+      "z": 0
+    },
+    "kern": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    }
+  }
+}

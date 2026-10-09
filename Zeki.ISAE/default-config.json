@@ -22,11 +22,16 @@
       "title": "Filmische Kamera im Finale",
       "tooltip": "Im Finale dreht sich die Kamera zur Sonne und folgt dem Schuss. Aus: Du behältst die Steuerung."
     },
-    "autoAim": {
-      "type": "toggle",
-      "value": true,
-      "title": "Hauptkanone automatisch ausrichten",
-      "tooltip": "Misst den Lauf der echten Sondenkanone und richtet die Kopie parallel zu den Fokuskanonen aus."
+    "materialSource": {
+      "type": "selector",
+      "value": "Vessel",
+      "options": [
+        "Vessel",
+        "Sondenkanone",
+        "Einfach"
+      ],
+      "title": "Materialien der Hauptkanone",
+      "tooltip": "Vessel: die Materialien des Vessels. Sondenkanone: die der echten Sondenkanone. Einfach: schlichte Farben."
     }
   }
 }

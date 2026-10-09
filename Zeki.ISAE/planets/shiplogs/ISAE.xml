@@ -18,11 +18,15 @@
     </RumorFact>
     <ExploreFact>
       <ID>ZEKISAE_FOUND</ID>
-      <Text>Eine zweite Orbitale Sondenkanone kreist um die Sonne. Drei kleine Schwerkraftkanonen umkreisen sie im Dreieck, und alle vier zielen in dieselbe Richtung.</Text>
+      <Text>Eine zweite Orbitale Sondenkanone kreist um die Sonne – heil und fertig gebaut, im Stil des Vessels. Drei Schwerkraftkanonen umkreisen sie im Dreieck, und alle vier zielen in dieselbe Richtung.</Text>
     </ExploreFact>
     <ExploreFact>
       <ID>ZEKISAE_ZWECK</ID>
-      <Text>Die Aussendungseinheit wartet auf den Zusammenbruch der Sonne. Sobald der Stern stirbt, entzieht sie ihm alle verbleibende Energie für einen einzigen Schuss zu einem fremden Stern.</Text>
+      <Text>Die Aussendungseinheit wartet auf den Tod der Sonne. Sobald der Stern zusammenbricht, entzieht sie ihm alle verbleibende Energie für einen einzigen Schuss zu einem fremden Stern.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKISAE_ERWACHT</ID>
+      <Text>Die Einheit hat 281 042 Jahre geschlafen. Sie ist erwacht, als das Aschezwilling-Projekt zum ersten Mal Erinnerungen in die Vergangenheit geschickt hat – also, als meine Zeitschleife begann.</Text>
     </ExploreFact>
     <ExploreFact>
       <ID>ZEKISAE_GEFAHR</ID>
@@ -37,10 +41,87 @@
       <Text>Ich habe die Aussendungseinheit abgeschaltet. Ihr Energiekern ist erloschen. Die Sonne darf wieder so sterben, wie sie es immer tut.</Text>
     </ExploreFact>
     <Entry>
+      <ID>ZEKISAE_KONTROLLE</ID>
+      <Name>Das Kontrollmodul</Name>
+      <ExploreFact>
+        <ID>ZEKISAE_KONTROLLE_FOUND</ID>
+        <Text>Im Kontrollmodul liegen die Überreste eines Nomai vor einer beschriebenen Wand. In der Mitte des Raums steht ein leeres Podest.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKISAE_SEDUM_ENDE</ID>
+        <Text>Sedum blieb bei seiner Einheit, als die Geisterwolke kam. Er ließ sie schlafen, damit sie beim Tod der Sonne eine Warnung zu den anderen Nomai-Clans trägt.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKISAE_LINUM_SCHALTER</ID>
+        <Text>Sedum hat Linums heimliche Abschaltung gefunden – und sie absichtlich eingebaut gelassen. Er wollte, dass jemand nach ihm entscheiden kann.</Text>
+      </ExploreFact>
+    </Entry>
+    <Entry>
+      <ID>ZEKISAE_START</ID>
+      <Name>Das Startmodul</Name>
+      <RumorFact>
+        <ID>ZEKISAE_START_RUMOR</ID>
+        <SourceID>ZEKISAE_KONTROLLE</SourceID>
+        <RumorName>Eine Sonde wartet</RumorName>
+        <Text>Laut dem Computer im Kontrollmodul wartet im Startmodul eine Sonde auf den Schuss.</Text>
+      </RumorFact>
+      <ExploreFact>
+        <ID>ZEKISAE_START_FOUND</ID>
+        <Text>Im Startmodul ruht eine Nomai-Sonde in einer Startwiege.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKISAE_START_BAU</ID>
+        <Text>Sedum und eine Pilotin namens Erica haben die Einheit heimlich gebaut. Die Teile kamen vom Konstruktionshof auf Giant's Deep, die Hülle folgt den Plänen des Vessels.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKISAE_START_KERN</ID>
+        <Text>Für die Energie eines ganzen Sterns braucht die Einheit einen fortgeschrittenen Warpkern wie im Vessel. Sedum hat seinen Entwurf aus den Rettungskapseln abgeschrieben.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKISAE_START_SONDE</ID>
+        <Text>Die Sonde ist eine umgebaute Ersatzsonde der Orbitalen Sondenkanone. Sie soll durch den Lauf der Hauptkanone zum Heimatstern der Nomai fliegen.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKISAE_BOTSCHAFT</ID>
+        <Text>Die Sonde trägt eine Warnung an die anderen Clans: Folgt dem Signal des Auges nicht durch die Dornen. Unser Vessel ist dort zerschellt.</Text>
+      </ExploreFact>
+    </Entry>
+    <Entry>
+      <ID>ZEKISAE_NAVI</ID>
+      <Name>Das Navigationsmodul</Name>
+      <RumorFact>
+        <ID>ZEKISAE_NAVI_RUMOR</ID>
+        <SourceID>ZEKISAE_KONTROLLE</SourceID>
+        <RumorName>Ein berechnetes Ziel</RumorName>
+        <Text>Der Computer im Kontrollmodul meldet, das Ziel der Einheit sei im Navigationsmodul berechnet.</Text>
+      </RumorFact>
+      <ExploreFact>
+        <ID>ZEKISAE_NAVI_FOUND</ID>
+        <Text>Über einem Sockel im Navigationsmodul dreht sich eine leuchtende Sternkarte.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKISAE_NAVI_ZIEL</ID>
+        <Text>Das Ziel ist der Heimatstern der Nomai. Er liegt hinter dem Nebel, aus dem das Signal des Auges kam.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKISAE_NAVI_ENERGIE</ID>
+        <Text>So weit kommt eine Sonde nur mit der gesamten Energie eines sterbenden Sterns in einem einzigen Augenblick. Darum wartet die Einheit auf den Tod der Sonne.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKISAE_NAVI_ZWEIFEL</ID>
+        <Text>Linum zweifelte, ob am Ziel überhaupt noch jemand lebt. Sedum wollte wenigstens verhindern, dass sich ein zweites Vessel in den Dornen verirrt.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKISAE_PYE_VERBOT</ID>
+        <Text>Pye hat die Einheit verboten: Das Aschezwilling-Projekt braucht den Tod der Sonne, und niemand hat das Recht, ihn für eine Botschaft zu opfern.</Text>
+      </ExploreFact>
+    </Entry>
+    <Entry>
       <ID>ZEKISAE_FOKUS</ID>
       <Name>Die Fokuskanonen</Name>
       <RumorFact>
         <ID>ZEKISAE_FOKUS_RUMOR</ID>
+        <SourceID>ZEKISAE_KONTROLLE</SourceID>
         <RumorName>Drei Fokuskanonen</RumorName>
         <Text>Drei kleinere Kanonen namens Alpha, Beta und Gamma umkreisen die Aussendungseinheit. Ihre Phasenkoppler sind noch verbunden.</Text>
       </RumorFact>
@@ -51,6 +132,10 @@
       <ExploreFact>
         <ID>ZEKISAE_FOKUS_ZWECK</ID>
         <Text>Die Fokuskanonen bündeln den Energiestrom des Sterns und lenken ihn in die Hauptkanone. Solange ein Kristall leuchtet, kann der Strom fließen.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKISAE_FOKUS_BAU</ID>
+        <Text>Erica hat die Fokuskanonen nach der Schwerkraftkanone von Ember Twin gebaut. Statt Fähren werfen sie Licht.</Text>
       </ExploreFact>
       <ExploreFact>
         <ID>ZEKISAE_FOKUS_DREIECK</ID>
@@ -71,7 +156,7 @@
     </Entry>
     <Entry>
       <ID>ZEKISAE_SEDUM</ID>
-      <Name>Sedum und Linum</Name>
+      <Name>Sedum, Linum, Pye und Erica</Name>
       <ExploreFact>
         <ID>ZEKISAE_SEDUM_PLAN</ID>
         <Text>Sedum baute die Aussendungseinheit, weil das Auge vielleicht nicht in diesem System liegt. Eine Sonde zu den Sternen schien ihm wichtiger als alles andere.</Text>

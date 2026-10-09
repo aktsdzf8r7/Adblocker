@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Pyes Aufzeichnung (Vessel-Recorder) im Navigationsmodul -->
+<NomaiObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/text_schema.xsd">
+  <TextBlock>
+    <ID>1</ID>
+    <Text>Hier spricht Pye. Sedum, ich habe deine Pläne gesehen. Die Antwort ist nein.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>2</ID>
+    <ParentID>1</ParentID>
+    <Text>Wir haben die Sonnenstation gebaut, um die Sonne zu zwingen. Sie hat versagt, und ich bin heute froh darüber.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>3</ID>
+    <ParentID>2</ParentID>
+    <Text>Das Aschezwilling-Projekt braucht den Tod der Sonne, wenn er kommt. Du würdest ihn stehlen.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>4</ID>
+    <ParentID>3</ParentID>
+    <Text>Unsere Clans werden uns finden oder nicht. Wir haben kein Recht, dafür alles andere zu opfern.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>5</ID>
+    <ParentID>4</ParentID>
+    <Text>Schalte die Einheit ab. Das ist keine Bitte.</Text>
+  </TextBlock>
+  <ShipLogConditions>
+    <RevealFact>
+      <FactID>ZEKISAE_PYE_VERBOT</FactID>
+      <Condition>1,2,3,4,5</Condition>
+    </RevealFact>
+  </ShipLogConditions>
+</NomaiObject>

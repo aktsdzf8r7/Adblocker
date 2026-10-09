@@ -12,7 +12,8 @@ namespace ZekiISAE;
 ///   D-10 .. D    Collapse: the camera turns to the sun, the vanilla collapse particles and sound play.
 ///   D            The sun goes out with a flash.
 ///   D+1.5        The main cannon fires the interstellar probe along its barrel; the camera follows it.
-///   D+7 .. D+14  Darkness. The eyes close, then the New Horizons game over shows
+///   D+7 .. D+14  Darkness. The eyes close.
+///   D+14 .. D+26 Epilogue on black: where the probe goes. Then the New Horizons game over shows
 ///                "Das Universum endet, aber du endest vor ihm..." (addon-manifest.json).
 ///
 /// D is the "drainSeconds" setting. With "cinematic" off the camera stays free, everything else still happens.
@@ -44,6 +45,8 @@ public class Finale : MonoBehaviour
     private int _nextLine;
 
     private (float at, string text, float duration)[] _lines;
+    private (float at, string text, float duration)[] _epilogue;
+    private int _nextCard;
 
     public void Start()
     {
@@ -69,14 +72,21 @@ public class Finale : MonoBehaviour
 
         _lines = new[]
         {
-            (0.5f, "Die Aussendungseinheit erwacht.", 5f),
-            (_d * 0.2f, "Sie trinkt das Licht der Sonne.", 5f),
-            (_d * 0.42f, "Alpha. Beta. Gamma. Das Dreieck schließt sich.", 5f),
-            (_d * 0.64f, "Keine Supernova. Keine Erinnerung, die zurückkehrt.", 5.5f),
+            (0.5f, "Die Aussendungseinheit erwacht.", 4.5f),
+            (_d * 0.13f, "281 042 Jahre hat sie auf diesen Augenblick gewartet.", 5f),
+            (_d * 0.28f, "Sie trinkt das Licht der Sonne.", 4.5f),
+            (_d * 0.43f, "Alpha. Beta. Gamma. Das Dreieck schließt sich.", 5f),
+            (_d * 0.58f, "Keine Supernova. Kein Projekt. Keine Erinnerung, die zurückkehrt.", 5.5f),
+            (_d * 0.74f, "Sedum wollte die Clans warnen. Linum wollte uns alle retten.", 5.5f),
             (_d - CollapseLength + 1f, "Die Sonne verlischt.", 4.5f),
-            (_d + 2f, "Ein einziger Schuss. Zu einem Stern, den niemand kennt.", 4.5f),
+            (_d + 2f, "Ein einziger Schuss. Eine Botschaft an Clans, die längst vergangen sind.", 4.5f),
             (_d + 7f, "Niemand wird sie je empfangen.", 3.8f),
-            (_d + 11f, "Das Universum wird still.", 3.5f),
+        };
+        _epilogue = new[]
+        {
+            (_d + 14.5f, "Die Sonde fliegt.", 3.2f),
+            (_d + 18f, "Zehntausend Jahre. Hunderttausend.", 3.2f),
+            (_d + 21.5f, "Sie erreicht einen Stern, an dem niemand mehr wartet.", 4f),
         };
 
         _lineMaterial = new Material(Shader.Find("Sprites/Default") ?? Shader.Find("Standard"));
@@ -129,10 +139,17 @@ public class Finale : MonoBehaviour
         if (!_eyesClosed && t >= _d + 11f)
         {
             _eyesClosed = true;
+            _cinema.Bars(false);
+            _cinema.Black(1f, 3f);
             var effects = FindObjectOfType<PlayerCameraEffectController>();
             if (effects != null) effects.CloseEyes(3f);
         }
-        if (t >= _d + 14.5f) EndOfEverything();
+        while (_nextCard < _epilogue.Length && t >= _epilogue[_nextCard].at)
+        {
+            _cinema.Card(_epilogue[_nextCard].text, _epilogue[_nextCard].duration);
+            _nextCard++;
+        }
+        if (t >= _d + 26f) EndOfEverything();
     }
 
     // ------------------------------------------------------------------------------------------ the sun
@@ -221,7 +238,7 @@ public class Finale : MonoBehaviour
     {
         var nh = ZekiISAE.Instance.NewHorizons;
         var isae = nh.GetPlanet(ZekiISAE.IsaeName);
-        if (isae != null) AddStream(isae.transform, 0f, 70f);
+        if (isae != null) AddStream(isae.transform, 0f, 70f); // into the glowing core of the hub
         foreach (var name in GameProps.FocusNames)
         {
             var body = nh.GetPlanet(name);
@@ -287,15 +304,9 @@ public class Finale : MonoBehaviour
         PlayOneShot(AudioType.NomaiGravityCannonActivate);
         PlayOneShot(AudioType.NomaiVesselPowerUp);
 
-        var muzzle = CannonAim.MuzzleWorld();
-        var axis = CannonAim.AxisWorld();
-        if (!CannonAim.Ready)
-        {
-            var isae = ZekiISAE.Instance.NewHorizons.GetPlanet(ZekiISAE.IsaeName);
-            if (isae == null) return;
-            muzzle = isae.transform.position + isae.transform.up * 120f;
-            axis = isae.transform.up;
-        }
+        if (GameProps.Isae == null) return;
+        var muzzle = GameProps.MuzzleWorld();
+        var axis = GameProps.AxisWorld();
 
         var beamGo = new GameObject("ISAE_Schuss");
         _shotBeam = beamGo.AddComponent<LineRenderer>();
@@ -308,7 +319,7 @@ public class Finale : MonoBehaviour
         _shotBeam.colorGradient = Gradient(new Color(2.5f, 2.5f, 3f, 1f), new Color(1.4f, 2f, 3f, 0.9f), new Color(1f, 1.6f, 3f, 0f));
         _shotBeam.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
 
-        // the copy of the real Nomai probe (GameProps); it leaves the ISAE and flies on its own
+        // the copy of the real Nomai probe that waited in the launch module's cradle; it leaves through the barrel
         _probe = GameProps.Probe != null ? GameProps.Probe : new GameObject("Interstellare_Sonde");
         _probe.transform.SetParent(null, true);
         _probe.SetActive(true);
@@ -394,7 +405,11 @@ public class Cinema : MonoBehaviour
     private RectTransform _top, _bottom;
     private Text _text;
     private CanvasGroup _textGroup;
-    private Image _flash;
+    private Image _flash, _black;
+    private Text _card;
+    private CanvasGroup _cardGroup;
+    private float _cardStart = -100f, _cardDuration;
+    private float _blackTarget, _blackSpeed = 1f;
     private float _barsTarget, _bars;
     private float _textStart = -100f, _textDuration;
     private float _flashAlpha;
@@ -411,6 +426,7 @@ public class Cinema : MonoBehaviour
         scaler.matchWidthOrHeight = 0.5f;
         var c = go.AddComponent<Cinema>();
 
+        c._black = Panel(go.transform, "Schwarz", new Vector2(0, 0), new Vector2(1, 1), new Color(0f, 0f, 0f, 0f));
         c._flash = Panel(go.transform, "Blitz", new Vector2(0, 0), new Vector2(1, 1), new Color(1f, 0.97f, 0.92f, 0f));
         c._top = Panel(go.transform, "Balken_oben", new Vector2(0, 1), new Vector2(1, 1), Color.black).rectTransform;
         c._top.pivot = new Vector2(0.5f, 1f);
@@ -436,6 +452,21 @@ public class Cinema : MonoBehaviour
         var shadow = textGo.AddComponent<Shadow>();
         shadow.effectColor = new Color(0, 0, 0, 0.9f);
         shadow.effectDistance = new Vector2(2, -2);
+
+        var cardGo = new GameObject("Epilog", typeof(RectTransform));
+        cardGo.transform.SetParent(go.transform, false);
+        var crt = (RectTransform)cardGo.transform;
+        crt.anchorMin = new Vector2(0.15f, 0.35f);
+        crt.anchorMax = new Vector2(0.85f, 0.65f);
+        crt.offsetMin = crt.offsetMax = Vector2.zero;
+        c._cardGroup = cardGo.AddComponent<CanvasGroup>();
+        c._cardGroup.alpha = 0f;
+        c._card = cardGo.AddComponent<Text>();
+        c._card.font = c._text.font;
+        c._card.fontSize = 60;
+        c._card.alignment = TextAnchor.MiddleCenter;
+        c._card.color = new Color(1f, 0.78f, 0.6f);
+        c._card.horizontalOverflow = HorizontalWrapMode.Wrap;
         return c;
     }
 
@@ -472,6 +503,21 @@ public class Cinema : MonoBehaviour
 
     public void Flash(float strength) => _flashAlpha = Mathf.Max(_flashAlpha, strength);
 
+    /// <summary>Fade a black screen in (or out) over the given seconds.</summary>
+    public void Black(float alpha, float seconds)
+    {
+        _blackTarget = alpha;
+        _blackSpeed = 1f / Mathf.Max(0.01f, seconds);
+    }
+
+    /// <summary>A big centred line for the epilogue.</summary>
+    public void Card(string text, float duration)
+    {
+        _card.text = text;
+        _cardStart = Time.time;
+        _cardDuration = duration;
+    }
+
     public void Update()
     {
         _bars = Mathf.MoveTowards(_bars, _barsTarget, Time.deltaTime * 90f);
@@ -480,6 +526,10 @@ public class Cinema : MonoBehaviour
 
         var t = Time.time - _textStart;
         _textGroup.alpha = t < 0f || t > _textDuration ? 0f : Mathf.Min(Mathf.Clamp01(t / 0.9f), Mathf.Clamp01((_textDuration - t) / 0.9f));
+
+        var k = Time.time - _cardStart;
+        _cardGroup.alpha = k < 0f || k > _cardDuration ? 0f : Mathf.Min(Mathf.Clamp01(k / 1.1f), Mathf.Clamp01((_cardDuration - k) / 1.1f));
+        _black.color = new Color(0f, 0f, 0f, Mathf.MoveTowards(_black.color.a, _blackTarget, Time.deltaTime * _blackSpeed));
 
         _flashAlpha = Mathf.MoveTowards(_flashAlpha, 0f, Time.deltaTime * 0.8f);
         _flash.color = new Color(1f, 0.97f, 0.92f, _flashAlpha);
