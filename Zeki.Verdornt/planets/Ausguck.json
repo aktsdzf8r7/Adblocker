@@ -1,0 +1,46 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+  "name": "Ausguck",
+  "starSystem": "Verdornt",
+  "Base": {
+    "surfaceSize": 25,
+    "surfaceGravity": 0,
+    "showMinimap": false
+  },
+  "Orbit": {
+    "staticPosition": {
+      "x": 0.0,
+      "y": 9000.0,
+      "z": 2500.0
+    },
+    "showOrbitLine": false
+  },
+  "MapMarker": {
+    "enabled": true
+  },
+  "Volumes": {
+    "forces": {
+      "directionalVolumes": [
+        {
+          "position": {
+            "x": 0.0,
+            "y": -8.0,
+            "z": 0.0
+          },
+          "force": 9,
+          "normal": {
+            "x": 0.0,
+            "y": -1.0,
+            "z": 0.0
+          },
+          "shape": {
+            "type": "cylinder",
+            "radius": 20,
+            "height": 34
+          },
+          "rename": "Ausguck_Schwerkraft"
+        }
+      ]
+    }
+  }
+}

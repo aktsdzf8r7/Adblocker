@@ -1,0 +1,27 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+  "name": "Glutdorn",
+  "starSystem": "Verdornt",
+  "Base": {
+    "surfaceSize": 220,
+    "surfaceGravity": 9,
+    "showMinimap": false
+  },
+  "Orbit": {
+    "primaryBody": "Herzdorn",
+    "semiMajorAxis": 6500,
+    "inclination": 9,
+    "trueAnomaly": 150,
+    "eccentricity": 0,
+    "siderealPeriod": 0,
+    "tint": {
+      "r": 120,
+      "g": 230,
+      "b": 140,
+      "a": 255
+    }
+  },
+  "MapMarker": {
+    "enabled": true
+  }
+}

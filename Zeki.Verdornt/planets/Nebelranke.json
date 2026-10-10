@@ -1,0 +1,47 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+  "name": "Nebelranke",
+  "starSystem": "Verdornt",
+  "Base": {
+    "surfaceSize": 640,
+    "surfaceGravity": 12,
+    "groundSize": 120,
+    "showMinimap": false
+  },
+  "Orbit": {
+    "primaryBody": "Herzdorn",
+    "semiMajorAxis": 9800,
+    "inclination": 3,
+    "trueAnomaly": 260,
+    "eccentricity": 0,
+    "siderealPeriod": 0,
+    "tint": {
+      "r": 120,
+      "g": 230,
+      "b": 140,
+      "a": 255
+    }
+  },
+  "MapMarker": {
+    "enabled": true
+  },
+  "Atmosphere": {
+    "size": 820,
+    "fogTint": {
+      "r": 70,
+      "g": 160,
+      "b": 90,
+      "a": 255
+    },
+    "fogDensity": 0.55,
+    "fogSize": 820,
+    "useAtmosphereShader": true,
+    "atmosphereTint": {
+      "r": 90,
+      "g": 200,
+      "b": 120,
+      "a": 255
+    },
+    "atmosphereSunIntensity": 0.6
+  }
+}

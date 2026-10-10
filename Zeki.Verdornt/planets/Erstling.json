@@ -1,0 +1,91 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+  "name": "Erstling",
+  "starSystem": "Verdornt",
+  "Base": {
+    "surfaceSize": 260,
+    "surfaceGravity": 10,
+    "showMinimap": false
+  },
+  "Orbit": {
+    "primaryBody": "Herzdorn",
+    "semiMajorAxis": 4200,
+    "inclination": 4,
+    "trueAnomaly": 30,
+    "eccentricity": 0,
+    "siderealPeriod": 0,
+    "tint": {
+      "r": 120,
+      "g": 230,
+      "b": 140,
+      "a": 255
+    }
+  },
+  "MapMarker": {
+    "enabled": true
+  },
+  "Spawn": {
+    "playerSpawnPoints": [
+      {
+        "position": {
+          "x": -144.979,
+          "y": 114.854,
+          "z": -185.564
+        },
+        "alignRadial": true,
+        "isDefault": true,
+        "startWithSuit": true
+      }
+    ]
+  },
+  "Props": {
+    "details": [
+      {
+        "path": "",
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "VD_Materialvorlagen",
+        "keepLoaded": true
+      },
+      {
+        "path": "QuantumMoon_Body/Sector_QuantumMoon/State_DB/Interactables_DBState/DBState_QuantumObjects/DB_Q_Vine1/DB_Bramble_Vine1/State_1/Terrain_TH_Bramble_Vine1",
+        "parentPath": "Sector/VD_Materialvorlagen",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "Ranke_1",
+        "keepLoaded": true
+      },
+      {
+        "path": "CaveTwin_Body/Sector_CaveTwin/Sector_SouthHemisphere/Sector_SouthUnderground/Sector_City/Interactables_City/CityDoors/Prefab_NOM_Gateway",
+        "parentPath": "Sector/VD_Materialvorlagen",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "Nomai_Tor",
+        "keepLoaded": true
+      },
+      {
+        "path": "QuantumMoon_Body/Sector_QuantumMoon/QuantumShrine/Structure_NOM_QuantumShrine",
+        "parentPath": "Sector/VD_Materialvorlagen",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "Nomai_Schrein",
+        "keepLoaded": true
+      }
+    ]
+  }
+}

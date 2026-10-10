@@ -1,0 +1,159 @@
+{
+  "props": [
+    {
+      "model": "herzdorn_kaefig",
+      "body": "Herzdorn",
+      "collider": true,
+      "spin": 0.4,
+      "name": "Herzdorn_kaefig",
+      "position": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "scale": 1
+    },
+    {
+      "model": "erstling",
+      "body": "Erstling",
+      "collider": true,
+      "name": "Erstling",
+      "position": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "scale": 1
+    },
+    {
+      "model": "lager",
+      "body": "Erstling",
+      "collider": true,
+      "name": "Lager",
+      "position": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "scale": 1
+    },
+    {
+      "model": "glutdorn",
+      "body": "Glutdorn",
+      "collider": true,
+      "name": "Glutdorn",
+      "position": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "scale": 1
+    },
+    {
+      "model": "nebelranke_ranken",
+      "body": "Nebelranke",
+      "collider": true,
+      "spin": 0.6,
+      "name": "Nebelranke_ranken",
+      "position": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "scale": 1
+    },
+    {
+      "model": "hohlsamen",
+      "body": "Hohlsamen",
+      "collider": true,
+      "name": "Hohlsamen",
+      "position": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "scale": 1
+    },
+    {
+      "model": "ausguck",
+      "body": "Ausguck",
+      "collider": true,
+      "name": "Ausguck",
+      "position": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "scale": 1
+    }
+  ],
+  "lights": [
+    {
+      "name": "Licht_Lager",
+      "body": "Erstling",
+      "position": {
+        "x": -79.473,
+        "y": 145.198,
+        "z": -218.352
+      },
+      "color": {
+        "x": 0.75,
+        "y": 0.9,
+        "z": 1.0
+      },
+      "range": 60,
+      "intensity": 1.4
+    },
+    {
+      "name": "Licht_Ausguck",
+      "body": "Ausguck",
+      "position": {
+        "x": 0.0,
+        "y": 8.0,
+        "z": 0.0
+      },
+      "color": {
+        "x": 0.75,
+        "y": 0.9,
+        "z": 1.0
+      },
+      "range": 45,
+      "intensity": 1.2
+    }
+  ]
+}

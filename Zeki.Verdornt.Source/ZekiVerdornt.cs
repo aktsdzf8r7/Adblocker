@@ -32,6 +32,10 @@ public class ZekiVerdornt : ModBehaviour
         NewHorizons.LoadConfigs(this);
         NewHorizons.GetStarSystemLoadedEvent().AddListener(OnSystemLoaded);
         new Harmony("Zeki.Verdornt").PatchAll(Assembly.GetExecutingAssembly());
+        SystemLoaded += system =>
+        {
+            if (system == SystemName || system == "SolarSystem") ModelPlacer.PlaceAll(this);
+        };
         Log("Verdornt ist geladen.");
     }
 
