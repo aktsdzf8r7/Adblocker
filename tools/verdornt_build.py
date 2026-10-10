@@ -23,7 +23,7 @@ from schleier_build import NH, color, vec, write_json  # noqa: E402
 MOD = os.path.abspath(sys.argv[1] if len(sys.argv) > 1 else os.path.join(os.path.dirname(__file__), "..", "Zeki.Verdornt"))
 sb.MOD = MOD
 
-VERSION = "0.1.0"
+VERSION = "0.1.1"
 SYSTEM = "Verdornt"
 
 
@@ -237,25 +237,35 @@ SAMENSCHLUND_AT = (24000, 41000, -33000)
 ANKUNFTSKAMMER_AT = (-31000, 26000, 42000)
 
 
+# where NH builds the crash site before the DLL moves it beside the vanilla crater (Timber Hearth coordinates)
+SITE_PROVISIONAL = [0, 400, 0]
+
+
 def timber_hearth():
     """The crash site on Timber Hearth (system SolarSystem). One container; the DLL moves it beside the vanilla
-    impact crater onto the ground (Crossing.cs), so everything inside is relative to it, +y up."""
+    impact crater onto the flattest ground it finds and fits everything inside onto the measured terrain
+    (CrashSite.cs). Positions are relative to the container: +y up, +z towards the old seed, heights above ground.
+    The crater reaches about 47 m out (68 m with its streaks); the barrier stands in front of it at 52 m."""
     site = TH_SITE
     cfg = sb.body_header("TIMBER_HEARTH", "SolarSystem")
     cfg["Props"] = {"details": [
-        {"path": "", "position": vec([0, 400, 0]), "rename": "VD_Absturzstelle", "keepLoaded": True},
+        {"path": "", "position": vec(SITE_PROVISIONAL), "rename": "VD_Absturzstelle", "keepLoaded": True},
         {"path": P["smoke_crash"], "parentPath": site, "isRelativeToParent": True, "position": vec([4, 8, 3]), "rename": "VD_Rauch"},
     ] + bramble_templates("Sector_TH")}
-    cfg["Props"]["translatorText"] = [nomai("computer", "Absturz_Rinde", [6, 0.5, 30], rotation=[0, 200, 0], parent=site)]
-    cfg["Props"]["dialogue"] = [{"parentPath": site, "isRelativeToParent": True, "position": vec([0, 1.6, 41]), "radius": 2.5,
+    cfg["Props"]["translatorText"] = [nomai("computer", "Absturz_Rinde", [-8, 0.5, 49], rotation=[0, 200, 0], parent=site)]
+    cfg["Props"]["dialogue"] = [{"parentPath": site, "isRelativeToParent": True, "position": vec([0, 1.6, 51.4]), "radius": 2.5,
                                  "xmlFile": "planets/dialogue/Absperrung.xml", "rename": "VD_Absperrung_Notiz"}]
-    cfg["Volumes"] = {"revealVolumes": [{"parentPath": site, "isRelativeToParent": True, "position": vec([0, 10, 0]), "radius": 40,
+    cfg["Volumes"] = {"revealVolumes": [{"parentPath": site, "isRelativeToParent": True, "position": vec([0, 10, 0]), "radius": 60,
                                          "reveals": ["ZEKIVD_ABSTURZ_FOUND"]}]}
+    # an unknown signal: whoever looks for the seed with the signalscope finds it
+    cfg["Props"]["signals"] = [{"frequency": "Dornenrufe", "name": "Absturzsamen", "audio": "DB_Ambience_LP", "parentPath": site,
+                                "isRelativeToParent": True, "position": vec([0, 12, 0]), "sourceRadius": 20, "identificationRadius": 40}]
     cfg["Bramble"] = {"nodes": [
         # the seed itself: large enough to walk into, half sunk into the crater
         # NH builds nodes before details, so the node cannot hang below the site container: the DLL moves it there
-        # (Crossing.PlaceCrashSite, 10 m above the crater floor)
-        {"position": vec([0, 0, 0]), "linksTo": "Samenschlund", "name": "ZEKIVD_Absturzsamen",
+        # (CrashSite.cs, its middle 6 m above the crater floor)
+        # Until then (and if the DLL ever fails) it waits with the container at its provisional spot, not in the core.
+        {"position": vec([0, SITE_PROVISIONAL[1] + 6, 0]), "linksTo": "Samenschlund", "name": "ZEKIVD_Absturzsamen",
          "scale": 0.25, "fogTint": color(120, 255, 150), "lightTint": color(150, 255, 170)}]}
     return cfg
 
@@ -424,7 +434,7 @@ def placements(A):
     props += [
         {"model": "krater", "name": "VD_Krater", "body": "TIMBER_HEARTH", "parentPath": TH_SITE, "collider": True},
         {"model": "absperrung", "name": "VD_Absperrung", "body": "TIMBER_HEARTH", "parentPath": TH_SITE, "collider": True,
-         "position": vec([0, 0.4, 41]), "rotation": vec([0, 180, 0])},
+         "position": vec([0, 0, 56]), "rotation": vec([0, 270, 0])},
         {"model": "strudel", "name": "VD_Strudel", "body": "Samenschlund", "spin": 14},
         {"model": "planetenkern_erstling", "name": "VD_Kern_Erstling_Modell", "body": "Erstling", "parentPath": "Sector/VD_Kern_Erstling", "spin": 25},
         {"model": "warpturm", "name": "VD_Warpturm_Erstling", "body": "Erstling", "collider": True, "position": vec(at(A["lager"]["turm"], -0.3)),

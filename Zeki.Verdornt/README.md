@@ -1,6 +1,6 @@
 # Verdornt
 
-*Eine New-Horizons-Mod für Outer Wilds. Version 0.1.0, Etappe 1 von 3: „Ankunft“.*
+*Eine New-Horizons-Mod für Outer Wilds. Version 0.1.1, Etappe 1 von 3: „Ankunft“.*
 
 Zu Beginn der Schleife ist ein riesiger Dornensamen auf Timber Hearth eingeschlagen, gleich neben dem alten Krater. Er raucht noch, und er ist offen. Wer hineinfliegt, landet in **Dornenkranz**: einem fremden System, in dem die Dornen alles überwuchert haben. Vier Planeten, und dort, wo die Sonne sein sollte, ein Käfig aus Dornen um einen gefangenen Stern.
 
@@ -16,7 +16,7 @@ Das DLC ist nicht nötig. Die Mod läuft neben *Die Aussendungseinheit* und dem 
 
 ## Was es in Etappe 1 gibt
 
-- **Der Absturzsamen** auf Timber Hearth, mit Krater, Rauch, einer Absperrung samt Notiz von Hornfels und einer Nomai-Schrift von Tansy.
+- **Der Absturzsamen** auf Timber Hearth: ein Krater von gut 90 m Durchmesser mit aufgeworfenem Rand, verbranntem Boden und grün glühenden Rissen, Rauch, einer Absperrung samt Notiz von Hornfels und einer Nomai-Schrift von Tansy. Das Signalskop findet ihn auf der Frequenz *Dornenrufe*.
 - **Der Samenschlund:** eine Dimension im Samen mit einem Dornenstrudel. Er zieht dich ins fremde System.
 - **Dornenkranz** mit allen Körpern, jeder „wie Dark Bramble, nur anders“:
 
@@ -43,7 +43,7 @@ Das DLC ist nicht nötig. Die Mod läuft neben *Die Aussendungseinheit* und dem 
 
 ## Komplettlösung Etappe 1 (Spoiler)
 
-1. **Der Samen:** Auf Timber Hearth zum frischen Krater neben dem alten Einschlagkrater fliegen. Durch den Samen hinein.
+1. **Der Samen:** Auf Timber Hearth zum frischen Krater neben dem alten Einschlagkrater fliegen. Er liegt etwa 90 bis 150 m neben dem alten Samen, an der flachsten Stelle. Wer ihn nicht sieht: Signalskop auf *Dornenrufe* stellen. Durch den Samen hinein.
 2. **Der Strudel:** In die Mitte des Strudels fliegen. Du wachst neben einem kleinen Samen auf Erstling auf.
 3. **Das Lager:** Es liegt nicht weit vom Ankunftssamen. Lies den Kernrechner in der Mitte.
 4. **Der Warp-Turm:**
@@ -61,11 +61,23 @@ Das DLC ist nicht nötig. Die Mod läuft neben *Die Aussendungseinheit* und dem 
 |---|---|---|
 | Filmische Übergänge | an | grüner Nebel beim Durchqueren des Samens |
 
+## Neu in 0.1.1
+
+- **Die Absturzstelle wurde neu gebaut.**
+  - Die DLL tastet den Boden rund um den alten Krater mit Strahlen ab, also eine Höhenkarte. Dann wählt sie die flachste Stelle und legt Krater, Absperrung und Texte auf das gemessene Gelände.
+  - Ist das Gelände beim Laden noch nicht da, versucht sie es weiter.
+- **Der Krater ist neu und viel größer:** ein echtes Kraterprofil mit 6 m hohem Rand, Auswurfstreifen und hochgeklappten Erdschollen.
+- **Ein Signal (*Dornenrufe*)** und eine Meldung zeigen, dass die Absturzstelle steht.
+- **Kommt das Ladeereignis von New Horizons nicht an** (eine andere Mod kann es abbrechen), baut Verdornt beim Aufwachen selbst auf.
+- **Das OWML-Log ist ausführlicher:** „Verdornt startet“, „Sternsystem … geladen“, „Absturzstelle: Container ok, Samenknoten ok, alter Samen ok“ und „Absturzstelle gesetzt …“.
+
 ## Testliste (bitte im Spiel prüfen)
 
-Ich kann Outer Wilds nicht selbst starten. Alles ist gegen die Schemas von New Horizons geprüft, die DLL baut ohne Warnungen, und die Logik hat 17 Unit-Tests. Bitte prüf im Spiel:
+Ich kann Outer Wilds nicht selbst starten. Alles ist gegen die Schemas von New Horizons geprüft, die DLL baut ohne Warnungen, und die Logik hat 26 Unit-Tests. Bitte prüf im Spiel:
 
-- [ ] Der Samen auf Timber Hearth liegt neben dem alten Krater auf dem Boden. Das OWML-Log nennt den Abstand.
+- [ ] Kurz nach dem Aufwachen erscheint die Meldung „SIGNALSKOP: UNBEKANNTES SIGNAL NAHE DEM ALTEN EINSCHLAGKRATER“. Erscheint stattdessen „ABSTURZSTELLE NICHT GESETZT“, bitte das OWML-Log schicken: alle Zeilen von *Verdornt*.
+- [ ] Der Krater liegt neben dem alten Krater auf dem Boden, sein Rand folgt dem Gelände. Er schwebt nicht und versinkt nicht. Das OWML-Log meldet „Absturzstelle gesetzt“ mit Abstand und Gelände-Unterschied.
+- [ ] Der Samen steckt halb eingegraben in der Mitte des Kraters.
 - [ ] Hineinfliegen bringt dich in den Samenschlund. Der Strudel wechselt das System.
 - [ ] Du wachst im grünen Nebel neben dem Ankunftssamen auf, nicht in ihm.
 - [ ] Der Rücksamen im Lager bringt dich zurück nach Timber Hearth.
@@ -94,7 +106,7 @@ python tools/verdornt_build.py Zeki.Verdornt              # Configs, Texte, Logb
 python tools/nh_validate.py Zeki.Verdornt                 # Schemas, Logbuch, Bedingungen, Bramble-Netz
 python tools/obj_check.py Zeki.Verdornt/assets/models     # Ausrichtung der Meshes
 cd Zeki.Verdornt.Source && dotnet build -c Release        # ZekiVerdornt.dll
-dotnet test Zeki.Verdornt.Tests                           # Logik: Übergang, Computer, Röhren
+dotnet test Zeki.Verdornt.Tests                           # Logik: Übergang, Computer, Röhren, Höhenkarte
 ```
 
 Design und Plan stehen in `docs/superpowers/specs/2026-10-10-verdornt-design.md` und `docs/superpowers/plans/2026-10-10-verdornt-etappe1.md`.

@@ -113,9 +113,9 @@
         "type": "computer",
         "xmlFile": "planets/text/Absturz_Rinde.xml",
         "position": {
-          "x": 6.0,
+          "x": -8.0,
           "y": 0.5,
-          "z": 30.0
+          "z": 49.0
         },
         "rename": "VD_Absturz_Rinde",
         "rotation": {
@@ -134,11 +134,27 @@
         "position": {
           "x": 0.0,
           "y": 1.6,
-          "z": 41.0
+          "z": 51.4
         },
         "radius": 2.5,
         "xmlFile": "planets/dialogue/Absperrung.xml",
         "rename": "VD_Absperrung_Notiz"
+      }
+    ],
+    "signals": [
+      {
+        "frequency": "Dornenrufe",
+        "name": "Absturzsamen",
+        "audio": "DB_Ambience_LP",
+        "parentPath": "Sector_TH/VD_Absturzstelle",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 12.0,
+          "z": 0.0
+        },
+        "sourceRadius": 20,
+        "identificationRadius": 40
       }
     ]
   },
@@ -152,7 +168,7 @@
           "y": 10.0,
           "z": 0.0
         },
-        "radius": 40,
+        "radius": 60,
         "reveals": [
           "ZEKIVD_ABSTURZ_FOUND"
         ]
@@ -164,7 +180,7 @@
       {
         "position": {
           "x": 0.0,
-          "y": 0.0,
+          "y": 406.0,
           "z": 0.0
         },
         "linksTo": "Samenschlund",

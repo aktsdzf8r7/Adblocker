@@ -332,6 +332,8 @@ public static class Procedural
             "NomaiKupfer" => new Color(0.72f, 0.43f, 0.22f),
             "NomaiHuelle" => new Color(0.46f, 0.36f, 0.28f),
             "HolzHearth" => new Color(0.45f, 0.3f, 0.18f),
+            "Erdreich" => new Color(0.36f, 0.27f, 0.17f),
+            "Brandspur" => new Color(0.07f, 0.06f, 0.05f),
             _ => new Color(0.16f, 0.12f, 0.085f),
         };
         if (IsGlow(slot) || slot == "NomaiGlas")

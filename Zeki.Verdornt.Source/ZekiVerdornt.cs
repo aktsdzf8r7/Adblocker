@@ -1,8 +1,6 @@
-using HarmonyLib;
 using OWML.Common;
 using OWML.ModHelper;
 using System;
-using System.Reflection;
 using UnityEngine;
 
 namespace ZekiVerdornt;
@@ -26,22 +24,53 @@ public class ZekiVerdornt : ModBehaviour
 
     public void Awake() => Instance = this;
 
+    /// <summary>Whether this scene's star system was built (by the NH event or, failing that, by the watchdog).</summary>
+    private bool _built;
+
     public void Start()
     {
+        Log("Verdornt startet.");
+        // our own handler first: whatever happens below, the world still gets built
+        SystemLoaded += Build;
         NewHorizons = ModHelper.Interaction.TryGetModApi<INewHorizons>("xen.NewHorizons");
-        NewHorizons.LoadConfigs(this);
-        NewHorizons.GetStarSystemLoadedEvent().AddListener(OnSystemLoaded);
-        new Harmony("Zeki.Verdornt").PatchAll(Assembly.GetExecutingAssembly());
-        SystemLoaded += system =>
+        if (NewHorizons == null)
         {
-            if (system != SystemName && system != "SolarSystem") return;
-            // the crossing is the only way in and out: it comes first, and nothing else may take it down
-            Guard("Übergang", () => Crossing.Setup(this, system));
-            Guard("Modelle", () => ModelPlacer.PlaceAll(this));
-            Guard("Computer", () => ReactiveComputers.Setup(this));
-            Guard("Murmelröhren", () => MarbleTube.Setup(this));
-        };
+            Log("New Horizons nicht gefunden - Verdornt bleibt aus.", true);
+            return;
+        }
+        NewHorizons.GetStarSystemLoadedEvent().AddListener(OnSystemLoaded);
+        NewHorizons.LoadConfigs(this);
+        LoadManager.OnStartSceneLoad += (_, _) => _built = false;
+        GlobalMessenger.AddListener("WakeUp", OnWakeUp);
         Log("Verdornt ist geladen.");
+    }
+
+    private void Build(string system)
+    {
+        Log($"Sternsystem {system} geladen.");
+        _built = true;
+        if (system != SystemName && system != "SolarSystem") return;
+        // the crossing is the only way in and out: it comes first, and nothing else may take it down
+        Guard("Übergang", () => Crossing.Setup(this, system));
+        Guard("Modelle", () => ModelPlacer.PlaceAll(this));
+        if (system == "SolarSystem") Guard("Absturzstelle", () => CrashSite.Begin(this));
+        Guard("Computer", () => ReactiveComputers.Setup(this));
+        Guard("Murmelröhren", () => MarbleTube.Setup(this));
+    }
+
+    /// <summary>
+    /// New Horizons calls its listeners one after another; one that throws stops the rest. If the "system loaded"
+    /// event never reached us by the time the player wakes up, build anyway.
+    /// </summary>
+    private void OnWakeUp() => StartCoroutine(Watchdog());
+
+    private System.Collections.IEnumerator Watchdog()
+    {
+        yield return new WaitForSeconds(1f);
+        if (_built) yield break;
+        var system = NewHorizons.GetCurrentStarSystem();
+        Log($"Das Ladeereignis von New Horizons kam nicht an - baue {system} selbst auf.", true);
+        OnSystemLoaded(system);
     }
 
     public override void Configure(IModConfig config)

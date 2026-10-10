@@ -750,21 +750,95 @@ def planetenkern(M, name, mat):
     return join(name, parts, uv_size=0.5)
 
 
+def ground_disc(name, r_in, r_out, z, mat, rings, seg):
+    """A flat ring on the ground, finely divided so the DLL can bend it onto the terrain. Normals point up."""
+    bm = bmesh.new()
+    grid = [[bm.verts.new(((r_in + (r_out - r_in) * i / rings) * math.cos(TAU * j / seg),
+                           (r_in + (r_out - r_in) * i / rings) * math.sin(TAU * j / seg), z)) for j in range(seg)]
+            for i in range(rings + 1)]
+    for i in range(rings):
+        for j in range(seg):
+            bm.faces.new((grid[i][j], grid[i + 1][j], grid[i + 1][(j + 1) % seg], grid[i][(j + 1) % seg]))
+    return link(name, bm, mat)
+
+
+def ground_strip(name, a_deg, r0, r1, w0, w1, z, mat, steps=16):
+    """A tapering streak on the ground from radius r0 to r1 in direction a_deg, divided along its length."""
+    bm = bmesh.new()
+    d = polar(1, a_deg)
+    side = Vector((-d.y, d.x, 0))
+    rows = []
+    for k in range(steps + 1):
+        t = k / steps
+        c = d * (r0 + (r1 - r0) * t) + Vector((0, 0, z))
+        w = w0 + (w1 - w0) * t
+        rows.append((bm.verts.new(c + side * w), bm.verts.new(c - side * w)))
+    for k in range(steps):
+        (l0, r_0), (l1, r_1) = rows[k], rows[k + 1]
+        bm.faces.new((l0, r_0, r_1, l1))
+    return link(name, bm, mat, smooth=False)
+
+
 def krater(M):
-    """The crater the seed tore into Timber Hearth: a rim of thrown-up rock and splinters. Origin = crater floor centre."""
+    """
+    The crater the seed tore into Timber Hearth (origin = crater floor centre, about 75 m across with its ejecta):
+    a torn rim of earth about 6 m high, a scorched floor with glowing cracks, peeled-up slabs, rubble, splinters and
+    dark streaks of thrown earth. The ground parts are finely divided: in game the DLL bends the whole crater onto
+    the terrain it measured (CrashSite.cs), so it lies on slopes instead of floating or vanishing in them.
+    """
     rnd = random.Random(71)
-    parts = [torus("wall", 26, 6, 1.0, M["bark"], 96, 12)]
-    parts[0].data.transform(Matrix.Scale(0.55, 4, Vector((0, 0, 1))))
-    for k in range(90):
+    earth = material("Erdreich", (0.25, 0.18, 0.11), 0.0, 0.95)
+    burnt = material("Brandspur", (0.06, 0.05, 0.045), 0.0, 1.0)
+    parts = []
+    # the rim: a real crater profile (steep inside, a long slope outside) swept around, its crest radius and height
+    # wobbling so it looks torn, not turned. Profile order like torus(): outward, over the crest, inward, under.
+    profile = [(17, -2.5), (17, -0.2), (13, 0.8), (9, 2.2), (5, 4.2), (2, 6.2), (0, 6.8), (-2, 6.0), (-5, 3.5),
+               (-8, 0.5), (-10, -1.5), (-10, -2.5)]
+    bm = bmesh.new()
+    seg = 144
+    ph = [rnd.uniform(0, TAU) for _ in range(4)]
+    rows = []
+    for i in range(seg):
+        a = TAU * i / seg
+        R = 30 + 1.8 * math.sin(3 * a + ph[0]) + 0.9 * math.sin(7 * a + ph[1])
+        tall = 1 + 0.22 * math.sin(4 * a + ph[2]) + 0.12 * math.sin(13 * a + ph[3])
+        row = []
+        for dr, z in profile:
+            z = z * tall + (rnd.uniform(-0.35, 0.35) if z > 0 else 0)
+            rr = R + dr + (rnd.uniform(-0.4, 0.4) if -10 < dr < 17 else 0)
+            row.append(bm.verts.new((rr * math.cos(a), rr * math.sin(a), z)))
+        rows.append(row)
+    ring = len(profile)
+    for i in range(seg):
+        A, B = rows[i], rows[(i + 1) % seg]
+        for j in range(ring):
+            bm.faces.new((A[j], B[j], B[(j + 1) % ring], A[(j + 1) % ring]))
+    parts.append(link("rand", bm, earth))
+    # the scorched floor and the glowing cracks running out from the seed
+    parts.append(ground_disc("boden", 0.5, 27, 0.15, burnt, 26, 96))
+    for k in range(9):
+        a = k * 40 + rnd.uniform(-12, 12)
+        parts.append(ground_strip(f"riss{k}", a, 15, rnd.uniform(22, 26), 0.45, 0.08, 0.3, M["seed"], 10))
+    # thrown earth outside the rim
+    for k in range(18):
+        a = k * 20 + rnd.uniform(-8, 8)
+        parts.append(ground_strip(f"streifen{k}", a, 34, rnd.uniform(52, 68), rnd.uniform(3, 5), 0.4, 0.12, burnt, 20))
+    # slabs of ground, peeled up and leaning outwards
+    for k in range(12):
+        a = k * 30 + rnd.uniform(-10, 10)
+        p = polar(rnd.uniform(33, 38), a, 1.5)
+        parts.append(box(f"scholle{k}", (rnd.uniform(5, 9), rnd.uniform(3, 5), 1.2), p, earth,
+                         rot=(0, math.radians(rnd.uniform(25, 50)), math.radians(a))))
+    for k in range(110):
         a = rnd.uniform(0, 360)
-        r = rnd.uniform(20, 38)
-        size = rnd.uniform(1.0, 4.5)
-        parts.append(box(f"brocken{k}", (size, size * rnd.uniform(0.5, 1), size * rnd.uniform(0.4, 0.9)), polar(r, a, rnd.uniform(-0.5, 2.0)),
-                         M["bark"], rot=(rnd.uniform(0, 1), rnd.uniform(0, 1), rnd.uniform(0, 6))))
-    for k in range(14):
+        size = rnd.uniform(1.0, 5.0)
+        parts.append(box(f"brocken{k}", (size, size * rnd.uniform(0.5, 1), size * rnd.uniform(0.4, 0.9)),
+                         polar(rnd.uniform(26, 52), a, rnd.uniform(0, 1.5)), earth if k % 3 else M["bark"],
+                         rot=(rnd.uniform(0, 1), rnd.uniform(0, 1), rnd.uniform(0, 6))))
+    for k in range(20):
         a = rnd.uniform(0, 360)
-        d = (polar(1, a, 0) + Vector((0, 0, rnd.uniform(0.4, 1.2)))).normalized()
-        parts.append(cone_along(f"splitter{k}", polar(rnd.uniform(12, 22), a, 0), d, rnd.uniform(4, 9), 0.6, 0.05, M["bark"], 6))
+        d = (polar(1, a, 0) + Vector((0, 0, rnd.uniform(0.4, 1.4)))).normalized()
+        parts.append(cone_along(f"splitter{k}", polar(rnd.uniform(18, 34), a, 0), d, rnd.uniform(5, 12), 0.8, 0.05, M["bark"], 6))
     return join("Krater", parts, uv_size=4.0)
 
 

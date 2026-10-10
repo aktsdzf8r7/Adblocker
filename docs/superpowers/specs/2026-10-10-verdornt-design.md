@@ -257,6 +257,7 @@ tools/nh_validate.py           Validierung (bei Bedarf erweitert)
 | `Models.cs` | OBJ-Lader und Platzierungen (Kopie der ISAE-Technik, eigener Namensraum) |
 | `Bramble.cs` | echte Dark-Bramble-Ranken und -Samen entlang von Pfaden |
 | `Crossing.cs` | Strudel, Systemwechsel, Ankunft, Rücksamen, Schiff + Notiz |
+| `CrashSite.cs` | Absturzstelle auf Timber Hearth: Höhenkarte per Strahlen, flachste Stelle neben dem alten Krater, Krater ans Gelände angepasst, Samen eingesetzt |
 | `MarbleTube.cs` | Murmel-Röhren und Mulden |
 | `ReactiveComputers.cs` | zustandsabhängige Computertexte |
 | `Network.cs` | Kernschrein, Knoten, die sich öffnen oder schließen |

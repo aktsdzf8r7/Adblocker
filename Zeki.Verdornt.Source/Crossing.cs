@@ -5,7 +5,6 @@ namespace ZekiVerdornt;
 
 /// <summary>
 /// The way between Timber Hearth and Dornenkranz (spec section 4):
-///   * places the crash site (crater, seed, barrier) next to the vanilla impact crater on Timber Hearth,
 ///   * the thorn vortex in the middle of the Samenschlund changes the star system to "Verdornt",
 ///   * after such a crossing the player comes to on Erstling in a green haze,
 ///   * the return seed in the camp (NH interaction volume sets ZEKIVD_HEIMREISE) changes back to the SolarSystem.
@@ -36,7 +35,6 @@ public class Crossing : MonoBehaviour
         c._veil = Veil.Create();
         if (system == "SolarSystem")
         {
-            PlaceCrashSite(mod);
             var schlund = mod.NewHorizons.GetPlanet("Samenschlund");
             c._vortex = schlund != null ? schlund.transform : null;
         }
@@ -45,56 +43,6 @@ public class Crossing : MonoBehaviour
             _arriving = false;
             c.Arrive();
         }
-    }
-
-    // ------------------------------------------------------------------------------------------ Timber Hearth
-    /// <summary>
-    /// The crash site is built by New Horizons as one container. It belongs next to the vanilla impact crater: about
-    /// 70 m beside the old seed, on the ground found by a ray towards the planet's centre, upright.
-    /// </summary>
-    private static void PlaceCrashSite(ZekiVerdornt mod)
-    {
-        var th = Locator.GetAstroObject(AstroObject.Name.TimberHearth);
-        if (th == null) return;
-        Transform site = null, oldSeed = null, seed = null;
-        foreach (var t in th.GetComponentsInChildren<Transform>(true))
-        {
-            if (t.name == "VD_Absturzstelle") site = t;
-            else if (t.name == SeedNode) seed = t;
-            // the vanilla seed (our copy of it is renamed "Samen")
-            else if (oldSeed == null && t.name == "Terrain_DB_BrambleSphere_Seed_V2") oldSeed = t;
-        }
-        if (site == null || oldSeed == null)
-        {
-            mod.Log($"Absturzstelle: Container {(site != null ? "ok" : "fehlt")}, alter Samen {(oldSeed != null ? "ok" : "fehlt")}.", true);
-            return;
-        }
-        var centre = th.transform.position;
-        var up = (oldSeed.position - centre).normalized;
-        var side = Vector3.Cross(up, th.transform.up).normalized;
-        if (side.sqrMagnitude < 0.01f) side = Vector3.Cross(up, th.transform.right).normalized;
-        var radius = (oldSeed.position - centre).magnitude;
-        var dir = (up * radius + side * 70f).normalized;
-        var from = centre + dir * (radius + 150f);
-        var ground = centre + dir * radius;
-        // only solid ground of Timber Hearth counts: no triggers, nothing of the site itself
-        var body = th.GetComponent<OWRigidbody>();
-        foreach (var hit in Physics.RaycastAll(from, -dir, 400f, OWLayerMask.groundMask, QueryTriggerInteraction.Ignore))
-        {
-            if (hit.collider.transform.IsChildOf(site)) continue;
-            if (body != null && hit.collider.attachedRigidbody != null && hit.collider.attachedRigidbody.GetComponent<OWRigidbody>() != body) continue;
-            if (Vector3.Distance(hit.point, from) < Vector3.Distance(ground, from)) ground = hit.point;
-        }
-        site.SetPositionAndRotation(ground - dir * 1.5f, Quaternion.FromToRotation(site.up, dir) * site.rotation);
-        // New Horizons builds the seed node before the site container exists; it hangs it in the planet's core
-        if (seed != null)
-        {
-            seed.SetParent(site, false);
-            seed.localPosition = new Vector3(0f, 10f, 0f);
-            seed.localRotation = Quaternion.identity;
-        }
-        mod.Log($"Absturzstelle neben dem alten Krater gesetzt ({Vector3.Distance(ground, oldSeed.position):0} m vom alten Samen), " +
-                $"Samen {(seed != null ? "eingesetzt" : "FEHLT")}.", seed == null);
     }
 
     // ------------------------------------------------------------------------------------------ crossings
