@@ -249,11 +249,13 @@ def timber_hearth():
     cfg["Props"]["translatorText"] = [nomai("computer", "Absturz_Rinde", [6, 0.5, 30], rotation=[0, 200, 0], parent=site)]
     cfg["Props"]["dialogue"] = [{"parentPath": site, "isRelativeToParent": True, "position": vec([0, 1.6, 41]), "radius": 2.5,
                                  "xmlFile": "planets/dialogue/Absperrung.xml", "rename": "VD_Absperrung_Notiz"}]
-    cfg["Volumes"] = {"revealVolumes": [{"parentPath": site, "isRelativeToParent": True, "position": vec([0, 10, 0]), "radius": 70,
+    cfg["Volumes"] = {"revealVolumes": [{"parentPath": site, "isRelativeToParent": True, "position": vec([0, 10, 0]), "radius": 40,
                                          "reveals": ["ZEKIVD_ABSTURZ_FOUND"]}]}
     cfg["Bramble"] = {"nodes": [
         # the seed itself: large enough to walk into, half sunk into the crater
-        {"parentPath": site, "isRelativeToParent": True, "position": vec([0, 10, 0]), "linksTo": "Samenschlund", "name": "ZEKIVD_Absturzsamen",
+        # NH builds nodes before details, so the node cannot hang below the site container: the DLL moves it there
+        # (Crossing.PlaceCrashSite, 10 m above the crater floor)
+        {"position": vec([0, 0, 0]), "linksTo": "Samenschlund", "name": "ZEKIVD_Absturzsamen",
          "scale": 0.25, "fogTint": color(120, 255, 150), "lightTint": color(150, 255, 170)}]}
     return cfg
 

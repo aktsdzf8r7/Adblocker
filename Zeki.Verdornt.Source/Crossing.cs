@@ -15,6 +15,7 @@ public class Crossing : MonoBehaviour
     public const string HomeCondition = "ZEKIVD_HEIMREISE";
     public const string FirstJourney = "ZEKIVD_ERSTE_REISE";
     public const string ArrivalFact = "ZEKIVD_ANKUNFT";
+    public const string SeedNode = "ZEKIVD_Absturzsamen";
     private const float VortexRadius = 12f;
 
     /// <summary>Survives the scene change: the next "Verdornt" load is an arrival through the seed.</summary>
@@ -55,10 +56,11 @@ public class Crossing : MonoBehaviour
     {
         var th = Locator.GetAstroObject(AstroObject.Name.TimberHearth);
         if (th == null) return;
-        Transform site = null, oldSeed = null;
+        Transform site = null, oldSeed = null, seed = null;
         foreach (var t in th.GetComponentsInChildren<Transform>(true))
         {
             if (t.name == "VD_Absturzstelle") site = t;
+            else if (t.name == SeedNode) seed = t;
             // the vanilla seed (our copy of it is renamed "Samen")
             else if (oldSeed == null && t.name == "Terrain_DB_BrambleSphere_Seed_V2") oldSeed = t;
         }
@@ -84,7 +86,15 @@ public class Crossing : MonoBehaviour
             if (Vector3.Distance(hit.point, from) < Vector3.Distance(ground, from)) ground = hit.point;
         }
         site.SetPositionAndRotation(ground - dir * 1.5f, Quaternion.FromToRotation(site.up, dir) * site.rotation);
-        mod.Log($"Absturzstelle neben dem alten Krater gesetzt ({Vector3.Distance(ground, oldSeed.position):0} m vom alten Samen).");
+        // New Horizons builds the seed node before the site container exists; it hangs it in the planet's core
+        if (seed != null)
+        {
+            seed.SetParent(site, false);
+            seed.localPosition = new Vector3(0f, 10f, 0f);
+            seed.localRotation = Quaternion.identity;
+        }
+        mod.Log($"Absturzstelle neben dem alten Krater gesetzt ({Vector3.Distance(ground, oldSeed.position):0} m vom alten Samen), " +
+                $"Samen {(seed != null ? "eingesetzt" : "FEHLT")}.", seed == null);
     }
 
     // ------------------------------------------------------------------------------------------ crossings

@@ -292,6 +292,12 @@ def check_consistency(bodies, systems):
                     err(f"{rel(path)}: bramble node links to {nd['linksTo']}, which is not a dimension of {sysname}")
                 if not nd.get("preventRecursionCrash"):
                     edges.setdefault(d["name"], []).append(nd["linksTo"])
+                # New Horizons builds bramble nodes before the details: a node cannot hang below a detail
+                parent = (nd.get("parentPath") or "").split("/")[-1]
+                renames = {x.get("rename") for x in d.get("Props", {}).get("details", [])}
+                if parent and parent in renames:
+                    err(f"{rel(path)}: bramble node {nd.get('name') or nd['linksTo']} hangs below the detail {parent}, which New Horizons "
+                        f"builds after the nodes - the node ends up at its position relative to the planet")
         for name, d in dims.items():
             exit_node = d["Bramble"]["dimension"].get("linksTo")
             if exit_node not in node_names:
