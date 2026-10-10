@@ -105,7 +105,7 @@ public class RiftEnding : Ending
         if (_seed != null && !_arrived)
         {
             // the seed is broken: it twitches, flickers and spins
-            _seed.transform.localScale = Vector3.one * (22f * Random.Range(0.85f, 1.2f)) / Mathf.Max(0.0001f, sun != null ? sun.lossyScale.x : 1f);
+            _seed.transform.localScale = Vector3.one * Random.Range(0.85f, 1.2f) / Mathf.Max(0.0001f, sun != null ? sun.lossyScale.x : 1f);
             _seed.transform.Rotate(new Vector3(70f, 130f, 40f) * Time.deltaTime, Space.Self);
             if (_seedLight != null) _seedLight.color = Random.value > 0.85f ? new Color(1f, 0.3f, 0.3f) : new Color(0.5f, 1f, 0.55f);
         }
@@ -141,9 +141,8 @@ public class RiftEnding : Ending
         Cinema.Flash(0.8f, new Color(0.8f, 1f, 0.8f));
         Wreck.Begin(true);
         if (sun == null || GameProps.Pivot == null || ZekiISAE.Instance == null) return;
-        _seed = ModelPlacer.Build(ZekiISAE.Instance, new PropPlacement { model = "babysamen", name = "Fehlerhafter_Babysamen", scale = 22f }, GameProps.Pivot, false);
-        if (_seed == null) _seed = new GameObject("Fehlerhafter_Babysamen");
-        _seed.transform.position = GameProps.Point("muendung");
+        // the game's own bramble seed, 45 m across, sick and twitching
+        _seed = CanonBramble.MakeSeed(GameProps.Pivot, "Fehlerhafter_Babysamen", GameProps.LocalPoint("muendung", Vector3.up * 795f), 45f, false);
         _seedLight = _seed.AddComponent<Light>();
         _seedLight.type = LightType.Point;
         _seedLight.range = 600f;

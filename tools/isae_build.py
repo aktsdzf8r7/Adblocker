@@ -180,6 +180,7 @@ def isae_config(A):
         relative(PIVOT, at(I["sonde"]), path=P["warp_particles"], scale=1.5, rename="Sondenglut", keepLoaded=True, deactivationCondition=DEAKTIVIERT),
     ]
     details += pulskern_props(K)
+    details += bramble_templates()
     texts = [
         relative(kontrolle, SPOT_COMPUTER, SPOT_ROT, type="computer", xmlFile="planets/text/ISAE_Status.xml", rename="Computer_Status"),
         relative(kontrolle, SPOT_RECORDER, SPOT_ROT, type="recorder", xmlFile="planets/text/ISAE_Linum.xml", rename="Recorder_Linum"),
@@ -253,6 +254,16 @@ def isae_config(A):
 
 
 KEIMLING_UP = 4.6  # the seedling over the Pulskern, metres above the socket
+
+
+def bramble_templates():
+    """Hidden copies of the real Dark Bramble vines (Quantum Moon, Dark Bramble state) and of the bramble seed of
+    Timber Hearth's crater. The DLL clones them for the roots, the Keimdorn and the endings (Bramble.cs)."""
+    container = "Sector/ISAE_Rankenvorlagen"
+    details = [placed("", (0, -2000, 0), rename="ISAE_Rankenvorlagen", keepLoaded=True)]
+    details += [relative(container, (0, 0, 0), path=P["db_vine"].format(n=n), rename=f"Ranke_{n}", keepLoaded=True) for n in range(1, 6)]
+    details.append(relative(container, (0, 0, 0), path=P["bramble_seed"], rename="Samen", keepLoaded=True))
+    return details
 
 
 def pulskern_props(K):
@@ -473,10 +484,6 @@ def placements(A):
         # the Pulskern on the chamber floor; its heart pulses (the DLL), the Samenkern goes into the socket above it
         {"model": "pulskern", "name": "ISAE_Pulskern", "parentPath": PIVOT, "collider": True, "position": K["pulskern"]["position"]},
         {"model": "pulsglut", "name": "ISAE_Pulsglut", "parentPath": PIVOT, "position": K["pulskern_mitte"]["position"]},
-        # Verwurzelt: hidden until the Samenkern lies in the Pulskern, then the DLL lets them grow
-        {"model": "babysamen", "name": "ISAE_Keimling", "parentPath": PIVOT, "hidden": True,
-         "position": vec(add(at(K["pulskern_mitte"]), (0, KEIMLING_UP, 0)))},
-        {"model": "wurzeln", "name": "ISAE_Wurzeln", "parentPath": PIVOT, "hidden": True},
     ]
     lights = [{"name": "Licht_Kernkammer", "body": NAME, "parentPath": PIVOT, "position": K["licht"]["position"],
                "color": {"x": 1.0, "y": 0.42, "z": 0.2}, "range": 45, "intensity": 2.2}]
@@ -493,7 +500,6 @@ def placements(A):
     # the Keimdorn and the seed chamber
     G = A["keim"]
     keim = [
-        {"model": "sternwurzeln", "name": "Keimdorn_Dornen", "body": KEIMDORN, "collider": True, "scale": KEIMDORN_SCALE},
         {"model": "forschungsplattform", "name": "Forschungsplattform", "body": SAMENKAMMER, "collider": True, "position": G["plattform"]["position"]},
         {"model": "herzgeruest", "name": "Herzgeruest", "body": SAMENKAMMER, "spin": 5, "position": G["herz"]["position"]},
         # the heart itself hangs below the NH item, so it travels with the player
@@ -514,7 +520,12 @@ def placements(A):
         {"name": "Licht_Keimdorn", "body": KEIMDORN, "position": {"x": 0, "y": 0, "z": 0},
          "color": {"x": 0.5, "y": 1.0, "z": 0.6}, "range": 260, "intensity": 1.6},
     ]
+    # Verwurzelt, the Keimdorn and the seed in the sun: the DLL lays the game's own Dark Bramble vines and bramble
+    # seed along these paths (Bramble.cs); the paths come from the Blender roots (anchors.json)
+    W, SW = A.get("wurzeln", {}), A.get("sternwurzeln", {})
+    bramble = {"isae": W.get("pfade", []), "knoten": W.get("knoten", []), "stern": SW.get("pfade", []), "keimdornScale": KEIMDORN_SCALE}
     return {
+        "bramble": bramble,
         # exact names of game materials for the Blender material slots; empty = taken from the game
         "materials": {"VesselHuelle": "", "VesselKupfer": "", "VesselDunkel": "", "VesselGlut": "", "VesselLeuchten": "",
                       "Dornranke": "", "Keimlicht": ""},

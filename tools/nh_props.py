@@ -71,6 +71,8 @@ P = {
     "vessel_lamp": "DB_VesselDimension_Body/Sector_VesselDimension/Sector_VesselBridge/Interactibles_VesselBridge/UNSORTED/Wall Lamps/Prefab_NOM_Lamp_Glow_Vessel_Wall",
     "warpcore_broken": "CaveTwin_Body/Sector_CaveTwin/Sector_NorthHemisphere/Sector_NorthSurface/Sector_TimeLoopExperiment/WarpCoreWallSockets/WarpCoreSocket/Props_NOM_WarpCoreBroken (1)/Props_NOM_WarpCore_Simple",
     "bramble_seed": "TimberHearth_Body/Sector_TH/Sector_ImpactCrater/Interactables_ImpactCrater/ControlledByProxy_Structures/Terrain_DB_BrambleSphere_Seed_V2",
+    # the real Dark Bramble vines (quantum state of the Quantum Moon), variants 1-5
+    "db_vine": "QuantumMoon_Body/Sector_QuantumMoon/State_DB/Interactables_DBState/DBState_QuantumObjects/DB_Q_Vine{n}/DB_Bramble_Vine{n}/State_1/Terrain_TH_Bramble_Vine{n}",
     "angler": "DB_HubDimension_Body/Sector_HubDimension/Interactables_HubDimension/Anglerfish_Body",
     "wall_lamp": "CaveTwin_Body/Sector_CaveTwin/Sector_SouthHemisphere/Sector_SouthUnderground/Sector_City/Lighting_City/Lights_FossilDistrict/Prefab_NOM_Lamp_Glow_Diamond_Wall",
     "gravity_crystal": "BrittleHollow_Body/Sector_BH/Sector Quantum Pole Path/Fragment QuantumPolePath 2/Interactables_QPP2/Prefab_NOM_GravityCrystal",
@@ -98,4 +100,4 @@ GROUND = {
     "stairs_l": -0.1, "stairs_r": -0.1,
 }
 
-SCENE_PROPS = set(P.values()) | {P["pottery"] % i for i in range(1, 15)}
+SCENE_PROPS = set(P.values()) | {P["pottery"] % i for i in range(1, 15)} | {P["db_vine"].format(n=n) for n in range(1, 6)}

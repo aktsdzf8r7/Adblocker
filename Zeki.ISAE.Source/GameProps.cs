@@ -59,6 +59,7 @@ public static class GameProps
         Pivot.gameObject.AddComponent<SunAim>();
         if (FocusCircle != null) FocusCircle.gameObject.AddComponent<FocusOrbit>();
         Pivot.gameObject.AddComponent<Tethers>();
+        CanonBramble.Setup(mod, Isae);
         SeedSystem.Setup(mod);
     }
 

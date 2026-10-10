@@ -145,14 +145,10 @@ public class RootEnding : Ending
         _probe.transform.rotation = Quaternion.FromToRotation(GameProps.ProbeAxis, GameProps.AxisWorld());
         _probe.transform.localScale = Vector3.one * 6f;
         // a baby seed that already roots, grown onto the probe
-        var mod = ZekiISAE.Instance;
-        if (mod != null)
-        {
-            var seed = ModelPlacer.Build(mod, new PropPlacement { model = "babysamen", name = "Babysamen_an_der_Sonde", scale = 0.5f }, _probe.transform, false);
-            if (seed != null) seed.transform.localPosition = GameProps.ProbeAxis * -0.6f;
-            var roots = ModelPlacer.Build(mod, new PropPlacement { model = "sternwurzeln", name = "Wurzeln_an_der_Sonde", scale = 0.45f }, _probe.transform, false);
-            if (roots != null) roots.transform.localPosition = GameProps.ProbeAxis * -0.6f;
-        }
+        // the game's own bramble seed, already rooting with real Dark Bramble vines (sizes in the probe's frame)
+        var seed = CanonBramble.MakeSeed(_probe.transform, "Babysamen_an_der_Sonde", GameProps.ProbeAxis * -0.6f, 1.1f, false);
+        var plan = ModelPlacer.Data.bramble;
+        if (plan != null) CanonBramble.BuildVines(seed.transform, "Wurzeln_an_der_Sonde", plan.stern, 0.45f, false, 3);
         var light = _probe.AddComponent<Light>();
         light.type = LightType.Point;
         light.color = new Color(0.55f, 1f, 0.6f);
@@ -232,11 +228,11 @@ public class RootEnding : Ending
     private void Seed()
     {
         var sun = Locator.GetSunTransform();
-        var mod = ZekiISAE.Instance;
-        if (sun == null || mod == null) return;
+        if (sun == null) return;
         _seedMarker = Marker("Sonnensamen", sun, sun.position);
-        _bigSeed = ModelPlacer.Build(mod, new PropPlacement { model = "babysamen", name = "Sonnensamen_Kern", scale = 1f }, _seedMarker, false);
-        _starRoots = ModelPlacer.Build(mod, new PropPlacement { model = "sternwurzeln", name = "Sonnensamen_Wurzeln", scale = 1f }, _seedMarker, false);
+        // the game's own bramble seed and Dark Bramble vines, unit size here, grown by GrowSeed
+        _bigSeed = CanonBramble.MakeSeed(_seedMarker, "Sonnensamen_Kern", Vector3.zero, 2.4f, false);
+        _starRoots = CanonBramble.BuildVines(_seedMarker, "Sonnensamen_Wurzeln", ModelPlacer.Data.bramble?.stern, 1f, false, 9);
         _seedLight = _seedMarker.gameObject.AddComponent<Light>();
         _seedLight.type = LightType.Point;
         _seedLight.color = new Color(0.5f, 1f, 0.55f);

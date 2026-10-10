@@ -602,8 +602,21 @@ def babysamen(M):
     return join("Babysamen", parts, uv_size=1.0)
 
 
-def thorned_tube(name, points, radius, mat, thorn_every=3, res=4):
+# The roots are NOT exported as meshes: in game the DLL lays the real Dark Bramble vines (and the real bramble
+# seed) along these paths. The meshes built here only serve the renders and the .blend.
+RECORD = None   # list of {"punkte": [...], "dicke": r} while a root model is built
+KNOTS = None    # list of {"position": ..., "groesse": d}
+
+
+def record(points, radius):
+    if RECORD is not None:
+        RECORD.append({"punkte": [unity(p) for p in points], "dicke": round(radius, 3)})
+
+
+def thorned_tube(name, points, radius, mat, thorn_every=3, res=4, rec=True):
     """A bramble vine through points, with thorns."""
+    if rec:
+        record(points, radius)
     parts = [tube(name, points, radius, mat, res=res, bevel=2)]
     for i in range(1, len(points) - 1, thorn_every):
         p, q = Vector(points[i]), Vector(points[i + 1])
@@ -619,18 +632,21 @@ def thorned_tube(name, points, radius, mat, thorn_every=3, res=4):
 
 def vine(name, points, r0, r1, mat, thorn_every=3, chunks=3):
     """A vine that tapers from r0 to r1 (split into a few tubes of falling radius)."""
+    record(points, (r0 + r1) / 2)
     parts, n = [], len(points)
     for c in range(chunks):
         a = c * (n - 1) // chunks
         b = min(n, (c + 1) * (n - 1) // chunks + 2)
         r = r0 + (r1 - r0) * c / max(1, chunks - 1)
-        parts += thorned_tube(f"{name}_{c}", points[a:b], r, mat, thorn_every)
+        parts += thorned_tube(f"{name}_{c}", points[a:b], r, mat, thorn_every, rec=False)
     return parts
 
 
 def knot(name, at, r, mat, seed_mat):
-    """A thick, thorny knot where roots meet, with a little seed light."""
+    """A thick, thorny knot where roots meet, with a little seed light (in game: the real bramble seed)."""
     at = Vector(at)
+    if KNOTS is not None:
+        KNOTS.append({"position": unity(at), "groesse": round(2.6 * r, 2)})
     parts = [sphere(name, r, at, mat, scale=(1, 1, 0.8), seg=16, rings=8)]
     for k in range(10):
         a, z = k * 137.5, math.sin(k * 1.9) * 0.7
@@ -642,6 +658,8 @@ def knot(name, at, r, mat, seed_mat):
 
 def wurzeln(M):
     """Bramble roots that swallow the cannon (Verwurzelt). The DLL grows them from the core outwards."""
+    global RECORD, KNOTS
+    RECORD, KNOTS = [], []
     bark, parts = M["bark"], []
     # along the rails, two thick roots winding around each rail
     for k, az in enumerate(RAIL_AZ):
@@ -692,11 +710,16 @@ def wurzeln(M):
         parts += thorned_tube(f"chamber_root{k}", [puls + Vector((0, 0, 1)), polar(20, a, CHAMBER_FLOOR + 1), polar(30, a + 10, 4),
                                                     polar(24, a + 25, 20), polar(10, a + 40, 30)], 0.8, bark, 1)
     parts.append(sphere("seedling_light", 1.2, puls + Vector((0, 0, 2.6)), M["seed"], seg=16, rings=8))
+    ANCHORS["wurzeln"] = {"pfade": RECORD, "knoten": KNOTS}
+    RECORD, KNOTS = None, None
     return join("Wurzeln", parts, uv_size=8.0)
 
 
 def sternwurzeln(M):
-    """Roots growing out of a baby bramble core where the sun was (Verwurzelt). Unit size, the DLL scales it."""
+    """Roots growing out of a baby bramble core where the sun was (Verwurzelt), also the thorns of the Keimdorn.
+    Unit size, the DLL scales it."""
+    global RECORD
+    RECORD = []
     parts = []
     for k in range(18):
         a, z = k * 137.5, math.sin(k * 1.3) * 0.9
@@ -708,6 +731,8 @@ def sternwurzeln(M):
         pts = [d * (1.0 + 0.6 * i) + side * 0.25 * math.sin(i * 1.7 + k) for i in range(8)]
         parts += thorned_tube(f"tendril{k}", pts, 0.16 - 0.004 * k, M["bark"], 2)
         anchor("keimdorn", f"spitze{k}", pts[-1])
+    ANCHORS["sternwurzeln"] = {"pfade": RECORD}
+    RECORD = None
     return join("Sternwurzeln", parts, uv_size=1.0)
 
 
@@ -804,7 +829,9 @@ def main():
     }
     print("OBJ export:")
     for key, obj in models.items():
-        export(obj, key + ".obj")
+        # roots and seeds come from the game (real Dark Bramble vines and seed); only their paths are exported
+        if key not in ("wurzeln", "sternwurzeln", "babysamen"):
+            export(obj, key + ".obj")
     with open(os.path.join(OUT, "anchors.json"), "w", encoding="utf-8", newline="\n") as f:
         json.dump(ANCHORS, f, ensure_ascii=False, indent=2)
         f.write("\n")

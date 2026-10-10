@@ -53,8 +53,19 @@ public class SeedSystem : MonoBehaviour
     {
         var pivot = transform;
         _glow = pivot.Find("ISAE_Pulsglut");
-        _seedling = pivot.Find("ISAE_Keimling");
-        _roots = pivot.Find("ISAE_Wurzeln");
+        // the roots and the seedling are the game's own Dark Bramble vines and seed (Bramble.cs), hidden until the Samenkern is in
+        var plan = ModelPlacer.Data.bramble ?? new BramblePlan();
+        _roots = CanonBramble.BuildVines(pivot, "ISAE_Wurzeln", plan.isae, 1f, false, 1505).transform;
+        for (var i = 0; i < plan.knoten.Count; i++)
+            CanonBramble.MakeSeed(_roots, "Wurzelknoten_" + i, plan.knoten[i].position.ToVector(), plan.knoten[i].groesse, false);
+        _roots.gameObject.SetActive(false);
+        _seedling = CanonBramble.MakeSeed(pivot, "ISAE_Keimling", GameProps.LocalPoint("keimling", Vector3.zero), 3.6f, false).transform;
+        var seedLight = _seedling.gameObject.AddComponent<Light>();
+        seedLight.type = LightType.Point;
+        seedLight.color = new Color(0.55f, 1f, 0.6f);
+        seedLight.range = 18f;
+        seedLight.intensity = 1.8f;
+        _seedling.gameObject.SetActive(false);
         var light = pivot.Find("Licht_Pulskern");
         _pulseLight = light != null ? light.GetComponent<Light>() : null;
         if (_pulseLight != null) _pulseLightBase = _pulseLight.intensity;
@@ -64,7 +75,8 @@ public class SeedSystem : MonoBehaviour
         if (_keimdorn != null)
         {
             _keimNode = Deep(_keimdorn, KeimNode);
-            _thorns = Deep(_keimdorn, "Keimdorn_Dornen");
+            var sector = _keimdorn.Find("Sector") ?? _keimdorn;
+            _thorns = CanonBramble.BuildVines(sector, "Keimdorn_Ranken", plan.stern, plan.keimdornScale, true, 77).transform;
             var kl = Deep(_keimdorn, "Licht_Keimdorn");
             _keimLight = kl != null ? kl.GetComponent<Light>() : null;
             if (_keimLight != null) _keimLightBase = _keimLight.intensity;
@@ -228,7 +240,7 @@ public class SeedSystem : MonoBehaviour
         if (_thorns != null)
         {
             _thornScale = Mathf.Lerp(1f, 0.25f, k);
-            _thorns.localScale = Vector3.one * (30f * _thornScale);
+            _thorns.localScale = Vector3.one * _thornScale;
             _thorns.Rotate(Vector3.up, 8f * Time.deltaTime, Space.Self);
         }
         if (_keimLight != null) _keimLight.intensity = _keimLightBase * (1f - k) * flicker;
@@ -284,7 +296,7 @@ public class SeedSystem : MonoBehaviour
             // pops out of the core and keeps swelling: a year in every second
             var k = Mathf.Clamp01(t / 5f);
             var back = 1f + 2.2f * Mathf.Pow(k - 1f, 3f) + 1.2f * Mathf.Pow(k - 1f, 2f);
-            _seedling.localScale = Vector3.one * (1.7f * Mathf.Max(0.01f, back) * (1f + 0.04f * Mathf.Sin(Time.time * 7f)));
+            _seedling.localScale = Vector3.one * (Mathf.Max(0.01f, back) * (1f + 0.04f * Mathf.Sin(Time.time * 7f)));
         }
         if (_roots != null)
         {

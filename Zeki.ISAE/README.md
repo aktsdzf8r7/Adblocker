@@ -143,13 +143,24 @@ Die Szene liegt in `Zeki.ISAE.Source/blender/ISAE.blend`, das Skript ist `tools/
 - **Kernkammer** und **Pulskern:** ein Käfig aus Kupferzinken um eine pulsierende Glut, mit einer Leitung zum Herz.
 - **Emitter-Gerüst** der Fokuskanonen.
 - **Samenkern**, **Herzgerüst** und **Forschungsplattform** der Samenkammer.
-- **Babysamen**, **Wurzeln** für die ganze Kanone und **Sternwurzeln** (die Dornen des Keimdorns und die Wurzeln dort, wo einst die Sonne war).
 
 Alles, was es im Spiel schon gibt, kommt aus dem Spiel: die Module der Sondenkanone, Schwerkraftkanonen, Projektionsbecken und -steine, Computer, Recorder, Schrein, Warpkern, Lampen, die Nomai-Sonde und die Bramble-Knoten.
 
+### Wurzeln und Samen: original aus dem Spiel
+
+Alle Wurzeln und Babysamen sind die **echten Objekte aus Outer Wilds**. Das gilt für die Wurzeln um die Kanone, die Dornen des Keimdorns, den Keimling im Pulskern, den fehlerhaften Samen in Ende 2 und den Samen in der Sonne in Ende 3.
+
+- **Ranken:** die fünf Dark-Bramble-Ranken aus dem Dark-Bramble-Zustand des Quantenmonds (`Terrain_TH_Bramble_Vine1–5`).
+- **Samen:** der Dornensamen aus dem Krater auf Timber Hearth.
+
+New Horizons kopiert sie einmal versteckt. Die DLL (`Bramble.cs`) misst Länge, Achse und Mitte jeder Ranke. Dann legt sie Kopien zufällig gedreht entlang der Wurzelpfade, die in Blender entworfen sind. Aus Blender kommen also nur die **Pfade**, keine Wurzel-Meshes mehr.
+
+Ein eigenes Unity-Projekt (Outer Wilds Unity Template, AssetBundle) war dafür nicht nötig: Selbst gebaute Ranken wären weniger original als die Ranken aus dem Spiel. Außerdem lässt sich der Unity-Editor in meiner Umgebung nicht starten.
+
 ## Was die DLL macht
 
-- **Modelle** (`Models.cs`): lädt die Blender-Modelle mit Kollision, Lichtern und Materialien. Die Wurzeln bekommen das Material der Ranken von Dark Bramble.
+- **Modelle** (`Models.cs`): lädt die Blender-Modelle mit Kollision, Lichtern und Materialien.
+- **Dornen** (`Bramble.cs`): legt die echten Dark-Bramble-Ranken und Samen aus dem Spiel entlang der Wurzelpfade.
 - **Zusammenbau** (`GameProps.cs`):
   - richtet die Anlage auf die Sonne aus,
   - setzt die Module an die Arme,
@@ -182,6 +193,7 @@ Alle Dateien sind gegen die offiziellen New-Horizons-Schemas geprüft. Die DLL b
 - **Projektionsbecken in den Modulen:** Die DLL sucht das Becken der Modul-Kopie und setzt das neue an seine Stelle. Das OWML-Log sagt, ob es gefunden wurde. Wo der Stein danach liegt, ist geschätzt.
 - **Babysamen → Vessel:** Die Verbindung in die Vessel-Dimension baut die DLL selbst (New Horizons kann das nicht). Sie steht im Log.
 - **Keimdorn:** wie groß der Knoten mit den Dornen am Himmel wirkt, und ob die Bahn um Dark Bramble gut liegt.
+- **Ranken:** Ob New Horizons die Ranken des Quantenmonds sauber kopiert und wie dicht die Wurzeln wirken. Das OWML-Log nennt die Zahl der gelegten Ranken und ihre Länge.
 - **Ende 3:** wie die Wurzeln auf der Sonne wirken und ob das Ersticken sauber zum Game Over führt (sonst greift nach 40 Sekunden ein Ersatz).
 - **Module, Titelbildschirm, Materialien:** wie bisher.
 

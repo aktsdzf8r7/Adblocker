@@ -18,6 +18,8 @@ public class Placements
     public List<LightPlacement> lights = new();
     /// <summary>Named points in the frame of the ISAE pivot (muzzle, lens, core, mounts, focus emitter).</summary>
     public Dictionary<string, Vector3Data> points = new();
+    /// <summary>Paths for the real Dark Bramble vines and seeds (Bramble.cs).</summary>
+    public BramblePlan bramble = new();
 }
 
 public class PropPlacement
