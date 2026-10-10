@@ -27,7 +27,7 @@ import sys
 
 import bmesh
 import bpy
-from mathutils import Matrix, Vector
+from mathutils import Matrix, Vector, noise
 
 ARGS = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
 MOD = os.path.abspath(ARGS[0] if ARGS else os.path.join(os.path.dirname(__file__), "..", "Zeki.Verdornt"))
@@ -118,8 +118,9 @@ def box(name, size, at, mat, rot=(0, 0, 0)):
     return link(name, bm, mat, smooth=False)
 
 
-def tube(name, points, radius, mat, res=10, bevel=4, taper=False):
-    """A round tube along points. taper: thin out to a point at both ends (vines; no end caps needed)."""
+def tube(name, points, radius, mat, res=10, bevel=4, taper=False, radii=None):
+    """A round tube along points. taper: thin out to a point at both ends (vines; no end caps needed).
+    radii: one radius factor per point instead (roots: thick at the core, thin at the tip)."""
     cu = bpy.data.curves.new(name, "CURVE")
     cu.dimensions = "3D"
     cu.bevel_depth = radius
@@ -132,7 +133,9 @@ def tube(name, points, radius, mat, res=10, bevel=4, taper=False):
     for i, (bp, p) in enumerate(zip(sp.bezier_points, points)):
         bp.co = p
         bp.handle_left_type = bp.handle_right_type = "AUTO"
-        if taper:
+        if radii is not None:
+            bp.radius = radii[i]
+        elif taper:
             bp.radius = max(0.02, min(1.0, min(i, n - 1 - i) / 3.0))
     ob = bpy.data.objects.new(name, cu)
     bpy.context.collection.objects.link(ob)
@@ -376,6 +379,99 @@ def displaced_ball(name, R, mat, strength, scale, seed, flats=()):
                 k = 1.0 if a < w else 1 - (a - w) / (w * 0.6)
                 v.co = v.co.lerp(d * R, k)
     return ob
+
+
+# ------------------------------------------------------------------------------------------ bramble cores and remains
+def basis(c):
+    """Two unit vectors perpendicular to c and to each other."""
+    c = Vector(c).normalized()
+    u = c.cross(Vector((0, 0, 1)) if abs(c.z) < 0.9 else Vector((1, 0, 0))).normalized()
+    return u, c.cross(u)
+
+
+def bramble_core(name, R, M, rnd, light):
+    """The great bramble in the middle of a planet: 30-40 woven vines around a glowing sphere (0.7 R), whose
+    light shows through the gaps."""
+    parts = [sphere(name + "_licht", R * 0.7, (0, 0, 0), light, seg=32, rings=16)]
+    for k in range(rnd.randint(30, 40)):
+        parts += great_circle_vine(f"{name}_ranke{k}", R * rnd.uniform(0.85, 1.05), R * rnd.uniform(0.04, 0.08), M["bark"], rnd,
+                                   sink=0.5, waves=rnd.randint(5, 9), amp=0.07, n=80, arc=rnd.uniform(0.6, 1.0))
+    return parts
+
+
+def roots(name, R_core, targets, M, rnd, rise=4.0):
+    """Roots from the core to every target: tapering, slightly bent, forked once, ending in 3-5 grip fingers that
+    spread from the target and climb rise metres outwards (through and over the remains they hold)."""
+    parts = []
+    for k, t in enumerate(targets):
+        t = Vector(t)
+        start = t.normalized() * R_core * 0.9
+        length = (t - start).length
+        u, w = basis(t)
+        bend = (u * math.cos(rnd.uniform(0, TAU)) + w * math.sin(rnd.uniform(0, TAU))).normalized() * length * 0.08
+        n = 9
+        pts = [start.lerp(t, i / (n - 1)) + bend * math.sin(math.pi * i / (n - 1)) for i in range(n)]
+        r0 = 0.12 * R_core
+        radii = [1.0 - 0.67 * i / (n - 1) for i in range(n)]
+        parts.append(tube(f"{name}{k}", pts, r0, M["bark"], res=4, bevel=2, radii=radii))
+        # the fork: a side branch from the middle, 30-60 % of the root's length
+        mid = pts[n // 2]
+        side = (u * rnd.uniform(-1, 1) + w * rnd.uniform(-1, 1)).normalized()
+        tip = mid + (t - mid).normalized() * length * rnd.uniform(0.15, 0.3) + side * length * rnd.uniform(0.15, 0.3)
+        branch = [mid.lerp(tip, i / 5) for i in range(6)]
+        parts.append(tube(f"{name}{k}_ast", branch, r0 * 0.5, M["bark"], res=4, bevel=2, radii=[1 - 0.9 * i / 5 for i in range(6)]))
+        # the grip: fingers along the sphere of the target, climbing outwards
+        rt = t.length
+        f = length * 0.25
+        for j in range(rnd.randint(3, 5)):
+            a = TAU * j / 5 + rnd.uniform(-0.3, 0.3)
+            d = u * math.cos(a) + w * math.sin(a)
+            finger = [(t.normalized() + d * (s / 5) * f / rt).normalized() * (rt + rise * min(1.0, s / 3)) for s in range(6)]
+            parts.append(tube(f"{name}{k}_f{j}", finger, r0 * 0.4, M["bark"], res=3, bevel=2, radii=[1 - 0.85 * s / 5 for s in range(6)]))
+    return parts
+
+
+def crust_shard(name, R, centre_dir, ang, thickness, mat, rnd, flats=()):
+    """A piece of a planet's crust: a thick spherical-shell cap of angular radius ang (rad) around centre_dir,
+    its top at R with displacement, its bottom at R - thickness, its rim jagged (+-15 %). flats (direction, angle)
+    stay at exactly R (building sites)."""
+    c = Vector(centre_dir).normalized()
+    u, w = basis(c)
+    nr = max(8, int(ang * R / 5))
+    ns = max(24, min(160, int(TAU * ang * R / 6)))
+    ph = [rnd.uniform(0, TAU) for _ in range(3)]
+    off = Vector((rnd.uniform(-50, 50), rnd.uniform(-50, 50), rnd.uniform(-50, 50)))
+    bm = bmesh.new()
+
+    def point(i, j, top):
+        az = TAU * j / ns
+        edge = ang * (1 + 0.1 * math.sin(3 * az + ph[0]) + 0.05 * math.sin(7 * az + ph[1]) + 0.03 * math.sin(13 * az + ph[2]))
+        a = edge * i / nr
+        d = c * math.cos(a) + (u * math.cos(az) + w * math.sin(az)) * math.sin(a)
+        if top:
+            r = R + 0.04 * R * noise.noise(d * 3 + off)
+            for f, fw in flats:
+                fa = d.angle(Vector(f))
+                if fa < fw * 1.6:
+                    k = 1.0 if fa < fw else 1 - (fa - fw) / (fw * 0.6)
+                    r = r + (R - r) * k
+        else:
+            r = R - thickness + 0.25 * thickness * noise.noise(d * 5 + off)
+        return d * r
+
+    tops = [[bm.verts.new(point(i, j, True)) for j in range(ns)] for i in range(1, nr + 1)]
+    bots = [[bm.verts.new(point(i, j, False)) for j in range(ns)] for i in range(1, nr + 1)]
+    ct, cb = bm.verts.new(point(0, 0, True)), bm.verts.new(point(0, 0, False))
+    for j in range(ns):
+        j2 = (j + 1) % ns
+        bm.faces.new((ct, tops[0][j], tops[0][j2]))
+        bm.faces.new((cb, bots[0][j2], bots[0][j]))
+        for i in range(nr - 1):
+            bm.faces.new((tops[i][j], tops[i + 1][j], tops[i + 1][j2], tops[i][j2]))
+            bm.faces.new((bots[i][j2], bots[i + 1][j2], bots[i + 1][j], bots[i][j]))
+        bm.faces.new((tops[-1][j], bots[-1][j], bots[-1][j2], tops[-1][j2]))
+    bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
+    return link(name, bm, mat)
 
 
 def direction(lat, lon):
