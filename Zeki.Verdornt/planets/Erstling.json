@@ -62,6 +62,29 @@
           "b": 180,
           "a": 255
         }
+      },
+      {
+        "position": {
+          "x": 235.967,
+          "y": -115.92,
+          "z": 110.033
+        },
+        "alignRadial": true,
+        "linksTo": "Eispforte",
+        "name": "ZEKIVD_Erstling_Knoten",
+        "scale": 0.5,
+        "fogTint": {
+          "r": 150,
+          "g": 200,
+          "b": 255,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 170,
+          "g": 210,
+          "b": 255,
+          "a": 255
+        }
       }
     ]
   },
@@ -111,6 +134,88 @@
           "z": 0.0
         },
         "rename": "Nomai_Schrein",
+        "keepLoaded": true
+      },
+      {
+        "path": "",
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "VD_Rankenvorlagen",
+        "keepLoaded": true
+      },
+      {
+        "path": "QuantumMoon_Body/Sector_QuantumMoon/State_DB/Interactables_DBState/DBState_QuantumObjects/DB_Q_Vine1/DB_Bramble_Vine1/State_1/Terrain_TH_Bramble_Vine1",
+        "parentPath": "Sector/VD_Rankenvorlagen",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "Ranke_1",
+        "keepLoaded": true
+      },
+      {
+        "path": "QuantumMoon_Body/Sector_QuantumMoon/State_DB/Interactables_DBState/DBState_QuantumObjects/DB_Q_Vine2/DB_Bramble_Vine2/State_1/Terrain_TH_Bramble_Vine2",
+        "parentPath": "Sector/VD_Rankenvorlagen",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "Ranke_2",
+        "keepLoaded": true
+      },
+      {
+        "path": "QuantumMoon_Body/Sector_QuantumMoon/State_DB/Interactables_DBState/DBState_QuantumObjects/DB_Q_Vine3/DB_Bramble_Vine3/State_1/Terrain_TH_Bramble_Vine3",
+        "parentPath": "Sector/VD_Rankenvorlagen",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "Ranke_3",
+        "keepLoaded": true
+      },
+      {
+        "path": "QuantumMoon_Body/Sector_QuantumMoon/State_DB/Interactables_DBState/DBState_QuantumObjects/DB_Q_Vine4/DB_Bramble_Vine4/State_1/Terrain_TH_Bramble_Vine4",
+        "parentPath": "Sector/VD_Rankenvorlagen",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "Ranke_4",
+        "keepLoaded": true
+      },
+      {
+        "path": "QuantumMoon_Body/Sector_QuantumMoon/State_DB/Interactables_DBState/DBState_QuantumObjects/DB_Q_Vine5/DB_Bramble_Vine5/State_1/Terrain_TH_Bramble_Vine5",
+        "parentPath": "Sector/VD_Rankenvorlagen",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "Ranke_5",
+        "keepLoaded": true
+      },
+      {
+        "path": "TimberHearth_Body/Sector_TH/Sector_ImpactCrater/Interactables_ImpactCrater/ControlledByProxy_Structures/Terrain_DB_BrambleSphere_Seed_V2",
+        "parentPath": "Sector/VD_Rankenvorlagen",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "Samen",
         "keepLoaded": true
       },
       {

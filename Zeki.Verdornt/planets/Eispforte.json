@@ -1,0 +1,88 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+  "name": "Eispforte",
+  "starSystem": "Verdornt",
+  "canShowOnTitle": false,
+  "Orbit": {
+    "staticPosition": {
+      "x": -52000.0,
+      "y": -18000.0,
+      "z": 30000.0
+    }
+  },
+  "ShipLog": {
+    "mapMode": {
+      "remove": true
+    }
+  },
+  "Bramble": {
+    "dimension": {
+      "radius": 420,
+      "fogTint": {
+        "r": 110,
+        "g": 170,
+        "b": 215,
+        "a": 255
+      },
+      "fogDensity": 3.0,
+      "linksTo": "ZEKIVD_Erstling_Knoten",
+      "vinePrefab": "hub"
+    },
+    "nodes": [
+      {
+        "position": {
+          "x": 160.0,
+          "y": 60.0,
+          "z": -120.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "linksTo": "Splittergang",
+        "name": "ZEKIVD_Zu_Splittergang",
+        "scale": 0.6,
+        "fogTint": {
+          "r": 190,
+          "g": 235,
+          "b": 255,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 190,
+          "g": 235,
+          "b": 255,
+          "a": 255
+        }
+      },
+      {
+        "position": {
+          "x": -150.0,
+          "y": -80.0,
+          "z": 140.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "linksTo": "Kaeltenest",
+        "name": "ZEKIVD_Zu_Kaeltenest",
+        "scale": 0.6,
+        "fogTint": {
+          "r": 90,
+          "g": 120,
+          "b": 220,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 90,
+          "g": 120,
+          "b": 220,
+          "a": 255
+        }
+      }
+    ]
+  }
+}

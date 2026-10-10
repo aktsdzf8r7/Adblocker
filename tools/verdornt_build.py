@@ -12,6 +12,7 @@ Usage:  python tools/verdornt_build.py [path/to/Zeki.Verdornt]
 import json
 import math
 import os
+import random
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -87,6 +88,56 @@ def material_templates():
     return details
 
 
+TH_SITE = "Sector_TH/VD_Absturzstelle"   # vanilla bodies: details land in their main sector
+
+
+def bramble_templates(sector="Sector"):
+    """Hidden copies of the real Dark Bramble vines and the bramble seed; the DLL clones them along paths (Bramble.cs).
+    One set per system: on Erstling, and on Timber Hearth for the Samenschlund."""
+    container = sector + "/VD_Rankenvorlagen"
+    details = [{"path": "", "position": vec([0, 0, 0]), "rename": "VD_Rankenvorlagen", "keepLoaded": True}]
+    details += [{"path": P["db_vine"].format(n=n), "parentPath": container, "isRelativeToParent": True, "position": vec([0, 0, 0]),
+                 "rename": f"Ranke_{n}", "keepLoaded": True} for n in range(1, 6)]
+    details.append({"path": P["bramble_seed"], "parentPath": container, "isRelativeToParent": True, "position": vec([0, 0, 0]),
+                    "rename": "Samen", "keepLoaded": True})
+    return details
+
+
+def unity_direction(lat, lon):
+    """A direction like Blender's direction(lat, lon) in tools/verdornt_models.py, converted to Unity (-x, z, -y)."""
+    la, lo = math.radians(lat), math.radians(lon)
+    x, y, z = math.cos(la) * math.cos(lo), math.cos(la) * math.sin(lo), math.sin(la)
+    return [-x, z, -y]
+
+
+ERSTLING_NODE = unity_direction(-24, 205)   # the planet node into the Eispforte, far from the camp
+
+
+def vine_paths(seed, radius, count, thick=(4, 9)):
+    """Random root paths inside a dimension: from the wall of thorns curling inwards (Unity coordinates)."""
+    rnd = random.Random(seed)
+    paths = []
+    for _ in range(count):
+        z = rnd.uniform(-1, 1)
+        a = rnd.uniform(0, math.tau)
+        d = [math.sqrt(1 - z * z) * math.cos(a), z, math.sqrt(1 - z * z) * math.sin(a)]
+        p = [c * radius * 0.92 for c in d]
+        heading = [-c for c in d]
+        pts = [p]
+        for _ in range(rnd.randint(7, 12)):
+            heading = [h + rnd.uniform(-0.6, 0.6) for h in heading]
+            n = math.sqrt(sum(h * h for h in heading)) or 1
+            heading = [h / n for h in heading]
+            step = radius * rnd.uniform(0.07, 0.13)
+            p = [p[i] + heading[i] * step for i in range(3)]
+            if math.sqrt(sum(c * c for c in p)) > radius * 0.95:
+                break
+            pts.append(p)
+        if len(pts) > 2:
+            paths.append({"punkte": [vec([round(c, 2) for c in q]) for q in pts], "dicke": round(rnd.uniform(*thick), 2)})
+    return paths
+
+
 def tangent(a, metres):
     """A point beside an anchor on the surface: metres along a direction perpendicular to its normal."""
     n = a["normal"]
@@ -104,9 +155,13 @@ def erstling(A):
     home = at(L["ruecksamen"], 0.6)
     return planet("Erstling", 260, 10, {
         "Spawn": {"playerSpawnPoints": [{"position": vec(spawn), "alignRadial": True, "isDefault": True, "startWithSuit": True}]},
-        "Bramble": {"nodes": [{"position": vec(seed), "alignRadial": True, "linksTo": "Ankunftskammer", "name": "ZEKIVD_Ankunftssamen", "scale": 0.12,
-                               "fogTint": color(160, 255, 170), "lightTint": color(170, 255, 180)}]},
-        "Props": {"details": material_templates() + [
+        "Bramble": {"nodes": [
+            {"position": vec(seed), "alignRadial": True, "linksTo": "Ankunftskammer", "name": "ZEKIVD_Ankunftssamen", "scale": 0.12,
+             "fogTint": color(160, 255, 170), "lightTint": color(170, 255, 180)},
+            # the great node of Erstling: into the Eispforte
+            {"position": vec([c * 285 for c in ERSTLING_NODE]), "alignRadial": True, "linksTo": "Eispforte", "name": "ZEKIVD_Erstling_Knoten",
+             "scale": 0.5, "fogTint": color(150, 200, 255), "lightTint": color(170, 210, 255)}]},
+        "Props": {"details": material_templates() + bramble_templates() + [
             # the return seed in its copper cradle: the real bramble seed, small
             {"path": P["bramble_seed"], "position": vec(home), "alignRadial": True, "scale": 0.12, "rename": "VD_Ruecksamen"},
         ]},
@@ -123,12 +178,12 @@ ANKUNFTSKAMMER_AT = (-31000, 26000, 42000)
 def timber_hearth():
     """The crash site on Timber Hearth (system SolarSystem). One container; the DLL moves it beside the vanilla
     impact crater onto the ground (Crossing.cs), so everything inside is relative to it, +y up."""
-    site = "Sector/VD_Absturzstelle"
+    site = TH_SITE
     cfg = sb.body_header("TIMBER_HEARTH", "SolarSystem")
     cfg["Props"] = {"details": [
         {"path": "", "position": vec([0, 400, 0]), "rename": "VD_Absturzstelle", "keepLoaded": True},
         {"path": P["smoke_crash"], "parentPath": site, "isRelativeToParent": True, "position": vec([4, 8, 3]), "rename": "VD_Rauch"},
-    ]}
+    ] + bramble_templates("Sector_TH")}
     cfg["Bramble"] = {"nodes": [
         # the seed itself: large enough to walk into, half sunk into the crater
         {"parentPath": site, "isRelativeToParent": True, "position": vec([0, 10, 0]), "linksTo": "Samenschlund", "name": "ZEKIVD_Absturzsamen",
@@ -185,6 +240,27 @@ def fernlager():
     return cfg
 
 
+# dimensions 2-4 of the thorn network (spec section 5)
+EISPFORTE_AT = (-52000, -18000, 30000)
+SPLITTERGANG_AT = (-60000, 33000, -24000)
+KAELTENEST_AT = (47000, -36000, 51000)
+
+
+def dimensions():
+    node = lambda pos, to, name, scale, fog: {"position": vec(pos), "rotation": vec([0, 0, 0]), "linksTo": to, "name": name, "scale": scale,  # noqa: E731
+                                              "fogTint": fog, "lightTint": fog}
+    return {
+        "Eispforte": dimension("Eispforte", EISPFORTE_AT, 420, color(110, 170, 215), 3.0, "ZEKIVD_Erstling_Knoten", vines="hub", nodes=[
+            node([160, 60, -120], "Splittergang", "ZEKIVD_Zu_Splittergang", 0.6, color(190, 235, 255)),
+            node([-150, -80, 140], "Kaeltenest", "ZEKIVD_Zu_Kaeltenest", 0.6, color(90, 120, 220)),
+        ]),
+        "Splittergang": dimension("Splittergang", SPLITTERGANG_AT, 320, color(170, 220, 235), 2.4, "ZEKIVD_Zu_Splittergang", vines="cluster"),
+        "Kaeltenest": dimension("Kaeltenest", KAELTENEST_AT, 280, color(40, 60, 120), 4.0, "ZEKIVD_Zu_Kaeltenest", extra={
+            # a real anglerfish lives here
+            "Props": {"details": [{"path": P["angler"], "position": vec([60, -40, 30]), "rename": "VD_Anglerfisch"}]}}),
+    }
+
+
 def placements(A):
     """assets/models/placements.json: where the DLL puts the Blender models (see Models.cs)."""
     props = [
@@ -197,11 +273,16 @@ def placements(A):
         {"model": "ausguck", "body": "Ausguck", "collider": True},
     ]
     props += [
-        {"model": "krater", "name": "VD_Krater", "body": "TIMBER_HEARTH", "parentPath": "Sector/VD_Absturzstelle", "collider": True},
-        {"model": "absperrung", "name": "VD_Absperrung", "body": "TIMBER_HEARTH", "parentPath": "Sector/VD_Absturzstelle", "collider": True,
+        {"model": "krater", "name": "VD_Krater", "body": "TIMBER_HEARTH", "parentPath": TH_SITE, "collider": True},
+        {"model": "absperrung", "name": "VD_Absperrung", "body": "TIMBER_HEARTH", "parentPath": TH_SITE, "collider": True,
          "position": vec([0, 0.4, 41]), "rotation": vec([0, 180, 0])},
         {"model": "strudel", "name": "VD_Strudel", "body": "Samenschlund", "spin": 14},
     ]
+    rnd = random.Random(5)
+    for k in range(7):  # ice thorns in the Splittergang
+        props.append({"model": "eiszapfen", "name": f"VD_Eiszapfen_{k}", "body": "Splittergang", "collider": True,
+                      "position": vec([rnd.uniform(-180, 180), rnd.uniform(-120, 120), rnd.uniform(-180, 180)]),
+                      "rotation": vec([rnd.uniform(0, 360), rnd.uniform(0, 360), 0]), "scale": rnd.uniform(1.0, 2.2)})
     for p in props:
         p.setdefault("name", p["model"].capitalize())
         p.setdefault("position", vec([0, 0, 0]))
@@ -213,7 +294,14 @@ def placements(A):
          "range": 60, "intensity": 1.4},
         {"name": "Licht_Ausguck", "body": "Ausguck", "position": vec([0, 8, 0]), "color": vec([0.75, 0.9, 1.0]), "range": 45, "intensity": 1.2},
     ]
-    return {"props": props, "lights": lights}
+    bramble = {
+        "Ankunftskammer": {"pfade": vine_paths(1, 160, 7, (3, 6))},
+        "Eispforte": {"pfade": vine_paths(2, 420, 10, (6, 12))},
+        "Splittergang": {"pfade": vine_paths(3, 320, 8, (4, 9))},
+        "Kaeltenest": {"pfade": vine_paths(4, 280, 9, (4, 8)), "samen": [{"position": vec([-40, 70, -50]), "groesse": 14}]},
+        "Samenschlund": {"pfade": vine_paths(5, 220, 6, (3, 7))},
+    }
+    return {"props": props, "lights": lights, "bramble": bramble}
 
 
 def system():
@@ -271,6 +359,8 @@ def main():
     write_json("planets/Samenschlund.json", dimension("Samenschlund", SAMENSCHLUND_AT, 220, color(40, 95, 55), 3.0, "ZEKIVD_Absturzsamen",
                                                       system="SolarSystem"))
     write_json("planets/Ankunftskammer.json", dimension("Ankunftskammer", ANKUNFTSKAMMER_AT, 160, color(150, 230, 160), 2.0, "ZEKIVD_Ankunftssamen"))
+    for name, cfg in dimensions().items():
+        write_json(f"planets/{name}.json", cfg)
     write_json("assets/models/placements.json", placements(A))
 
 

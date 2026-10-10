@@ -14,6 +14,8 @@ public class Placements
 {
     public List<PropPlacement> props = new();
     public List<LightPlacement> lights = new();
+    /// <summary>Real Dark Bramble vines and seeds per body or dimension (Bramble.cs).</summary>
+    public Dictionary<string, VinePlan> bramble = new();
 }
 
 public class PropPlacement
@@ -179,6 +181,7 @@ public static class ModelPlacer
         }
         foreach (var l in Data.lights) AddLight(mod, l);
         mod.Log($"{count} Modelle platziert.");
+        PlaceVines(mod);
     }
 
     /// <summary>The parent of a placement, or null when its body is not in the current system.</summary>
@@ -227,6 +230,24 @@ public static class ModelPlacer
         if (p.spin != 0f) go.AddComponent<Spinner>().DegreesPerSecond = p.spin;
         go.SetActive(true);
         return go;
+    }
+
+    /// <summary>The real Dark Bramble vines and seeds of every body of this system that has a plan.</summary>
+    private static void PlaceVines(ZekiVerdornt mod)
+    {
+        // the templates of this system: on Erstling in Dornenkranz, on Timber Hearth at home
+        var host = mod.NewHorizons.GetPlanet("Erstling")?.transform;
+        if (host == null) host = Locator.GetAstroObject(AstroObject.Name.TimberHearth)?.transform;
+        if (host == null || Data.bramble == null) return;
+        CanonBramble.Setup(mod, host);
+        foreach (var kv in Data.bramble)
+        {
+            var parent = Parent(mod, kv.Key, null);
+            if (parent == null) continue;
+            var vines = CanonBramble.BuildVines(parent, "VD_Ranken", kv.Value.pfade, 1f, true, kv.Key.GetHashCode());
+            for (var i = 0; i < kv.Value.samen.Count; i++)
+                CanonBramble.MakeSeed(vines.transform, "VD_Samen_" + i, kv.Value.samen[i].position.ToVector(), kv.Value.samen[i].groesse, true);
+        }
     }
 
     private static void AddLight(ZekiVerdornt mod, LightPlacement l)

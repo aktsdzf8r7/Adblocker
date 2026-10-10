@@ -55,10 +55,13 @@ public class Crossing : MonoBehaviour
     {
         var th = Locator.GetAstroObject(AstroObject.Name.TimberHearth);
         if (th == null) return;
-        var site = th.transform.Find("Sector/VD_Absturzstelle");
-        Transform oldSeed = null;
+        Transform site = null, oldSeed = null;
         foreach (var t in th.GetComponentsInChildren<Transform>(true))
-            if (t.name == "Terrain_DB_BrambleSphere_Seed_V2") { oldSeed = t; break; }
+        {
+            if (t.name == "VD_Absturzstelle") site = t;
+            // the vanilla seed (our copy of it is renamed "Samen")
+            else if (oldSeed == null && t.name == "Terrain_DB_BrambleSphere_Seed_V2") oldSeed = t;
+        }
         if (site == null || oldSeed == null)
         {
             mod.Log($"Absturzstelle: Container {(site != null ? "ok" : "fehlt")}, alter Samen {(oldSeed != null ? "ok" : "fehlt")}.", true);
