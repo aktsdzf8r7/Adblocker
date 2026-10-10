@@ -138,6 +138,18 @@ def vine_paths(seed, radius, count, thick=(4, 9)):
     return paths
 
 
+def nomai(kind, name, pos, radial=False, rotation=None, parent=None):
+    """A Nomai text prop (computer, recorder, trailmarker) pointing at planets/text/<name>.xml."""
+    t = {"type": kind, "xmlFile": f"planets/text/{name}.xml", "position": vec(pos), "rename": "VD_" + name}
+    if radial:
+        t["alignRadial"] = True
+    if rotation:
+        t["rotation"] = vec(rotation)
+    if parent:
+        t.update({"parentPath": parent, "isRelativeToParent": True})
+    return t
+
+
 def remote(rid, platform=None, stones=()):
     r = {"id": "ZEKIVD_" + rid, "decalPath": f"planets/assets/remotes/{rid.lower()}.png"}
     if platform:
@@ -196,7 +208,13 @@ def erstling(A):
             # the warp pad of the tower sleeps until the marble lies in "wach"
             {"path": "", "position": vec(at(L["turm"], 0.4)), "alignRadial": True, "rename": "VD_Turm_Warp",
              "activationCondition": "ZEKIVD_TURM_WACH"},
-        ], "translatorText": lagerkern_texts(L),
+        ], "translatorText": lagerkern_texts(L) + [
+            nomai("recorder", "Lager_Hyssop", at(L["recorder1"]), radial=True),
+            nomai("recorder", "Lager_Rue", at(L["recorder2"]), radial=True),
+            nomai("recorder", "Lager_Tansy", at(L["recorder3"]), radial=True),
+            nomai("computer", "Turm_Erstling", tangent(L["turm"], -7.0), radial=True),
+            nomai("computer", "Hoehle_Kern", at(L["hoehle"]), radial=True),
+        ],
         "warpTransmitters": [{"frequency": "ZEKIVD_AUSGUCK", "parentPath": "Sector/VD_Turm_Warp", "isRelativeToParent": True,
                               "position": vec([0, 0, 0])}],
         "warpReceivers": [{"frequency": "ZEKIVD_ERSTLING", "position": vec(tangent(L["turm"], 11.0)), "alignRadial": True}],
@@ -228,6 +246,9 @@ def timber_hearth():
         {"path": "", "position": vec([0, 400, 0]), "rename": "VD_Absturzstelle", "keepLoaded": True},
         {"path": P["smoke_crash"], "parentPath": site, "isRelativeToParent": True, "position": vec([4, 8, 3]), "rename": "VD_Rauch"},
     ] + bramble_templates("Sector_TH")}
+    cfg["Props"]["translatorText"] = [nomai("computer", "Absturz_Rinde", [6, 0.5, 30], rotation=[0, 200, 0], parent=site)]
+    cfg["Props"]["dialogue"] = [{"parentPath": site, "isRelativeToParent": True, "position": vec([0, 1.6, 41]), "radius": 2.5,
+                                 "xmlFile": "planets/dialogue/Absperrung.xml", "rename": "VD_Absperrung_Notiz"}]
     cfg["Volumes"] = {"revealVolumes": [{"parentPath": site, "isRelativeToParent": True, "position": vec([0, 10, 0]), "radius": 70,
                                          "reveals": ["ZEKIVD_ABSTURZ_FOUND"]}]}
     cfg["Bramble"] = {"nodes": [
@@ -273,6 +294,7 @@ def ausguck(A):
         "MapMarker": {"enabled": True},
         "Props": {
             "entryLocation": [{"id": "ZEKIVD_AUSGUCK", "position": vec([0, 4, 0])}],
+            "translatorText": [nomai("computer", "Ausguck_System", [-2, 0, -10], rotation=[0, 20, 0])],
             "remotes": [
                 remote("SYSTEM", platform={"position": vec(at(A["ausguck"]["becken"])), "rotation": vec([0, A["ausguck"]["becken"]["yaw"], 0]),
                                            "rename": "VD_Becken_System", "reveals": "ZEKIVD_SYSTEM_BLICK"}),
@@ -317,10 +339,12 @@ def dimensions():
             node([160, 60, -120], "Splittergang", "ZEKIVD_Zu_Splittergang", 0.6, color(190, 235, 255)),
             node([-150, -80, 140], "Kaeltenest", "ZEKIVD_Zu_Kaeltenest", 0.6, color(90, 120, 220)),
         ]),
-        "Splittergang": dimension("Splittergang", SPLITTERGANG_AT, 320, color(170, 220, 235), 2.4, "ZEKIVD_Zu_Splittergang", vines="cluster"),
+        "Splittergang": dimension("Splittergang", SPLITTERGANG_AT, 320, color(170, 220, 235), 2.4, "ZEKIVD_Zu_Splittergang", vines="cluster",
+                                  extra={"Props": {"translatorText": [nomai("computer", "Splitter_Rue", [30, 20, -60], rotation=[0, 40, 0])]}}),
         "Kaeltenest": dimension("Kaeltenest", KAELTENEST_AT, 280, color(40, 60, 120), 4.0, "ZEKIVD_Zu_Kaeltenest", extra={
             # a real anglerfish lives here
-            "Props": {"details": [{"path": P["angler"], "position": vec([60, -40, 30]), "rename": "VD_Anglerfisch"}]}}),
+            "Props": {"details": [{"path": P["angler"], "position": vec([60, -40, 30]), "rename": "VD_Anglerfisch"}],
+                      "translatorText": [nomai("computer", "Kaelte_Hinweis", [-50, 30, 40], rotation=[0, 120, 0])]}}),
     }
 
 
@@ -438,7 +462,7 @@ def placements(A):
 
 # ship log layout (rumor mode)
 ENTRIES_HOME = {"ZEKIVD_ABSTURZ": (2900, -400)}
-ENTRIES = {"ZEKIVD_LAGER": (0, 0), "ZEKIVD_AUSGUCK": (420, 220), "ZEKIVD_NETZ": (420, -220), "ZEKIVD_KERNE": (-500, 0)}
+ENTRIES = {"ZEKIVD_LAGER": (0, 0), "ZEKIVD_AUSGUCK": (420, 220), "ZEKIVD_NETZ": (420, -220), "ZEKIVD_KERNE": (-500, 0), "ZEKIVD_VIER": (0, 420)}
 ORANGE = (color(150, 230, 120), color(220, 255, 200))
 
 
@@ -454,6 +478,7 @@ def system():
         "respawnHere": False,
         "startHere": False,
         "curiosities": [{"id": "ZEKIVD_LAGER", "color": GREEN[0], "highlightColor": GREEN[1]},
+                        {"id": "ZEKIVD_VIER", "color": color(255, 170, 210), "highlightColor": color(255, 220, 235)},
                         {"id": "ZEKIVD_KERNE", "color": color(150, 200, 255), "highlightColor": color(210, 235, 255)}],
         "entryPositions": [{"id": k, "position": {"x": v[0], "y": v[1]}} for k, v in ENTRIES.items()],
     }
@@ -486,12 +511,30 @@ def decal(rid, size=256):
     return img
 
 
+def dialogue_hornfels():
+    """The note at the barrier on Timber Hearth (a Hearthian, Hornfels)."""
+    pages = ["NICHT ANFASSEN!", "Dieser Samen ist heute Morgen vom Himmel gefallen. Er raucht noch.",
+             "Gossan sagt, er ist innen hohl. Slate sagt, er summt. Ich sage: Finger weg, bis ich ihn vermessen habe.",
+             "– Hornfels, Observatorium"]
+    xml = ['<?xml version="1.0" encoding="utf-8"?>',
+           '<DialogueTree xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" '
+           'xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/dialogue_schema.xsd">',
+           "  <NameField>Notiz an der Absperrung</NameField>", "  <DialogueNode>", "    <Name>START</Name>",
+           "    <EntryCondition>DEFAULT</EntryCondition>", "    <Dialogue>"]
+    xml += [f"      <Page>{p}</Page>" for p in pages]
+    xml += ["    </Dialogue>", "  </DialogueNode>", "</DialogueTree>"]
+    path = os.path.join(MOD, "planets", "dialogue", "Absperrung.xml")
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="utf-8", newline="\n") as f:
+        f.write("\n".join(xml) + "\n")
+
+
 def entry_art(entry, seed):
     """Ship log pictures for stage 1 (a thorn ball with the entry's own tint; renders follow later)."""
     from PIL import ImageDraw
     rnd = random.Random(seed)
     tint = {"ZEKIVD_ABSTURZ": (150, 230, 120), "ZEKIVD_LAGER": (150, 200, 255), "ZEKIVD_AUSGUCK": (255, 210, 140),
-            "ZEKIVD_NETZ": (120, 190, 255), "ZEKIVD_KERNE": (190, 230, 255)}[entry]
+            "ZEKIVD_NETZ": (120, 190, 255), "ZEKIVD_KERNE": (190, 230, 255), "ZEKIVD_VIER": (255, 190, 220)}[entry]
     img = sb.starfield(512, seed, tint=tint)
     d = ImageDraw.Draw(img)
     c = 256
@@ -555,7 +598,9 @@ def main():
         sb.save(decal(rid), f"planets/assets/remotes/{rid.lower()}.png")
     for k, entry in enumerate(list(ENTRIES_HOME) + list(ENTRIES)):
         sb.save(entry_art(entry, 100 + k), f"planets/assets/shiplog/entries/{entry}.png")
-    write_json("planets/Ankunftskammer.json", dimension("Ankunftskammer", ANKUNFTSKAMMER_AT, 160, color(150, 230, 160), 2.0, "ZEKIVD_Ankunftssamen"))
+    write_json("planets/Ankunftskammer.json", dimension("Ankunftskammer", ANKUNFTSKAMMER_AT, 160, color(150, 230, 160), 2.0, "ZEKIVD_Ankunftssamen",
+                                                        extra={"Props": {"translatorText": [nomai("computer", "Ankunft_Tansy", [0, -10, 40])]}}))
+    dialogue_hornfels()
     for name, cfg in dimensions().items():
         write_json(f"planets/{name}.json", cfg)
     write_json("assets/models/placements.json", placements(A))

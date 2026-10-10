@@ -43,5 +43,24 @@
         ]
       }
     ]
+  },
+  "Props": {
+    "translatorText": [
+      {
+        "type": "computer",
+        "xmlFile": "planets/text/Splitter_Rue.xml",
+        "position": {
+          "x": 30.0,
+          "y": 20.0,
+          "z": -60.0
+        },
+        "rename": "VD_Splitter_Rue",
+        "rotation": {
+          "x": 0.0,
+          "y": 40.0,
+          "z": 0.0
+        }
+      }
+    ]
   }
 }

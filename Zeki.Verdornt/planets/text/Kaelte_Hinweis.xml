@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Computer im Kältenest -->
+<NomaiObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/text_schema.xsd">
+  <TextBlock>
+    <ID>1</ID>
+    <Text>Rue: Kältenest. Das Licht hier gehört einem Fisch. Leise sein.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>2</ID>
+    <ParentID>1</ParentID>
+    <Text>Tansy: Der Ausguck liegt hoch über der Bahn der Planeten. Ohne Schiff: nur über den Turm von Erstling.</Text>
+  </TextBlock>
+  <ShipLogConditions>
+    <RevealFact>
+      <FactID>ZEKIVD_KAELTE_HINWEIS</FactID>
+      <Condition>1</Condition>
+    </RevealFact>
+  </ShipLogConditions>
+</NomaiObject>

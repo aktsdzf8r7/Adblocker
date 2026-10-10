@@ -29,5 +29,19 @@
       "vinePrefab": "smallNest"
     }
   },
-  "Volumes": {}
+  "Volumes": {},
+  "Props": {
+    "translatorText": [
+      {
+        "type": "computer",
+        "xmlFile": "planets/text/Ankunft_Tansy.xml",
+        "position": {
+          "x": 0.0,
+          "y": -10.0,
+          "z": 40.0
+        },
+        "rename": "VD_Ankunft_Tansy"
+      }
+    ]
+  }
 }

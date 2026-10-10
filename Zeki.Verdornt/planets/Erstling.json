@@ -308,6 +308,61 @@
         },
         "alignRadial": true,
         "rename": "Lagerkern_Kern"
+      },
+      {
+        "type": "recorder",
+        "xmlFile": "planets/text/Lager_Hyssop.xml",
+        "position": {
+          "x": -67.273,
+          "y": 141.595,
+          "z": -207.62
+        },
+        "rename": "VD_Lager_Hyssop",
+        "alignRadial": true
+      },
+      {
+        "type": "recorder",
+        "xmlFile": "planets/text/Lager_Rue.xml",
+        "position": {
+          "x": -81.921,
+          "y": 141.595,
+          "z": -202.289
+        },
+        "rename": "VD_Lager_Rue",
+        "alignRadial": true
+      },
+      {
+        "type": "recorder",
+        "xmlFile": "planets/text/Lager_Tansy.xml",
+        "position": {
+          "x": -77.044,
+          "y": 130.147,
+          "z": -211.677
+        },
+        "rename": "VD_Lager_Tansy",
+        "alignRadial": true
+      },
+      {
+        "type": "computer",
+        "xmlFile": "planets/text/Turm_Erstling.xml",
+        "position": {
+          "x": -101.394,
+          "y": 122.514,
+          "z": -207.889
+        },
+        "rename": "VD_Turm_Erstling",
+        "alignRadial": true
+      },
+      {
+        "type": "computer",
+        "xmlFile": "planets/text/Hoehle_Kern.xml",
+        "position": {
+          "x": -43.71,
+          "y": 129.923,
+          "z": -224.586
+        },
+        "rename": "VD_Hoehle_Kern",
+        "alignRadial": true
       }
     ],
     "warpTransmitters": [

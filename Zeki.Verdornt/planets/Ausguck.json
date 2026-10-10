@@ -29,6 +29,23 @@
         }
       }
     ],
+    "translatorText": [
+      {
+        "type": "computer",
+        "xmlFile": "planets/text/Ausguck_System.xml",
+        "position": {
+          "x": -2.0,
+          "y": 0.0,
+          "z": -10.0
+        },
+        "rename": "VD_Ausguck_System",
+        "rotation": {
+          "x": 0.0,
+          "y": 20.0,
+          "z": 0.0
+        }
+      }
+    ],
     "remotes": [
       {
         "id": "ZEKIVD_SYSTEM",

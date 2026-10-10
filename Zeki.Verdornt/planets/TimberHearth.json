@@ -107,6 +107,39 @@
         "rename": "Samen",
         "keepLoaded": true
       }
+    ],
+    "translatorText": [
+      {
+        "type": "computer",
+        "xmlFile": "planets/text/Absturz_Rinde.xml",
+        "position": {
+          "x": 6.0,
+          "y": 0.5,
+          "z": 30.0
+        },
+        "rename": "VD_Absturz_Rinde",
+        "rotation": {
+          "x": 0.0,
+          "y": 200.0,
+          "z": 0.0
+        },
+        "parentPath": "Sector_TH/VD_Absturzstelle",
+        "isRelativeToParent": true
+      }
+    ],
+    "dialogue": [
+      {
+        "parentPath": "Sector_TH/VD_Absturzstelle",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 1.6,
+          "z": 41.0
+        },
+        "radius": 2.5,
+        "xmlFile": "planets/dialogue/Absperrung.xml",
+        "rename": "VD_Absperrung_Notiz"
+      }
     ]
   },
   "Volumes": {

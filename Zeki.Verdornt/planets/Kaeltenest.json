@@ -55,6 +55,23 @@
         },
         "rename": "VD_Anglerfisch"
       }
+    ],
+    "translatorText": [
+      {
+        "type": "computer",
+        "xmlFile": "planets/text/Kaelte_Hinweis.xml",
+        "position": {
+          "x": -50.0,
+          "y": 30.0,
+          "z": 40.0
+        },
+        "rename": "VD_Kaelte_Hinweis",
+        "rotation": {
+          "x": 0.0,
+          "y": 120.0,
+          "z": 0.0
+        }
+      }
     ]
   }
 }

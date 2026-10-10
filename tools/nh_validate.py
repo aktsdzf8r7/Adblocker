@@ -94,7 +94,8 @@ def check_schemas(bodies, systems):
         for e in jsonschema.Draft7Validator(sch).iter_errors(load_json(path)):
             err(f"{name}: {e.message[:160]}")
     xsds = {root: etree.XMLSchema(etree.fromstring(schema_text(n).encode("utf-8")))
-            for root, n in (("NomaiObject", "text_schema.xsd"), ("AstroObjectEntry", "shiplog_schema.xsd"))}
+            for root, n in (("NomaiObject", "text_schema.xsd"), ("AstroObjectEntry", "shiplog_schema.xsd"),
+                            ("DialogueTree", "dialogue_schema.xsd"))}
     for path in glob.glob(os.path.join(MOD, "planets", "**", "*.xml"), recursive=True):
         doc = etree.parse(path)
         x = xsds[doc.getroot().tag]

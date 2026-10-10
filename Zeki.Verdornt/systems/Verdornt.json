@@ -24,6 +24,21 @@
       }
     },
     {
+      "id": "ZEKIVD_VIER",
+      "color": {
+        "r": 255,
+        "g": 170,
+        "b": 210,
+        "a": 255
+      },
+      "highlightColor": {
+        "r": 255,
+        "g": 220,
+        "b": 235,
+        "a": 255
+      }
+    },
+    {
       "id": "ZEKIVD_KERNE",
       "color": {
         "r": 150,
@@ -66,6 +81,13 @@
       "position": {
         "x": -500,
         "y": 0
+      }
+    },
+    {
+      "id": "ZEKIVD_VIER",
+      "position": {
+        "x": 0,
+        "y": 420
       }
     }
   ]

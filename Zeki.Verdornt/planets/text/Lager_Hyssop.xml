@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Hyssops Aufzeichnung im Lager -->
+<NomaiObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/text_schema.xsd">
+  <TextBlock>
+    <ID>1</ID>
+    <Text>Hier spricht Hyssop. Das Vessel ist in den Dornen zerschellt. Wir drei wollten zu den Rettungskapseln.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>2</ID>
+    <ParentID>1</ParentID>
+    <Text>Ein alter, dunkler Samen tief in den Dornen hat uns hindurchgezogen. Wir kamen hier heraus, aus einem kleinen Samen – Lichtjahre entfernt.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>3</ID>
+    <ParentID>2</ParentID>
+    <Text>Dieses System ist überwuchert. Vier Planeten, und dort, wo die Sonne sein sollte, ein Käfig aus Dornen um einen gefangenen Stern.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>4</ID>
+    <ParentID>3</ParentID>
+    <Text>Ich glaube, hier hat die Dornenwelt angefangen. Was wir zu Hause „die Dornen“ nannten, ist nur ein einzelner Samen von hier.</Text>
+  </TextBlock>
+  <ShipLogConditions>
+    <RevealFact>
+      <FactID>ZEKIVD_FALSCH_ABGEBOGEN</FactID>
+      <Condition>1,2</Condition>
+    </RevealFact>
+    <RevealFact>
+      <FactID>ZEKIVD_URSPRUNG</FactID>
+      <Condition>3,4</Condition>
+    </RevealFact>
+  </ShipLogConditions>
+</NomaiObject>

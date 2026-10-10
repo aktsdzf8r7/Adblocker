@@ -11,6 +11,10 @@
       <Text>Neben dem alten Einschlagkrater auf Timber Hearth liegt ein frischer: Ein riesiger Dornensamen ist zu Beginn dieser Schleife eingeschlagen. Er ist offen – man kann hineinfliegen.</Text>
     </ExploreFact>
     <ExploreFact>
+      <ID>ZEKIVD_ABSTURZ_NOMAI</ID>
+      <Text>Auf einem Nomai-Computer am Samen steht: Der Samen ist nicht gewachsen, er wurde geworfen – von einer Nomai namens Tansy.</Text>
+    </ExploreFact>
+    <ExploreFact>
       <ID>ZEKIVD_ABSTURZ_SCHLUND</ID>
       <Text>Im Samen liegt eine kleine, dunkle Dimension. In ihrer Mitte dreht sich ein Strudel aus Dornen, der alles in sich hineinzieht.</Text>
     </ExploreFact>

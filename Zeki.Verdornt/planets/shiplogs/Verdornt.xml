@@ -24,6 +24,10 @@
       <Text>Ein kleiner Samen in einer Kupferwiege im Lager führt zurück nach Timber Hearth.</Text>
     </ExploreFact>
     <ExploreFact>
+      <ID>ZEKIVD_TUERME</ID>
+      <Text>Tansy hat auf jedem Planeten einen Warp-Turm gebaut. Jeder erwacht, wenn seine Murmel in die richtige Mulde rollt.</Text>
+    </ExploreFact>
+    <ExploreFact>
       <ID>ZEKIVD_TURM_WACH_FACT</ID>
       <Text>Ich habe den Warp-Turm von Erstling geweckt. Er führt zum Ausguck hoch über dem System.</Text>
     </ExploreFact>
@@ -31,6 +35,19 @@
       <ID>ZEKIVD_AUSGUCK</ID>
       <Name>Der Ausguck</Name>
       <Curiosity>ZEKIVD_LAGER</Curiosity>
+      <RumorFact>
+        <ID>ZEKIVD_HERZDORN_RUMOR</ID>
+        <RumorName>Ein gefangener Stern</RumorName>
+        <Text>In der Mitte des Systems ist ein Stern in einem Käfig aus Dornen gefangen. Die Dornen trinken sein Licht.</Text>
+      </RumorFact>
+      <ExploreFact>
+        <ID>ZEKIVD_SYSTEM_NAMEN</ID>
+        <Text>Die Nomai nannten das System Dornenkranz: Herzdorn in der Mitte, dann Erstling, Glutdorn, Nebelranke und Hohlsamen.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKIVD_BRAMBLESATION</ID>
+        <Text>Hyssop zählte die Samen, die der Herzdorn ins All wirft, und nannte das die Bramblesation. Sie wächst immer weiter.</Text>
+      </ExploreFact>
       <ExploreFact>
         <ID>ZEKIVD_AUSGUCK_FOUND</ID>
         <Text>Hoch über der Bahnebene schwebt eine Nomai-Plattform mit einem großen Projektionsbecken.</Text>
@@ -44,6 +61,15 @@
       <ID>ZEKIVD_NETZ</ID>
       <Name>Das Dornen-Netz</Name>
       <Curiosity>ZEKIVD_LAGER</Curiosity>
+      <RumorFact>
+        <ID>ZEKIVD_KAELTE_HINWEIS</ID>
+        <RumorName>Ein Licht in der Kälte</RumorName>
+        <Text>Rue warnt vor einem Licht in einer kalten Dimension: Es ist kein Stern, sondern ein Anglerfisch.</Text>
+      </RumorFact>
+      <ExploreFact>
+        <ID>ZEKIVD_NETZ_RUE</ID>
+        <Text>Rue hat die Knoten kartiert: Die Dornen bilden ein Netz zwischen den Planeten. Der Weg zu den anderen führt über einen Kreuzweg.</Text>
+      </ExploreFact>
       <ExploreFact>
         <ID>ZEKIVD_EISPFORTE_FOUND</ID>
         <Text>Der große Knoten von Erstling führt in eine eisblaue Dimension mit zwei weiteren Knoten.</Text>
@@ -59,14 +85,40 @@
     </Entry>
   </Entry>
   <Entry>
+    <ID>ZEKIVD_VIER</ID>
+    <Name>Hyssop, Rue, Tansy und Yarrow</Name>
+    <IsCuriosity/>
+    <ExploreFact>
+      <ID>ZEKIVD_FALSCH_ABGEBOGEN</ID>
+      <Text>Drei Nomai vom Vessel – Hyssop, Rue und Tansy – suchten in den Dornen nach den Rettungskapseln. Ein alter Samen zog sie in dieses System.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKIVD_URSPRUNG</ID>
+      <Text>Hyssop glaubt, dass Dornenkranz der Ursprung von Dark Bramble ist: Unsere Dornen sind nur ein Samen von hier.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKIVD_TANSY_WURF</ID>
+      <Text>Tansy hat einen Samen in Richtung unseres Systems geworfen, als Weg für alle, die nach ihnen kommen. Er schlug auf Timber Hearth ein.</Text>
+    </ExploreFact>
+  </Entry>
+  <Entry>
     <ID>ZEKIVD_KERNE</ID>
     <Name>Die Planetenkerne</Name>
     <IsCuriosity/>
+    <RumorFact>
+      <ID>ZEKIVD_MUTTERKERN_RUMOR</ID>
+      <RumorName>Der Mutterkern</RumorName>
+      <Text>Alle Planetenkerne gleichen einem Kern im Herzdorn: dem Mutterkern, der jeden Samen dieses Systems geworfen hat.</Text>
+    </RumorFact>
     <RumorFact>
       <ID>ZEKIVD_KERN_SCHREIN_RUMOR</ID>
       <RumorName>Ein Schrein für vier Kerne</RumorName>
       <Text>Hyssop schreibt, dass alle vier Planetenkerne zum Kernschrein vor dem Herzdorn gehören. Dann öffnet sich der Weg nach innen.</Text>
     </RumorFact>
+    <ExploreFact>
+      <ID>ZEKIVD_KERN_PLAN</ID>
+      <Text>Ein Planetenkern ist der Samenkern, aus dem ein ganzer Planet gewachsen ist.</Text>
+    </ExploreFact>
     <ExploreFact>
       <ID>ZEKIVD_KERN_ERSTLING_GENOMMEN</ID>
       <Text>In der Höhle hinter dem Lagertor lag der Planetenkern von Erstling: das Herz des Samens, aus dem dieser Planet gewachsen ist.</Text>

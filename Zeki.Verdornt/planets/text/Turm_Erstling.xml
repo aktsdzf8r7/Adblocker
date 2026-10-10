@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Computer am Warp-Turm von Erstling -->
+<NomaiObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/text_schema.xsd">
+  <TextBlock>
+    <ID>1</ID>
+    <Text>WARP-TURM ERSTLING. Gegenstück: Ausguck.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>2</ID>
+    <ParentID>1</ParentID>
+    <Text>Zustand: schläft, bis die Murmel in der oberen Mulde liegt.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>3</ID>
+    <ParentID>2</ParentID>
+    <Text>Weitere Türme: Glutdorn, Nebelranke, Hohlsamen. Jeder mit eigener Röhre.</Text>
+  </TextBlock>
+  <ShipLogConditions>
+    <RevealFact>
+      <FactID>ZEKIVD_TUERME</FactID>
+      <Condition>3</Condition>
+    </RevealFact>
+  </ShipLogConditions>
+</NomaiObject>
