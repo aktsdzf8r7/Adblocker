@@ -175,6 +175,41 @@
       "scale": 1
     },
     {
+      "model": "planetenkern_erstling",
+      "name": "VD_Kern_Erstling_Modell",
+      "body": "Erstling",
+      "parentPath": "Sector/VD_Kern_Erstling",
+      "spin": 25,
+      "position": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "scale": 1
+    },
+    {
+      "model": "lager_tor",
+      "name": "VD_Lager_Tor",
+      "body": "Erstling",
+      "collider": true,
+      "position": {
+        "x": -48.729,
+        "y": 130.975,
+        "z": -221.432
+      },
+      "rotation": {
+        "x": 12.683,
+        "y": 118.081,
+        "z": -57.1
+      },
+      "scale": 1
+    },
+    {
       "model": "eiszapfen",
       "name": "VD_Eiszapfen_0",
       "body": "Splittergang",
@@ -2495,5 +2530,39 @@
         }
       ]
     }
-  }
+  },
+  "computers": [
+    {
+      "body": "Erstling",
+      "name": "Lagerkern",
+      "states": [
+        {
+          "object": "Lagerkern_Start",
+          "priority": 0,
+          "conditions": []
+        },
+        {
+          "object": "Lagerkern_Ankunft",
+          "priority": 1,
+          "conditions": [
+            "fact:ZEKIVD_ANKUNFT"
+          ]
+        },
+        {
+          "object": "Lagerkern_Turm",
+          "priority": 2,
+          "conditions": [
+            "persistent:ZEKIVD_TURM_WACH"
+          ]
+        },
+        {
+          "object": "Lagerkern_Kern",
+          "priority": 3,
+          "conditions": [
+            "fact:ZEKIVD_KERN_ERSTLING_GENOMMEN"
+          ]
+        }
+      ]
+    }
+  ]
 }

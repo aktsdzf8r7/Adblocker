@@ -11,6 +11,8 @@
     }
   },
   "ShipLog": {
+    "xmlFile": "planets/shiplogs/Absturz.xml",
+    "spriteFolder": "planets/assets/shiplog/entries",
     "mapMode": {
       "remove": true
     }
@@ -28,5 +30,20 @@
       "linksTo": "ZEKIVD_Absturzsamen",
       "vinePrefab": "smallNest"
     }
+  },
+  "Volumes": {
+    "revealVolumes": [
+      {
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "radius": 220,
+        "reveals": [
+          "ZEKIVD_ABSTURZ_SCHLUND"
+        ]
+      }
+    ]
   }
 }

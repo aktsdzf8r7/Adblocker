@@ -18,7 +18,33 @@
   "MapMarker": {
     "enabled": true
   },
+  "Props": {
+    "entryLocation": [
+      {
+        "id": "ZEKIVD_AUSGUCK",
+        "position": {
+          "x": 0.0,
+          "y": 4.0,
+          "z": 0.0
+        }
+      }
+    ]
+  },
   "Volumes": {
+    "revealVolumes": [
+      {
+        "position": {
+          "x": 0.0,
+          "y": 2.0,
+          "z": 0.0
+        },
+        "radius": 40,
+        "reveals": [
+          "ZEKIVD_AUSGUCK_FOUND",
+          "ZEKIVD_SYSTEM_BLICK"
+        ]
+      }
+    ],
     "forces": {
       "directionalVolumes": [
         {

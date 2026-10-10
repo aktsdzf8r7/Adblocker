@@ -147,6 +147,22 @@ def tangent(a, metres):
     return [p[0] + side[0] / length * metres, p[1], p[2] + side[2] / length * metres]
 
 
+LAGERKERN = (("Lagerkern_Start", 0, []), ("Lagerkern_Ankunft", 1, ["fact:ZEKIVD_ANKUNFT"]),
+             ("Lagerkern_Turm", 2, ["persistent:ZEKIVD_TURM_WACH"]), ("Lagerkern_Kern", 3, ["fact:ZEKIVD_KERN_ERSTLING_GENOMMEN"]))
+
+
+def lagerkern_texts(L):
+    """The reactive core computer of the camp: one NH computer per state at the same spot (ReactiveComputers.cs)."""
+    spot = L["computer"]
+    return [{"type": "computer", "xmlFile": f"planets/text/{name}.xml", "position": vec(at(spot)), "alignRadial": True,
+             "rename": name} for name, _, _ in LAGERKERN]
+
+
+def computers():
+    return [{"body": "Erstling", "name": "Lagerkern",
+             "states": [{"object": name, "priority": prio, "conditions": cond} for name, prio, cond in LAGERKERN]}]
+
+
 def erstling(A):
     E, L = A["erstling"], A["lager"]
     # the player comes to beside the arrival seed, outside its warp sphere
@@ -164,8 +180,15 @@ def erstling(A):
         "Props": {"details": material_templates() + bramble_templates() + [
             # the return seed in its copper cradle: the real bramble seed, small
             {"path": P["bramble_seed"], "position": vec(home), "alignRadial": True, "scale": 0.12, "rename": "VD_Ruecksamen"},
-        ]},
-        "Volumes": {"interactionVolumes": [
+            # the planet core of Erstling in the cave behind the gate (an NH item; the Blender model hangs below it)
+            {"path": "", "position": vec(at(L["kern"])), "alignRadial": True, "rename": "VD_Kern_Erstling", "keepLoaded": True,
+             "item": {"name": "Planetenkern Erstling", "itemType": "Planetenkern", "colliderRadius": 0.6, "interactRange": 3,
+                      "pickupFact": "ZEKIVD_KERN_ERSTLING_GENOMMEN", "holdOffset": vec([0, -0.1, 0.25])}},
+        ], "translatorText": lagerkern_texts(L),
+           "entryLocation": [{"id": "ZEKIVD_LAGER", "position": vec(at(L["mitte"], 6))}, {"id": "ZEKIVD_KERNE", "position": vec(at(L["kern"]))}]},
+        "ShipLog": {"xmlFile": "planets/shiplogs/Verdornt.xml", "spriteFolder": "planets/assets/shiplog/entries"},
+        "Volumes": {"revealVolumes": [{"position": vec(at(L["mitte"], 4)), "radius": 32, "reveals": ["ZEKIVD_LAGER_FOUND"]}],
+                    "interactionVolumes": [
             {"position": vec(home), "radius": 2.5, "range": 3.5, "prompt": "Durch den Rücksamen heimkehren", "condition": "ZEKIVD_HEIMREISE",
              "persistent": False, "reusable": True, "rename": "VD_Ruecksamen_Volumen"}]},
     })
@@ -184,11 +207,17 @@ def timber_hearth():
         {"path": "", "position": vec([0, 400, 0]), "rename": "VD_Absturzstelle", "keepLoaded": True},
         {"path": P["smoke_crash"], "parentPath": site, "isRelativeToParent": True, "position": vec([4, 8, 3]), "rename": "VD_Rauch"},
     ] + bramble_templates("Sector_TH")}
+    cfg["Volumes"] = {"revealVolumes": [{"parentPath": site, "isRelativeToParent": True, "position": vec([0, 10, 0]), "radius": 70,
+                                         "reveals": ["ZEKIVD_ABSTURZ_FOUND"]}]}
     cfg["Bramble"] = {"nodes": [
         # the seed itself: large enough to walk into, half sunk into the crater
         {"parentPath": site, "isRelativeToParent": True, "position": vec([0, 10, 0]), "linksTo": "Samenschlund", "name": "ZEKIVD_Absturzsamen",
          "scale": 0.25, "fogTint": color(120, 255, 150), "lightTint": color(150, 255, 170)}]}
     return cfg
+
+
+DIMENSION_FACTS = {"Samenschlund": "ZEKIVD_ABSTURZ_SCHLUND", "Eispforte": "ZEKIVD_EISPFORTE_FOUND", "Splittergang": "ZEKIVD_SPLITTER_FOUND",
+                   "Kaeltenest": "ZEKIVD_KAELTE_FOUND"}
 
 
 def dimension(name, at_, radius, fog, density, exit_node, vines="smallNest", nodes=None, extra=None, system=SYSTEM):
@@ -198,6 +227,8 @@ def dimension(name, at_, radius, fog, density, exit_node, vines="smallNest", nod
         "Orbit": {"staticPosition": vec(at_)},
         "ShipLog": {"mapMode": {"remove": True}},
         "Bramble": {"dimension": {"radius": radius, "fogTint": fog, "fogDensity": density, "linksTo": exit_node, "vinePrefab": vines}},
+        "Volumes": {"revealVolumes": [{"position": vec([0, 0, 0]), "radius": radius, "reveals": [DIMENSION_FACTS[name]]}]}
+        if name in DIMENSION_FACTS else {},
     })
     if nodes:
         cfg["Bramble"]["nodes"] = nodes
@@ -219,8 +250,10 @@ def ausguck():
         "Base": {"surfaceSize": 25, "surfaceGravity": 0, "showMinimap": False},
         "Orbit": {"staticPosition": vec(AUSGUCK_AT), "showOrbitLine": False},
         "MapMarker": {"enabled": True},
+        "Props": {"entryLocation": [{"id": "ZEKIVD_AUSGUCK", "position": vec([0, 4, 0])}]},
         # Nomai gravity on the deck, the landing and the lift shaft
-        "Volumes": {"forces": {"directionalVolumes": [
+        "Volumes": {"revealVolumes": [{"position": vec([0, 2, 0]), "radius": 40, "reveals": ["ZEKIVD_AUSGUCK_FOUND", "ZEKIVD_SYSTEM_BLICK"]}],
+                    "forces": {"directionalVolumes": [
             {"position": vec([0, -8, 0]), "force": 9, "normal": vec([0, -1, 0]), "shape": {"type": "cylinder", "radius": 20, "height": 34},
              "rename": "Ausguck_Schwerkraft"}]}},
     })
@@ -261,6 +294,35 @@ def dimensions():
     }
 
 
+def gate_rotation(L):
+    """Euler angles that stand the gate upright on the camp's surface, facing the cave (Unity: Euler zxy)."""
+    n = L["torzu"]["normal"]
+    up = [n["x"], n["y"], n["z"]]
+    a, b = at(L["torzu"]), at(L["hoehle"])
+    fwd = [b[i] - a[i] for i in range(3)]
+    dot = sum(fwd[i] * up[i] for i in range(3))
+    fwd = [fwd[i] - up[i] * dot for i in range(3)]
+    return look_rotation(fwd, up)
+
+
+def look_rotation(fwd, up):
+    """Unity Euler angles (degrees) of Quaternion.LookRotation(fwd, up)."""
+    def norm(v):
+        n = math.sqrt(sum(c * c for c in v)) or 1.0
+        return [c / n for c in v]
+
+    def cross(a, b):
+        return [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]]
+    z = norm(fwd)
+    x = norm(cross(up, z))
+    y = cross(z, x)
+    # rotation matrix columns x, y, z -> Euler (Unity order: z, then x, then y)
+    pitch = math.asin(max(-1.0, min(1.0, -z[1])))
+    yaw_ = math.atan2(z[0], z[2])
+    roll = math.atan2(x[1], y[1])
+    return [round(math.degrees(pitch), 3), round(math.degrees(yaw_), 3), round(math.degrees(roll), 3)]
+
+
 def placements(A):
     """assets/models/placements.json: where the DLL puts the Blender models (see Models.cs)."""
     props = [
@@ -277,6 +339,9 @@ def placements(A):
         {"model": "absperrung", "name": "VD_Absperrung", "body": "TIMBER_HEARTH", "parentPath": TH_SITE, "collider": True,
          "position": vec([0, 0.4, 41]), "rotation": vec([0, 180, 0])},
         {"model": "strudel", "name": "VD_Strudel", "body": "Samenschlund", "spin": 14},
+        {"model": "planetenkern_erstling", "name": "VD_Kern_Erstling_Modell", "body": "Erstling", "parentPath": "Sector/VD_Kern_Erstling", "spin": 25},
+        {"model": "lager_tor", "name": "VD_Lager_Tor", "body": "Erstling", "collider": True, "position": vec(at(A["lager"]["torzu"])),
+         "rotation": vec(gate_rotation(A["lager"]))},
     ]
     rnd = random.Random(5)
     for k in range(7):  # ice thorns in the Splittergang
@@ -301,7 +366,13 @@ def placements(A):
         "Kaeltenest": {"pfade": vine_paths(4, 280, 9, (4, 8)), "samen": [{"position": vec([-40, 70, -50]), "groesse": 14}]},
         "Samenschlund": {"pfade": vine_paths(5, 220, 6, (3, 7))},
     }
-    return {"props": props, "lights": lights, "bramble": bramble}
+    return {"props": props, "lights": lights, "bramble": bramble, "computers": computers()}
+
+
+# ship log layout (rumor mode)
+ENTRIES_HOME = {"ZEKIVD_ABSTURZ": (2900, -400)}
+ENTRIES = {"ZEKIVD_LAGER": (0, 0), "ZEKIVD_AUSGUCK": (420, 220), "ZEKIVD_NETZ": (420, -220), "ZEKIVD_KERNE": (-500, 0)}
+ORANGE = (color(150, 230, 120), color(220, 255, 200))
 
 
 def system():
@@ -315,7 +386,37 @@ def system():
         "destroyStockPlanets": True,
         "respawnHere": False,
         "startHere": False,
+        "curiosities": [{"id": "ZEKIVD_LAGER", "color": GREEN[0], "highlightColor": GREEN[1]},
+                        {"id": "ZEKIVD_KERNE", "color": color(150, 200, 255), "highlightColor": color(210, 235, 255)}],
+        "entryPositions": [{"id": k, "position": {"x": v[0], "y": v[1]}} for k, v in ENTRIES.items()],
     }
+
+
+def home_system():
+    """systems/SolarSystem.json of this mod: the curiosity of the crashed seed."""
+    return {
+        "$schema": NH + "star_system_schema.json",
+        "curiosities": [{"id": "ZEKIVD_ABSTURZ", "color": GREEN[0], "highlightColor": GREEN[1]}],
+        "entryPositions": [{"id": k, "position": {"x": v[0], "y": v[1]}} for k, v in ENTRIES_HOME.items()],
+    }
+
+
+def entry_art(entry, seed):
+    """Ship log pictures for stage 1 (a thorn ball with the entry's own tint; renders follow later)."""
+    from PIL import ImageDraw
+    rnd = random.Random(seed)
+    tint = {"ZEKIVD_ABSTURZ": (150, 230, 120), "ZEKIVD_LAGER": (150, 200, 255), "ZEKIVD_AUSGUCK": (255, 210, 140),
+            "ZEKIVD_NETZ": (120, 190, 255), "ZEKIVD_KERNE": (190, 230, 255)}[entry]
+    img = sb.starfield(512, seed, tint=tint)
+    d = ImageDraw.Draw(img)
+    c = 256
+    for k in range(22):
+        a = rnd.uniform(0, math.tau)
+        r1, r2 = rnd.uniform(40, 90), rnd.uniform(150, 240)
+        d.line([(c + r1 * math.cos(a), c + r1 * math.sin(a)), (c + r2 * math.cos(a + 0.3), c + r2 * math.sin(a + 0.3))],
+               fill=(70, 55, 40, 255), width=rnd.randint(5, 12))
+    d.ellipse([c - 70, c - 70, c + 70, c + 70], fill=tint + (255,), outline=(255, 255, 240, 255), width=5)
+    return img
 
 
 def manifests():
@@ -346,6 +447,11 @@ def manifests():
 
 def main():
     A = anchors()
+    import verdornt_shiplog  # the Nomai texts and the ship log the configs point to
+    import verdornt_texts
+    verdornt_texts.MOD = verdornt_shiplog.MOD = MOD
+    verdornt_texts.write_all()
+    verdornt_shiplog.main()
     manifests()
     write_json(f"systems/{SYSTEM}.json", system())
     write_json("planets/Herzdorn.json", herzdorn())
@@ -356,8 +462,12 @@ def main():
     write_json("planets/Ausguck.json", ausguck())
     write_json("planets/Fernlager.json", fernlager())
     write_json("planets/TimberHearth.json", timber_hearth())
-    write_json("planets/Samenschlund.json", dimension("Samenschlund", SAMENSCHLUND_AT, 220, color(40, 95, 55), 3.0, "ZEKIVD_Absturzsamen",
-                                                      system="SolarSystem"))
+    schlund = dimension("Samenschlund", SAMENSCHLUND_AT, 220, color(40, 95, 55), 3.0, "ZEKIVD_Absturzsamen", system="SolarSystem")
+    schlund["ShipLog"] = {"xmlFile": "planets/shiplogs/Absturz.xml", "spriteFolder": "planets/assets/shiplog/entries", "mapMode": {"remove": True}}
+    write_json("planets/Samenschlund.json", schlund)
+    write_json("systems/SolarSystem.json", home_system())
+    for k, entry in enumerate(list(ENTRIES_HOME) + list(ENTRIES)):
+        sb.save(entry_art(entry, 100 + k), f"planets/assets/shiplog/entries/{entry}.png")
     write_json("planets/Ankunftskammer.json", dimension("Ankunftskammer", ANKUNFTSKAMMER_AT, 160, color(150, 230, 160), 2.0, "ZEKIVD_Ankunftssamen"))
     for name, cfg in dimensions().items():
         write_json(f"planets/{name}.json", cfg)

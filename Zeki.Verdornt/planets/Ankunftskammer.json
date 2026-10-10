@@ -28,5 +28,6 @@
       "linksTo": "ZEKIVD_Ankunftssamen",
       "vinePrefab": "smallNest"
     }
-  }
+  },
+  "Volumes": {}
 }

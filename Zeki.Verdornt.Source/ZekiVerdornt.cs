@@ -37,6 +37,7 @@ public class ZekiVerdornt : ModBehaviour
             if (system != SystemName && system != "SolarSystem") return;
             ModelPlacer.PlaceAll(this);
             Crossing.Setup(this, system);
+            ReactiveComputers.Setup(this);
         };
         Log("Verdornt ist geladen.");
     }

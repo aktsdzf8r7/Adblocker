@@ -29,6 +29,21 @@
       "vinePrefab": "smallNest"
     }
   },
+  "Volumes": {
+    "revealVolumes": [
+      {
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "radius": 280,
+        "reveals": [
+          "ZEKIVD_KAELTE_FOUND"
+        ]
+      }
+    ]
+  },
   "Props": {
     "details": [
       {

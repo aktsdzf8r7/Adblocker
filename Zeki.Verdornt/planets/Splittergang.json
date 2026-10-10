@@ -28,5 +28,20 @@
       "linksTo": "ZEKIVD_Zu_Splittergang",
       "vinePrefab": "cluster"
     }
+  },
+  "Volumes": {
+    "revealVolumes": [
+      {
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "radius": 320,
+        "reveals": [
+          "ZEKIVD_SPLITTER_FOUND"
+        ]
+      }
+    ]
   }
 }

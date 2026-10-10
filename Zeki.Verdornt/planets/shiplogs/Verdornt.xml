@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Logbuch: Dornenkranz, Etappe 1 -->
+<AstroObjectEntry xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/shiplog_schema.xsd">
+  <ID>ZEKIVD_ERSTLING</ID>
+  <Entry>
+    <ID>ZEKIVD_LAGER</ID>
+    <Name>Das Lager auf Erstling</Name>
+    <IsCuriosity/>
+    <RumorFact>
+      <ID>ZEKIVD_LAGER_RUMOR_TURM</ID>
+      <RumorName>Ein schlafender Warp-Turm</RumorName>
+      <Text>Der Lagerkern empfiehlt, den Warp-Turm zu wecken. Seine Murmel liegt in einer Röhre am Fuß des Turms.</Text>
+    </RumorFact>
+    <ExploreFact>
+      <ID>ZEKIVD_ANKUNFT</ID>
+      <Text>Der Strudel hat mich in ein fremdes System gezogen. Ich bin neben einem kleinen Samen auf einem eisgepanzerten Dornenplaneten zu mir gekommen.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKIVD_LAGER_FOUND</ID>
+      <Text>Auf Erstling steht ein verlassenes Nomai-Lager: drei Kuppeln, ein Kernrechner, eine verschlossene Höhle und ein Warp-Turm.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKIVD_RUECKSAMEN</ID>
+      <Text>Ein kleiner Samen in einer Kupferwiege im Lager führt zurück nach Timber Hearth.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKIVD_TURM_WACH_FACT</ID>
+      <Text>Ich habe den Warp-Turm von Erstling geweckt. Er führt zum Ausguck hoch über dem System.</Text>
+    </ExploreFact>
+    <Entry>
+      <ID>ZEKIVD_AUSGUCK</ID>
+      <Name>Der Ausguck</Name>
+      <Curiosity>ZEKIVD_LAGER</Curiosity>
+      <ExploreFact>
+        <ID>ZEKIVD_AUSGUCK_FOUND</ID>
+        <Text>Hoch über der Bahnebene schwebt eine Nomai-Plattform mit einem großen Projektionsbecken.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKIVD_SYSTEM_BLICK</ID>
+        <Text>Vom Ausguck aus sieht man das ganze System: vier verdornte Planeten um einen Stern, der in einem Käfig aus Dornen gefangen ist.</Text>
+      </ExploreFact>
+    </Entry>
+    <Entry>
+      <ID>ZEKIVD_NETZ</ID>
+      <Name>Das Dornen-Netz</Name>
+      <Curiosity>ZEKIVD_LAGER</Curiosity>
+      <ExploreFact>
+        <ID>ZEKIVD_EISPFORTE_FOUND</ID>
+        <Text>Der große Knoten von Erstling führt in eine eisblaue Dimension mit zwei weiteren Knoten.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKIVD_SPLITTER_FOUND</ID>
+        <Text>Eine Dimension voller Eisdornen. Die Nomai haben hier Wegmarken hinterlassen.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKIVD_KAELTE_FOUND</ID>
+        <Text>Eine dunkle, kalte Dimension. Etwas Großes lebt hier.</Text>
+      </ExploreFact>
+    </Entry>
+  </Entry>
+  <Entry>
+    <ID>ZEKIVD_KERNE</ID>
+    <Name>Die Planetenkerne</Name>
+    <IsCuriosity/>
+    <RumorFact>
+      <ID>ZEKIVD_KERN_SCHREIN_RUMOR</ID>
+      <RumorName>Ein Schrein für vier Kerne</RumorName>
+      <Text>Hyssop schreibt, dass alle vier Planetenkerne zum Kernschrein vor dem Herzdorn gehören. Dann öffnet sich der Weg nach innen.</Text>
+    </RumorFact>
+    <ExploreFact>
+      <ID>ZEKIVD_KERN_ERSTLING_GENOMMEN</ID>
+      <Text>In der Höhle hinter dem Lagertor lag der Planetenkern von Erstling: das Herz des Samens, aus dem dieser Planet gewachsen ist.</Text>
+    </ExploreFact>
+  </Entry>
+</AstroObjectEntry>

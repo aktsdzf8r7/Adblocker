@@ -6,5 +6,67 @@
   "canExitViaWarpDrive": true,
   "destroyStockPlanets": true,
   "respawnHere": false,
-  "startHere": false
+  "startHere": false,
+  "curiosities": [
+    {
+      "id": "ZEKIVD_LAGER",
+      "color": {
+        "r": 120,
+        "g": 230,
+        "b": 140,
+        "a": 255
+      },
+      "highlightColor": {
+        "r": 200,
+        "g": 255,
+        "b": 200,
+        "a": 255
+      }
+    },
+    {
+      "id": "ZEKIVD_KERNE",
+      "color": {
+        "r": 150,
+        "g": 200,
+        "b": 255,
+        "a": 255
+      },
+      "highlightColor": {
+        "r": 210,
+        "g": 235,
+        "b": 255,
+        "a": 255
+      }
+    }
+  ],
+  "entryPositions": [
+    {
+      "id": "ZEKIVD_LAGER",
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "ZEKIVD_AUSGUCK",
+      "position": {
+        "x": 420,
+        "y": 220
+      }
+    },
+    {
+      "id": "ZEKIVD_NETZ",
+      "position": {
+        "x": 420,
+        "y": -220
+      }
+    },
+    {
+      "id": "ZEKIVD_KERNE",
+      "position": {
+        "x": -500,
+        "y": 0
+      }
+    }
+  ]
 }

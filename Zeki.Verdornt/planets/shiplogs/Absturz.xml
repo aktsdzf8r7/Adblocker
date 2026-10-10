@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Logbuch: der Absturzsamen auf Timber Hearth -->
+<AstroObjectEntry xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/shiplog_schema.xsd">
+  <ID>ZEKIVD_TH</ID>
+  <Entry>
+    <ID>ZEKIVD_ABSTURZ</ID>
+    <Name>Der Absturzsamen</Name>
+    <IsCuriosity/>
+    <ExploreFact>
+      <ID>ZEKIVD_ABSTURZ_FOUND</ID>
+      <Text>Neben dem alten Einschlagkrater auf Timber Hearth liegt ein frischer: Ein riesiger Dornensamen ist zu Beginn dieser Schleife eingeschlagen. Er ist offen – man kann hineinfliegen.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKIVD_ABSTURZ_SCHLUND</ID>
+      <Text>Im Samen liegt eine kleine, dunkle Dimension. In ihrer Mitte dreht sich ein Strudel aus Dornen, der alles in sich hineinzieht.</Text>
+    </ExploreFact>
+  </Entry>
+</AstroObjectEntry>

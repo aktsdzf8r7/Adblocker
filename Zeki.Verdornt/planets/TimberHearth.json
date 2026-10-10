@@ -109,6 +109,23 @@
       }
     ]
   },
+  "Volumes": {
+    "revealVolumes": [
+      {
+        "parentPath": "Sector_TH/VD_Absturzstelle",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 10.0,
+          "z": 0.0
+        },
+        "radius": 70,
+        "reveals": [
+          "ZEKIVD_ABSTURZ_FOUND"
+        ]
+      }
+    ]
+  },
   "Bramble": {
     "nodes": [
       {

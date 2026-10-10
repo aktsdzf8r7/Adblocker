@@ -228,10 +228,114 @@
         "alignRadial": true,
         "scale": 0.12,
         "rename": "VD_Ruecksamen"
+      },
+      {
+        "path": "",
+        "position": {
+          "x": -42.249,
+          "y": 129.961,
+          "z": -226.222
+        },
+        "alignRadial": true,
+        "rename": "VD_Kern_Erstling",
+        "keepLoaded": true,
+        "item": {
+          "name": "Planetenkern Erstling",
+          "itemType": "Planetenkern",
+          "colliderRadius": 0.6,
+          "interactRange": 3,
+          "pickupFact": "ZEKIVD_KERN_ERSTLING_GENOMMEN",
+          "holdOffset": {
+            "x": 0.0,
+            "y": -0.1,
+            "z": 0.25
+          }
+        }
+      }
+    ],
+    "translatorText": [
+      {
+        "type": "computer",
+        "xmlFile": "planets/text/Lagerkern_Start.xml",
+        "position": {
+          "x": -74.96,
+          "y": 139.899,
+          "z": -205.95
+        },
+        "alignRadial": true,
+        "rename": "Lagerkern_Start"
+      },
+      {
+        "type": "computer",
+        "xmlFile": "planets/text/Lagerkern_Ankunft.xml",
+        "position": {
+          "x": -74.96,
+          "y": 139.899,
+          "z": -205.95
+        },
+        "alignRadial": true,
+        "rename": "Lagerkern_Ankunft"
+      },
+      {
+        "type": "computer",
+        "xmlFile": "planets/text/Lagerkern_Turm.xml",
+        "position": {
+          "x": -74.96,
+          "y": 139.899,
+          "z": -205.95
+        },
+        "alignRadial": true,
+        "rename": "Lagerkern_Turm"
+      },
+      {
+        "type": "computer",
+        "xmlFile": "planets/text/Lagerkern_Kern.xml",
+        "position": {
+          "x": -74.96,
+          "y": 139.899,
+          "z": -205.95
+        },
+        "alignRadial": true,
+        "rename": "Lagerkern_Kern"
+      }
+    ],
+    "entryLocation": [
+      {
+        "id": "ZEKIVD_LAGER",
+        "position": {
+          "x": -77.153,
+          "y": 140.958,
+          "z": -211.976
+        }
+      },
+      {
+        "id": "ZEKIVD_KERNE",
+        "position": {
+          "x": -42.249,
+          "y": 129.961,
+          "z": -226.222
+        }
       }
     ]
   },
+  "ShipLog": {
+    "xmlFile": "planets/shiplogs/Verdornt.xml",
+    "spriteFolder": "planets/assets/shiplog/entries"
+  },
   "Volumes": {
+    "revealVolumes": [
+      {
+        "position": {
+          "x": -76.573,
+          "y": 139.899,
+          "z": -210.383
+        },
+        "radius": 32,
+        "reveals": [
+          "ZEKIVD_LAGER_FOUND"
+        ]
+      }
+    ],
     "interactionVolumes": [
       {
         "position": {

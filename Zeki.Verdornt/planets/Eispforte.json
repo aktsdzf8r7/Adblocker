@@ -84,5 +84,20 @@
         }
       }
     ]
+  },
+  "Volumes": {
+    "revealVolumes": [
+      {
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "radius": 420,
+        "reveals": [
+          "ZEKIVD_EISPFORTE_FOUND"
+        ]
+      }
+    ]
   }
 }

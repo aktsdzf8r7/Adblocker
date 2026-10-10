@@ -315,7 +315,8 @@ def check_consistency(bodies, systems):
         if sysdata.get("warpDriveSpawnPointID") and sysdata["warpDriveSpawnPointID"] not in spawn_ids:
             err(f"systems/{sysname}.json: warpDriveSpawnPointID {sysdata['warpDriveSpawnPointID']} does not exist")
 
-        unrevealed = set(s["facts"]) - revealed_somewhere
+        # facts the addon's DLL reveals itself (RevealFact with a string constant)
+        unrevealed = set(s["facts"]) - revealed_somewhere - code_conditions()
         for fid in sorted(unrevealed):
             err(f"{sysname}: fact {fid} can never be revealed")
 
