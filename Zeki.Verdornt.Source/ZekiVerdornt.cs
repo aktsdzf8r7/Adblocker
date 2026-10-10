@@ -38,6 +38,7 @@ public class ZekiVerdornt : ModBehaviour
             ModelPlacer.PlaceAll(this);
             Crossing.Setup(this, system);
             ReactiveComputers.Setup(this);
+            MarbleTube.Setup(this);
         };
         Log("Verdornt ist geladen.");
     }

@@ -251,6 +251,17 @@
             "z": 0.25
           }
         }
+      },
+      {
+        "path": "",
+        "position": {
+          "x": -108.088,
+          "y": 122.726,
+          "z": -205.814
+        },
+        "alignRadial": true,
+        "rename": "VD_Turm_Warp",
+        "activationCondition": "ZEKIVD_TURM_WACH"
       }
     ],
     "translatorText": [
@@ -297,6 +308,69 @@
         },
         "alignRadial": true,
         "rename": "Lagerkern_Kern"
+      }
+    ],
+    "warpTransmitters": [
+      {
+        "frequency": "ZEKIVD_AUSGUCK",
+        "parentPath": "Sector/VD_Turm_Warp",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        }
+      }
+    ],
+    "warpReceivers": [
+      {
+        "frequency": "ZEKIVD_ERSTLING",
+        "position": {
+          "x": -118.309,
+          "y": 122.514,
+          "z": -201.733
+        },
+        "alignRadial": true
+      }
+    ],
+    "remotes": [
+      {
+        "id": "ZEKIVD_LAGER",
+        "decalPath": "planets/assets/remotes/lager.png",
+        "platform": {
+          "position": {
+            "x": -85.361,
+            "y": 133.115,
+            "z": -206.676
+          },
+          "alignRadial": true,
+          "rename": "VD_Becken_Lager",
+          "reveals": "ZEKIVD_LAGER_FOUND"
+        }
+      },
+      {
+        "id": "ZEKIVD_SYSTEM",
+        "decalPath": "planets/assets/remotes/system.png",
+        "stones": [
+          {
+            "position": {
+              "x": -79.44,
+              "y": 147.171,
+              "z": -199.986
+            },
+            "alignRadial": true,
+            "rename": "VD_Stein_System_Lager"
+          },
+          {
+            "position": {
+              "x": -112.671,
+              "y": 122.514,
+              "z": -203.785
+            },
+            "alignRadial": true,
+            "rename": "VD_Stein_System_Turm"
+          }
+        ]
       }
     ],
     "entryLocation": [

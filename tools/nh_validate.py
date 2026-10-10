@@ -457,11 +457,16 @@ AUDIO_TYPES = audio_types()
 
 
 def code_conditions():
-    """Conditions a C# part of the addon sets itself (string constants in <mod>.Source/*.cs)."""
+    """Conditions a C# part of the addon sets itself: string constants in <mod>.Source/*.cs, and conditions it
+    builds at runtime that the build script declares in assets/models/placements.json ("setsConditions")."""
     found = set()
     for path in glob.glob(MOD.rstrip(os.sep) + ".Source/**/*.cs", recursive=True):
         with open(path, encoding="utf-8") as f:
             found.update(re.findall(r'"([A-Z][A-Z0-9_]{3,})"', f.read()))
+    placements = os.path.join(MOD, "assets", "models", "placements.json")
+    if os.path.exists(placements):
+        with open(placements, encoding="utf-8") as f:
+            found.update(json.load(f).get("setsConditions", []))
     return found
 
 

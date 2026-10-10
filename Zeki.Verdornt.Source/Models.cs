@@ -18,6 +18,8 @@ public class Placements
     public Dictionary<string, VinePlan> bramble = new();
     /// <summary>Reactive Nomai computers (ReactiveComputers.cs).</summary>
     public List<ReactiveComputer> computers = new();
+    /// <summary>Marble tubes (MarbleTube.cs).</summary>
+    public List<TubeConfig> tubes = new();
 }
 
 public class PropPlacement

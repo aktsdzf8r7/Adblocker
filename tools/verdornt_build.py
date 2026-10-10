@@ -138,6 +138,15 @@ def vine_paths(seed, radius, count, thick=(4, 9)):
     return paths
 
 
+def remote(rid, platform=None, stones=()):
+    r = {"id": "ZEKIVD_" + rid, "decalPath": f"planets/assets/remotes/{rid.lower()}.png"}
+    if platform:
+        r["platform"] = platform
+    if stones:
+        r["stones"] = list(stones)
+    return r
+
+
 def tangent(a, metres):
     """A point beside an anchor on the surface: metres along a direction perpendicular to its normal."""
     n = a["normal"]
@@ -184,7 +193,19 @@ def erstling(A):
             {"path": "", "position": vec(at(L["kern"])), "alignRadial": True, "rename": "VD_Kern_Erstling", "keepLoaded": True,
              "item": {"name": "Planetenkern Erstling", "itemType": "Planetenkern", "colliderRadius": 0.6, "interactRange": 3,
                       "pickupFact": "ZEKIVD_KERN_ERSTLING_GENOMMEN", "holdOffset": vec([0, -0.1, 0.25])}},
+            # the warp pad of the tower sleeps until the marble lies in "wach"
+            {"path": "", "position": vec(at(L["turm"], 0.4)), "alignRadial": True, "rename": "VD_Turm_Warp",
+             "activationCondition": "ZEKIVD_TURM_WACH"},
         ], "translatorText": lagerkern_texts(L),
+        "warpTransmitters": [{"frequency": "ZEKIVD_AUSGUCK", "parentPath": "Sector/VD_Turm_Warp", "isRelativeToParent": True,
+                              "position": vec([0, 0, 0])}],
+        "warpReceivers": [{"frequency": "ZEKIVD_ERSTLING", "position": vec(tangent(L["turm"], 11.0)), "alignRadial": True}],
+        "remotes": [
+            remote("LAGER", platform={"position": vec(at(L["becken"])), "alignRadial": True, "rename": "VD_Becken_Lager",
+                                      "reveals": "ZEKIVD_LAGER_FOUND"}),
+            remote("SYSTEM", stones=[{"position": vec(at(L["stein1"], 0.4)), "alignRadial": True, "rename": "VD_Stein_System_Lager"},
+                                     {"position": vec(tangent(L["turm"], 5.0)), "alignRadial": True, "rename": "VD_Stein_System_Turm"}]),
+        ],
            "entryLocation": [{"id": "ZEKIVD_LAGER", "position": vec(at(L["mitte"], 6))}, {"id": "ZEKIVD_KERNE", "position": vec(at(L["kern"]))}]},
         "ShipLog": {"xmlFile": "planets/shiplogs/Verdornt.xml", "spriteFolder": "planets/assets/shiplog/entries"},
         "Volumes": {"revealVolumes": [{"position": vec(at(L["mitte"], 4)), "radius": 32, "reveals": ["ZEKIVD_LAGER_FOUND"]}],
@@ -244,13 +265,22 @@ def nebelranke():
     })
 
 
-def ausguck():
+def ausguck(A):
     cfg = header("Ausguck")
     cfg.update({
         "Base": {"surfaceSize": 25, "surfaceGravity": 0, "showMinimap": False},
         "Orbit": {"staticPosition": vec(AUSGUCK_AT), "showOrbitLine": False},
         "MapMarker": {"enabled": True},
-        "Props": {"entryLocation": [{"id": "ZEKIVD_AUSGUCK", "position": vec([0, 4, 0])}]},
+        "Props": {
+            "entryLocation": [{"id": "ZEKIVD_AUSGUCK", "position": vec([0, 4, 0])}],
+            "remotes": [
+                remote("SYSTEM", platform={"position": vec(at(A["ausguck"]["becken"])), "rotation": vec([0, A["ausguck"]["becken"]["yaw"], 0]),
+                                           "rename": "VD_Becken_System", "reveals": "ZEKIVD_SYSTEM_BLICK"}),
+                remote("LAGER", stones=[{"position": vec(at(A["ausguck"]["steinplatz"], 0.4)), "rename": "VD_Stein_Lager"}]),
+            ],
+            "warpReceivers": [{"frequency": "ZEKIVD_AUSGUCK", "position": vec(at(A["ausguck"]["landung"], 0.1))}],
+            "warpTransmitters": [{"frequency": "ZEKIVD_ERSTLING", "position": vec([8, 0.1, -8])}],
+        },
         # Nomai gravity on the deck, the landing and the lift shaft
         "Volumes": {"revealVolumes": [{"position": vec([0, 2, 0]), "radius": 40, "reveals": ["ZEKIVD_AUSGUCK_FOUND", "ZEKIVD_SYSTEM_BLICK"]}],
                     "forces": {"directionalVolumes": [
@@ -323,6 +353,37 @@ def look_rotation(fwd, up):
     return [round(math.degrees(pitch), 3), round(math.degrees(yaw_), 3), round(math.degrees(roll), 3)]
 
 
+def upright(a):
+    """Euler angles that stand a model upright on a surface anchor (its +y along the anchor's normal)."""
+    n = a["normal"]
+    up = [n["x"], n["y"], n["z"]]
+    fwd = [up[2], 0.0, -up[0]] if abs(up[1]) < 0.95 else [0.0, 0.0, 1.0]
+    return look_rotation(fwd, up)
+
+
+def offset(a, b):
+    pa, pb = at(a), at(b)
+    return vec([round(pb[i] - pa[i], 3) for i in range(3)])
+
+
+def tubes(A):
+    """The marble tubes of stage 1 (MarbleTube.cs): path and slots from the Blender anchors."""
+    L, U = A["lager"], A["ausguck"]
+    def tube(name, body, parent, actions=()):
+        r = A["roehre_" + name]
+        return {"name": name, "body": body, "parentPath": parent, "pfad": r["pfad"], "mulden": r["mulden"], "ruhe": list(r["mulden"])[0],
+                "aktionen": list(actions)}
+    return [
+        # the gate of the core cave rises 6.5 m while the marble lies in "offen"
+        tube("tor", "Erstling", None, [{"objekt": "VD_Lager_Tor", "versatz": {"offen": offset(L["torzu"], L["torauf"])}, "sekunden": 3}]),
+        # the warp tower wakes up (its warp pad is an NH prop with the condition ZEKIVD_TURM_WACH)
+        tube("turm", "Erstling", "Sector/VD_Warpturm_Erstling"),
+        # the lift of the Ausguck carries its own tube
+        tube("lift", "Ausguck", "Sector/VD_Ausguck_Lift", [{"objekt": "VD_Ausguck_Lift", "versatz": {"oben": offset(U["lift_unten"], U["lift_oben"])},
+                                                           "sekunden": 6}]),
+    ]
+
+
 def placements(A):
     """assets/models/placements.json: where the DLL puts the Blender models (see Models.cs)."""
     props = [
@@ -340,6 +401,9 @@ def placements(A):
          "position": vec([0, 0.4, 41]), "rotation": vec([0, 180, 0])},
         {"model": "strudel", "name": "VD_Strudel", "body": "Samenschlund", "spin": 14},
         {"model": "planetenkern_erstling", "name": "VD_Kern_Erstling_Modell", "body": "Erstling", "parentPath": "Sector/VD_Kern_Erstling", "spin": 25},
+        {"model": "warpturm", "name": "VD_Warpturm_Erstling", "body": "Erstling", "collider": True, "position": vec(at(A["lager"]["turm"], -0.3)),
+         "rotation": vec(upright(A["lager"]["turm"]))},
+        {"model": "ausguck_lift", "name": "VD_Ausguck_Lift", "body": "Ausguck", "collider": True, "position": vec(at(A["ausguck"]["lift_unten"]))},
         {"model": "lager_tor", "name": "VD_Lager_Tor", "body": "Erstling", "collider": True, "position": vec(at(A["lager"]["torzu"])),
          "rotation": vec(gate_rotation(A["lager"]))},
     ]
@@ -366,7 +430,10 @@ def placements(A):
         "Kaeltenest": {"pfade": vine_paths(4, 280, 9, (4, 8)), "samen": [{"position": vec([-40, 70, -50]), "groesse": 14}]},
         "Samenschlund": {"pfade": vine_paths(5, 220, 6, (3, 7))},
     }
-    return {"props": props, "lights": lights, "bramble": bramble, "computers": computers()}
+    T = tubes(A)
+    # conditions the DLL builds at runtime (MarbleTube.Condition), declared for the validator
+    sets = sorted(f"ZEKIVD_{t['name'].upper()}_{slot.upper()}" for t in T for slot in t["mulden"])
+    return {"props": props, "lights": lights, "bramble": bramble, "computers": computers(), "tubes": T, "setsConditions": sets}
 
 
 # ship log layout (rumor mode)
@@ -399,6 +466,24 @@ def home_system():
         "curiosities": [{"id": "ZEKIVD_ABSTURZ", "color": GREEN[0], "highlightColor": GREEN[1]}],
         "entryPositions": [{"id": k, "position": {"x": v[0], "y": v[1]}} for k, v in ENTRIES_HOME.items()],
     }
+
+
+def decal(rid, size=256):
+    """Icons of the projection pools (white on transparent, like the game's decals)."""
+    from PIL import Image, ImageDraw
+    img = Image.new("RGBA", (size, size), (0, 0, 0, 0))
+    d = ImageDraw.Draw(img)
+    c, w = size / 2, (255, 255, 255, 255)
+    d.ellipse([12, 12, size - 12, size - 12], outline=w, width=10)
+    if rid == "SYSTEM":   # a star in a cage, four orbits
+        for r in (40, 62, 84, 104):
+            d.ellipse([c - r, c - r * 0.45, c + r, c + r * 0.45], outline=w, width=4)
+        d.ellipse([c - 18, c - 18, c + 18, c + 18], fill=w)
+    else:                 # three domes
+        for k, dx in enumerate((-60, 0, 60)):
+            d.pieslice([c + dx - 34, c - 30 - (k == 1) * 10, c + dx + 34, c + 38], 180, 360, fill=w)
+        d.rectangle([c - 100, c + 30, c + 100, c + 42], fill=w)
+    return img
 
 
 def entry_art(entry, seed):
@@ -459,13 +544,15 @@ def main():
     write_json("planets/Glutdorn.json", planet("Glutdorn", 220, 9))
     write_json("planets/Nebelranke.json", nebelranke())
     write_json("planets/Hohlsamen.json", planet("Hohlsamen", 300, 8))
-    write_json("planets/Ausguck.json", ausguck())
+    write_json("planets/Ausguck.json", ausguck(A))
     write_json("planets/Fernlager.json", fernlager())
     write_json("planets/TimberHearth.json", timber_hearth())
     schlund = dimension("Samenschlund", SAMENSCHLUND_AT, 220, color(40, 95, 55), 3.0, "ZEKIVD_Absturzsamen", system="SolarSystem")
     schlund["ShipLog"] = {"xmlFile": "planets/shiplogs/Absturz.xml", "spriteFolder": "planets/assets/shiplog/entries", "mapMode": {"remove": True}}
     write_json("planets/Samenschlund.json", schlund)
     write_json("systems/SolarSystem.json", home_system())
+    for rid in ("LAGER", "SYSTEM"):
+        sb.save(decal(rid), f"planets/assets/remotes/{rid.lower()}.png")
     for k, entry in enumerate(list(ENTRIES_HOME) + list(ENTRIES)):
         sb.save(entry_art(entry, 100 + k), f"planets/assets/shiplog/entries/{entry}.png")
     write_json("planets/Ankunftskammer.json", dimension("Ankunftskammer", ANKUNFTSKAMMER_AT, 160, color(150, 230, 160), 2.0, "ZEKIVD_Ankunftssamen"))

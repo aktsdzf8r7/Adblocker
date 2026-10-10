@@ -28,6 +28,60 @@
           "z": 0.0
         }
       }
+    ],
+    "remotes": [
+      {
+        "id": "ZEKIVD_SYSTEM",
+        "decalPath": "planets/assets/remotes/system.png",
+        "platform": {
+          "position": {
+            "x": -7.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "rotation": {
+            "x": 0.0,
+            "y": 90.0,
+            "z": 0.0
+          },
+          "rename": "VD_Becken_System",
+          "reveals": "ZEKIVD_SYSTEM_BLICK"
+        }
+      },
+      {
+        "id": "ZEKIVD_LAGER",
+        "decalPath": "planets/assets/remotes/lager.png",
+        "stones": [
+          {
+            "position": {
+              "x": -5.5,
+              "y": 0.4,
+              "z": 9.526
+            },
+            "rename": "VD_Stein_Lager"
+          }
+        ]
+      }
+    ],
+    "warpReceivers": [
+      {
+        "frequency": "ZEKIVD_AUSGUCK",
+        "position": {
+          "x": 12.0,
+          "y": -21.9,
+          "z": 0.0
+        }
+      }
+    ],
+    "warpTransmitters": [
+      {
+        "frequency": "ZEKIVD_ERSTLING",
+        "position": {
+          "x": 8.0,
+          "y": 0.1,
+          "z": -8.0
+        }
+      }
     ]
   },
   "Volumes": {
