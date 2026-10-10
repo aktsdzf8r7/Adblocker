@@ -3,12 +3,14 @@
     "VesselHuelle": "",
     "VesselKupfer": "",
     "VesselDunkel": "",
+    "VesselGlut": "",
     "VesselLeuchten": ""
   },
   "props": [
     {
       "model": "hauptkanone",
       "name": "ISAE_Hauptkanone",
+      "parentPath": "Sector/ISAE_Ausrichtung",
       "collider": true,
       "body": "Interstellare Sonden Aussendungseinheit",
       "position": {
@@ -26,7 +28,44 @@
     {
       "model": "laufringe",
       "name": "ISAE_Laufringe",
-      "spin": 10,
+      "parentPath": "Sector/ISAE_Ausrichtung",
+      "spin": 6,
+      "body": "Interstellare Sonden Aussendungseinheit",
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "scale": 1
+    },
+    {
+      "model": "kernkammer",
+      "name": "ISAE_Kernkammer",
+      "parentPath": "Sector/ISAE_Ausrichtung",
+      "collider": true,
+      "body": "Interstellare Sonden Aussendungseinheit",
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "scale": 1
+    },
+    {
+      "model": "kernringe",
+      "name": "ISAE_Kernringe",
+      "parentPath": "Sector/ISAE_Ausrichtung",
+      "spin": 24,
       "body": "Interstellare Sonden Aussendungseinheit",
       "position": {
         "x": 0,
@@ -43,11 +82,12 @@
     {
       "model": "sternkarte",
       "name": "ISAE_Sternkarte",
+      "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Modul_Navigation",
       "spin": 7,
       "position": {
-        "x": -25.0,
-        "y": -0.2,
-        "z": 43.301
+        "x": -8.881,
+        "y": -4.881,
+        "z": 6.932
       },
       "body": "Interstellare Sonden Aussendungseinheit",
       "rotation": {
@@ -58,8 +98,9 @@
       "scale": 1
     },
     {
-      "model": "modul_kontrolle",
-      "name": "ISAE_Kontrollmodul",
+      "model": "fokusgeruest",
+      "name": "Fokus_Alpha_Geruest",
+      "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Alpha",
       "collider": true,
       "body": "Interstellare Sonden Aussendungseinheit",
       "position": {
@@ -75,8 +116,9 @@
       "scale": 1
     },
     {
-      "model": "modul_start",
-      "name": "ISAE_Startmodul",
+      "model": "fokusgeruest",
+      "name": "Fokus_Beta_Geruest",
+      "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Beta",
       "collider": true,
       "body": "Interstellare Sonden Aussendungseinheit",
       "position": {
@@ -92,8 +134,9 @@
       "scale": 1
     },
     {
-      "model": "modul_navigation",
-      "name": "ISAE_Navigationsmodul",
+      "model": "fokusgeruest",
+      "name": "Fokus_Gamma_Geruest",
+      "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Gamma",
       "collider": true,
       "body": "Interstellare Sonden Aussendungseinheit",
       "position": {
@@ -111,111 +154,128 @@
   ],
   "lights": [
     {
-      "name": "Licht_Kontrollmodul",
+      "name": "Licht_Kernkammer",
       "body": "Interstellare Sonden Aussendungseinheit",
+      "parentPath": "Sector/ISAE_Ausrichtung",
       "position": {
-        "x": -25.0,
-        "y": 4.5,
-        "z": -43.301
-      },
-      "color": {
-        "x": 0.75,
-        "y": 0.9,
-        "z": 1.0
-      },
-      "range": 15,
-      "intensity": 1.5
-    },
-    {
-      "name": "Licht_Kontrollmodul_Tuer",
-      "body": "Interstellare Sonden Aussendungseinheit",
-      "position": {
-        "x": -27.25,
-        "y": -1.4,
-        "z": -47.198
+        "x": 0,
+        "y": -5,
+        "z": 0
       },
       "color": {
         "x": 1.0,
-        "y": 0.8,
-        "z": 0.6
+        "y": 0.42,
+        "z": 0.2
       },
-      "range": 8,
-      "intensity": 0.8
+      "range": 45,
+      "intensity": 2.2
     },
     {
-      "name": "Licht_Startmodul",
+      "name": "Licht_Emitter_Alpha",
       "body": "Interstellare Sonden Aussendungseinheit",
+      "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Alpha",
       "position": {
-        "x": 50.0,
-        "y": 4.5,
-        "z": -0.0
-      },
-      "color": {
-        "x": 0.75,
-        "y": 0.9,
-        "z": 1.0
-      },
-      "range": 15,
-      "intensity": 1.5
-    },
-    {
-      "name": "Licht_Startmodul_Tuer",
-      "body": "Interstellare Sonden Aussendungseinheit",
-      "position": {
-        "x": 54.5,
-        "y": -1.4,
-        "z": -0.0
+        "x": 0,
+        "y": 113,
+        "z": 0
       },
       "color": {
         "x": 1.0,
-        "y": 0.8,
-        "z": 0.6
+        "y": 0.4,
+        "z": 0.18
       },
-      "range": 8,
-      "intensity": 0.8
+      "range": 70,
+      "intensity": 1.6
     },
     {
-      "name": "Licht_Navigationsmodul",
+      "name": "Licht_Emitter_Beta",
       "body": "Interstellare Sonden Aussendungseinheit",
+      "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Beta",
       "position": {
-        "x": -25.0,
-        "y": 4.5,
-        "z": 43.301
-      },
-      "color": {
-        "x": 0.75,
-        "y": 0.9,
-        "z": 1.0
-      },
-      "range": 15,
-      "intensity": 1.5
-    },
-    {
-      "name": "Licht_Navigationsmodul_Tuer",
-      "body": "Interstellare Sonden Aussendungseinheit",
-      "position": {
-        "x": -27.25,
-        "y": -1.4,
-        "z": 47.198
+        "x": 0,
+        "y": 113,
+        "z": 0
       },
       "color": {
         "x": 1.0,
-        "y": 0.8,
-        "z": 0.6
+        "y": 0.4,
+        "z": 0.18
       },
-      "range": 8,
-      "intensity": 0.8
+      "range": 70,
+      "intensity": 1.6
+    },
+    {
+      "name": "Licht_Emitter_Gamma",
+      "body": "Interstellare Sonden Aussendungseinheit",
+      "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Gamma",
+      "position": {
+        "x": 0,
+        "y": 113,
+        "z": 0
+      },
+      "color": {
+        "x": 1.0,
+        "y": 0.4,
+        "z": 0.18
+      },
+      "range": 70,
+      "intensity": 1.6
     }
   ],
   "points": {
-    "muendung": {
-      "x": 0,
-      "y": 161.0,
-      "z": 0
-    },
     "kern": {
       "x": 0,
       "y": 0,
+      "z": 0
+    },
+    "linse": {
+      "x": 0,
+      "y": 770.0,
+      "z": 0
+    },
+    "muendung": {
+      "x": 0,
+      "y": 795.0,
+      "z": 0
+    },
+    "heck": {
+      "x": 0,
+      "y": -285.0,
+      "z": 0
+    },
+    "modul_kontrolle": {
+      "x": -129.904,
+      "y": 0.0,
+      "z": -75.0
+    },
+    "modul_start": {
+      "x": 129.904,
+      "y": 0.0,
+      "z": -75.0
+    },
+    "modul_navigation": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 150.0
+    },
+    "fokus_A": {
+      "x": -420.0,
+      "y": 300.0,
+      "z": -0.0
+    },
+    "fokus_B": {
+      "x": 210.0,
+      "y": 300.0,
+      "z": -363.731
+    },
+    "fokus_C": {
+      "x": 210.0,
+      "y": 300.0,
+      "z": 363.731
+    },
+    "fokus_emitter": {
+      "x": 0,
+      "y": 113,
       "z": 0
     }
   }

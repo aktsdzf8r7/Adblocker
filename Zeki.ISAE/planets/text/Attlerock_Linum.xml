@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Aufzeichnung auf dem Attlerock: Linum misst die Sonne -->
+<NomaiObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/text_schema.xsd">
+  <TextBlock>
+    <ID>1</ID>
+    <Text>Linum: Vom Mond aus sieht man die Sonne ohne Wolken.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>2</ID>
+    <ParentID>1</ParentID>
+    <Text>Ich habe sie hundert Tage lang gemessen. Sie altert. In ein paar hunderttausend Jahren wird sie sterben.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>3</ID>
+    <ParentID>2</ParentID>
+    <Text>Sedum sagt, seine Einheit kann so lange warten. Ich frage mich, wer dann noch da ist, um sie aufzuhalten.</Text>
+  </TextBlock>
+  <ShipLogConditions>
+    <RevealFact>
+      <FactID>ZEKISAE_SPUR_ATTLE</FactID>
+      <Condition>1,2,3</Condition>
+    </RevealFact>
+  </ShipLogConditions>
+</NomaiObject>

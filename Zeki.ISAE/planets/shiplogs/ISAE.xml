@@ -14,15 +14,15 @@
     <RumorFact>
       <ID>ZEKISAE_RUMOR</ID>
       <RumorName>Sedums verbotener Entwurf</RumorName>
-      <Text>In der Orbitalen Sondenkanone hat ein Nomai namens Sedum notiert, dass er eine zweite, stärkere Kanone baut – gegen Pyes Verbot. Sie soll Sonden zu anderen Sternen schicken und braucht dafür mehr Energie, als ein lebender Stern hergibt.</Text>
+      <Text>Ein Nomai namens Sedum wollte gegen Pyes Verbot eine zweite, stärkere Kanone bauen. Sie soll Sonden zu anderen Sternen schicken und braucht dafür mehr Energie, als ein lebender Stern hergibt.</Text>
     </RumorFact>
     <ExploreFact>
       <ID>ZEKISAE_FOUND</ID>
-      <Text>Eine zweite Orbitale Sondenkanone kreist um die Sonne – heil und fertig gebaut, im Stil des Vessels. Drei Schwerkraftkanonen umkreisen sie im Dreieck, und alle vier zielen in dieselbe Richtung.</Text>
+      <Text>Eine riesige Kanone im Stil des Vessels kreist um die Sonne, über einen Kilometer lang, mit gepanzertem Kern, gezahnten Schienen und Klauen an der Mündung. Sie zielt auf die Sonne, und drei Fokuskanonen umkreisen ihren Lauf.</Text>
     </ExploreFact>
     <ExploreFact>
       <ID>ZEKISAE_ZWECK</ID>
-      <Text>Die Aussendungseinheit wartet auf den Tod der Sonne. Sobald der Stern zusammenbricht, entzieht sie ihm alle verbleibende Energie für einen einzigen Schuss zu einem fremden Stern.</Text>
+      <Text>Die Aussendungseinheit wartet auf den Tod der Sonne. Sobald der Stern zusammenbricht, trinken ihre Linse und die Fokuskanonen seine ganze Energie für einen einzigen Schuss zu einem fremden Stern.</Text>
     </ExploreFact>
     <ExploreFact>
       <ID>ZEKISAE_ERWACHT</ID>
@@ -38,22 +38,40 @@
     </ExploreFact>
     <ExploreFact>
       <ID>ZEKISAE_ABGESCHALTET</ID>
-      <Text>Ich habe die Aussendungseinheit abgeschaltet. Ihr Energiekern ist erloschen. Die Sonne darf wieder so sterben, wie sie es immer tut.</Text>
+      <Text>Ich habe die Aussendungseinheit abgeschaltet. Ihre Linse ist erloschen. Die Sonne darf wieder so sterben, wie sie es immer tut.</Text>
     </ExploreFact>
     <Entry>
       <ID>ZEKISAE_KONTROLLE</ID>
       <Name>Das Kontrollmodul</Name>
       <ExploreFact>
         <ID>ZEKISAE_KONTROLLE_FOUND</ID>
-        <Text>Im Kontrollmodul liegen die Überreste eines Nomai vor einer beschriebenen Wand. In der Mitte des Raums steht ein leeres Podest.</Text>
+        <Text>Das Kontrollmodul ist eine Kopie der Module der Orbitalen Sondenkanone. Neben dem Computer und Linums Aufzeichnung ist ein Platz leer – dort erscheint später der Hauptschalter.</Text>
+      </ExploreFact>
+    </Entry>
+    <Entry>
+      <ID>ZEKISAE_KERN</ID>
+      <Name>Die Kernkammer</Name>
+      <RumorFact>
+        <ID>ZEKISAE_KERN_RUMOR</ID>
+        <SourceID>ZEKISAE_KONTROLLE</SourceID>
+        <RumorName>Eine Luke im Panzer</RumorName>
+        <Text>Linum sagt, Sedum habe sich in die Kernkammer zurückgezogen. Die Luke liegt in der Panzerung unter der ersten Schiene.</Text>
+      </RumorFact>
+      <ExploreFact>
+        <ID>ZEKISAE_KERN_FOUND</ID>
+        <Text>Im Inneren der Panzerung glüht das Herz der Einheit über einem Sockel. Davor liegen die Überreste eines Nomai.</Text>
       </ExploreFact>
       <ExploreFact>
         <ID>ZEKISAE_SEDUM_ENDE</ID>
-        <Text>Sedum blieb bei seiner Einheit, als die Geisterwolke kam. Er ließ sie schlafen, damit sie beim Tod der Sonne eine Warnung zu den anderen Nomai-Clans trägt.</Text>
+        <Text>Sedum blieb beim Herz seiner Einheit, als die Geisterwolke kam. Er ließ sie schlafen, damit sie beim Tod der Sonne eine Warnung zu den anderen Nomai-Clans trägt.</Text>
       </ExploreFact>
       <ExploreFact>
         <ID>ZEKISAE_LINUM_SCHALTER</ID>
         <Text>Sedum hat Linums heimliche Abschaltung gefunden – und sie absichtlich eingebaut gelassen. Er wollte, dass jemand nach ihm entscheiden kann.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKISAE_NAVI_ZWEIFEL</ID>
+        <Text>Linum zweifelte, ob am Ziel überhaupt noch jemand lebt. Sedum wollte wenigstens verhindern, dass sich ein zweites Vessel in den Dornen verirrt.</Text>
       </ExploreFact>
     </Entry>
     <Entry>
@@ -67,7 +85,7 @@
       </RumorFact>
       <ExploreFact>
         <ID>ZEKISAE_START_FOUND</ID>
-        <Text>Im Startmodul ruht eine Nomai-Sonde in einer Startwiege.</Text>
+        <Text>Im Startmodul schwebt eine Nomai-Sonde, bereit für den Schuss.</Text>
       </ExploreFact>
       <ExploreFact>
         <ID>ZEKISAE_START_BAU</ID>
@@ -97,7 +115,7 @@
       </RumorFact>
       <ExploreFact>
         <ID>ZEKISAE_NAVI_FOUND</ID>
-        <Text>Über einem Sockel im Navigationsmodul dreht sich eine leuchtende Sternkarte.</Text>
+        <Text>Im Navigationsmodul dreht sich eine leuchtende Sternkarte.</Text>
       </ExploreFact>
       <ExploreFact>
         <ID>ZEKISAE_NAVI_ZIEL</ID>
@@ -106,10 +124,6 @@
       <ExploreFact>
         <ID>ZEKISAE_NAVI_ENERGIE</ID>
         <Text>So weit kommt eine Sonde nur mit der gesamten Energie eines sterbenden Sterns in einem einzigen Augenblick. Darum wartet die Einheit auf den Tod der Sonne.</Text>
-      </ExploreFact>
-      <ExploreFact>
-        <ID>ZEKISAE_NAVI_ZWEIFEL</ID>
-        <Text>Linum zweifelte, ob am Ziel überhaupt noch jemand lebt. Sedum wollte wenigstens verhindern, dass sich ein zweites Vessel in den Dornen verirrt.</Text>
       </ExploreFact>
       <ExploreFact>
         <ID>ZEKISAE_PYE_VERBOT</ID>
@@ -123,15 +137,19 @@
         <ID>ZEKISAE_FOKUS_RUMOR</ID>
         <SourceID>ZEKISAE_KONTROLLE</SourceID>
         <RumorName>Drei Fokuskanonen</RumorName>
-        <Text>Drei kleinere Kanonen namens Alpha, Beta und Gamma umkreisen die Aussendungseinheit. Ihre Phasenkoppler sind noch verbunden.</Text>
+        <Text>Drei kleinere Kanonen namens Alpha, Beta und Gamma umkreisen den Lauf der Aussendungseinheit. Ihre Phasenkoppler sind noch verbunden.</Text>
       </RumorFact>
       <ExploreFact>
         <ID>ZEKISAE_FOKUS_FOUND</ID>
-        <Text>Jede Fokuskanone ist eine frei schwebende Nomai-Schwerkraftkanone. Auf ihrer Startplattform leuchtet ein Kristall: der Phasenkoppler.</Text>
+        <Text>Jede Fokuskanone ist eine Nomai-Schwerkraftkanone in einem Gerüst aus drei Dornen. Oben sitzt ein Emitter, der auf die Sonne zielt, unten ein Kiel. Eine rote Leitung verbindet ihn mit der Hauptkanone.</Text>
       </ExploreFact>
       <ExploreFact>
         <ID>ZEKISAE_FOKUS_ZWECK</ID>
-        <Text>Die Fokuskanonen bündeln den Energiestrom des Sterns und lenken ihn in die Hauptkanone. Solange ein Kristall leuchtet, kann der Strom fließen.</Text>
+        <Text>Die Fokuskanonen bündeln den Energiestrom des Sterns und lenken ihn in die Hauptkanone.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKISAE_FOKUS_LEITUNG</ID>
+        <Text>Wird ein Phasenkoppler getrennt, erlischt die rote Leitung dieser Fokuskanone.</Text>
       </ExploreFact>
       <ExploreFact>
         <ID>ZEKISAE_FOKUS_BAU</ID>
@@ -140,6 +158,22 @@
       <ExploreFact>
         <ID>ZEKISAE_FOKUS_DREIECK</ID>
         <Text>Nur alle drei gemeinsam halten den Strom eines ganzen Sterns. Fehlt einer, bricht das Dreieck.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKISAE_FOKUS_SONNE</ID>
+        <Text>Die Einheit zielt immer auf die Sonne und folgt ihr, solange niemand an Bord ist. Nach dem Tod der Sonne wendet sie sich ab und schießt zu den Sternen.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKISAE_FOKUS_OBEN</ID>
+        <Text>Auf Fokuskanone Beta liegt der Phasenkoppler oben unter dem Emitter.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKISAE_FOKUS_UNTEN</ID>
+        <Text>Auf Fokuskanone Gamma hängt der Phasenkoppler unter dem Kiel, in der Leere.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKISAE_FOKUS_VERSTECK</ID>
+        <Text>Linum hat die Koppler versteckt, damit nur jemand sie findet, der wirklich sucht.</Text>
       </ExploreFact>
       <ExploreFact>
         <ID>ZEKISAE_KOPPLER_A_FACT</ID>
@@ -164,6 +198,26 @@
       <ExploreFact>
         <ID>ZEKISAE_LINUM_REUE</ID>
         <Text>Linum half Sedum, prüfte seine Rechnungen und entschied sich am Ende gegen ihn: Niemand darf das Ende eines anderen wählen.</Text>
+      </ExploreFact>
+    </Entry>
+    <Entry>
+      <ID>ZEKISAE_SPUREN</ID>
+      <Name>Spuren im Sonnensystem</Name>
+      <ExploreFact>
+        <ID>ZEKISAE_SPUR_ET</ID>
+        <Text>Auf Ember Twin hat Erica die Schwerkraftkanone vermessen, für drei Kanonen, deren Zweck Sedum ihr nicht verriet.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKISAE_SPUR_ATTLE</ID>
+        <Text>Auf dem Attlerock hat Linum die Sonne gemessen: Sie altert und wird in einigen hunderttausend Jahren sterben.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKISAE_SPUR_GD</ID>
+        <Text>Im Kern von Giant's Deep las Linum beim Sondenverfolgungsmodul, dass die ersten Schüsse das Auge nicht fanden – für Sedum ein Beweis, für Linum ein Grund weiterzusuchen.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKISAE_SPUR_BH</ID>
+        <Text>Auf Brittle Hollow lehnte Pyes Versammlung Sedums Antrag ab. Pye fürchtete, dass er trotzdem baut.</Text>
       </ExploreFact>
     </Entry>
   </Entry>

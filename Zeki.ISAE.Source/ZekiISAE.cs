@@ -26,6 +26,8 @@ public class ZekiISAE : ModBehaviour
     public const string DrainActive = "ZEKISAE_ENTZUG";
     public const string UniverseEnds = "ZEKISAE_UNIVERSUM_ENDET";
     public const string Prelude = "ZEKISAE_VORBOTE";
+    /// <summary>Persistent condition of one cut phase coupler; {0} = A, B or C.</summary>
+    public const string CouplerCut = "ZEKISAE_KOPPLER_{0}";
 
     /// <summary>Seconds before the end of the loop when the ISAE visibly wakes up.</summary>
     public const float PreludeSeconds = 120f;
@@ -37,6 +39,7 @@ public class ZekiISAE : ModBehaviour
     public float DrainSeconds = 60f;
     public bool Cinematic = true;
     public string MaterialSource = "Vessel";
+    public bool ShowOnTitle = true;
     /// <summary>The last two minutes of the loop: the ISAE charges up.</summary>
     public bool Awakening;
 
@@ -57,6 +60,7 @@ public class ZekiISAE : ModBehaviour
         NewHorizons.GetStarSystemLoadedEvent().AddListener(OnStarSystemLoaded);
         new Harmony("Zeki.ISAE").PatchAll(Assembly.GetExecutingAssembly());
         LoadManager.OnCompleteSceneLoad += OnCompleteSceneLoad;
+        if (LoadManager.GetCurrentScene() == OWScene.TitleScreen) StartCoroutine(BuildTitle());
         Log("Die Aussendungseinheit ist geladen.");
     }
 
@@ -66,6 +70,7 @@ public class ZekiISAE : ModBehaviour
         DrainSeconds = Mathf.Clamp(config.GetSettingsValue<float>("drainSeconds"), 20f, 180f);
         Cinematic = config.GetSettingsValue<bool>("cinematic");
         MaterialSource = config.GetSettingsValue<string>("materialSource") ?? "Vessel";
+        ShowOnTitle = config.GetSettingsValue<bool>("showOnTitle");
     }
 
     public void Log(string message, bool warning = false)
@@ -87,8 +92,22 @@ public class ZekiISAE : ModBehaviour
         }
     }
 
+    private System.Collections.IEnumerator BuildTitle()
+    {
+        yield return new WaitForSeconds(0.5f);
+        try
+        {
+            TitleScreen.Build(this);
+        }
+        catch (Exception e)
+        {
+            Log("Titelbildschirm: " + e, true);
+        }
+    }
+
     private void OnCompleteSceneLoad(OWScene previousScene, OWScene newScene)
     {
+        if (newScene == OWScene.TitleScreen) StartCoroutine(BuildTitle());
         _warnedAtStart = false;
         _warnedBeforeEnd = false;
         Awakening = false;

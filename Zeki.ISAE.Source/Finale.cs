@@ -7,13 +7,15 @@ namespace ZekiISAE;
 /// <summary>
 /// The end of the universe, as a cutscene. Replaces the supernova while the ISAE is still running:
 ///
-///   0 .. D       Energy streams flow from the sun into the main cannon and the three focus cannons.
+///   0 .. D       Energy streams flow from the sun into the lens of the main cannon (which points at the sun)
+///                and into the emitters of the three focus cannons.
 ///                The sun shrinks, turns red, then violet-white. Subtitles tell what happens.
 ///   D-10 .. D    Collapse: the camera turns to the sun, the vanilla collapse particles and sound play.
 ///   D            The sun goes out with a flash.
-///   D+1.5        The main cannon fires the interstellar probe along its barrel; the camera follows it.
-///   D+7 .. D+14  Darkness. The eyes close.
-///   D+14 .. D+26 Epilogue on black: where the probe goes. Then the New Horizons game over shows
+///   D+0.5        The cannon turns away from the dead sun, towards the stars; the camera watches its muzzle.
+///   D+7          It fires the interstellar probe along its barrel; the camera follows the probe.
+///   D+12 .. D+19 Darkness. The eyes close.
+///   D+19 .. D+31 Epilogue on black: where the probe goes. Then the New Horizons game over shows
 ///                "Das Universum endet, aber du endest vor ihm..." (addon-manifest.json).
 ///
 /// D is the "drainSeconds" setting. With "cinematic" off the camera stays free, everything else still happens.
@@ -24,14 +26,15 @@ public class Finale : MonoBehaviour
     public SunController Sun;
 
     private const float CollapseLength = 10f;
-    private const float FocusStreamHeight = 4f; // the energy streams end a few metres above the launch platform
 
     private float _start, _d;
     private float _startScale, _currentScale, _startRadius, _startSunLight, _startAmbientLight, _startLocalAmbient;
     private Color _startColor;
     private Material _baseSurface;
     private readonly List<(DistantSunController sun, Vector3 scale, float light)> _distant = new();
-    private readonly List<(LineRenderer line, Transform body, float height)> _streams = new();
+    private readonly List<(LineRenderer line, Transform anchor, Vector3 local, float width)> _streams = new();
+    private Transform _muzzle;
+    private bool _turning;
     private Cinema _cinema;
     private PlayerLockOnTargeting _lockOn;
     private Material _lineMaterial;
@@ -79,14 +82,15 @@ public class Finale : MonoBehaviour
             (_d * 0.58f, "Keine Supernova. Kein Projekt. Keine Erinnerung, die zurückkehrt.", 5.5f),
             (_d * 0.74f, "Sedum wollte die Clans warnen. Linum wollte uns alle retten.", 5.5f),
             (_d - CollapseLength + 1f, "Die Sonne verlischt.", 4.5f),
-            (_d + 2f, "Ein einziger Schuss. Eine Botschaft an Clans, die längst vergangen sind.", 4.5f),
-            (_d + 7f, "Niemand wird sie je empfangen.", 3.8f),
+            (_d + 1f, "Die Kanone wendet sich von der toten Sonne ab. Zu den Sternen.", 5.5f),
+            (_d + 7.5f, "Ein einziger Schuss. Eine Botschaft an Clans, die längst vergangen sind.", 4.5f),
+            (_d + 12.5f, "Niemand wird sie je empfangen.", 3.8f),
         };
         _epilogue = new[]
         {
-            (_d + 14.5f, "Die Sonde fliegt.", 3.2f),
-            (_d + 18f, "Zehntausend Jahre. Hunderttausend.", 3.2f),
-            (_d + 21.5f, "Sie erreicht einen Stern, an dem niemand mehr wartet.", 4f),
+            (_d + 20f, "Die Sonde fliegt.", 3.2f),
+            (_d + 23.5f, "Zehntausend Jahre. Hunderttausend.", 3.2f),
+            (_d + 27f, "Sie erreicht einen Stern, an dem niemand mehr wartet.", 4f),
         };
 
         _lineMaterial = new Material(Shader.Find("Sprites/Default") ?? Shader.Find("Standard"));
@@ -132,11 +136,12 @@ public class Finale : MonoBehaviour
 
         if (!_collapseStarted && t >= _d - CollapseLength) StartCollapse();
         if (!_sunGone && t >= _d) SunGoesOut();
-        if (!_fired && t >= _d + 1.5f) Fire();
+        if (!_turning && t >= _d + 0.5f) TurnAway();
+        if (!_fired && t >= _d + 7f) Fire();
         if (_fired) UpdateShot();
-        if (!_darkness && t >= _d + 7f) _darkness = true;
+        if (!_darkness && t >= _d + 12f) _darkness = true;
         if (_darkness) DimEverything();
-        if (!_eyesClosed && t >= _d + 11f)
+        if (!_eyesClosed && t >= _d + 16f)
         {
             _eyesClosed = true;
             _cinema.Bars(false);
@@ -149,7 +154,7 @@ public class Finale : MonoBehaviour
             _cinema.Card(_epilogue[_nextCard].text, _epilogue[_nextCard].duration);
             _nextCard++;
         }
-        if (t >= _d + 26f) EndOfEverything();
+        if (t >= _d + 31.5f) EndOfEverything();
     }
 
     // ------------------------------------------------------------------------------------------ the sun
@@ -236,45 +241,61 @@ public class Finale : MonoBehaviour
     // ------------------------------------------------------------------------------------------ energy streams
     private void BuildStreams()
     {
-        var nh = ZekiISAE.Instance.NewHorizons;
-        var isae = nh.GetPlanet(ZekiISAE.IsaeName);
-        if (isae != null) AddStream(isae.transform, 0f, 70f); // into the glowing core of the hub
-        foreach (var name in GameProps.FocusNames)
-        {
-            var body = nh.GetPlanet(name);
-            if (body != null) AddStream(body.transform, FocusStreamHeight, 30f);
-        }
+        if (GameProps.Pivot == null) return;
+        AddStream(GameProps.Pivot, GameProps.LocalPoint("linse", Vector3.up * 770f), 80f);
+        var emitter = GameProps.LocalPoint("fokus_emitter", Vector3.up * 113f);
+        foreach (var focus in GameProps.FocusCannons) AddStream(focus, emitter, 32f);
+        _muzzle = new GameObject("ISAE_Muendung_Kamera").transform;
+        _muzzle.SetParent(GameProps.Pivot, false);
+        _muzzle.localPosition = GameProps.LocalPoint("muendung", Vector3.up * 800f);
     }
 
-    private void AddStream(Transform body, float height, float width)
+    private void AddStream(Transform anchor, Vector3 local, float width)
     {
-        var go = new GameObject("Energiestrom_" + body.name);
+        var go = new GameObject("Energiestrom_" + anchor.name);
         var line = go.AddComponent<LineRenderer>();
         line.useWorldSpace = true;
         line.positionCount = 32;
         line.sharedMaterial = _lineMaterial;
         line.widthMultiplier = width;
         line.widthCurve = new AnimationCurve(new Keyframe(0f, 1f), new Keyframe(0.7f, 0.35f), new Keyframe(1f, 0.12f));
-        line.colorGradient = Gradient(new Color(1.6f, 0.7f, 0.3f, 0f), new Color(1.8f, 1.2f, 0.7f, 0.8f), new Color(1.2f, 1.8f, 2.4f, 1f));
+        line.colorGradient = Gradient(new Color(1.6f, 0.7f, 0.3f, 0f), new Color(1.8f, 1.0f, 0.5f, 0.8f), new Color(2.4f, 0.9f, 0.4f, 1f));
         line.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
         line.receiveShadows = false;
-        _streams.Add((line, body, height));
+        _streams.Add((line, anchor, local, width));
+    }
+
+    /// <summary>The sun is dead: the cannon turns its muzzle away from it, towards the stars.</summary>
+    private void TurnAway()
+    {
+        _turning = true;
+        var aim = SunAim.Instance;
+        var sun = Locator.GetSunTransform();
+        if (aim == null || sun == null) return;
+        aim.Override = (aim.transform.position - sun.position).normalized;
+        aim.DegreesPerSecond = 32f;
+        PlayOneShot(AudioType.NomaiVesselPowerUp);
+        if (ZekiISAE.Instance.Cinematic && _lockOn != null && _muzzle != null)
+        {
+            _lockOn.BreakLock();
+            _lockOn.LockOn(_muzzle, 2.5f, false, 1f);
+        }
     }
 
     private void UpdateStreams(float t)
     {
         var sun = Locator.GetSunTransform();
         var fade = _sunGone ? Mathf.Clamp01(1f - (Time.time - _start - _d) / 1.2f) : Mathf.Clamp01(t / 3f);
-        foreach (var (line, body, height) in _streams)
+        foreach (var (line, anchor, local, width) in _streams)
         {
             if (line == null) continue;
-            if (sun == null || body == null || fade <= 0f)
+            if (sun == null || anchor == null || fade <= 0f)
             {
                 line.enabled = false;
                 continue;
             }
             line.enabled = true;
-            var target = body.TransformPoint(Vector3.up * height);
+            var target = anchor.TransformPoint(local);
             var dir = (target - sun.position).normalized;
             var radius = _sunGone ? 0f : _startRadius * _currentScale / _startScale;
             var from = sun.position + dir * radius;
@@ -291,7 +312,7 @@ public class Finale : MonoBehaviour
                 line.SetPosition(i, Vector3.Lerp(from, target, u) + side * wobble + lift * twist);
             }
             var charge = Mathf.Clamp01(t / _d);
-            line.widthMultiplier = Mathf.Lerp(0.4f, 1.3f, charge) * (1f + 0.25f * Mathf.Sin(t * 9f)) * fade * (body.name.Contains("Fokus") ? 30f : 70f);
+            line.widthMultiplier = Mathf.Lerp(0.4f, 1.3f, charge) * (1f + 0.25f * Mathf.Sin(t * 9f)) * fade * width;
         }
     }
 
@@ -304,8 +325,8 @@ public class Finale : MonoBehaviour
         PlayOneShot(AudioType.NomaiGravityCannonActivate);
         PlayOneShot(AudioType.NomaiVesselPowerUp);
 
-        if (GameProps.Isae == null) return;
-        var muzzle = GameProps.MuzzleWorld();
+        if (GameProps.Pivot == null) return;
+        var muzzle = GameProps.Point("muendung");
         var axis = GameProps.AxisWorld();
 
         var beamGo = new GameObject("ISAE_Schuss");

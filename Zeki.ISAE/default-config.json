@@ -22,6 +22,12 @@
       "title": "Filmische Kamera im Finale",
       "tooltip": "Im Finale dreht sich die Kamera zur Sonne und folgt dem Schuss. Aus: Du behältst die Steuerung."
     },
+    "showOnTitle": {
+      "type": "toggle",
+      "value": true,
+      "title": "Kanone im Hauptmenü",
+      "tooltip": "Zeigt die Aussendungseinheit am Himmel des Titelbildschirms."
+    },
     "materialSource": {
       "type": "selector",
       "value": "Vessel",

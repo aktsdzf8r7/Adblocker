@@ -32,35 +32,49 @@
       "id": "ZEKISAE_KONTROLLE",
       "position": {
         "x": 2080,
-        "y": 450
+        "y": 640
+      }
+    },
+    {
+      "id": "ZEKISAE_KERN",
+      "position": {
+        "x": 2080,
+        "y": 260
       }
     },
     {
       "id": "ZEKISAE_START",
       "position": {
         "x": 2500,
-        "y": 720
+        "y": 780
       }
     },
     {
       "id": "ZEKISAE_NAVI",
       "position": {
         "x": 2500,
-        "y": 180
+        "y": 470
       }
     },
     {
       "id": "ZEKISAE_FOKUS",
       "position": {
-        "x": 2080,
+        "x": 1650,
         "y": 880
       }
     },
     {
       "id": "ZEKISAE_SEDUM",
       "position": {
-        "x": 2080,
-        "y": 20
+        "x": 1650,
+        "y": 30
+      }
+    },
+    {
+      "id": "ZEKISAE_SPUREN",
+      "position": {
+        "x": 1220,
+        "y": 450
       }
     }
   ],

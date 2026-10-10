@@ -63,6 +63,7 @@ P = {
     "dead_suit": "Comet_Body/Sector_CO/Sector_CometInterior/Props_CometInterior/Prefab_NOM_Dead_Suit (1)",
     "skeleton_child": "CaveTwin_Body/Sector_CaveTwin/Sector_SouthHemisphere/Sector_SouthUnderground/Sector_FossilCave/Geometry_FossilCave/OtherComponentsGroup/Child Skeletons/Prefab_NOM_Skeleton_Child_Pile_A",
     "opc_module": "OrbitalProbeCannon_Body/Sector_OrbitalProbeCannon/Sector_Module_Broken",
+    "opc_module_intact": "OrbitalProbeCannon_Body/Sector_OrbitalProbeCannon/Sector_Module_Intact",
     "nomai_probe": "NomaiProbe_Body/Structure_NOM_Probe_Renderer",
     "sunstation": "SunStation_Body/Sector_SunStation/Geometry_SunStation",
     "statue_head": "SunStation_Body/Sector_SunStation/Sector_ControlModule/Props/OtherComponentsGroup/StatueHead/Prefab_NOM_StatueHead",

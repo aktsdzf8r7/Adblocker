@@ -4,14 +4,13 @@
   "starSystem": "SolarSystem",
   "canShowOnTitle": false,
   "Base": {
-    "surfaceSize": 120,
-    "surfaceGravity": 0.6,
-    "gravityFallOff": "linear",
+    "surfaceSize": 500,
+    "surfaceGravity": 0,
     "showMinimap": false
   },
   "Orbit": {
     "primaryBody": "Sun",
-    "semiMajorAxis": 6200,
+    "semiMajorAxis": 6400,
     "eccentricity": 0,
     "inclination": 62,
     "longitudeOfAscendingNode": 35,
@@ -34,13 +33,13 @@
     "mapMode": {
       "revealedSprite": "planets/assets/shiplog/map/isae.png",
       "outlineSprite": "planets/assets/shiplog/map/isae_outline.png",
-      "scale": 0.9
+      "scale": 1.4
     }
   },
   "Props": {
     "details": [
       {
-        "path": "TowerTwin_Body/Sector_TowerTwin/Sector_TimeLoopInterior/Interactables_TimeLoopInterior/WarpCoreSocket/Prefab_NOM_WarpCoreVessel/Effects_NOM_AdvancedWarpCore/Effects_NOM_WarpParticlesWhite",
+        "path": "",
         "position": {
           "x": 0.0,
           "y": 0.0,
@@ -51,17 +50,163 @@
           "y": 0.0,
           "z": 0.0
         },
-        "scale": 6,
-        "rename": "ISAE_Energiekern",
+        "rename": "ISAE_Ausrichtung",
+        "keepLoaded": true
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "path": "",
+        "rename": "ISAE_Fokuskreis",
+        "keepLoaded": true
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis",
+        "isRelativeToParent": true,
+        "position": {
+          "x": -420.0,
+          "y": 300.0,
+          "z": -0.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "path": "",
+        "rename": "Fokus_Alpha",
+        "keepLoaded": true
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 210.0,
+          "y": 300.0,
+          "z": -363.731
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "path": "",
+        "rename": "Fokus_Beta",
+        "keepLoaded": true
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 210.0,
+          "y": 300.0,
+          "z": 363.731
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "path": "",
+        "rename": "Fokus_Gamma",
+        "keepLoaded": true
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung",
+        "isRelativeToParent": true,
+        "position": {
+          "x": -129.904,
+          "y": 0.0,
+          "z": -75.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "path": "OrbitalProbeCannon_Body/Sector_OrbitalProbeCannon/Sector_Module_Intact",
+        "rename": "ISAE_Modul_Kontrolle",
+        "keepLoaded": true,
+        "removeChildren": [
+          "Interactables_Module_Intact"
+        ]
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 129.904,
+          "y": 0.0,
+          "z": -75.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "path": "OrbitalProbeCannon_Body/Sector_OrbitalProbeCannon/Sector_Module_Intact",
+        "rename": "ISAE_Modul_Start",
+        "keepLoaded": true,
+        "removeChildren": [
+          "Interactables_Module_Intact"
+        ]
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 150.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "path": "OrbitalProbeCannon_Body/Sector_OrbitalProbeCannon/Sector_Module_Intact",
+        "rename": "ISAE_Modul_Navigation",
+        "keepLoaded": true,
+        "removeChildren": [
+          "Interactables_Module_Intact"
+        ]
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 770.0,
+          "z": 0.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "path": "TowerTwin_Body/Sector_TowerTwin/Sector_TimeLoopInterior/Interactables_TimeLoopInterior/WarpCoreSocket/Prefab_NOM_WarpCoreVessel/Effects_NOM_AdvancedWarpCore/Effects_NOM_WarpParticlesWhite",
+        "scale": 9,
+        "rename": "ISAE_Linsenglut",
         "keepLoaded": true,
         "deactivationCondition": "ZEKISAE_DEAKTIVIERT",
         "blinkWhenActiveChanged": true
       },
       {
-        "path": "TowerTwin_Body/Sector_TowerTwin/Sector_TimeLoopInterior/Interactables_TimeLoopInterior/WarpCoreSocket/Prefab_NOM_WarpCoreVessel/Effects_NOM_AdvancedWarpCore/Effects_NOM_WarpParticlesWhite",
+        "parentPath": "Sector/ISAE_Ausrichtung",
+        "isRelativeToParent": true,
         "position": {
           "x": 0.0,
-          "y": 161.0,
+          "y": 795.0,
           "z": 0.0
         },
         "rotation": {
@@ -69,16 +214,18 @@
           "y": 0.0,
           "z": 0.0
         },
-        "scale": 2.5,
+        "path": "TowerTwin_Body/Sector_TowerTwin/Sector_TimeLoopInterior/Interactables_TimeLoopInterior/WarpCoreSocket/Prefab_NOM_WarpCoreVessel/Effects_NOM_AdvancedWarpCore/Effects_NOM_WarpParticlesWhite",
+        "scale": 5,
         "rename": "ISAE_Muendungsglut",
         "keepLoaded": true,
         "activationCondition": "ZEKISAE_VORBOTE"
       },
       {
-        "path": "CaveTwin_Body/Sector_CaveTwin/Sector_SouthHemisphere/Sector_EscapePod/Interactables_EscapePod/EscapePod_VisibleFrom_Far/DistressBeaconTransmitter/LightBeam",
+        "parentPath": "Sector/ISAE_Ausrichtung",
+        "isRelativeToParent": true,
         "position": {
           "x": 0.0,
-          "y": 161.0,
+          "y": 770.0,
           "z": 0.0
         },
         "rotation": {
@@ -86,57 +233,112 @@
           "y": 0.0,
           "z": 0.0
         },
-        "scale": 6,
+        "path": "CaveTwin_Body/Sector_CaveTwin/Sector_SouthHemisphere/Sector_EscapePod/Interactables_EscapePod/EscapePod_VisibleFrom_Far/DistressBeaconTransmitter/LightBeam",
+        "scale": 10,
         "rename": "ISAE_Entzugsstrahl",
         "keepLoaded": true,
         "activationCondition": "ZEKISAE_ENTZUG"
       },
       {
-        "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_NorthPoleSurface/Props_NorthPoleSurface/OtherComponentsGroup/LowBuilding/Prefab_NOM_Skeleton_Large_Pile_A",
+        "parentPath": "Sector/ISAE_Ausrichtung",
+        "isRelativeToParent": true,
         "position": {
-          "x": -20.429,
-          "y": -3.6,
-          "z": -41.784
+          "x": 17.22,
+          "y": -14.0,
+          "z": 8.03
         },
         "rotation": {
           "x": 0.0,
-          "y": 251.6,
+          "y": 245.0,
           "z": 0.0
         },
+        "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_NorthPoleSurface/Props_NorthPoleSurface/OtherComponentsGroup/LowBuilding/Prefab_NOM_Skeleton_Large_Pile_A",
         "rename": "Sedums_Ueberreste"
       },
       {
-        "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge/BlackHoleForgePivot/Props_BlackHoleForge/Prefab_NOM_Staff",
+        "parentPath": "Sector/ISAE_Ausrichtung",
+        "isRelativeToParent": true,
         "position": {
-          "x": -20.429,
-          "y": -3.55,
-          "z": -41.784
+          "x": 17.22,
+          "y": -13.95,
+          "z": 8.03
         },
         "rotation": {
           "x": 0.0,
-          "y": 321.6,
+          "y": 315.0,
           "z": 90.0
         },
+        "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge/BlackHoleForgePivot/Props_BlackHoleForge/Prefab_NOM_Staff",
         "rename": "Sedums_Stab"
       },
       {
-        "path": "",
+        "parentPath": "Sector/ISAE_Ausrichtung",
+        "isRelativeToParent": true,
         "position": {
-          "x": -25.0,
-          "y": -3.25,
-          "z": -43.301
+          "x": -13.0,
+          "y": -14.0,
+          "z": 22.517
         },
         "rotation": {
           "x": 0.0,
-          "y": 210.0,
+          "y": 0.0,
           "z": 0.0
         },
+        "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
+        "rename": "Kammerlampe_1"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung",
+        "isRelativeToParent": true,
+        "position": {
+          "x": -24.432,
+          "y": -14.0,
+          "z": -8.893
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
+        "rename": "Kammerlampe_2"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 16.712,
+          "y": -14.0,
+          "z": -19.917
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
+        "rename": "Kammerlampe_3"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Modul_Kontrolle",
+        "isRelativeToParent": true,
+        "position": {
+          "x": -8.881,
+          "y": -4.881,
+          "z": 8.732
+        },
+        "rotation": {
+          "x": 270.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "path": "",
         "rename": "ISAE_Hauptschalter",
         "activationCondition": "ZEKISAE_KOPPLER_ALLE",
         "deactivationCondition": "ZEKISAE_DEAKTIVIERT"
       },
       {
-        "parentPath": "Sector/ISAE_Hauptschalter",
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Modul_Kontrolle/ISAE_Hauptschalter",
         "isRelativeToParent": true,
         "position": {
           "x": 0.0,
@@ -149,14 +351,15 @@
           "z": 0.0
         },
         "path": "DB_VesselDimension_Body/Sector_VesselDimension/Sector_VesselBridge/Interactibles_VesselBridge/WarpController/CoordinateInterface",
+        "scale": 0.7,
         "rename": "Hauptschalter_Vessel_Interface"
       },
       {
-        "parentPath": "Sector/ISAE_Hauptschalter",
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Modul_Kontrolle/ISAE_Hauptschalter",
         "isRelativeToParent": true,
         "position": {
           "x": 0.0,
-          "y": 3.2,
+          "y": 2.3,
           "z": 0.0
         },
         "rotation": {
@@ -169,150 +372,678 @@
         "removeComponents": true
       },
       {
-        "path": "NomaiProbe_Body/Structure_NOM_Probe_Renderer",
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Modul_Start",
+        "isRelativeToParent": true,
         "position": {
-          "x": 50.0,
-          "y": -1.3,
-          "z": -0.0
+          "x": -8.881,
+          "y": -4.881,
+          "z": 7.532
         },
         "rotation": {
           "x": 0.0,
           "y": 0.0,
           "z": 0.0
         },
+        "path": "NomaiProbe_Body/Structure_NOM_Probe_Renderer",
         "rename": "Interstellare_Sonde",
         "keepLoaded": true
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Alpha",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "path": "CaveTwin_Body/Sector_CaveTwin/Sector_SouthHemisphere/Sector_GravityCannon/Geometry_GravityCannon/ControlledByProxy_Arch/Structure_NOM_GravityCannon_HT",
+        "rename": "Fokuskanone_Alpha_Struktur",
+        "keepLoaded": true
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Alpha",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 113.0,
+          "z": 0.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "path": "CaveTwin_Body/Sector_CaveTwin/Sector_SouthHemisphere/Sector_EscapePod/Interactables_EscapePod/EscapePod_VisibleFrom_Far/DistressBeaconTransmitter/LightBeam",
+        "scale": 3,
+        "rename": "Fokusstrahl_Alpha",
+        "keepLoaded": true,
+        "activationCondition": "ZEKISAE_ENTZUG"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Alpha",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 113.0,
+          "z": 0.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "path": "TowerTwin_Body/Sector_TowerTwin/Sector_TimeLoopInterior/Interactables_TimeLoopInterior/WarpCoreSocket/Prefab_NOM_WarpCoreVessel/Effects_NOM_AdvancedWarpCore/Effects_NOM_WarpParticlesWhite",
+        "scale": 1.6,
+        "rename": "Emitterglut_Alpha",
+        "keepLoaded": true,
+        "deactivationCondition": "ZEKISAE_KOPPLER_A",
+        "blinkWhenActiveChanged": true
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Alpha",
+        "isRelativeToParent": true,
+        "position": {
+          "x": -0.0,
+          "y": 0.0,
+          "z": -36.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "path": "BrittleHollow_Body/Sector_BH/Sector_GravityCannon/Lighting_GravityCannon/Prefab_NOM_Doorway",
+        "rename": "Fokustor_Alpha_1"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Alpha",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 31.177,
+          "y": 0.0,
+          "z": 18.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 240.0,
+          "z": 0.0
+        },
+        "path": "BrittleHollow_Body/Sector_BH/Sector_GravityCannon/Lighting_GravityCannon/Prefab_NOM_Doorway",
+        "rename": "Fokustor_Alpha_2"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Alpha",
+        "isRelativeToParent": true,
+        "position": {
+          "x": -31.177,
+          "y": 0.0,
+          "z": 18.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 120.0,
+          "z": 0.0
+        },
+        "path": "BrittleHollow_Body/Sector_BH/Sector_GravityCannon/Lighting_GravityCannon/Prefab_NOM_Doorway",
+        "rename": "Fokustor_Alpha_3"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Alpha",
+        "isRelativeToParent": true,
+        "position": {
+          "x": -28.579,
+          "y": 0.0,
+          "z": -16.5
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
+        "rename": "Fokuslampe_Alpha_1"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Alpha",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 28.579,
+          "y": 0.0,
+          "z": -16.5
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
+        "rename": "Fokuslampe_Alpha_2"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Alpha",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 33.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
+        "rename": "Fokuslampe_Alpha_3"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Alpha",
+        "isRelativeToParent": true,
+        "position": {
+          "x": -13.0,
+          "y": 0.0,
+          "z": 22.517
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 150.0,
+          "z": 0.0
+        },
+        "path": "BrittleHollow_Body/Sector_BH/Sector Quantum Pole Path/Fragment QuantumPolePath 2/Interactables_QPP2/Prefab_NOM_GravityCrystal",
+        "rename": "Phasenkoppler_Alpha",
+        "deactivationCondition": "ZEKISAE_KOPPLER_A",
+        "blinkWhenActiveChanged": true
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Alpha",
+        "isRelativeToParent": true,
+        "position": {
+          "x": -13.0,
+          "y": 0.0,
+          "z": 22.517
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 150.0,
+          "z": 0.0
+        },
+        "path": "BrittleHollow_Body/Sector_BH/Sector Quantum Pole Path/Fragment QuantumPolePath 2/Interactables_QPP2/Prefab_NOM_GravityCrystal_Cracked",
+        "rename": "Phasenkoppler_Alpha_getrennt",
+        "activationCondition": "ZEKISAE_KOPPLER_A"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Alpha",
+        "isRelativeToParent": true,
+        "position": {
+          "x": -13.0,
+          "y": 2.2,
+          "z": 22.517
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "path": "TowerTwin_Body/Sector_TowerTwin/Sector_TimeLoopInterior/Interactables_TimeLoopInterior/WarpCoreSocket/Prefab_NOM_WarpCoreVessel/Effects_NOM_AdvancedWarpCore/Effects_NOM_WarpParticlesWhite",
+        "scale": 0.3,
+        "rename": "Kopplerlicht_Alpha",
+        "deactivationCondition": "ZEKISAE_KOPPLER_A"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Beta",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "path": "CaveTwin_Body/Sector_CaveTwin/Sector_SouthHemisphere/Sector_GravityCannon/Geometry_GravityCannon/ControlledByProxy_Arch/Structure_NOM_GravityCannon_HT",
+        "rename": "Fokuskanone_Beta_Struktur",
+        "keepLoaded": true
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Beta",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 113.0,
+          "z": 0.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "path": "CaveTwin_Body/Sector_CaveTwin/Sector_SouthHemisphere/Sector_EscapePod/Interactables_EscapePod/EscapePod_VisibleFrom_Far/DistressBeaconTransmitter/LightBeam",
+        "scale": 3,
+        "rename": "Fokusstrahl_Beta",
+        "keepLoaded": true,
+        "activationCondition": "ZEKISAE_ENTZUG"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Beta",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 113.0,
+          "z": 0.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "path": "TowerTwin_Body/Sector_TowerTwin/Sector_TimeLoopInterior/Interactables_TimeLoopInterior/WarpCoreSocket/Prefab_NOM_WarpCoreVessel/Effects_NOM_AdvancedWarpCore/Effects_NOM_WarpParticlesWhite",
+        "scale": 1.6,
+        "rename": "Emitterglut_Beta",
+        "keepLoaded": true,
+        "deactivationCondition": "ZEKISAE_KOPPLER_B",
+        "blinkWhenActiveChanged": true
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Beta",
+        "isRelativeToParent": true,
+        "position": {
+          "x": -0.0,
+          "y": 0.0,
+          "z": -36.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "path": "BrittleHollow_Body/Sector_BH/Sector_GravityCannon/Lighting_GravityCannon/Prefab_NOM_Doorway",
+        "rename": "Fokustor_Beta_1"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Beta",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 31.177,
+          "y": 0.0,
+          "z": 18.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 240.0,
+          "z": 0.0
+        },
+        "path": "BrittleHollow_Body/Sector_BH/Sector_GravityCannon/Lighting_GravityCannon/Prefab_NOM_Doorway",
+        "rename": "Fokustor_Beta_2"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Beta",
+        "isRelativeToParent": true,
+        "position": {
+          "x": -31.177,
+          "y": 0.0,
+          "z": 18.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 120.0,
+          "z": 0.0
+        },
+        "path": "BrittleHollow_Body/Sector_BH/Sector_GravityCannon/Lighting_GravityCannon/Prefab_NOM_Doorway",
+        "rename": "Fokustor_Beta_3"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Beta",
+        "isRelativeToParent": true,
+        "position": {
+          "x": -28.579,
+          "y": 0.0,
+          "z": -16.5
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
+        "rename": "Fokuslampe_Beta_1"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Beta",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 28.579,
+          "y": 0.0,
+          "z": -16.5
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
+        "rename": "Fokuslampe_Beta_2"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Beta",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 33.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
+        "rename": "Fokuslampe_Beta_3"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Beta",
+        "isRelativeToParent": true,
+        "position": {
+          "x": -3.0,
+          "y": 100.0,
+          "z": -0.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 90.0,
+          "z": 0.0
+        },
+        "path": "BrittleHollow_Body/Sector_BH/Sector Quantum Pole Path/Fragment QuantumPolePath 2/Interactables_QPP2/Prefab_NOM_GravityCrystal",
+        "rename": "Phasenkoppler_Beta",
+        "deactivationCondition": "ZEKISAE_KOPPLER_B",
+        "blinkWhenActiveChanged": true
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Beta",
+        "isRelativeToParent": true,
+        "position": {
+          "x": -3.0,
+          "y": 100.0,
+          "z": -0.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 90.0,
+          "z": 0.0
+        },
+        "path": "BrittleHollow_Body/Sector_BH/Sector Quantum Pole Path/Fragment QuantumPolePath 2/Interactables_QPP2/Prefab_NOM_GravityCrystal_Cracked",
+        "rename": "Phasenkoppler_Beta_getrennt",
+        "activationCondition": "ZEKISAE_KOPPLER_B"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Beta",
+        "isRelativeToParent": true,
+        "position": {
+          "x": -3.0,
+          "y": 102.2,
+          "z": 0.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "path": "TowerTwin_Body/Sector_TowerTwin/Sector_TimeLoopInterior/Interactables_TimeLoopInterior/WarpCoreSocket/Prefab_NOM_WarpCoreVessel/Effects_NOM_AdvancedWarpCore/Effects_NOM_WarpParticlesWhite",
+        "scale": 0.3,
+        "rename": "Kopplerlicht_Beta",
+        "deactivationCondition": "ZEKISAE_KOPPLER_B"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Gamma",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "path": "CaveTwin_Body/Sector_CaveTwin/Sector_SouthHemisphere/Sector_GravityCannon/Geometry_GravityCannon/ControlledByProxy_Arch/Structure_NOM_GravityCannon_HT",
+        "rename": "Fokuskanone_Gamma_Struktur",
+        "keepLoaded": true
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Gamma",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 113.0,
+          "z": 0.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "path": "CaveTwin_Body/Sector_CaveTwin/Sector_SouthHemisphere/Sector_EscapePod/Interactables_EscapePod/EscapePod_VisibleFrom_Far/DistressBeaconTransmitter/LightBeam",
+        "scale": 3,
+        "rename": "Fokusstrahl_Gamma",
+        "keepLoaded": true,
+        "activationCondition": "ZEKISAE_ENTZUG"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Gamma",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 113.0,
+          "z": 0.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "path": "TowerTwin_Body/Sector_TowerTwin/Sector_TimeLoopInterior/Interactables_TimeLoopInterior/WarpCoreSocket/Prefab_NOM_WarpCoreVessel/Effects_NOM_AdvancedWarpCore/Effects_NOM_WarpParticlesWhite",
+        "scale": 1.6,
+        "rename": "Emitterglut_Gamma",
+        "keepLoaded": true,
+        "deactivationCondition": "ZEKISAE_KOPPLER_C",
+        "blinkWhenActiveChanged": true
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Gamma",
+        "isRelativeToParent": true,
+        "position": {
+          "x": -0.0,
+          "y": 0.0,
+          "z": -36.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "path": "BrittleHollow_Body/Sector_BH/Sector_GravityCannon/Lighting_GravityCannon/Prefab_NOM_Doorway",
+        "rename": "Fokustor_Gamma_1"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Gamma",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 31.177,
+          "y": 0.0,
+          "z": 18.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 240.0,
+          "z": 0.0
+        },
+        "path": "BrittleHollow_Body/Sector_BH/Sector_GravityCannon/Lighting_GravityCannon/Prefab_NOM_Doorway",
+        "rename": "Fokustor_Gamma_2"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Gamma",
+        "isRelativeToParent": true,
+        "position": {
+          "x": -31.177,
+          "y": 0.0,
+          "z": 18.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 120.0,
+          "z": 0.0
+        },
+        "path": "BrittleHollow_Body/Sector_BH/Sector_GravityCannon/Lighting_GravityCannon/Prefab_NOM_Doorway",
+        "rename": "Fokustor_Gamma_3"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Gamma",
+        "isRelativeToParent": true,
+        "position": {
+          "x": -28.579,
+          "y": 0.0,
+          "z": -16.5
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
+        "rename": "Fokuslampe_Gamma_1"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Gamma",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 28.579,
+          "y": 0.0,
+          "z": -16.5
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
+        "rename": "Fokuslampe_Gamma_2"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Gamma",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 33.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
+        "rename": "Fokuslampe_Gamma_3"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Gamma",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": -67.4,
+          "z": 0.0
+        },
+        "rotation": {
+          "x": 180.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "path": "BrittleHollow_Body/Sector_BH/Sector Quantum Pole Path/Fragment QuantumPolePath 2/Interactables_QPP2/Prefab_NOM_GravityCrystal",
+        "rename": "Phasenkoppler_Gamma",
+        "deactivationCondition": "ZEKISAE_KOPPLER_C",
+        "blinkWhenActiveChanged": true
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Gamma",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": -67.4,
+          "z": 0.0
+        },
+        "rotation": {
+          "x": 180.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "path": "BrittleHollow_Body/Sector_BH/Sector Quantum Pole Path/Fragment QuantumPolePath 2/Interactables_QPP2/Prefab_NOM_GravityCrystal_Cracked",
+        "rename": "Phasenkoppler_Gamma_getrennt",
+        "activationCondition": "ZEKISAE_KOPPLER_C"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Gamma",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": -69.6,
+          "z": 0.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "path": "TowerTwin_Body/Sector_TowerTwin/Sector_TimeLoopInterior/Interactables_TimeLoopInterior/WarpCoreSocket/Prefab_NOM_WarpCoreVessel/Effects_NOM_AdvancedWarpCore/Effects_NOM_WarpParticlesWhite",
+        "scale": 0.3,
+        "rename": "Kopplerlicht_Gamma",
+        "deactivationCondition": "ZEKISAE_KOPPLER_C"
       }
     ],
     "translatorText": [
       {
-        "type": "preCrashComputer",
-        "xmlFile": "planets/text/ISAE_Status.xml",
-        "position": {
-          "x": -21.07,
-          "y": -3.6,
-          "z": -46.494
-        },
-        "rename": "Computer_Status",
-        "rotation": {
-          "x": 0.0,
-          "y": 309.1,
-          "z": 0.0
-        }
-      },
-      {
-        "type": "preCrashRecorder",
-        "xmlFile": "planets/text/ISAE_Linum.xml",
-        "position": {
-          "x": -29.73,
-          "y": -3.6,
-          "z": -41.494
-        },
-        "rename": "Recorder_Linum",
-        "rotation": {
-          "x": 0.0,
-          "y": 110.9,
-          "z": 0.0
-        }
-      },
-      {
-        "type": "wall",
-        "xmlFile": "planets/text/Sedum_Abschied.xml",
-        "position": {
-          "x": -22.4,
-          "y": -1.1,
-          "z": -38.798
-        },
-        "rename": "Wandschrift_Sedum",
-        "normal": {
-          "x": -0.5,
-          "y": 0.0,
-          "z": -0.866
-        },
-        "seed": 4102
-      },
-      {
-        "type": "wall",
-        "xmlFile": "planets/text/Start_Bau.xml",
-        "position": {
-          "x": 44.8,
-          "y": -1.1,
-          "z": -0.0
-        },
-        "rename": "Wandschrift_Bau",
-        "normal": {
-          "x": 1.0,
-          "y": 0.0,
-          "z": -0.0
-        },
-        "seed": 4103
-      },
-      {
-        "type": "preCrashComputer",
-        "xmlFile": "planets/text/Start_Sonde.xml",
-        "position": {
-          "x": 50.8,
-          "y": -3.6,
-          "z": 5.0
-        },
-        "rename": "Computer_Sonde",
-        "rotation": {
-          "x": 0.0,
-          "y": 189.1,
-          "z": 0.0
-        }
-      },
-      {
-        "type": "preCrashComputer",
-        "xmlFile": "planets/text/Navi_Ziel.xml",
-        "position": {
-          "x": -29.73,
-          "y": -3.6,
-          "z": 41.494
-        },
-        "rename": "Computer_Ziel",
-        "rotation": {
-          "x": 0.0,
-          "y": 69.1,
-          "z": 0.0
-        }
-      },
-      {
-        "type": "preCrashRecorder",
-        "xmlFile": "planets/text/Navi_Pye.xml",
-        "position": {
-          "x": -21.07,
-          "y": -3.6,
-          "z": 46.494
-        },
-        "rename": "Recorder_Pye",
-        "rotation": {
-          "x": 0.0,
-          "y": 230.9,
-          "z": 0.0
-        }
-      },
-      {
-        "type": "wall",
-        "xmlFile": "planets/text/Navi_Wand.xml",
-        "position": {
-          "x": -22.4,
-          "y": -1.1,
-          "z": 38.798
-        },
-        "rename": "Wandschrift_Ziel",
-        "normal": {
-          "x": -0.5,
-          "y": 0.0,
-          "z": 0.866
-        },
-        "seed": 4107
-      },
-      {
-        "parentPath": "Sector/ISAE_Hauptschalter",
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Modul_Kontrolle",
         "isRelativeToParent": true,
         "position": {
-          "x": 2.6,
+          "x": -6.881,
+          "y": -6.93,
+          "z": 8.714
+        },
+        "rotation": {
+          "x": 270.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "type": "computer",
+        "xmlFile": "planets/text/ISAE_Status.xml",
+        "rename": "Computer_Status"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Modul_Kontrolle",
+        "isRelativeToParent": true,
+        "position": {
+          "x": -10.435,
+          "y": -3.059,
+          "z": 8.171
+        },
+        "rotation": {
+          "x": 270.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "type": "recorder",
+        "xmlFile": "planets/text/ISAE_Linum.xml",
+        "rename": "Recorder_Linum"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Modul_Kontrolle/ISAE_Hauptschalter",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 2.0,
           "y": 0.0,
           "z": 0.0
         },
@@ -324,6 +1055,210 @@
         "type": "trailmarker",
         "xmlFile": "planets/text/ISAE_Hauptschalter.xml",
         "rename": "Wegmarke_Hauptschalter"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Modul_Start",
+        "isRelativeToParent": true,
+        "position": {
+          "x": -6.881,
+          "y": -6.93,
+          "z": 8.714
+        },
+        "rotation": {
+          "x": 270.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "type": "computer",
+        "xmlFile": "planets/text/Start_Sonde.xml",
+        "rename": "Computer_Sonde"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Modul_Start",
+        "isRelativeToParent": true,
+        "position": {
+          "x": -10.435,
+          "y": -3.059,
+          "z": 8.171
+        },
+        "rotation": {
+          "x": 270.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "type": "recorder",
+        "xmlFile": "planets/text/Start_Bau.xml",
+        "rename": "Recorder_Bau"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Modul_Navigation",
+        "isRelativeToParent": true,
+        "position": {
+          "x": -6.881,
+          "y": -6.93,
+          "z": 8.714
+        },
+        "rotation": {
+          "x": 270.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "type": "computer",
+        "xmlFile": "planets/text/Navi_Ziel.xml",
+        "rename": "Computer_Ziel"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Modul_Navigation",
+        "isRelativeToParent": true,
+        "position": {
+          "x": -10.435,
+          "y": -3.059,
+          "z": 8.171
+        },
+        "rotation": {
+          "x": 270.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "type": "recorder",
+        "xmlFile": "planets/text/Navi_Pye.xml",
+        "rename": "Recorder_Pye"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 17.854,
+          "y": -14.0,
+          "z": -6.498
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 290.0,
+          "z": 0.0
+        },
+        "type": "computer",
+        "xmlFile": "planets/text/Sedum_Abschied.xml",
+        "rename": "Computer_Sedum"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 6.498,
+          "y": -14.0,
+          "z": 17.854
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 200.0,
+          "z": 0.0
+        },
+        "type": "recorder",
+        "xmlFile": "planets/text/Kammer_Zweifel.xml",
+        "rename": "Recorder_Zweifel"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Alpha",
+        "isRelativeToParent": true,
+        "position": {
+          "x": -14.5,
+          "y": 0.0,
+          "z": -25.115
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 30.0,
+          "z": 0.0
+        },
+        "type": "computer",
+        "xmlFile": "planets/text/Fokus_Alpha.xml",
+        "rename": "Computer_Fokus_Alpha"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Alpha",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 29.0,
+          "y": 0.0,
+          "z": -0.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 270.0,
+          "z": 0.0
+        },
+        "type": "recorder",
+        "xmlFile": "planets/text/Fokus_Alpha_Erica.xml",
+        "rename": "Recorder_Fokus_Alpha"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Beta",
+        "isRelativeToParent": true,
+        "position": {
+          "x": -14.5,
+          "y": 0.0,
+          "z": -25.115
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 30.0,
+          "z": 0.0
+        },
+        "type": "computer",
+        "xmlFile": "planets/text/Fokus_Beta.xml",
+        "rename": "Computer_Fokus_Beta"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Beta",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 29.0,
+          "y": 0.0,
+          "z": -0.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 270.0,
+          "z": 0.0
+        },
+        "type": "recorder",
+        "xmlFile": "planets/text/Fokus_Beta_Sedum.xml",
+        "rename": "Recorder_Fokus_Beta"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Gamma",
+        "isRelativeToParent": true,
+        "position": {
+          "x": -14.5,
+          "y": 0.0,
+          "z": -25.115
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 30.0,
+          "z": 0.0
+        },
+        "type": "computer",
+        "xmlFile": "planets/text/Fokus_Gamma.xml",
+        "rename": "Computer_Fokus_Gamma"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Gamma",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 29.0,
+          "y": 0.0,
+          "z": -0.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 270.0,
+          "z": 0.0
+        },
+        "type": "recorder",
+        "xmlFile": "planets/text/Fokus_Gamma_Linum.xml",
+        "rename": "Recorder_Fokus_Gamma"
       }
     ],
     "signals": [
@@ -336,62 +1271,92 @@
           "y": 0.0,
           "z": 0.0
         },
-        "sourceRadius": 5,
-        "detectionRadius": 7000,
-        "identificationRadius": 400
+        "sourceRadius": 20,
+        "detectionRadius": 9000,
+        "identificationRadius": 900
       }
     ],
     "entryLocation": [
       {
-        "id": "ZEKISAE_ISAE",
+        "parentPath": "Sector/ISAE_Ausrichtung",
+        "isRelativeToParent": true,
         "position": {
           "x": 0.0,
-          "y": 20.0,
+          "y": 80.0,
           "z": 0.0
-        }
+        },
+        "id": "ZEKISAE_ISAE"
       },
       {
-        "id": "ZEKISAE_KONTROLLE",
+        "parentPath": "Sector/ISAE_Ausrichtung",
+        "isRelativeToParent": true,
         "position": {
-          "x": -25.0,
-          "y": -1.6,
-          "z": -43.301
-        }
-      },
-      {
-        "id": "ZEKISAE_START",
-        "position": {
-          "x": 50.0,
-          "y": -1.6,
+          "x": -0.0,
+          "y": -11.0,
           "z": -0.0
-        }
+        },
+        "id": "ZEKISAE_KERN"
       },
       {
-        "id": "ZEKISAE_NAVI",
+        "parentPath": "Sector/ISAE_Ausrichtung",
+        "isRelativeToParent": true,
         "position": {
-          "x": -25.0,
-          "y": -1.6,
-          "z": 43.301
-        }
+          "x": 17.22,
+          "y": -13.0,
+          "z": 8.03
+        },
+        "id": "ZEKISAE_SEDUM"
       },
       {
-        "id": "ZEKISAE_SEDUM",
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Modul_Kontrolle",
+        "isRelativeToParent": true,
         "position": {
-          "x": -20.429,
-          "y": -2.6,
-          "z": -41.784
-        }
+          "x": -8.881,
+          "y": -4.881,
+          "z": 8.732
+        },
+        "id": "ZEKISAE_KONTROLLE"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Modul_Start",
+        "isRelativeToParent": true,
+        "position": {
+          "x": -8.881,
+          "y": -4.881,
+          "z": 8.732
+        },
+        "id": "ZEKISAE_START"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Modul_Navigation",
+        "isRelativeToParent": true,
+        "position": {
+          "x": -8.881,
+          "y": -4.881,
+          "z": 8.732
+        },
+        "id": "ZEKISAE_NAVI"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Alpha",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 3.0,
+          "z": 0.0
+        },
+        "id": "ZEKISAE_FOKUS"
       }
     ]
   },
   "Volumes": {
     "interactionVolumes": [
       {
-        "parentPath": "Sector/ISAE_Hauptschalter",
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Modul_Kontrolle/ISAE_Hauptschalter",
         "isRelativeToParent": true,
         "position": {
           "x": 0.0,
-          "y": 1.6,
+          "y": 1.4,
           "z": 0.0
         },
         "rotation": {
@@ -407,52 +1372,82 @@
         "reusable": false,
         "audio": "NomaiPowerOff",
         "rename": "Hauptschalter_Volumen"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Alpha",
+        "isRelativeToParent": true,
+        "position": {
+          "x": -13.0,
+          "y": 1.0,
+          "z": 22.517
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "radius": 1.6,
+        "range": 3,
+        "prompt": "Phasenkoppler trennen",
+        "condition": "ZEKISAE_KOPPLER_A",
+        "persistent": true,
+        "reusable": false,
+        "audio": "NomaiPowerSwitch",
+        "rename": "Koppler_Alpha_Volumen"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Beta",
+        "isRelativeToParent": true,
+        "position": {
+          "x": -3.0,
+          "y": 101.0,
+          "z": 0.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "radius": 1.6,
+        "range": 3,
+        "prompt": "Phasenkoppler trennen",
+        "condition": "ZEKISAE_KOPPLER_B",
+        "persistent": true,
+        "reusable": false,
+        "audio": "NomaiPowerSwitch",
+        "rename": "Koppler_Beta_Volumen"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Gamma",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": -68.4,
+          "z": 0.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "radius": 1.6,
+        "range": 3,
+        "prompt": "Phasenkoppler trennen",
+        "condition": "ZEKISAE_KOPPLER_C",
+        "persistent": true,
+        "reusable": false,
+        "audio": "NomaiPowerSwitch",
+        "rename": "Koppler_Gamma_Volumen"
       }
     ],
     "revealVolumes": [
-      {
-        "position": {
-          "x": -25.0,
-          "y": -1.6,
-          "z": -43.301
-        },
-        "radius": 8,
-        "revealOn": "enter",
-        "reveals": [
-          "ZEKISAE_KONTROLLE_FOUND"
-        ]
-      },
-      {
-        "position": {
-          "x": 50.0,
-          "y": -1.6,
-          "z": -0.0
-        },
-        "radius": 8,
-        "revealOn": "enter",
-        "reveals": [
-          "ZEKISAE_START_FOUND"
-        ]
-      },
-      {
-        "position": {
-          "x": -25.0,
-          "y": -1.6,
-          "z": 43.301
-        },
-        "radius": 8,
-        "revealOn": "enter",
-        "reveals": [
-          "ZEKISAE_NAVI_FOUND"
-        ]
-      },
       {
         "position": {
           "x": 0.0,
           "y": 0.0,
           "z": 0.0
         },
-        "radius": 320,
+        "radius": 1300,
         "revealOn": "enter",
         "reveals": [
           "ZEKISAE_FOUND"
@@ -464,73 +1459,296 @@
           "y": 0.0,
           "z": 0.0
         },
-        "radius": 120,
+        "radius": 450,
         "revealOn": "observe",
         "reveals": [
           "ZEKISAE_FOKUS_RUMOR"
         ],
-        "maxDistance": 2500,
+        "maxDistance": 4000,
         "maxAngle": 25
+      },
+      {
+        "position": {
+          "x": -0.0,
+          "y": -11.0,
+          "z": -0.0
+        },
+        "radius": 24,
+        "revealOn": "enter",
+        "reveals": [
+          "ZEKISAE_KERN_FOUND"
+        ],
+        "parentPath": "Sector/ISAE_Ausrichtung",
+        "isRelativeToParent": true
+      },
+      {
+        "position": {
+          "x": -6.881,
+          "y": -6.93,
+          "z": 8.714
+        },
+        "radius": 12,
+        "revealOn": "enter",
+        "reveals": [
+          "ZEKISAE_KONTROLLE_FOUND"
+        ],
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Modul_Kontrolle",
+        "isRelativeToParent": true
+      },
+      {
+        "position": {
+          "x": -6.881,
+          "y": -6.93,
+          "z": 8.714
+        },
+        "radius": 12,
+        "revealOn": "enter",
+        "reveals": [
+          "ZEKISAE_START_FOUND"
+        ],
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Modul_Start",
+        "isRelativeToParent": true
+      },
+      {
+        "position": {
+          "x": -6.881,
+          "y": -6.93,
+          "z": 8.714
+        },
+        "radius": 12,
+        "revealOn": "enter",
+        "reveals": [
+          "ZEKISAE_NAVI_FOUND"
+        ],
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Modul_Navigation",
+        "isRelativeToParent": true
+      },
+      {
+        "position": {
+          "x": 0.0,
+          "y": 3.0,
+          "z": 0.0
+        },
+        "radius": 45,
+        "revealOn": "enter",
+        "reveals": [
+          "ZEKISAE_FOKUS_FOUND"
+        ],
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Alpha",
+        "isRelativeToParent": true
+      },
+      {
+        "position": {
+          "x": 0.0,
+          "y": 3.0,
+          "z": 0.0
+        },
+        "radius": 45,
+        "revealOn": "enter",
+        "reveals": [
+          "ZEKISAE_FOKUS_FOUND"
+        ],
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Beta",
+        "isRelativeToParent": true
+      },
+      {
+        "position": {
+          "x": 0.0,
+          "y": 3.0,
+          "z": 0.0
+        },
+        "radius": 45,
+        "revealOn": "enter",
+        "reveals": [
+          "ZEKISAE_FOKUS_FOUND"
+        ],
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Gamma",
+        "isRelativeToParent": true
       }
     ],
     "forces": {
       "directionalVolumes": [
         {
-          "force": 9,
-          "normal": {
-            "x": 0.0,
-            "y": -1.0,
-            "z": 0.0
-          },
+          "parentPath": "Sector/ISAE_Ausrichtung",
+          "isRelativeToParent": true,
           "position": {
-            "x": -25.0,
-            "y": 2.65,
-            "z": -43.301
-          },
-          "shape": {
-            "type": "cylinder",
-            "radius": 8.04,
-            "height": 12.1
-          },
-          "rename": "Schwerkraft_Kontrollmodul"
-        },
-        {
-          "force": 9,
-          "normal": {
-            "x": 0.0,
-            "y": -1.0,
-            "z": 0.0
-          },
-          "position": {
-            "x": 50.0,
-            "y": 2.65,
+            "x": -0.0,
+            "y": 9.0,
             "z": -0.0
           },
-          "shape": {
-            "type": "cylinder",
-            "radius": 8.04,
-            "height": 12.1
+          "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
           },
-          "rename": "Schwerkraft_Startmodul"
-        },
-        {
           "force": 9,
           "normal": {
             "x": 0.0,
             "y": -1.0,
             "z": 0.0
           },
+          "shape": {
+            "type": "cylinder",
+            "radius": 28.77,
+            "height": 45.6
+          },
+          "rename": "Schwerkraft_Kernkammer"
+        },
+        {
+          "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Alpha",
+          "isRelativeToParent": true,
           "position": {
-            "x": -25.0,
-            "y": 2.65,
-            "z": 43.301
+            "x": 0.0,
+            "y": 12.0,
+            "z": 0.0
+          },
+          "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "force": 9,
+          "normal": {
+            "x": 0.0,
+            "y": -1.0,
+            "z": 0.0
           },
           "shape": {
             "type": "cylinder",
-            "radius": 8.04,
-            "height": 12.1
+            "radius": 40.5,
+            "height": 24
           },
-          "rename": "Schwerkraft_Navigationsmodul"
+          "rename": "Deckschwerkraft_Alpha"
+        },
+        {
+          "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Alpha",
+          "isRelativeToParent": true,
+          "position": {
+            "x": 0.0,
+            "y": 102.5,
+            "z": 0.0
+          },
+          "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "force": 9,
+          "normal": {
+            "x": 0.0,
+            "y": -1.0,
+            "z": 0.0
+          },
+          "shape": {
+            "type": "cylinder",
+            "radius": 7.5,
+            "height": 5
+          },
+          "rename": "Emitterschwerkraft_Alpha"
+        },
+        {
+          "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Beta",
+          "isRelativeToParent": true,
+          "position": {
+            "x": 0.0,
+            "y": 12.0,
+            "z": 0.0
+          },
+          "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "force": 9,
+          "normal": {
+            "x": 0.0,
+            "y": -1.0,
+            "z": 0.0
+          },
+          "shape": {
+            "type": "cylinder",
+            "radius": 40.5,
+            "height": 24
+          },
+          "rename": "Deckschwerkraft_Beta"
+        },
+        {
+          "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Beta",
+          "isRelativeToParent": true,
+          "position": {
+            "x": 0.0,
+            "y": 102.5,
+            "z": 0.0
+          },
+          "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "force": 9,
+          "normal": {
+            "x": 0.0,
+            "y": -1.0,
+            "z": 0.0
+          },
+          "shape": {
+            "type": "cylinder",
+            "radius": 7.5,
+            "height": 5
+          },
+          "rename": "Emitterschwerkraft_Beta"
+        },
+        {
+          "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Gamma",
+          "isRelativeToParent": true,
+          "position": {
+            "x": 0.0,
+            "y": 12.0,
+            "z": 0.0
+          },
+          "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "force": 9,
+          "normal": {
+            "x": 0.0,
+            "y": -1.0,
+            "z": 0.0
+          },
+          "shape": {
+            "type": "cylinder",
+            "radius": 40.5,
+            "height": 24
+          },
+          "rename": "Deckschwerkraft_Gamma"
+        },
+        {
+          "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Gamma",
+          "isRelativeToParent": true,
+          "position": {
+            "x": 0.0,
+            "y": 102.5,
+            "z": 0.0
+          },
+          "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "force": 9,
+          "normal": {
+            "x": 0.0,
+            "y": -1.0,
+            "z": 0.0
+          },
+          "shape": {
+            "type": "cylinder",
+            "radius": 7.5,
+            "height": 5
+          },
+          "rename": "Emitterschwerkraft_Gamma"
         }
       ]
     }

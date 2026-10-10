@@ -1,0 +1,24 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+  "name": "BRITTLE_HOLLOW",
+  "starSystem": "SolarSystem",
+  "Props": {
+    "translatorText": [
+      {
+        "type": "recorder",
+        "xmlFile": "planets/text/BH_Pye.xml",
+        "position": {
+          "x": 102.114,
+          "y": 284.311,
+          "z": -29.607
+        },
+        "rotation": {
+          "x": 9.3,
+          "y": 164.0,
+          "z": 17.9
+        },
+        "rename": "Aussendungseinheit_BH_Pye"
+      }
+    ]
+  }
+}

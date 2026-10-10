@@ -4,14 +4,18 @@ Blender models of "Die Aussendungseinheit" (Zeki.ISAE). Run with Blender 4.2 LTS
 
     blender -b -P tools/isae_models.py -- path/to/Zeki.ISAE [path/to/previews]
 
-The centrepiece is built here: the Orbital Probe Cannon as it would look intact and finished in the style
-of the Nomai Vessel - segmented armour around a glowing core, a long barrel with spinning coil rings and a
-muzzle crown, swept tail fins, and three walkable modules (control, launch, navigation). Everything that
-exists in the game (computers, recorders, crystals, the Vessel interface, the Nomai probe, lamps) is NOT
-modelled; New Horizons copies those from the game into the spots this script exports.
+The centrepiece is built here: a huge, menacing descendant of the Orbital Probe Cannon in the style of the
+Nomai Vessel - an armoured core whose plates glow at the seams, a 1.2 km railgun of three serrated rails
+around a glowing core beam, spiked accelerator rings, pincer claws at the muzzle and swept tail blades.
+Inside the core sits a walkable chamber. The three side modules are NOT modelled: New Horizons copies the
+real modules of the Orbital Probe Cannon onto the ends of the arms. The emitter frame of the focus cannons
+is modelled; the gravity cannon inside it is the game's own.
+
+Everything that exists in the game (modules, computers, recorders, crystals, the Vessel interface, the Nomai
+probe, lamps, archways) is NOT modelled; New Horizons copies those into the spots this script exports.
 
 Outputs
-  * <mod>/assets/models/*.obj (+.mtl)     - the DLL loads them at runtime (Models.cs)
+  * <mod>/assets/models/*.obj (+.mtl)     - the DLL loads them at runtime (Models.cs), also on the title screen
   * <mod>/assets/models/anchors.json      - spots on the models (Unity coordinates) for isae_build.py
   * <mod>/planets/assets/shiplog/...       - ship log photos and the map sprite, rendered with Cycles
   * Zeki.ISAE.Source/blender/ISAE.blend   - the editable scene
@@ -19,9 +23,10 @@ Outputs
 
 Coordinates: Blender is Z-up and right-handed, Unity is Y-up and left-handed. A Blender point (x, y, z)
 ends up at Unity (-x, z, -y): the OBJ export (forward -Z, up Y) plus the x-mirror in the DLL's loader.
-The cannon fires along Blender +Z = Unity +y, the same axis as the three focus cannons. 1 unit = 1 metre.
+The cannon fires along Blender +Z = Unity +y; the DLL turns that axis towards the sun. 1 unit = 1 metre.
 
-Material names are the contract with the DLL: VesselHuelle, VesselKupfer, VesselDunkel, VesselLeuchten.
+Material names are the contract with the DLL: VesselHuelle, VesselKupfer, VesselDunkel (opaque, taken from
+the Vessel in game), VesselGlut (red-orange glow) and VesselLeuchten (blue glow).
 """
 import json
 import math
@@ -43,20 +48,20 @@ TAU = math.tau
 ANCHORS = {}
 
 # ------------------------------------------------------------------------------------------ dimensions
-HUB_R = 16.0
-BARREL_START, BARREL_END = 20.0, 150.0
-BARREL_R0, BARREL_R1 = 6.6, 5.0
-MUZZLE_END = 160.0
-TAIL_END = -42.0
-MODULE_DIST = 50.0          # hub centre -> module centre
-MODULE_R, MODULE_WALL = 9.6, 0.7
-FLOOR_Z = -3.6              # floor of a module, relative to its centre
-MODULES = (                 # key, name, azimuth (between the tail fins)
-    ("kontrolle", "Kontrollmodul", 60.0),
-    ("start", "Startmodul", 180.0),
-    ("navigation", "Navigationsmodul", 300.0),
-)
-
+HUB_R = 70.0                       # armoured core
+RAIL_AZ = (90.0, 210.0, 330.0)     # the three rails
+ARM_AZ = (30.0, 150.0, 270.0)      # arms to the three modules (between the rails)
+RAIL_START, RAIL_END = 40.0, 700.0
+LENS_Z = 770.0                     # the focus lens between the claws
+MUZZLE_Z = 960.0
+TAIL_Z = -300.0
+ARM_END = 150.0                    # radius where a module is mounted
+RINGS_Z = (140, 230, 320, 410, 500, 590)
+CHAMBER_R, CHAMBER_FLOOR = 34.0, -14.0
+TUNNEL_AZ, TUNNEL_Z = 90.0, -10.0
+FOCUS_RADIUS, FOCUS_Z = 420.0, 300.0
+MODULES = (("kontrolle", "Kontrollmodul", 30.0), ("start", "Startmodul", 150.0), ("navigation", "Navigationsmodul", 270.0))
+FOCUS = (("A", "Alpha", 0.0), ("B", "Beta", 120.0), ("C", "Gamma", 240.0))
 
 # ------------------------------------------------------------------------------------------ helpers
 def reset():
@@ -78,12 +83,13 @@ def material(name, color, metallic=0.0, rough=0.5, emission=None, strength=0.0):
 
 
 def materials():
-    # preview colours close to the Vessel; in game the DLL uses the Vessel's own materials
+    # preview colours close to the Vessel; in game the DLL uses the Vessel's own materials for the opaque ones
     return {
         "hull": material("VesselHuelle", (0.46, 0.36, 0.28), 0.5, 0.45),
         "copper": material("VesselKupfer", (0.72, 0.43, 0.22), 0.8, 0.35),
         "dark": material("VesselDunkel", (0.10, 0.09, 0.10), 0.4, 0.6),
         "glow": material("VesselLeuchten", (0.5, 0.82, 1.0), 0.0, 0.3, (0.4, 0.78, 1.0), 7.0),
+        "ember": material("VesselGlut", (1.0, 0.35, 0.12), 0.0, 0.3, (1.0, 0.28, 0.06), 9.0),
     }
 
 
@@ -255,146 +261,220 @@ def anchor(group, name, p, face=None, normal=None, **extra):
     ANCHORS.setdefault(group, {})[name] = a
 
 
+def link_multi(name, bm, mats):
+    """Mesh with several materials; faces carry their material_index."""
+    me = bpy.data.meshes.new(name)
+    bm.to_mesh(me)
+    bm.free()
+    ob = bpy.data.objects.new(name, me)
+    bpy.context.collection.objects.link(ob)
+    for m in mats:
+        ob.data.materials.append(m)
+    return ob
+
+
+def cone_along(name, base, direction, length, r1, r2, mat, seg=16):
+    """A cone from base along direction (spikes)."""
+    d = Vector(direction).normalized()
+    rot = Vector((0, 0, 1)).rotation_difference(d).to_matrix().to_4x4()
+    return cylinder(name, r1, r2, 0, length, mat, seg, matrix=Matrix.Translation(base) @ rot)
+
+
+def prism(name, profile, zs, az, mats, inner_mat=None, outer_mat=None):
+    """Extrude a cross-section (radial, tangential) along z at the given azimuth - used for the rails."""
+    a = math.radians(az)
+    d, s = Vector((math.cos(a), math.sin(a), 0)), Vector((-math.sin(a), math.cos(a), 0))
+    bm = bmesh.new()
+    loops = [[bm.verts.new(d * r + s * t + Vector((0, 0, z))) for r, t in profile] for z in zs]
+    n = len(profile)
+    for i in range(len(zs) - 1):
+        for j in range(n):
+            f = bm.faces.new((loops[i][j], loops[i][(j + 1) % n], loops[i + 1][(j + 1) % n], loops[i + 1][j]))
+            f.material_index = inner_mat if (j == 0 and inner_mat is not None) else (outer_mat if (j == 3 and outer_mat is not None) else 0)
+    bm.faces.new(list(reversed(loops[0])))
+    bm.faces.new(loops[-1])
+    bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
+    return link_multi(name, bm, mats)
+
+
 # ------------------------------------------------------------------------------------------ the cannon
+def armoured_core(M):
+    """Faceted armour plates around the core; the seams between the plates glow red."""
+    bm = bmesh.new()
+    bmesh.ops.create_icosphere(bm, subdivisions=3, radius=HUB_R)
+    hole = (polar(1, TUNNEL_AZ, 0) + Vector((0, 0, TUNNEL_Z / HUB_R))).normalized()
+    bmesh.ops.delete(bm, geom=[f for f in bm.faces if f.calc_center_median().normalized().dot(hole) > math.cos(math.radians(7.5))], context="FACES")
+    bmesh.ops.delete(bm, geom=[v for v in bm.verts if not v.link_faces], context="VERTS")
+    rim = set(bmesh.ops.inset_individual(bm, faces=list(bm.faces), thickness=1.2, depth=0.0, use_even_offset=True)["faces"])
+    plates = [f for f in bm.faces if f not in rim]
+    tops = bmesh.ops.extrude_discrete_faces(bm, faces=plates)["faces"]
+    for f in tops:
+        n = f.calc_center_median().normalized()
+        for v in f.verts:
+            v.co += n * 2.8
+    tops = set(tops)
+    for f in bm.faces:
+        f.material_index = 0 if f in tops else (3 if f in rim else 2)
+    bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
+    return link_multi("core_armour", bm, [M["hull"], M["copper"], M["dark"], M["ember"]])
+
+
 def hauptkanone(M):
-    parts = []
-    # hub: a glowing core inside six armour shells; the seams between the shells glow
-    parts.append(sphere("core", HUB_R - 0.9, (0, 0, 0), M["glow"], (1, 1, 0.86), 48, 24))
-    gap = 7.0
-
-    def shell(c):
-        az = math.degrees(math.atan2(c.y, c.x)) % 60.0
-        return gap / 2 < az < 60 - gap / 2 and abs(c.z) < HUB_R * 0.74
-
-    parts.append(sphere("shells", HUB_R, (0, 0, 0), M["hull"], (1, 1, 0.86), 96, 48, keep=shell))
-    modifier(parts[-1], "SOLIDIFY", thickness=0.6, offset=1.0)
-    for z, r in ((0.0, HUB_R + 0.2), (7.5, HUB_R * 0.86), (-7.5, HUB_R * 0.86)):
-        parts.append(torus(f"hub_band{z}", r, 0.7, z, M["copper"], 96, 10))
-    # poles: collar into the barrel and into the tail
-    parts.append(cylinder("collar_top", 10.5, 7.6, 11.0, BARREL_START, M["hull"], 48))
-    parts.append(torus("collar_top_ring", 9.4, 0.9, 14.0, M["copper"], 64, 10))
-    parts.append(cylinder("collar_bottom", 7.5, 10.5, -12.5, -11.0, M["hull"], 48))
-    # barrel with three ribs
-    parts.append(cylinder("barrel", BARREL_R0, BARREL_R1, BARREL_START, BARREL_END, M["hull"], 48))
-    for k in range(3):
-        a = 30 + k * 120
-        parts.append(tube(f"rib{k}", [polar(BARREL_R0 + 0.4, a, BARREL_START), polar(BARREL_R1 + 0.4, a, BARREL_END)], 0.55, M["dark"]))
-    for z in range(30, int(BARREL_END), 15):  # glowing coil lines under the spinning rings
-        r = BARREL_R0 + (BARREL_R1 - BARREL_R0) * (z - BARREL_START) / (BARREL_END - BARREL_START)
-        parts.append(torus(f"coil{z}", r + 0.05, 0.22, z, M["glow"], 48, 6))
-    # muzzle: flared mouth, dark throat, glowing lens and a crown of six Vessel fins
-    parts.append(cylinder("muzzle", BARREL_R1, 7.6, BARREL_END, MUZZLE_END, M["hull"], 48, cap=False))
-    parts.append(cylinder("throat", 4.4, 4.4, BARREL_END - 6, MUZZLE_END - 0.6, M["dark"], 32))
-    parts.append(cylinder("lens", 4.0, 4.0, MUZZLE_END - 0.6, MUZZLE_END - 0.4, M["glow"], 32))
-    parts.append(torus("muzzle_ring", 7.6, 0.6, MUZZLE_END, M["copper"], 64, 10))
+    parts = [armoured_core(M)]
+    # spikes around the core: six backwards along the equator, three forwards over the arms
     for k in range(6):
-        a = k * 60
-        parts.append(fin(f"crown{k}", [(6.4, BARREL_END - 4), (9.6, MUZZLE_END + 2), (10.8, MUZZLE_END + 9), (8.2, MUZZLE_END + 3)], 0.6, a, M["hull"]))
-    # tail: cone, glowing exhaust ring and three swept fins
-    parts.append(cylinder("tail", 9.0, 3.0, TAIL_END + 4, -12.5, M["hull"], 48))
-    parts.append(torus("tail_ring", 6.4, 0.5, -22.0, M["copper"], 64, 8))
-    parts.append(torus("tail_glow", 3.2, 0.4, TAIL_END + 4, M["glow"], 32, 8))
-    for k in range(3):
-        a = k * 120
-        parts.append(fin(f"tailfin{k}", [(8.0, -8.0), (24.0, -26.0), (32.0, -46.0), (26.0, -50.0), (14.0, -38.0), (7.0, -30.0)], 1.4, a, M["hull"]))
-        parts.append(fin(f"tailfin_edge{k}", [(24.0, -26.0), (32.0, -46.0), (31.0, -47.0), (23.4, -27.2)], 1.7, a, M["copper"]))
-    # arms to the three modules (between the tail fins)
+        a = k * 60.0
+        base = polar(HUB_R - 3, a, 0)
+        parts.append(cone_along(f"spike{k}", base, polar(1, a, 0) + Vector((0, 0, -0.45)), 75, 9, 0.4, M["dark"]))
+    for k, a in enumerate(ARM_AZ):
+        base = polar(HUB_R * 0.8, a, 40)
+        parts.append(cone_along(f"spike_front{k}", base, polar(1, a, 0) + Vector((0, 0, 1.1)), 60, 7, 0.3, M["dark"]))
+    # hatch of the tunnel into the core chamber
+    hatch = polar(HUB_R + 2.0, TUNNEL_AZ, TUNNEL_Z)
+    parts.append(torus("hatch", 9.5, 1.6, 0, M["copper"], 48, 10,
+                       matrix=Matrix.Translation(hatch) @ Matrix.Rotation(math.radians(TUNNEL_AZ), 4, "Z") @ Matrix.Rotation(math.pi / 2, 4, "Y")))
+    # the railgun: core beam and three serrated rails
+    parts.append(cylinder("beam", 7.0, 6.0, 20, LENS_Z - 10, M["ember"], 32))
+    for z in range(90, int(RAIL_END), 70):
+        parts.append(torus(f"beam_band{z}", 8.2, 0.9, z, M["dark"], 32, 8))
+    profile = [(13, -3.5), (13, 3.5), (24, 6.5), (36, 2.8), (36, -2.8), (24, -6.5)]
+    for k, az in enumerate(RAIL_AZ):
+        parts.append(prism(f"rail{k}", profile, [RAIL_START, 200, 400, 600, RAIL_END], az, [M["hull"], M["ember"], M["copper"]], inner_mat=1, outer_mat=2))
+        for i, z in enumerate(range(80, int(RAIL_END) - 20, 40)):
+            parts.append(box(f"tooth{k}_{i}", (8.0, 2.4, 11.0), polar(39.5, az, z), M["dark"], (0, math.radians(-25), math.radians(az))))
+        # pincer claws at the muzzle
+        parts.append(fin(f"claw{k}", [(14, 660), (36, 660), (54, 760), (46, 870), (12, 958), (5, 944), (28, 862), (24, 760)], 10, az, M["hull"]))
+        parts.append(fin(f"claw_edge{k}", [(36, 662), (54, 760), (46, 870), (12, 958), (10.6, 954), (44.2, 867), (52.4, 761), (34.8, 664)], 11, az, M["copper"]))
+        # tail blades
+        parts.append(fin(f"blade{k}", [(28, -55), (95, -170), (120, -290), (96, -322), (56, -250), (30, -180)], 7, az, M["hull"]))
+        parts.append(fin(f"blade_edge{k}", [(95, -170), (120, -290), (118, -294), (93, -174)], 8, az, M["copper"]))
+    parts.append(torus("claw_ring", 30, 3, 700, M["hull"], 72, 10))
+    parts.append(sphere("lens", 12, (0, 0, LENS_Z), M["ember"], seg=40, rings=20))
+    parts.append(torus("lens_halo", 20, 1.4, LENS_Z, M["ember"], 72, 8))
+    # tail spine and exhaust
+    parts.append(cylinder("spine", 34, 7, -60, TAIL_Z + 20, M["hull"], 48))
+    for z in (-110, -170, -230):
+        r = 34 + (7 - 34) * (z + 60) / (TAIL_Z + 80)
+        parts.append(torus(f"spine_band{z}", r + 0.6, 1.2, z, M["ember"], 64, 8))
+    parts.append(torus("exhaust", 9, 1.6, TAIL_Z + 20, M["ember"], 48, 8))
+    # arms to the three modules: two beams with zigzag braces and a mounting collar
     for key, _, az in MODULES:
-        parts.append(tube(f"arm_{key}", [polar(HUB_R - 1, az, 0), polar(MODULE_DIST - MODULE_R + 0.5, az, 0)], 1.7, M["hull"]))
-        for dz in (-3.4, 3.4):
-            parts.append(tube(f"strut_{key}{dz}", [polar(HUB_R - 2, az, dz * 0.6), polar(30, az, dz), polar(MODULE_DIST - MODULE_R + 1, az, dz * 0.5)], 0.6, M["dark"]))
-        parts.append(torus(f"joint_{key}", 2.6, 0.6, 0, M["copper"], 32, 8,
-                           matrix=Matrix.Translation(polar(MODULE_DIST - MODULE_R - 1.0, az)) @ Matrix.Rotation(math.radians(az), 4, "Z") @ Matrix.Rotation(math.pi / 2, 4, "Y")))
-    obj = join("Hauptkanone", parts)
+        for dz in (-7, 7):
+            parts.append(tube(f"arm_{key}{dz}", [polar(HUB_R - 8, az, dz), polar(ARM_END - 3, az, dz)], 3.2, M["hull"]))
+        for i in range(int((ARM_END - HUB_R) / 14)):
+            r0 = HUB_R + i * 14
+            parts.append(tube(f"brace_{key}{i}", [polar(r0, az, -7), polar(r0 + 14, az, 7)], 1.1, M["dark"]))
+        parts.append(torus(f"collar_{key}", 13, 2.6, 0, M["copper"], 48, 10,
+                           matrix=Matrix.Translation(polar(ARM_END - 3, az)) @ Matrix.Rotation(math.radians(az), 4, "Z") @ Matrix.Rotation(math.pi / 2, 4, "Y")))
+        anchor("isae", f"modul_{key}", polar(ARM_END, az), normal=polar(1, az))
+    obj = join("Hauptkanone", parts, uv_size=12.0)
 
     anchor("isae", "kern", (0, 0, 0))
-    anchor("isae", "muendung", (0, 0, MUZZLE_END + 1.0))
-    anchor("isae", "heck", (0, 0, TAIL_END + 3))
-    ANCHORS["isae"]["laenge"] = MUZZLE_END - TAIL_END
+    anchor("isae", "linse", (0, 0, LENS_Z))
+    anchor("isae", "muendung", (0, 0, LENS_Z + 25))
+    anchor("isae", "heck", (0, 0, TAIL_Z + 15))
+    anchor("isae", "luke", polar(HUB_R + 14, TUNNEL_AZ, TUNNEL_Z))
+    for letter, _, az in FOCUS:
+        anchor("isae", f"fokus_{letter}", polar(FOCUS_RADIUS, az, FOCUS_Z))
+    ANCHORS["isae"]["laenge"] = MUZZLE_Z - TAIL_Z
     return obj
 
 
 def laufringe(M):
-    """Coil rings around the barrel - a separate object so the DLL can spin it around the firing axis."""
+    """Spiked accelerator rings around the rails - spun by the DLL around the firing axis."""
     parts = []
-    for i, z in enumerate(range(30, int(BARREL_END), 15)):
-        r = BARREL_R0 + (BARREL_R1 - BARREL_R0) * (z - BARREL_START) / (BARREL_END - BARREL_START)
-        parts.append(torus(f"ring{i}", r + 2.6, 0.95, z, M["copper"], 64, 10))
-        parts.append(torus(f"ring_light{i}", r + 1.5, 0.22, z, M["glow"], 64, 6))
-        for k in range(3):
-            a = math.radians(k * 120 + i * 20)
-            parts.append(box(f"clamp{i}_{k}", (2.2, 0.7, 1.6), ((r + 1.4) * math.cos(a), (r + 1.4) * math.sin(a), z), M["dark"], (0, 0, a)))
-    return join("Laufringe", parts)
+    for i, z in enumerate(RINGS_Z):
+        parts.append(torus(f"ring{i}", 52, 4.5, z, M["hull"], 96, 12))
+        parts.append(torus(f"ring_glow{i}", 46.6, 1.3, z, M["ember"], 96, 8))
+        for k in range(6):
+            a = k * 60 + 15 + i * 10
+            parts.append(cone_along(f"ring_spike{i}_{k}", polar(55, a, z), polar(1, a, 0) + Vector((0, 0, 0.25)), 26, 3.4, 0.2, M["dark"], 12))
+    return join("Laufringe", parts, uv_size=12.0)
 
 
-def module(M, key, name, az):
-    """A walkable module: hollow armoured sphere with a door facing away from the hub, round windows,
-    a floor, a ceiling light and the furniture of its room. Gravity (New Horizons) pulls towards the floor."""
-    c = polar(MODULE_DIST, az)
-    out = polar(1, az)                      # horizontal, away from the hub
-    side = Vector((-out.y, out.x, 0))
-    shell = sphere(f"{key}_shell", MODULE_R, c, M["hull"], (1, 1, 1), 64, 32)
-    modifier(shell, "SOLIDIFY", thickness=MODULE_WALL, offset=-1.0)
-    cutters = []
-    door = box(f"{key}_door", (4.0, 3.4, 3.8), c + out * (MODULE_R - 0.2) + Vector((0, 0, FLOOR_Z + 1.9)), M["dark"], (0, 0, math.radians(az)))
-    cutters.append(door)
-    for k, wa in enumerate((-110, -60, 60, 110, 180)):
-        d = polar(1, az + wa)
-        w = cylinder(f"{key}_window{k}", 1.2, 1.2, -2.0, 2.0, M["dark"], 24,
-                     matrix=Matrix.Translation(c + d * (MODULE_R - 0.3) + Vector((0, 0, 1.2))) @ Matrix.Rotation(math.radians(az + wa), 4, "Z") @ Matrix.Rotation(math.pi / 2, 4, "Y"))
-        cutters.append(w)
-    cut(shell, cutters)
+def kernkammer(M):
+    """The walkable chamber inside the core: the burning heart of the unit and Sedum's last place."""
+    door_dir = polar(1, TUNNEL_AZ)
+    shell = sphere("chamber", CHAMBER_R, (0, 0, 0), M["hull"], seg=64, rings=32)
+    modifier(shell, "SOLIDIFY", thickness=2.0, offset=-1.0)
+    cut(shell, [box("door", (10, 13, 13), door_dir * (CHAMBER_R - 1) + Vector((0, 0, TUNNEL_Z)), M["dark"], (0, 0, math.radians(TUNNEL_AZ)))])
     parts = [shell]
-    inner = MODULE_R - MODULE_WALL
-    floor_r = math.sqrt(inner ** 2 - FLOOR_Z ** 2) + 0.2
-    parts.append(cylinder(f"{key}_floor", floor_r, floor_r, FLOOR_Z - 0.5, FLOOR_Z, M["dark"], 48, at=c))
-    parts.append(torus(f"{key}_floor_light", floor_r - 1.2, 0.08, FLOOR_Z + 0.01, M["glow"], 64, 6, matrix=Matrix.Translation(c)))
-    parts.append(torus(f"{key}_ceiling_light", 3.2, 0.18, 6.6, M["glow"], 48, 6, matrix=Matrix.Translation(c)))
-    parts.append(torus(f"{key}_band", MODULE_R + 0.1, 0.5, 0.0, M["copper"], 96, 8, matrix=Matrix.Translation(c)))
-    parts.append(torus(f"{key}_door_frame", 2.4, 0.3, 0, M["copper"], 32, 6,
-                       matrix=Matrix.Translation(c + out * (MODULE_R - 0.1) + Vector((0, 0, FLOOR_Z + 2.0))) @ Matrix.Rotation(math.radians(az), 4, "Z") @ Matrix.Rotation(math.pi / 2, 4, "Y")))
+    floor_r = math.sqrt((CHAMBER_R - 2) ** 2 - CHAMBER_FLOOR ** 2) + 0.3
+    parts.append(cylinder("floor", floor_r, floor_r, CHAMBER_FLOOR - 1.2, CHAMBER_FLOOR, M["dark"], 64))
+    parts.append(torus("floor_glow", floor_r - 2, 0.15, CHAMBER_FLOOR + 0.02, M["ember"], 96, 6))
+    parts.append(cylinder("pillar", 4.0, 2.2, CHAMBER_FLOOR, -6.5, M["copper"], 32))
+    parts.append(sphere("heart", 7, (0, 0, 0), M["ember"], seg=40, rings=20))
+    # tunnel from the chamber to the hatch in the armour
+    tunnel = cylinder("tunnel", 6.5, 6.5, 0, HUB_R + 3 - (CHAMBER_R - 1.5), M["hull"], 32, cap=False,
+                      matrix=Matrix.Translation(door_dir * (CHAMBER_R - 1.5) + Vector((0, 0, TUNNEL_Z))) @ Matrix.Rotation(math.radians(TUNNEL_AZ), 4, "Z") @ Matrix.Rotation(math.pi / 2, 4, "Y"))
+    modifier(tunnel, "SOLIDIFY", thickness=0.8, offset=1.0)
+    parts.append(tunnel)
+    obj = join("Kernkammer", parts, uv_size=6.0)
 
-    floor = lambda v: c + v + Vector((0, 0, FLOOR_Z))  # noqa: E731
-    centre = floor(Vector((0, 0, 0)))
-    A = ANCHORS.setdefault(key, {})
-    A["name"] = name
-    anchor(key, "boden", centre)
-    anchor(key, "tuer", c + out * (MODULE_R + 2.5) + Vector((0, 0, FLOOR_Z + 1.0)))
-    anchor(key, "licht1", c + Vector((0, 0, 4.5)))
-    anchor(key, "licht2", floor(out * 4.5 + Vector((0, 0, 2.2))))
-    A["bodenRadius"] = round(floor_r, 2)
-    A["hoehe"] = round(inner - FLOOR_Z, 2)
+    floor = lambda r, a: polar(r, a, CHAMBER_FLOOR)  # noqa: E731
+    centre = Vector((0, 0, CHAMBER_FLOOR))
+    anchor("kammer", "boden", centre)
+    anchor("kammer", "sedum", floor(19, 205), face=centre)
+    anchor("kammer", "computer", floor(19, 160), face=centre)
+    anchor("kammer", "recorder", floor(19, 250), face=centre)
+    for i, a in enumerate((300, 20, 130)):
+        anchor("kammer", f"lampe{i + 1}", floor(26, a))
+    anchor("kammer", "licht", (0, 0, -5))
+    ANCHORS["kammer"]["bodenRadius"] = round(floor_r, 2)
+    ANCHORS["kammer"]["hoehe"] = round(CHAMBER_R - 2 - CHAMBER_FLOOR, 2)
+    return obj
 
-    # a flat wall slab for Nomai wall writing, opposite the door
-    slab_c = floor(-out * 5.4 + Vector((0, 0, 2.5)))
-    parts.append(box(f"{key}_slab", (0.35, 6.8, 4.6), slab_c, M["hull"], (0, 0, math.radians(az))))
-    parts.append(box(f"{key}_slab_frame", (0.2, 7.2, 0.25), slab_c + Vector((0, 0, 2.35)), M["copper"], (0, 0, math.radians(az))))
-    anchor(key, "wand", slab_c + out * 0.2, normal=out)
-    # spots at the sides
-    anchor(key, "links", floor(side * 5.0 + out * 0.8), face=centre)
-    anchor(key, "rechts", floor(-side * 5.0 + out * 0.8), face=centre)
-    anchor(key, "mitte", centre, face=c + out * 10 + Vector((0, 0, FLOOR_Z)))
-    anchor(key, "hinten_links", floor(side * 3.2 - out * 3.6), face=centre)
-    anchor(key, "hinten_rechts", floor(-side * 3.2 - out * 3.6), face=centre)
 
-    if key == "kontrolle":
-        # raised dais where the main switch (the Vessel's coordinate interface) appears
-        parts.append(cylinder("dais", 2.9, 2.6, FLOOR_Z, FLOOR_Z + 0.35, M["copper"], 48, at=c))
-        parts.append(torus("dais_light", 2.75, 0.07, FLOOR_Z + 0.36, M["glow"], 48, 6, matrix=Matrix.Translation(c)))
-        anchor(key, "schalter", floor(Vector((0, 0, 0.35))), face=c + out * 10)
-    elif key == "start":
-        # launch cradle that holds the interstellar probe until the finale
-        parts.append(cylinder("cradle_base", 2.2, 1.6, FLOOR_Z, FLOOR_Z + 0.6, M["copper"], 32, at=c))
-        for k in range(3):
-            a = az + 90 + k * 120
-            parts.append(tube(f"cradle_arm{k}", [floor(polar(1.4, a, 0.5)), floor(polar(1.9, a, 1.6)), floor(polar(1.2, a, 2.6))], 0.18, M["dark"]))
-        anchor(key, "wiege", floor(Vector((0, 0, 2.3))))
-    else:
-        # star chart pedestal; the hologram above it is the separate, spinning "sternkarte" model
-        parts.append(cylinder("chart_base", 1.6, 1.0, FLOOR_Z, FLOOR_Z + 1.1, M["copper"], 32, at=c))
-        parts.append(torus("chart_rim", 1.05, 0.1, FLOOR_Z + 1.1, M["glow"], 32, 6, matrix=Matrix.Translation(c)))
-        anchor(key, "karte", floor(Vector((0, 0, 3.4))))
-    return join(f"Modul_{key}", parts)
+def kernringe(M):
+    parts = []
+    for k, (R, tilt) in enumerate(((10.5, 0.45), (13.0, -0.6), (15.5, 1.1))):
+        parts.append(torus(f"gyro{k}", R, 0.6, 0, M["copper"], 72, 8, matrix=Matrix.Rotation(tilt, 4, "X") @ Matrix.Rotation(k * 1.3, 4, "Y")))
+    return join("Kernringe", parts, uv_size=3.0)
+
+
+def fokusgeruest(M):
+    """The emitter frame of a focus cannon. Origin = top of the gravity cannon's launch platform (the DLL
+    shifts the game's gravity cannon there). Three spiked prongs carry the emitter that aims at the sun."""
+    parts = [
+        cylinder("disk", 40, 40, -1.4, -0.2, M["hull"], 72),
+        torus("disk_rim", 40, 1.6, -0.8, M["copper"], 96, 10),
+        torus("disk_glow", 37, 0.25, -0.18, M["ember"], 96, 6),
+        # keel underneath: an inverted spire, so the floating cannon is not bare from below
+        cylinder("keel", 0.8, 24, -66, -1.4, M["hull"], 48),
+        torus("keel_glow", 16.5, 1.0, -22, M["ember"], 64, 8),
+        cylinder("keel_platform", 6, 6, -67.4, -66.2, M["hull"], 32),
+        torus("keel_platform_glow", 6, 0.2, -67.4, M["ember"], 48, 6),
+        # emitter at the top, with a small platform below it
+        sphere("emitter", 5, (0, 0, 113), M["ember"], seg=32, rings=16),
+        torus("emitter_crown", 9, 1.1, 112, M["copper"], 48, 8),
+        torus("emitter_halo", 12, 0.4, 112, M["ember"], 64, 6),
+        cylinder("top_platform", 7, 7, 99.2, 100.0, M["hull"], 32),
+        torus("top_platform_glow", 7, 0.2, 100.0, M["ember"], 48, 6),
+    ]
+    for k in range(3):
+        a = k * 120.0
+        parts.append(tube(f"prong{k}", [polar(40, a, -0.5), polar(48, a, 40), polar(30, a, 85), polar(8, a, 108)], 2.6, M["dark"]))
+        parts.append(cone_along(f"prong_spike{k}", polar(49, a, 40), polar(1, a, 0) + Vector((0, 0, 0.3)), 22, 2.6, 0.2, M["dark"], 12))
+        parts.append(tube(f"top_strut{k}", [polar(6.5, a, 99.6), polar(16, a, 100.4)], 0.6, M["copper"]))
+        parts.append(fin(f"keel_fin{k}", [(10, -8), (30, -20), (26, -45), (6, -56)], 2.0, a + 60, M["dark"]))
+    obj = join("Fokusgeruest", parts, uv_size=8.0)
+
+    centre = Vector((0, 0, 0))
+    A = "fokus"
+    anchor(A, "deck", centre)
+    anchor(A, "koppler_deck", polar(26, 300), face=centre)
+    anchor(A, "computer", polar(29, 60), face=centre)
+    anchor(A, "recorder", polar(29, 180), face=centre)
+    for i, a in enumerate((90, 210, 330)):
+        anchor(A, f"tor{i + 1}", polar(36, a), face=centre)
+    for i, a in enumerate((30, 150, 270)):
+        anchor(A, f"lampe{i + 1}", polar(33, a))
+    anchor(A, "emitter", (0, 0, 113))
+    anchor(A, "oben", (0, 0, 100.0))
+    anchor(A, "koppler_oben", polar(3.0, 0, 100.0), face=(0, 0, 100.0))
+    anchor(A, "unten", (0, 0, -67.4))
+    ANCHORS[A]["deckRadius"] = 40.0
+    return obj
 
 
 def sternkarte(M):
@@ -427,18 +507,16 @@ def scene_setup():
     sun = bpy.data.objects.new("Sonne", bpy.data.lights.new("Sonne", "SUN"))
     sun.data.energy = 4.5
     sun.data.color = (1.0, 0.82, 0.66)
-    sun.rotation_euler = (math.radians(55), math.radians(15), math.radians(-30))
     scn.collection.objects.link(sun)
     fill = bpy.data.objects.new("Fuelllicht", bpy.data.lights.new("Fuelllicht", "SUN"))
-    fill.data.energy = 1.2
-    fill.data.color = (0.6, 0.75, 1.0)
+    fill.data.energy = 1.0
+    fill.data.color = (0.6, 0.72, 1.0)
     fill.rotation_euler = (math.radians(-60), math.radians(-20), math.radians(150))
     scn.collection.objects.link(fill)
     world = bpy.data.worlds.new("All")
     world.use_nodes = True
     nodes, links = world.node_tree.nodes, world.node_tree.links
     bg = nodes["Background"]
-    bg.inputs[1].default_value = 1.0
     noise = nodes.new("ShaderNodeTexNoise")
     noise.inputs["Scale"].default_value = 900.0
     noise.inputs["Detail"].default_value = 0.0
@@ -460,24 +538,23 @@ def scene_setup():
     return cam
 
 
-def render(cam, path, cam_loc, target, size=(512, 512), lens=35, hide=(), key_light=False):
+def render(cam, path, cam_loc, target, size=(512, 512), lens=35, show=None, key_light=True):
     sun = bpy.data.objects["Sonne"]
     if key_light:  # light from over the camera's shoulder
-        d = Vector(target) - (Vector(cam_loc) + Vector((0, 0, 25)) + (Vector(cam_loc) - Vector(target)).cross(Vector((0, 0, 1))).normalized() * 15)
+        d = Vector(target) - (Vector(cam_loc) + Vector((0, 0, 0.3)) * (Vector(cam_loc) - Vector(target)).length
+                              + (Vector(cam_loc) - Vector(target)).cross(Vector((0, 0, 1))).normalized() * 0.3 * (Vector(cam_loc) - Vector(target)).length)
         sun.rotation_euler = d.to_track_quat("-Z", "Y").to_euler()
-    else:
-        sun.rotation_euler = (math.radians(55), math.radians(15), math.radians(-30))
     for o in bpy.context.scene.objects:
         if o.type == "MESH":
-            o.hide_render = o.name in hide
+            o.hide_render = show is not None and o.name not in show
     cam.data.lens = lens
-    cam.data.clip_end = 5000
+    cam.data.clip_start = 0.5
+    cam.data.clip_end = 20000
     cam.location = cam_loc
     cam.rotation_euler = (Vector(target) - Vector(cam_loc)).to_track_quat("-Z", "Y").to_euler()
     scn = bpy.context.scene
     scn.render.resolution_x, scn.render.resolution_y = size
     scn.render.filepath = path
-    scn.render.film_transparent = False
     bpy.ops.render.render(write_still=True)
 
 
@@ -488,11 +565,14 @@ def main():
         if f.endswith((".obj", ".mtl")):
             os.remove(os.path.join(OUT, f))
     M = materials()
-    models = {"hauptkanone": hauptkanone(M), "laufringe": laufringe(M)}
-    for key, name, az in MODULES:
-        models["modul_" + key] = module(M, key, name, az)
-    chart = sternkarte(M)
-    models["sternkarte"] = chart
+    models = {
+        "hauptkanone": hauptkanone(M),
+        "laufringe": laufringe(M),
+        "kernkammer": kernkammer(M),
+        "kernringe": kernringe(M),
+        "fokusgeruest": fokusgeruest(M),
+        "sternkarte": sternkarte(M),
+    }
     print("OBJ export:")
     for key, obj in models.items():
         export(obj, key + ".obj")
@@ -500,29 +580,33 @@ def main():
         json.dump(ANCHORS, f, ensure_ascii=False, indent=2)
         f.write("\n")
 
-    # the chart hovers over its pedestal (the DLL puts it there in game, here only for the pictures)
-    k = ANCHORS["navigation"]["karte"]["position"]
-    chart.location = (-k["x"], -k["z"], k["y"])
-
+    # pictures: the whole ensemble with the three focus cannons at their places
+    focus = models["fokusgeruest"]
+    copies = []
+    for letter, _, az in FOCUS:
+        c = focus.copy()
+        c.location = polar(FOCUS_RADIUS, az, FOCUS_Z)
+        bpy.context.collection.objects.link(c)
+        copies.append(c)
+    models["sternkarte"].location = (5000, 5000, 5000)
+    ensemble = [models["hauptkanone"].name, models["laufringe"].name] + [c.name for c in copies]
     cam = scene_setup()
     E = os.path.join(SHIPLOG, "entries")
     os.makedirs(E, exist_ok=True)
-    render(cam, os.path.join(E, "ZEKISAE_ISAE.png"), (150, -120, 95), (0, 0, 55), lens=34)
-
-    def module_view(key, az, dist=30, height=7):
-        c = polar(MODULE_DIST, az)
-        return c + polar(dist, az + 22, height), c + polar(2, az, -1)
-    for key, entry in (("kontrolle", "ZEKISAE_KONTROLLE"), ("start", "ZEKISAE_START"), ("navigation", "ZEKISAE_NAVI")):
-        az = dict((m[0], m[2]) for m in MODULES)[key]
-        loc, target = module_view(key, az)
-        render(cam, os.path.join(E, entry + ".png"), loc, target, lens=35, key_light=True)
-    # map sprite: the cannon seen from the side, on transparent background
+    render(cam, os.path.join(E, "ZEKISAE_ISAE.png"), (1500, -1300, 900), (0, 0, 280), lens=38, show=ensemble)
+    render(cam, os.path.join(E, "ZEKISAE_FOKUS.png"), (120, -150, 70), (0, 0, 30), lens=35, show=[focus.name])
+    render(cam, os.path.join(E, "ZEKISAE_KERN.png"), polar(25, TUNNEL_AZ - 25, CHAMBER_FLOOR + 6), (0, 0, -2), lens=20,
+           show=[models["kernkammer"].name, models["kernringe"].name], key_light=False)
+    # the modules are copies of the real OPC module (not modelled here); their ship log pictures are drawn by isae_build.py
     scn = bpy.context.scene
     scn.render.film_transparent = True
     os.makedirs(os.path.join(SHIPLOG, "map"), exist_ok=True)
     cam.data.type = "ORTHO"
-    cam.data.ortho_scale = 230
-    cam.location, cam.rotation_euler = (0, -600, 55), (math.radians(90), 0, 0)
+    cam.data.ortho_scale = 1300
+    cam.location, cam.rotation_euler = (0, -3000, 330), (math.radians(90), 0, 0)
+    for o in scn.objects:
+        if o.type == "MESH":
+            o.hide_render = o.name not in ensemble[:2]
     scn.render.resolution_x = scn.render.resolution_y = 256
     scn.render.filepath = os.path.join(SHIPLOG, "map", "isae.png")
     bpy.ops.render.render(write_still=True)
@@ -530,12 +614,15 @@ def main():
     scn.render.film_transparent = False
     if PREVIEWS:
         os.makedirs(PREVIEWS, exist_ok=True)
-        render(cam, os.path.join(PREVIEWS, "isae_total.png"), (260, -200, 140), (0, 0, 55), (1280, 800), lens=32)
-        render(cam, os.path.join(PREVIEWS, "isae_naben.png"), (70, -60, 30), (0, 0, 5), (1280, 800), lens=30)
-        c = polar(MODULE_DIST, 60)
-        render(cam, os.path.join(PREVIEWS, "kontrollmodul_innen.png"), c + polar(5.5, 60 + 25, FLOOR_Z + 2.4), c + polar(4, 60 + 180, FLOOR_Z + 2.0),
-               (1280, 800), lens=18)
-
+        render(cam, os.path.join(PREVIEWS, "isae_gesamt.png"), (1700, -1500, 1000), (0, 0, 300), (1600, 1000), lens=36, show=ensemble)
+        render(cam, os.path.join(PREVIEWS, "isae_kern_aussen.png"), (260, -230, 120), (0, 0, 20), (1600, 1000), lens=32, show=ensemble[:2])
+        render(cam, os.path.join(PREVIEWS, "isae_muendung.png"), (200, -260, 1000), (0, 0, 780), (1600, 1000), lens=32, show=ensemble[:2])
+        render(cam, os.path.join(PREVIEWS, "fokuskanone.png"), (130, -160, 80), (0, 0, 30), (1600, 1000), lens=32, show=[focus.name])
+        render(cam, os.path.join(PREVIEWS, "kernkammer.png"), polar(25, TUNNEL_AZ - 25, CHAMBER_FLOOR + 6), (0, 0, -2), (1600, 1000), lens=20,
+               show=[models["kernkammer"].name, models["kernringe"].name], key_light=False)
+    for c in copies:
+        bpy.data.objects.remove(c, do_unlink=True)
+    models["sternkarte"].location = (0, 0, 0)
     os.makedirs(os.path.dirname(BLEND), exist_ok=True)
     bpy.ops.wm.save_as_mainfile(filepath=BLEND, compress=True)
     print("saved", BLEND)

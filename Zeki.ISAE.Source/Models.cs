@@ -16,7 +16,7 @@ public class Placements
     public Dictionary<string, string> materials = new();
     public List<PropPlacement> props = new();
     public List<LightPlacement> lights = new();
-    /// <summary>Named points in the frame of the ISAE body (muzzle, core).</summary>
+    /// <summary>Named points in the frame of the ISAE pivot (muzzle, lens, core, mounts, focus emitter).</summary>
     public Dictionary<string, Vector3Data> points = new();
 }
 
@@ -40,6 +40,7 @@ public class LightPlacement
 {
     public string name;
     public string body;
+    public string parentPath;
     public Vector3Data position = new();
     public Vector3Data color = new() { x = 1f, y = 1f, z = 1f };
     public float range = 10f;
@@ -146,13 +147,11 @@ public static class ModelPlacer
     public static void PlaceAll(ZekiISAE mod)
     {
         Materials.Clear();
-        var file = Path.Combine(mod.ModHelper.Manifest.ModFolderPath, "assets/models/placements.json");
-        if (!File.Exists(file))
+        if (!Load(mod))
         {
             mod.Log("placements.json fehlt - keine Modelle geladen.", true);
             return;
         }
-        Data = JsonConvert.DeserializeObject<Placements>(File.ReadAllText(file));
         var count = 0;
         foreach (var p in Data.props)
         {
@@ -183,11 +182,18 @@ public static class ModelPlacer
             mod.Log($"Pfad '{p.parentPath}' auf '{p.body}' nicht gefunden (Modell {p.model}).", true);
             return false;
         }
+        var go = Build(mod, p, parent, false);
+        return go != null;
+    }
+
+    /// <summary>Creates the model of a placement below parent. simple = plain colours (title screen).</summary>
+    public static GameObject Build(ZekiISAE mod, PropPlacement p, Transform parent, bool simple)
+    {
         var path = Path.Combine(mod.ModHelper.Manifest.ModFolderPath, "assets/models/" + p.model + ".obj");
         if (!File.Exists(path))
         {
             mod.Log($"Modell {path} fehlt.", true);
-            return false;
+            return null;
         }
         var model = ObjLoader.Load(path);
         var go = new GameObject(p.name ?? p.model);
@@ -199,11 +205,20 @@ public static class ModelPlacer
         go.transform.localScale = Vector3.one * p.scale;
         go.AddComponent<MeshFilter>().sharedMesh = model.Mesh;
         var renderer = go.AddComponent<MeshRenderer>();
-        renderer.sharedMaterials = model.MaterialSlots.Select(s => Resolve(mod, s)).ToArray();
+        renderer.sharedMaterials = model.MaterialSlots.Select(s => simple ? SimpleCached(s) : Resolve(mod, s)).ToArray();
         renderer.shadowCastingMode = ShadowCastingMode.On;
-        if (p.collider) go.AddComponent<MeshCollider>().sharedMesh = model.Mesh;
+        if (p.collider && !simple) go.AddComponent<MeshCollider>().sharedMesh = model.Mesh;
         if (p.spin != 0f) go.AddComponent<Spinner>().DegreesPerSecond = p.spin;
         go.SetActive(true);
+        return go;
+    }
+
+    /// <summary>Reads placements.json (also used on the title screen).</summary>
+    public static bool Load(ZekiISAE mod)
+    {
+        var file = Path.Combine(mod.ModHelper.Manifest.ModFolderPath, "assets/models/placements.json");
+        if (!File.Exists(file)) return false;
+        Data = JsonConvert.DeserializeObject<Placements>(File.ReadAllText(file));
         return true;
     }
 
@@ -211,8 +226,10 @@ public static class ModelPlacer
     {
         var body = mod.NewHorizons.GetPlanet(l.body);
         if (body == null) return;
+        var parent = string.IsNullOrEmpty(l.parentPath) ? body.transform.Find("Sector") ?? body.transform : body.transform.Find(l.parentPath);
+        if (parent == null) return;
         var go = new GameObject(l.name ?? "ISAE_Licht");
-        go.transform.SetParent(body.transform.Find("Sector") ?? body.transform, false);
+        go.transform.SetParent(parent, false);
         go.transform.localPosition = l.position.ToVector();
         var light = go.AddComponent<Light>();
         light.type = LightType.Point;
@@ -234,7 +251,7 @@ public static class ModelPlacer
             if (m == null) mod.Log($"Material '{wanted}' für {slot} nicht gefunden, nehme Ersatz.", true);
         }
         var rank = slot switch { "VesselKupfer" => 1, "VesselDunkel" => 2, _ => 0 };
-        if (m == null && slot != "VesselLeuchten")
+        if (m == null && !IsGlow(slot))
         {
             if (mod.MaterialSource == "Vessel") m = FromRenderers(VesselRoot(), rank) ?? FromRenderers(CannonRoot(), rank);
             else if (mod.MaterialSource == "Sondenkanone") m = FromRenderers(CannonRoot(), rank);
@@ -284,19 +301,42 @@ public static class ModelPlacer
         return ordered.Count == 0 ? null : ordered[Mathf.Min(rank, ordered.Count - 1)];
     }
 
+    private static bool IsGlow(string slot) => slot == "VesselLeuchten" || slot == "VesselGlut";
+
+    private static readonly Dictionary<string, Material> SimpleMaterials = new();
+
+    private static Material SimpleCached(string slot)
+    {
+        if (!SimpleMaterials.TryGetValue(slot, out var m) || m == null) SimpleMaterials[slot] = m = Simple(slot);
+        return m;
+    }
+
     private static Material Simple(string slot)
     {
-        var glow = slot == "VesselLeuchten";
+        var glow = IsGlow(slot);
         var shader = glow ? Shader.Find("Sprites/Default") : Shader.Find("Standard");
         if (shader == null) shader = Shader.Find("Sprites/Default") ?? Shader.Find("Standard");
         var m = new Material(shader) { name = "ZekiISAE_" + slot };
         m.color = slot switch
         {
             "VesselLeuchten" => new Color(1.3f, 2.1f, 2.8f),
+            "VesselGlut" => new Color(3.2f, 1.1f, 0.35f),
             "VesselDunkel" => new Color(0.11f, 0.1f, 0.11f),
             "VesselKupfer" => new Color(0.72f, 0.43f, 0.22f),
             _ => new Color(0.46f, 0.36f, 0.28f),
         };
         return m;
+    }
+}
+
+/// <summary>Turns an object around its own up axis; faster while the ISAE charges and while it drains the sun.</summary>
+public class Spinner : MonoBehaviour
+{
+    public float DegreesPerSecond;
+
+    public void Update()
+    {
+        var boost = Finale.Running ? 8f : ZekiISAE.Instance != null && ZekiISAE.Instance.Awakening ? 3f : 1f;
+        transform.Rotate(Vector3.up, DegreesPerSecond * boost * Time.deltaTime, Space.Self);
     }
 }
