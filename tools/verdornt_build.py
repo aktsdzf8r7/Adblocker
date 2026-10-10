@@ -404,7 +404,7 @@ def tubes(A):
         tube("turm", "Erstling", "Sector/VD_Warpturm_Erstling"),
         # the lift of the Ausguck carries its own tube
         tube("lift", "Ausguck", "Sector/VD_Ausguck_Lift", [{"objekt": "VD_Ausguck_Lift", "versatz": {"oben": offset(U["lift_unten"], U["lift_oben"])},
-                                                           "sekunden": 6}]),
+                                                           "sekunden": 6, "traegt": 2.4}]),
     ]
 
 

@@ -14,4 +14,10 @@ public class CrossingState
     }
 
     public void Reset() => Busy = false;
+
+    /// <summary>
+    /// After the veil has closed: change the system only if a crossing is running and the player is alive. A death
+    /// during the veil reloads the scene by itself (and NH would keep the loop time), so the crossing stays busy.
+    /// </summary>
+    public bool MayChangeSystem(bool playerDying) => Busy && !playerDying;
 }

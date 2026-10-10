@@ -75,9 +75,12 @@ public class Crossing : MonoBehaviour
         var dir = (up * radius + side * 70f).normalized;
         var from = centre + dir * (radius + 150f);
         var ground = centre + dir * radius;
-        foreach (var hit in Physics.RaycastAll(from, -dir, 400f))
+        // only solid ground of Timber Hearth counts: no triggers, nothing of the site itself
+        var body = th.GetComponent<OWRigidbody>();
+        foreach (var hit in Physics.RaycastAll(from, -dir, 400f, OWLayerMask.groundMask, QueryTriggerInteraction.Ignore))
         {
             if (hit.collider.transform.IsChildOf(site)) continue;
+            if (body != null && hit.collider.attachedRigidbody != null && hit.collider.attachedRigidbody.GetComponent<OWRigidbody>() != body) continue;
             if (Vector3.Distance(hit.point, from) < Vector3.Distance(ground, from)) ground = hit.point;
         }
         site.SetPositionAndRotation(ground - dir * 1.5f, Quaternion.FromToRotation(site.up, dir) * site.rotation);
@@ -109,6 +112,13 @@ public class Crossing : MonoBehaviour
         PlayOneShot(AudioType.DB_VineImpact);
         _veil.FadeTo(1f, 1.1f);
         yield return new WaitForSeconds(1.2f);
+        var dm = Locator.GetDeathManager();
+        if (!_state.MayChangeSystem(dm != null && (dm.IsPlayerDying() || dm.IsPlayerDead())))
+        {
+            _mod.Log("Übergang abgebrochen: der Spieler stirbt.");
+            _veil.FadeTo(0f, 0.5f);
+            yield break;
+        }
         _arriving = arrive;
         if (!_mod.NewHorizons.ChangeCurrentStarSystem(target))
         {

@@ -35,10 +35,11 @@ public class ZekiVerdornt : ModBehaviour
         SystemLoaded += system =>
         {
             if (system != SystemName && system != "SolarSystem") return;
-            ModelPlacer.PlaceAll(this);
-            Crossing.Setup(this, system);
-            ReactiveComputers.Setup(this);
-            MarbleTube.Setup(this);
+            // the crossing is the only way in and out: it comes first, and nothing else may take it down
+            Guard("Übergang", () => Crossing.Setup(this, system));
+            Guard("Modelle", () => ModelPlacer.PlaceAll(this));
+            Guard("Computer", () => ReactiveComputers.Setup(this));
+            Guard("Murmelröhren", () => MarbleTube.Setup(this));
         };
         Log("Verdornt ist geladen.");
     }
@@ -57,6 +58,18 @@ public class ZekiVerdornt : ModBehaviour
         catch (Exception e)
         {
             Log($"Fehler beim Aufbau von {system}: {e}", true);
+        }
+    }
+
+    private void Guard(string what, Action step)
+    {
+        try
+        {
+            step();
+        }
+        catch (Exception e)
+        {
+            Log($"Fehler beim Aufbau ({what}): {e}", true);
         }
     }
 

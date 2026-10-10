@@ -2879,7 +2879,8 @@
               "z": 0.0
             }
           },
-          "sekunden": 6
+          "sekunden": 6,
+          "traegt": 2.4
         }
       ]
     }

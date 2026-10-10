@@ -24,6 +24,8 @@ public class TubeAction
     public string objekt;
     public Dictionary<string, Vector3Data> versatz = new();
     public float sekunden = 3f;
+    /// <summary>A platform (lift): whoever stands on it within this radius rides along. 0 = not a platform.</summary>
+    public float traegt;
 }
 
 /// <summary>
@@ -84,7 +86,12 @@ public class MarbleTube : MonoBehaviour
             foreach (var t in root.GetComponentsInChildren<Transform>(true))
                 if (t.name == a.objekt) { found = t; break; }
             if (found == null) mod.Log($"Murmelröhre {c.name}: Objekt {a.objekt} nicht gefunden.", true);
-            else _movers.Add((found, found.localPosition, a));
+            else
+            {
+                _movers.Add((found, found.localPosition, a));
+                // a moving collider should be a kinematic rigidbody, not a static one
+                if (a.traegt > 0f && found.GetComponent<Rigidbody>() == null) found.gameObject.AddComponent<Rigidbody>().isKinematic = true;
+            }
         }
         BuildMarble();
         foreach (var (t, home, a) in _movers) t.localPosition = home + Offset(a, _slot);
@@ -182,8 +189,21 @@ public class MarbleTube : MonoBehaviour
             if (t == null) continue;
             var target = home + Offset(a, _slot);
             var speed = Mathf.Max(0.1f, (Offset(a, _slot).magnitude + 0.5f) / Mathf.Max(0.1f, a.sekunden));
+            var before = t.position;
             t.localPosition = Vector3.MoveTowards(t.localPosition, target, speed * Time.deltaTime);
+            if (a.traegt > 0f) Carry(t, t.position - before, a.traegt);
         }
+    }
+
+    /// <summary>The player standing on a moving platform moves with it (no floor sliding up through their feet).</summary>
+    private static void Carry(Transform platform, Vector3 delta, float radius)
+    {
+        if (delta.sqrMagnitude < 1e-8f) return;
+        var player = Locator.GetPlayerBody();
+        if (player == null) return;
+        var local = platform.InverseTransformPoint(player.transform.position - delta);
+        if (!PlatformCarry.IsOn(new Num.Vector3(local.x, local.y, local.z), radius)) return;
+        player.SetPosition(player.transform.position + delta);
     }
 
     private void ShowPrompt(bool show)

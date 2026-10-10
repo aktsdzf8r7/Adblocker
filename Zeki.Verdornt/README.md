@@ -63,7 +63,7 @@ Das DLC ist nicht nötig. Die Mod läuft neben *Die Aussendungseinheit* und dem 
 
 ## Testliste (bitte im Spiel prüfen)
 
-Ich kann Outer Wilds nicht selbst starten. Alles ist gegen die Schemas von New Horizons geprüft, die DLL baut ohne Warnungen, und die Logik hat 10 Unit-Tests. Bitte prüf im Spiel:
+Ich kann Outer Wilds nicht selbst starten. Alles ist gegen die Schemas von New Horizons geprüft, die DLL baut ohne Warnungen, und die Logik hat 17 Unit-Tests. Bitte prüf im Spiel:
 
 - [ ] Der Samen auf Timber Hearth liegt neben dem alten Krater auf dem Boden. Das OWML-Log nennt den Abstand.
 - [ ] Hineinfliegen bringt dich in den Samenschlund. Der Strudel wechselt das System.
@@ -71,7 +71,7 @@ Ich kann Outer Wilds nicht selbst starten. Alles ist gegen die Schemas von New H
 - [ ] Der Rücksamen im Lager bringt dich zurück nach Timber Hearth.
 - [ ] Die Murmeln lassen sich ziehen und rasten ein.
 - [ ] Das Tor hebt sich, und der Turm erwacht: Sein Warppad bringt dich zum Ausguck.
-- [ ] Der Lift fährt dich mit, ohne dass du durchfällst.
+- [ ] Der Lift trägt dich mit: Wer auf ihm steht, fährt mit, ohne durchzufallen.
 - [ ] Der Kernrechner wechselt seinen Text: nach der Ankunft, nach dem Wecken des Turms, nach dem Nehmen des Kerns.
 - [ ] Das Becken auf dem Ausguck zeigt das ganze System.
 - [ ] Das Licht von Herzdorn fällt durch den Käfig.
