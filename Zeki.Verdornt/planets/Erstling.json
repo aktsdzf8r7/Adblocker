@@ -28,13 +28,40 @@
     "playerSpawnPoints": [
       {
         "position": {
-          "x": -144.979,
-          "y": 114.854,
-          "z": -185.564
+          "x": -154.904,
+          "y": 113.977,
+          "z": -175.528
         },
         "alignRadial": true,
         "isDefault": true,
         "startWithSuit": true
+      }
+    ]
+  },
+  "Bramble": {
+    "nodes": [
+      {
+        "position": {
+          "x": -145.532,
+          "y": 115.292,
+          "z": -186.272
+        },
+        "alignRadial": true,
+        "linksTo": "Ankunftskammer",
+        "name": "ZEKIVD_Ankunftssamen",
+        "scale": 0.12,
+        "fogTint": {
+          "r": 160,
+          "g": 255,
+          "b": 170,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 170,
+          "g": 255,
+          "b": 180,
+          "a": 255
+        }
       }
     ]
   },
@@ -85,6 +112,35 @@
         },
         "rename": "Nomai_Schrein",
         "keepLoaded": true
+      },
+      {
+        "path": "TimberHearth_Body/Sector_TH/Sector_ImpactCrater/Interactables_ImpactCrater/ControlledByProxy_Structures/Terrain_DB_BrambleSphere_Seed_V2",
+        "position": {
+          "x": -72.259,
+          "y": 154.422,
+          "z": -198.531
+        },
+        "alignRadial": true,
+        "scale": 0.12,
+        "rename": "VD_Ruecksamen"
+      }
+    ]
+  },
+  "Volumes": {
+    "interactionVolumes": [
+      {
+        "position": {
+          "x": -72.259,
+          "y": 154.422,
+          "z": -198.531
+        },
+        "radius": 2.5,
+        "range": 3.5,
+        "prompt": "Durch den Rücksamen heimkehren",
+        "condition": "ZEKIVD_HEIMREISE",
+        "persistent": false,
+        "reusable": true,
+        "rename": "VD_Ruecksamen_Volumen"
       }
     ]
   }

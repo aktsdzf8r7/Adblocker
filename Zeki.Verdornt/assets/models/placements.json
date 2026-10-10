@@ -120,9 +120,78 @@
         "z": 0.0
       },
       "scale": 1
+    },
+    {
+      "model": "krater",
+      "name": "VD_Krater",
+      "body": "TIMBER_HEARTH",
+      "parentPath": "Sector/VD_Absturzstelle",
+      "collider": true,
+      "position": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "scale": 1
+    },
+    {
+      "model": "absperrung",
+      "name": "VD_Absperrung",
+      "body": "TIMBER_HEARTH",
+      "parentPath": "Sector/VD_Absturzstelle",
+      "collider": true,
+      "position": {
+        "x": 0.0,
+        "y": 0.4,
+        "z": 41.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 180.0,
+        "z": 0.0
+      },
+      "scale": 1
+    },
+    {
+      "model": "strudel",
+      "name": "VD_Strudel",
+      "body": "Samenschlund",
+      "spin": 14,
+      "position": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "scale": 1
     }
   ],
   "lights": [
+    {
+      "name": "Licht_Strudel",
+      "body": "Samenschlund",
+      "position": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "color": {
+        "x": 0.6,
+        "y": 1.0,
+        "z": 0.65
+      },
+      "range": 70,
+      "intensity": 2.0
+    },
     {
       "name": "Licht_Lager",
       "body": "Erstling",

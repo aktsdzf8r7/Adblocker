@@ -185,6 +185,12 @@ public static class ModelPlacer
     public static Transform Parent(ZekiVerdornt mod, string body, string parentPath)
     {
         var go = mod.NewHorizons.GetPlanet(body);
+        // vanilla bodies are named like the AstroObject names in the configs (TIMBER_HEARTH)
+        if (go == null && Enum.TryParse<AstroObject.Name>(body.Replace("_", ""), true, out var name) && name != AstroObject.Name.None)
+        {
+            var astro = Locator.GetAstroObject(name);
+            if (astro != null) go = astro.gameObject;
+        }
         if (go == null) return null;
         return string.IsNullOrEmpty(parentPath) ? go.transform.Find("Sector") ?? go.transform : go.transform.Find(parentPath);
     }

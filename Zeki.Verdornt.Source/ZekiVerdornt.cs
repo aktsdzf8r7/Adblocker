@@ -34,7 +34,9 @@ public class ZekiVerdornt : ModBehaviour
         new Harmony("Zeki.Verdornt").PatchAll(Assembly.GetExecutingAssembly());
         SystemLoaded += system =>
         {
-            if (system == SystemName || system == "SolarSystem") ModelPlacer.PlaceAll(this);
+            if (system != SystemName && system != "SolarSystem") return;
+            ModelPlacer.PlaceAll(this);
+            Crossing.Setup(this, system);
         };
         Log("Verdornt ist geladen.");
     }

@@ -1,0 +1,58 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+  "name": "TIMBER_HEARTH",
+  "starSystem": "SolarSystem",
+  "Props": {
+    "details": [
+      {
+        "path": "",
+        "position": {
+          "x": 0.0,
+          "y": 400.0,
+          "z": 0.0
+        },
+        "rename": "VD_Absturzstelle",
+        "keepLoaded": true
+      },
+      {
+        "path": "TimberHearth_Body/Sector_TH/Sector_ImpactCrater/Interactables_ImpactCrater/BrambleSeed/Effects_HEA_SmokeColumn_Crash",
+        "parentPath": "Sector/VD_Absturzstelle",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 4.0,
+          "y": 8.0,
+          "z": 3.0
+        },
+        "rename": "VD_Rauch"
+      }
+    ]
+  },
+  "Bramble": {
+    "nodes": [
+      {
+        "parentPath": "Sector/VD_Absturzstelle",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 10.0,
+          "z": 0.0
+        },
+        "linksTo": "Samenschlund",
+        "name": "ZEKIVD_Absturzsamen",
+        "scale": 0.25,
+        "fogTint": {
+          "r": 120,
+          "g": 255,
+          "b": 150,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 150,
+          "g": 255,
+          "b": 170,
+          "a": 255
+        }
+      }
+    ]
+  }
+}

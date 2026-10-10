@@ -71,6 +71,7 @@ P = {
     "vessel_lamp": "DB_VesselDimension_Body/Sector_VesselDimension/Sector_VesselBridge/Interactibles_VesselBridge/UNSORTED/Wall Lamps/Prefab_NOM_Lamp_Glow_Vessel_Wall",
     "warpcore_broken": "CaveTwin_Body/Sector_CaveTwin/Sector_NorthHemisphere/Sector_NorthSurface/Sector_TimeLoopExperiment/WarpCoreWallSockets/WarpCoreSocket/Props_NOM_WarpCoreBroken (1)/Props_NOM_WarpCore_Simple",
     "bramble_seed": "TimberHearth_Body/Sector_TH/Sector_ImpactCrater/Interactables_ImpactCrater/ControlledByProxy_Structures/Terrain_DB_BrambleSphere_Seed_V2",
+    "smoke_crash": "TimberHearth_Body/Sector_TH/Sector_ImpactCrater/Interactables_ImpactCrater/BrambleSeed/Effects_HEA_SmokeColumn_Crash",
     # the real Dark Bramble vines (quantum state of the Quantum Moon), variants 1-5
     "db_vine": "QuantumMoon_Body/Sector_QuantumMoon/State_DB/Interactables_DBState/DBState_QuantumObjects/DB_Q_Vine{n}/DB_Bramble_Vine{n}/State_1/Terrain_TH_Bramble_Vine{n}",
     "angler": "DB_HubDimension_Body/Sector_HubDimension/Interactables_HubDimension/Anglerfish_Body",

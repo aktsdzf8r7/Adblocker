@@ -87,13 +87,67 @@ def material_templates():
     return details
 
 
+def tangent(a, metres):
+    """A point beside an anchor on the surface: metres along a direction perpendicular to its normal."""
+    n = a["normal"]
+    side = [n["z"], 0.0, -n["x"]]
+    length = math.hypot(side[0], side[2]) or 1.0
+    p = at(a)
+    return [p[0] + side[0] / length * metres, p[1], p[2] + side[2] / length * metres]
+
+
 def erstling(A):
-    E = A["erstling"]
-    spawn = at(E["ankunft"], 2.0)
+    E, L = A["erstling"], A["lager"]
+    # the player comes to beside the arrival seed, outside its warp sphere
+    spawn = tangent(E["ankunft"], 14.0)
+    seed = at(E["ankunft"], 3.0)
+    home = at(L["ruecksamen"], 0.6)
     return planet("Erstling", 260, 10, {
         "Spawn": {"playerSpawnPoints": [{"position": vec(spawn), "alignRadial": True, "isDefault": True, "startWithSuit": True}]},
-        "Props": {"details": material_templates()},
+        "Bramble": {"nodes": [{"position": vec(seed), "alignRadial": True, "linksTo": "Ankunftskammer", "name": "ZEKIVD_Ankunftssamen", "scale": 0.12,
+                               "fogTint": color(160, 255, 170), "lightTint": color(170, 255, 180)}]},
+        "Props": {"details": material_templates() + [
+            # the return seed in its copper cradle: the real bramble seed, small
+            {"path": P["bramble_seed"], "position": vec(home), "alignRadial": True, "scale": 0.12, "rename": "VD_Ruecksamen"},
+        ]},
+        "Volumes": {"interactionVolumes": [
+            {"position": vec(home), "radius": 2.5, "range": 3.5, "prompt": "Durch den Rücksamen heimkehren", "condition": "ZEKIVD_HEIMREISE",
+             "persistent": False, "reusable": True, "rename": "VD_Ruecksamen_Volumen"}]},
     })
+
+
+SAMENSCHLUND_AT = (24000, 41000, -33000)
+ANKUNFTSKAMMER_AT = (-31000, 26000, 42000)
+
+
+def timber_hearth():
+    """The crash site on Timber Hearth (system SolarSystem). One container; the DLL moves it beside the vanilla
+    impact crater onto the ground (Crossing.cs), so everything inside is relative to it, +y up."""
+    site = "Sector/VD_Absturzstelle"
+    cfg = sb.body_header("TIMBER_HEARTH", "SolarSystem")
+    cfg["Props"] = {"details": [
+        {"path": "", "position": vec([0, 400, 0]), "rename": "VD_Absturzstelle", "keepLoaded": True},
+        {"path": P["smoke_crash"], "parentPath": site, "isRelativeToParent": True, "position": vec([4, 8, 3]), "rename": "VD_Rauch"},
+    ]}
+    cfg["Bramble"] = {"nodes": [
+        # the seed itself: large enough to walk into, half sunk into the crater
+        {"parentPath": site, "isRelativeToParent": True, "position": vec([0, 10, 0]), "linksTo": "Samenschlund", "name": "ZEKIVD_Absturzsamen",
+         "scale": 0.25, "fogTint": color(120, 255, 150), "lightTint": color(150, 255, 170)}]}
+    return cfg
+
+
+def dimension(name, at_, radius, fog, density, exit_node, vines="smallNest", nodes=None, extra=None, system=SYSTEM):
+    cfg = sb.body_header(name, system)
+    cfg.update({
+        "canShowOnTitle": False,
+        "Orbit": {"staticPosition": vec(at_)},
+        "ShipLog": {"mapMode": {"remove": True}},
+        "Bramble": {"dimension": {"radius": radius, "fogTint": fog, "fogDensity": density, "linksTo": exit_node, "vinePrefab": vines}},
+    })
+    if nodes:
+        cfg["Bramble"]["nodes"] = nodes
+    cfg.update(extra or {})
+    return cfg
 
 
 def nebelranke():
@@ -142,12 +196,19 @@ def placements(A):
         {"model": "hohlsamen", "body": "Hohlsamen", "collider": True},
         {"model": "ausguck", "body": "Ausguck", "collider": True},
     ]
+    props += [
+        {"model": "krater", "name": "VD_Krater", "body": "TIMBER_HEARTH", "parentPath": "Sector/VD_Absturzstelle", "collider": True},
+        {"model": "absperrung", "name": "VD_Absperrung", "body": "TIMBER_HEARTH", "parentPath": "Sector/VD_Absturzstelle", "collider": True,
+         "position": vec([0, 0.4, 41]), "rotation": vec([0, 180, 0])},
+        {"model": "strudel", "name": "VD_Strudel", "body": "Samenschlund", "spin": 14},
+    ]
     for p in props:
         p.setdefault("name", p["model"].capitalize())
         p.setdefault("position", vec([0, 0, 0]))
         p.setdefault("rotation", vec([0, 0, 0]))
         p.setdefault("scale", 1)
     lights = [
+        {"name": "Licht_Strudel", "body": "Samenschlund", "position": vec([0, 0, 0]), "color": vec([0.6, 1.0, 0.65]), "range": 70, "intensity": 2.0},
         {"name": "Licht_Lager", "body": "Erstling", "position": vec(at(A["lager"]["mitte"], 14)), "color": vec([0.75, 0.9, 1.0]),
          "range": 60, "intensity": 1.4},
         {"name": "Licht_Ausguck", "body": "Ausguck", "position": vec([0, 8, 0]), "color": vec([0.75, 0.9, 1.0]), "range": 45, "intensity": 1.2},
@@ -206,6 +267,10 @@ def main():
     write_json("planets/Hohlsamen.json", planet("Hohlsamen", 300, 8))
     write_json("planets/Ausguck.json", ausguck())
     write_json("planets/Fernlager.json", fernlager())
+    write_json("planets/TimberHearth.json", timber_hearth())
+    write_json("planets/Samenschlund.json", dimension("Samenschlund", SAMENSCHLUND_AT, 220, color(40, 95, 55), 3.0, "ZEKIVD_Absturzsamen",
+                                                      system="SolarSystem"))
+    write_json("planets/Ankunftskammer.json", dimension("Ankunftskammer", ANKUNFTSKAMMER_AT, 160, color(150, 230, 160), 2.0, "ZEKIVD_Ankunftssamen"))
     write_json("assets/models/placements.json", placements(A))
 
 

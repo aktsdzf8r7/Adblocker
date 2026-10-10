@@ -1,0 +1,32 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+  "name": "Samenschlund",
+  "starSystem": "SolarSystem",
+  "canShowOnTitle": false,
+  "Orbit": {
+    "staticPosition": {
+      "x": 24000.0,
+      "y": 41000.0,
+      "z": -33000.0
+    }
+  },
+  "ShipLog": {
+    "mapMode": {
+      "remove": true
+    }
+  },
+  "Bramble": {
+    "dimension": {
+      "radius": 220,
+      "fogTint": {
+        "r": 40,
+        "g": 95,
+        "b": 55,
+        "a": 255
+      },
+      "fogDensity": 3.0,
+      "linksTo": "ZEKIVD_Absturzsamen",
+      "vinePrefab": "smallNest"
+    }
+  }
+}
