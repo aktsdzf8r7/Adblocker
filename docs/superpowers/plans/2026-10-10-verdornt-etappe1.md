@@ -121,6 +121,7 @@
   - `strudel` (spiral thorns).
   - `planetenkern` (r≈0.4).
   - `absperrung` (Hearthian barrier with sign).
+  - `krater` (crater rim with rubble for Timber Hearth).
   - `eiszapfen` (icicle thorn cluster).
   - `ausguck_lift` (moving platform).
 - Anchors:
