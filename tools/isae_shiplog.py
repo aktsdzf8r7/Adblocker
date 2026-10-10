@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Ship log of "Die Aussendungseinheit" (Zeki.ISAE). Writes planets/shiplogs/ISAE.xml.
+Ship log of "Die Aussendungseinheit" (Zeki.ISAE). Writes planets/shiplogs/ISAE.xml and Keimdorn.xml.
 
 Usage:  python tools/isae_shiplog.py [path/to/Zeki.ISAE]
 """
@@ -45,7 +45,7 @@ LOG = (
     ], [
         entry('ZEKISAE_KONTROLLE', 'Das Kontrollmodul', [
             fact('ZEKISAE_KONTROLLE_FOUND',
-                 'Das Kontrollmodul ist eine Kopie der Module der Orbitalen Sondenkanone. Neben dem Computer und Linums Aufzeichnung ist ein Platz leer – dort erscheint später der Hauptschalter.'),
+                 'Das Kontrollmodul ist eine Kopie der Module der Orbitalen Sondenkanone. Neben dem Computer und Linums Aufzeichnung ist ein Platz leer – dort erscheint später der Hauptschalter. Ein Projektionsstein zeigt die Kernkammer.'),
         ]),
         entry('ZEKISAE_KERN', 'Die Kernkammer', [
             rumor('ZEKISAE_KERN_RUMOR', 'Eine Luke im Panzer',
@@ -61,9 +61,9 @@ LOG = (
         ]),
         entry('ZEKISAE_START', 'Das Startmodul', [
             rumor('ZEKISAE_START_RUMOR', 'Eine Sonde wartet',
-                  'Laut dem Computer im Kontrollmodul wartet im Startmodul eine Sonde auf den Schuss.', source='ZEKISAE_KONTROLLE'),
+                  'Laut dem Computer im Kontrollmodul wartet eine Sonde in einer Wiege an der Mündung auf den Schuss.', source='ZEKISAE_KONTROLLE'),
             fact('ZEKISAE_START_FOUND',
-                 'Im Startmodul schwebt eine Nomai-Sonde, bereit für den Schuss.'),
+                 'Das Startmodul steuert den Schuss. Die Sonde selbst liegt nicht hier, sondern in einer Wiege zwischen den Klauen, vor der Linse. Ein Projektionsbecken zeigt eine der Fokuskanonen.'),
             fact('ZEKISAE_START_BAU',
                  "Sedum und eine Pilotin namens Erica haben die Einheit heimlich gebaut. Die Teile kamen vom Konstruktionshof auf Giant's Deep, die Hülle folgt den Plänen des Vessels."),
             fact('ZEKISAE_START_KERN',
@@ -77,7 +77,7 @@ LOG = (
             rumor('ZEKISAE_NAVI_RUMOR', 'Ein berechnetes Ziel',
                   'Der Computer im Kontrollmodul meldet, das Ziel der Einheit sei im Navigationsmodul berechnet.', source='ZEKISAE_KONTROLLE'),
             fact('ZEKISAE_NAVI_FOUND',
-                 'Im Navigationsmodul dreht sich eine leuchtende Sternkarte.'),
+                 'Im Navigationsmodul dreht sich eine leuchtende Sternkarte. Ein Projektionsstein dort zeigt eine grüne Kammer voller Dornen.'),
             fact('ZEKISAE_NAVI_ZIEL',
                  'Das Ziel ist der Heimatstern der Nomai. Er liegt hinter dem Nebel, aus dem das Signal des Auges kam.'),
             fact('ZEKISAE_NAVI_ENERGIE',
@@ -113,6 +113,20 @@ LOG = (
             fact('ZEKISAE_KOPPLER_C_FACT',
                  'Der Phasenkoppler von Fokuskanone Gamma ist getrennt.'),
         ]),
+        entry('ZEKISAE_PULSKERN', 'Der Pulskern', [
+            fact('ZEKISAE_PULSKERN_FOUND',
+                 'Auf dem Boden der Kernkammer pulsiert ein glühender Kern in einem Käfig aus Kupferzinken. Über ihm ist eine leere Fassung.'),
+            fact('ZEKISAE_PULSKERN_ZEIT',
+                 'Im Pulskern ist die Zeit verdichtet: Ein Jahr vergeht in jeder Sekunde. So lädt Sedum den Warpkern in Augenblicken.'),
+            fact('ZEKISAE_PULSKERN_WARNUNG',
+                 'Tamarisk hat Sedum gewarnt: Ein Samenkern im Pulskern würde in Augenblicken Jahrtausende wachsen und die Einheit verschlingen.'),
+            fact('ZEKISAE_PULSKERN_GEFUETTERT',
+                 'Ich habe den Samenkern in den Pulskern gelegt. Er pulsiert jetzt elfmal in jeder Sekunde.'),
+        ]),
+        entry('ZEKISAE_WURZELN', 'Die verwurzelte Einheit', [
+            fact('ZEKISAE_WURZELN_FOUND',
+                 'Aus dem Pulskern ist ein Babysamen gewachsen. Seine Wurzeln haben in Sekunden die ganze Aussendungseinheit umschlungen: den Kern, die Schienen, die Klauen, die Arme.'),
+        ]),
         entry('ZEKISAE_SEDUM', 'Sedum, Linum, Pye und Erica', [
             fact('ZEKISAE_SEDUM_PLAN',
                  'Sedum baute die Aussendungseinheit, weil das Auge vielleicht nicht in diesem System liegt. Eine Sonde zu den Sternen schien ihm wichtiger als alles andere.'),
@@ -133,9 +147,45 @@ LOG = (
 )
 
 
-def xml(e, ind):
+KEIM = (
+    entry('ZEKISAE_KEIMDORN', 'Der Keimdorn', [
+        rumor('ZEKISAE_KEIM_RUMOR', 'Ein kleiner Samen um Dark Bramble',
+              'Tamarisk forschte im Keimdorn, einem kleinen Dornensamen, der um Dark Bramble kreist. Im Herzen jedes Samens liegt ein Kern, der in Sedums Pulskern passt.',
+              source='ZEKISAE_PULSKERN'),
+        fact('ZEKISAE_KEIMDORN_FOUND',
+             'Um Dark Bramble kreist ein kleiner Dornensamen: ein grün leuchtender Knoten, aus dem riesige Dornen ins All stechen. Auf den Spitzen brennen Nomai-Lampen.'),
+    ], [
+        entry('ZEKISAE_SAMENKAMMER', 'Die Samenkammer', [
+            fact('ZEKISAE_SAMENKAMMER_FOUND',
+                 'Im Keimdorn liegt eine kleine, grüne Dimension. Die Nomai haben dort eine Forschungsstation gebaut: eine Plattform mit einem Schrein, einem Warpkern und einem Steg zur Mitte.'),
+            fact('ZEKISAE_SAMENKERN_PLAN',
+                 'Jeder Samen von Dark Bramble trägt einen Samenkern. In ihm liegt der ganze Plan des Gewächses.'),
+            fact('ZEKISAE_BABYSAMEN',
+                 'Ein Babysamen am Rand der Samenkammer führt in die Dimension, in der das Vessel liegt.'),
+        ]),
+        entry('ZEKISAE_SAMENKERN', 'Der Samenkern', [
+            fact('ZEKISAE_SAMENKERN_FOUND',
+                 'In der Mitte der Samenkammer schwebt in einem Nomai-Gerüst der Samenkern: das Herz eines jeden Samens. Er pulsiert einmal alle elf Sekunden.'),
+            fact('ZEKISAE_SAMENKERN_GENOMMEN',
+                 'Ich habe den Samenkern genommen. Die Samenkammer hat gebebt – und hinter mir ist der Keimdorn erloschen.'),
+            fact('ZEKISAE_SAMEN_ERLOESCHEN',
+                 'Ohne seinen Kern verliert ein Samen seinen Halt. Der Keimdorn erlischt, sobald man ihn mit dem Kern verlässt.'),
+            fact('ZEKISAE_WURZEL_RISS',
+                 'Tamarisk: Fällt der Samenkern in den Pulskern und die Einheit schießt, hält die Wirklichkeit um sie nicht mehr. Sie würde einen kranken Samen in die Sonne schießen.'),
+            fact('ZEKISAE_WURZEL_WRACK',
+                 'Tamarisk: Ist die Einheit abgeschaltet, halten nur die Wurzeln ihren Kern zusammen. Wird er instabil, fliegt die Sonde doch – mit einem Samen an ihr.'),
+        ]),
+    ], curiosity=True),
+)
+
+
+def xml(e, ind, tree=None):
     eid, name, facts, children, curiosity = e
+    # every entry below a curiosity names it, otherwise New Horizons draws it without the curiosity's colour
     out = [f"{ind}<Entry>", f"{ind}  <ID>{eid}</ID>", f"{ind}  <Name>{escape(name)}</Name>"]
+    if tree:
+        out.append(f"{ind}  <Curiosity>{tree}</Curiosity>")
+    tree = tree or eid
     if curiosity:
         out.append(f"{ind}  <IsCuriosity/>")
     for f in facts:
@@ -149,19 +199,26 @@ def xml(e, ind):
             _, fid, text = f
             out += [f"{ind}  <ExploreFact>", f"{ind}    <ID>{fid}</ID>", f"{ind}    <Text>{escape(text)}</Text>", f"{ind}  </ExploreFact>"]
     for c in children:
-        out += xml(c, ind + "  ")
+        out += xml(c, ind + "  ", tree)
     out.append(f"{ind}</Entry>")
     return out
 
 
-def main():
-    lines = ['<?xml version="1.0" encoding="utf-8"?>', "<!-- Logbuch: die Interstellare Sonden Aussendungseinheit im Sonnensystem -->",
-             f"<AstroObjectEntry {SCHEMA}>", "  <ID>ISAE</ID>"] + xml(LOG, "  ") + ["</AstroObjectEntry>"]
-    path = os.path.join(MOD, "planets", "shiplogs", "ISAE.xml")
+def write(filename, astro_id, comment, entries):
+    lines = ['<?xml version="1.0" encoding="utf-8"?>', f"<!-- {comment} -->", f"<AstroObjectEntry {SCHEMA}>", f"  <ID>{astro_id}</ID>"]
+    for e in entries:
+        lines += xml(e, "  ")
+    lines.append("</AstroObjectEntry>")
+    path = os.path.join(MOD, "planets", "shiplogs", filename)
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8", newline="\n") as f:
         f.write("\n".join(lines) + "\n")
-    print("ship log written")
+
+
+def main():
+    write("ISAE.xml", "ISAE", "Logbuch: die Interstellare Sonden Aussendungseinheit im Sonnensystem", [LOG])
+    write("Keimdorn.xml", "KEIMDORN", "Logbuch: der Keimdorn um Dark Bramble und seine Samenkammer", KEIM)
+    print("ship logs written")
 
 
 if __name__ == "__main__":

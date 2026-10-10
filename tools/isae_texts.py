@@ -35,7 +35,7 @@ text("ISAE_Status.xml", "Computer im Kontrollmodul der Aussendungseinheit", chai
     "INTERSTELLARE SONDEN AUSSENDUNGSEINHEIT. Zustand: erwacht. Ausrichtung: auf den Stern.",
     "Weckbedingung erfüllt: Das Aschezwilling-Projekt hat zum ersten Mal Erinnerungen in die Vergangenheit geschickt. Schlafdauer: 281 042 Jahre.",
     "Auslöser des Schusses: Tod des Sterns. Sobald er zusammenbricht, trinken Linse und Fokuskanonen alle verbleibende Energie.",
-    "Fokuskanonen Alpha, Beta und Gamma: ausgerichtet. Phasenkoppler: verbunden. Sonde im Startmodul: bereit. Ziel im Navigationsmodul: berechnet.",
+    "Fokuskanonen Alpha, Beta und Gamma: ausgerichtet. Phasenkoppler: verbunden. Sonde in der Wiege an der Mündung: bereit. Ziel im Navigationsmodul: berechnet.",
     "Erwartete Folgen für dieses System: keine. Der Stern stirbt ohnehin. – Sedum",
 ), [("ZEKISAE_ZWECK", [1, 3]), ("ZEKISAE_ERWACHT", [2]), ("ZEKISAE_FOKUS_RUMOR", [4]), ("ZEKISAE_START_RUMOR", [4]),
     ("ZEKISAE_NAVI_RUMOR", [4])])
@@ -82,7 +82,7 @@ text("Start_Sonde.xml", "Computer im Startmodul: die Nutzlast", chain(
     "STARTMODUL. Nutzlast: eine Ersatzsonde der Orbitalen Sondenkanone, umgebaut für interstellare Entfernungen.",
     "Botschaft an Bord: »An alle Clans: Wir sind dem Signal des Auges gefolgt. Unser Vessel ist in den Dornen zerschellt.«",
     "»Folgt dem Signal nicht durch die Dornen. Sucht einen anderen Weg. Wartet nicht auf uns.«",
-    "Startfenster: Tod des Sterns. Flugdauer bis zum Heimatstern: unbekannt. Die Sonde verlässt die Kanone durch den Lauf.",
+    "Startfenster: Tod des Sterns. Die Sonde wartet nicht hier, sondern in ihrer Wiege zwischen den Klauen, vor der Linse. Von dort verlässt sie die Kanone.",
 ), [("ZEKISAE_START_SONDE", [1, 4]), ("ZEKISAE_BOTSCHAFT", [2, 3])])
 
 # ------------------------------------------------------------------ navigation module (Navigationsmodul)
@@ -162,6 +162,36 @@ text("BH_Pye.xml", "Aufzeichnung auf Brittle Hollow: Pyes Versammlung", chain(
     "Beschluss: abgelehnt. Die Sonnenstation war unser letzter Versuch, eine Sonne zu zwingen.",
     "Sedum hat den Saal ohne ein Wort verlassen. Ich fürchte, er baut trotzdem.",
 ), [("ZEKISAE_SPUR_BH", [1, 2, 3]), ("ZEKISAE_RUMOR", [1, 3])])
+
+
+# ------------------------------------------------------------------ 1.5: the Pulskern and the Keimdorn
+text("Pulskern.xml", "Computer am Pulskern in der Kernkammer", chain(
+    "PULSKERN. Zeitverdichtung im Kern: ein Jahr in jeder Sekunde. Zweck: den Warpkern in Augenblicken laden, für die ein Stern Jahrhunderte bräuchte.",
+    "Sedum: In dieser Fassung altert alles. Was hier hineinfällt, erlebt in einer Minute sechzig Jahre.",
+    "Tamarisk: Ich forsche im Keimdorn, dem kleinen Dornensamen, der um Dark Bramble kreist. Im Herzen jedes Samens liegt ein Kern – und er passt in diese Fassung.",
+    "Tamarisk: Sedum, lege niemals einen Samenkern in den Pulskern. Ein Samen, der in Augenblicken Jahrtausende wächst, verschlingt alles, woran er Wurzeln schlägt.",
+), [("ZEKISAE_PULSKERN_ZEIT", [1, 2]), ("ZEKISAE_KEIM_RUMOR", [3]), ("ZEKISAE_PULSKERN_WARNUNG", [4])])
+
+text("Keim_Forschung.xml", "Computer der Forschungsstation in der Samenkammer", chain(
+    "FORSCHUNGSSTATION KEIMDORN. Objekt: der Samenkern, das Herz eines Dornensamens.",
+    "Jeder Samen von Dark Bramble trägt einen solchen Kern. In ihm liegt der ganze Plan des Gewächses: Wurzeln, Dornen, Knoten, Dimensionen.",
+    "Ohne seinen Kern verliert der Samen seinen Halt. Die Kammer bebt, und der Keimdorn erlischt, sobald man ihn verlässt.",
+    "Der kleine Babysamen am Rand der Kammer führt in die Dimension, in der unser Vessel liegt. So haben wir das Wrack gefunden.",
+), [("ZEKISAE_SAMENKERN_PLAN", [1, 2]), ("ZEKISAE_SAMEN_ERLOESCHEN", [3]), ("ZEKISAE_BABYSAMEN", [4])])
+
+text("Keim_Tamarisk.xml", "Tamarisks Aufzeichnung in der Samenkammer", chain(
+    "Hier spricht Tamarisk. Sedum hat mich gefragt, ob ein Samenkern die Energie eines Sterns halten kann. Ich habe nein gesagt. Er hat nicht zugehört.",
+    "Fällt der Samenkern in seinen Pulskern, wächst ein Babysamen ein Jahr in jeder Sekunde. Seine Wurzeln würden die ganze Einheit verschlingen.",
+    "Will die Einheit dann schießen, hält die Wirklichkeit um sie nicht mehr. Sie würde einen kranken Samen in die Sonne schießen – und alles danach zerreißt.",
+    "Ist die Einheit abgeschaltet, halten nur noch die Wurzeln ihren Kern zusammen. Irgendwann wird er instabil, und die Sonde fliegt doch – mit einem Samen an ihr.",
+    "Ein Stern ist auch nur Erde, sagt Sedum. Ich hoffe, er irrt sich.",
+), [("ZEKISAE_WURZEL_RISS", [2, 3]), ("ZEKISAE_WURZEL_WRACK", [4])])
+
+text("Keim_Tafel.xml", "Tafel der Forschungsstation: Messungen am Samenkern", chain(
+    "Samenkern: Puls einmal alle elf Sekunden. Wärme: gleichbleibend.",
+    "Im Pulskern: Puls elfmal in jeder Sekunde. Der Samen erwacht.",
+    "Nicht wiederholen.",
+), [("ZEKISAE_SAMENKERN_FOUND", [1])])
 
 
 def write_all():

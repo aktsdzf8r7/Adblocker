@@ -18,6 +18,21 @@
         "b": 120,
         "a": 255
       }
+    },
+    {
+      "id": "ZEKISAE_KEIMDORN",
+      "color": {
+        "r": 110,
+        "g": 255,
+        "b": 140,
+        "a": 255
+      },
+      "highlightColor": {
+        "r": 200,
+        "g": 255,
+        "b": 190,
+        "a": 255
+      }
     }
   ],
   "entryPositions": [
@@ -75,6 +90,41 @@
       "position": {
         "x": 1220,
         "y": 450
+      }
+    },
+    {
+      "id": "ZEKISAE_PULSKERN",
+      "position": {
+        "x": 2500,
+        "y": 160
+      }
+    },
+    {
+      "id": "ZEKISAE_WURZELN",
+      "position": {
+        "x": 2080,
+        "y": -60
+      }
+    },
+    {
+      "id": "ZEKISAE_KEIMDORN",
+      "position": {
+        "x": 2950,
+        "y": 450
+      }
+    },
+    {
+      "id": "ZEKISAE_SAMENKAMMER",
+      "position": {
+        "x": 3380,
+        "y": 620
+      }
+    },
+    {
+      "id": "ZEKISAE_SAMENKERN",
+      "position": {
+        "x": 3380,
+        "y": 260
       }
     }
   ],
@@ -150,6 +200,18 @@
       "then": {
         "revealFacts": [
           "ZEKISAE_ABGESCHALTET"
+        ]
+      }
+    },
+    {
+      "check": {
+        "allConditionsSet": [
+          "ZEKISAE_SAMEN_EINGESETZT"
+        ]
+      },
+      "then": {
+        "revealFacts": [
+          "ZEKISAE_WURZELN_FOUND"
         ]
       }
     }

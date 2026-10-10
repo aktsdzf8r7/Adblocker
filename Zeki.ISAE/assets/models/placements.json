@@ -4,7 +4,9 @@
     "VesselKupfer": "",
     "VesselDunkel": "",
     "VesselGlut": "",
-    "VesselLeuchten": ""
+    "VesselLeuchten": "",
+    "Dornranke": "",
+    "Keimlicht": ""
   },
   "props": [
     {
@@ -150,6 +152,146 @@
         "z": 0
       },
       "scale": 1
+    },
+    {
+      "model": "pulskern",
+      "name": "ISAE_Pulskern",
+      "parentPath": "Sector/ISAE_Ausrichtung",
+      "collider": true,
+      "position": {
+        "x": -10.337,
+        "y": -14.0,
+        "z": 3.762
+      },
+      "body": "Interstellare Sonden Aussendungseinheit",
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "scale": 1
+    },
+    {
+      "model": "pulsglut",
+      "name": "ISAE_Pulsglut",
+      "parentPath": "Sector/ISAE_Ausrichtung",
+      "position": {
+        "x": -10.337,
+        "y": -11.4,
+        "z": 3.762
+      },
+      "body": "Interstellare Sonden Aussendungseinheit",
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "scale": 1
+    },
+    {
+      "model": "babysamen",
+      "name": "ISAE_Keimling",
+      "parentPath": "Sector/ISAE_Ausrichtung",
+      "hidden": true,
+      "position": {
+        "x": -10.337,
+        "y": -6.8,
+        "z": 3.762
+      },
+      "body": "Interstellare Sonden Aussendungseinheit",
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "scale": 1
+    },
+    {
+      "model": "wurzeln",
+      "name": "ISAE_Wurzeln",
+      "parentPath": "Sector/ISAE_Ausrichtung",
+      "hidden": true,
+      "body": "Interstellare Sonden Aussendungseinheit",
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "scale": 1
+    },
+    {
+      "model": "sternwurzeln",
+      "name": "Keimdorn_Dornen",
+      "body": "Keimdorn",
+      "collider": true,
+      "scale": 30.0,
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "model": "forschungsplattform",
+      "name": "Forschungsplattform",
+      "body": "Samenkammer",
+      "collider": true,
+      "position": {
+        "x": -0.0,
+        "y": -30.0,
+        "z": 55.0
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "scale": 1
+    },
+    {
+      "model": "herzgeruest",
+      "name": "Herzgeruest",
+      "body": "Samenkammer",
+      "spin": 5,
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "scale": 1
+    },
+    {
+      "model": "samenkern",
+      "name": "Samenkern_Modell",
+      "body": "Samenkammer",
+      "parentPath": "Sector/ZEKISAE_Samenkern",
+      "spin": 40,
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "scale": 1
     }
   ],
   "lights": [
@@ -220,6 +362,72 @@
       },
       "range": 70,
       "intensity": 1.6
+    },
+    {
+      "name": "Licht_Pulskern",
+      "body": "Interstellare Sonden Aussendungseinheit",
+      "parentPath": "Sector/ISAE_Ausrichtung",
+      "position": {
+        "x": -10.337,
+        "y": -11.4,
+        "z": 3.762
+      },
+      "color": {
+        "x": 1.0,
+        "y": 0.5,
+        "z": 0.22
+      },
+      "range": 14,
+      "intensity": 2.0
+    },
+    {
+      "name": "Licht_Samenkern",
+      "body": "Samenkammer",
+      "parentPath": "Sector/ZEKISAE_Samenkern",
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "color": {
+        "x": 0.45,
+        "y": 1.0,
+        "z": 0.55
+      },
+      "range": 30,
+      "intensity": 2.4
+    },
+    {
+      "name": "Licht_Forschung",
+      "body": "Samenkammer",
+      "position": {
+        "x": 0.0,
+        "y": -18.0,
+        "z": 55.0
+      },
+      "color": {
+        "x": 0.7,
+        "y": 1.0,
+        "z": 0.75
+      },
+      "range": 45,
+      "intensity": 1.3
+    },
+    {
+      "name": "Licht_Keimdorn",
+      "body": "Keimdorn",
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "color": {
+        "x": 0.5,
+        "y": 1.0,
+        "z": 0.6
+      },
+      "range": 260,
+      "intensity": 1.6
     }
   ],
   "points": {
@@ -277,6 +485,21 @@
       "x": 0,
       "y": 113,
       "z": 0
+    },
+    "sonde": {
+      "x": 0,
+      "y": 795.0,
+      "z": 0
+    },
+    "pulskern": {
+      "x": -10.337,
+      "y": -11.4,
+      "z": 3.762
+    },
+    "keimling": {
+      "x": -10.337,
+      "y": -6.8,
+      "z": 3.762
     }
   }
 }

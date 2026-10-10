@@ -244,6 +244,16 @@ def check_consistency(bodies, systems):
                 for k in ("activationCondition", "deactivationCondition"):
                     if d.get(k):
                         conditions_used.append((path, d[k]))
+                # items and item sockets reveal facts and set dialogue conditions
+                item, socket = d.get("item") or {}, d.get("itemSocket") or {}
+                for fid in (item.get("pickupFact"), socket.get("insertFact"), socket.get("removalFact")):
+                    if fid:
+                        need_fact(rel(path) + " item", fid)
+                conditions_set.update(c for c in (item.get("pickupCondition"), socket.get("insertCondition"), socket.get("removalCondition")) if c)
+            for v in vols.get("interactionVolumes", []) + vols.get("audioVolumes", []):
+                audio = v.get("audio")
+                if audio and AUDIO_TYPES and audio not in AUDIO_TYPES and not os.path.exists(os.path.join(MOD, audio)):
+                    err(f"{rel(path)}: audio {audio} is neither an AudioType nor a file of the mod")
 
         # warp pads and remotes are global, but every pair should live in one system
         tx, rx, stones, platforms = {}, {}, {}, {}
@@ -279,7 +289,8 @@ def check_consistency(bodies, systems):
                     node_names[nd["name"]] = d["name"]
                 if nd["linksTo"] not in dims:
                     err(f"{rel(path)}: bramble node links to {nd['linksTo']}, which is not a dimension of {sysname}")
-                edges.setdefault(d["name"], []).append(nd["linksTo"])
+                if not nd.get("preventRecursionCrash"):
+                    edges.setdefault(d["name"], []).append(nd["linksTo"])
         for name, d in dims.items():
             exit_node = d["Bramble"]["dimension"].get("linksTo")
             if exit_node not in node_names:
@@ -423,6 +434,25 @@ def check_placement(bodies):
 FLOATING_OK = {"Sondenkanone_Wrack", "Sonnenwacht_Station"}
 # light effects that may hang in the air
 EFFECTS = {P["light_beam"], P["warp_particles"]}
+
+
+def audio_types():
+    """AudioType names from the New Horizons docs next to the schemas (empty if they are not there)."""
+    if not SCHEMA_DIR:
+        return set()
+    doc = os.path.join(SCHEMA_DIR, "nhsrc", "docs", "src", "content", "docs", "reference", "audio-enum.md")
+    if not os.path.exists(doc):
+        return set()
+    names = set()
+    with open(doc, encoding="utf-8") as f:
+        for line in f:
+            cells = [c.strip(" *") for c in line.strip().strip("|").split("|")]
+            if len(cells) == 2 and cells[1].strip().isdigit():
+                names.add(cells[0].strip())
+    return names
+
+
+AUDIO_TYPES = audio_types()
 
 
 def code_conditions():

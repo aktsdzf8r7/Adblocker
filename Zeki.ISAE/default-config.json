@@ -38,6 +38,25 @@
       ],
       "title": "Materialien der Hauptkanone",
       "tooltip": "Vessel: die Materialien des Vessels. Sondenkanone: die der echten Sondenkanone. Einfach: schlichte Farben."
+    },
+    "wreckSeconds": {
+      "type": "slider",
+      "value": 300,
+      "min": 60,
+      "max": 600,
+      "title": "Ende 3: Zeit im Wrack (Sekunden)",
+      "tooltip": "Wie lange du im Ende \"Verwurzelt\" nach der Explosion noch lebst, bevor der Energiekern instabil wird."
+    },
+    "endingKeys": {
+      "type": "selector",
+      "value": "Strg + 1/2/3",
+      "options": [
+        "Strg + 1/2/3",
+        "1/2/3",
+        "Aus"
+      ],
+      "title": "Skip-Tasten für die Enden",
+      "tooltip": "Springt sofort zu einem Ende: 1 = Aussendung, 2 = Riss, 3 = Verwurzelt."
     }
   }
 }

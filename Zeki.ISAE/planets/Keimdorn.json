@@ -1,0 +1,185 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+  "name": "Keimdorn",
+  "starSystem": "SolarSystem",
+  "canShowOnTitle": false,
+  "Base": {
+    "surfaceSize": 140,
+    "surfaceGravity": 0,
+    "showMinimap": false
+  },
+  "Orbit": {
+    "primaryBody": "DARK_BRAMBLE",
+    "isMoon": true,
+    "semiMajorAxis": 2600,
+    "eccentricity": 0,
+    "inclination": 24,
+    "longitudeOfAscendingNode": 70,
+    "trueAnomaly": 40,
+    "axialTilt": 0,
+    "siderealPeriod": 0,
+    "tint": {
+      "r": 110,
+      "g": 255,
+      "b": 140,
+      "a": 255
+    }
+  },
+  "MapMarker": {
+    "enabled": true
+  },
+  "ShipLog": {
+    "xmlFile": "planets/shiplogs/Keimdorn.xml",
+    "spriteFolder": "planets/assets/shiplog/entries",
+    "mapMode": {
+      "revealedSprite": "planets/assets/shiplog/map/keimdorn.png",
+      "outlineSprite": "planets/assets/shiplog/map/isae_outline.png",
+      "scale": 0.8
+    }
+  },
+  "Bramble": {
+    "nodes": [
+      {
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "linksTo": "Samenkammer",
+        "name": "ZEKISAE_Keimdorn_Knoten",
+        "scale": 0.6,
+        "fogTint": {
+          "r": 120,
+          "g": 255,
+          "b": 150,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 150,
+          "g": 255,
+          "b": 170,
+          "a": 255
+        }
+      }
+    ]
+  },
+  "Props": {
+    "details": [
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
+        "position": {
+          "x": -156.0,
+          "y": 0.0,
+          "z": -4.65
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "Keimdorn_Leuchtfeuer_0"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
+        "position": {
+          "x": -85.05,
+          "y": -82.11,
+          "z": -101.94
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "Keimdorn_Leuchtfeuer_3"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
+        "position": {
+          "x": 35.91,
+          "y": 104.28,
+          "z": -110.49
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "Keimdorn_Leuchtfeuer_6"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
+        "position": {
+          "x": 116.31,
+          "y": -88.23,
+          "z": -55.38
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "Keimdorn_Leuchtfeuer_9"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
+        "position": {
+          "x": 130.92,
+          "y": 15.06,
+          "z": 83.76
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "Keimdorn_Leuchtfeuer_12"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
+        "position": {
+          "x": 25.17,
+          "y": 74.64,
+          "z": 134.85
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "Keimdorn_Leuchtfeuer_15"
+      }
+    ],
+    "entryLocation": [
+      {
+        "id": "ZEKISAE_KEIMDORN",
+        "position": {
+          "x": 0.0,
+          "y": 60.0,
+          "z": 0.0
+        }
+      }
+    ]
+  },
+  "Volumes": {
+    "revealVolumes": [
+      {
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "radius": 420,
+        "revealOn": "enter",
+        "reveals": [
+          "ZEKISAE_KEIMDORN_FOUND"
+        ]
+      }
+    ]
+  }
+}

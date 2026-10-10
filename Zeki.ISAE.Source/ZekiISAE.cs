@@ -9,8 +9,11 @@ namespace ZekiISAE;
 
 /// <summary>
 /// "Die Aussendungseinheit": while the Interstellare Sonden Aussendungseinheit (ISAE) is still running,
-/// the end of the time loop does not end in a supernova. The ISAE drains the dying sun instead (see Finale):
-/// it shrinks until it is gone, the cannon fires, and the game ends with a New Horizons game over.
+/// the end of the time loop does not end in a supernova. Three endings (EndingKind) replace it:
+///   1 "Aussendung" (Finale)   armed: the ISAE drains the sun and fires its probe,
+///   2 "Riss" (RiftEnding)     armed, Samenkern in the Pulskern: a broken seed is fired, reality breaks,
+///   3 "Verwurzelt" (RootEnding) switched off, Samenkern in the Pulskern: wreck, then the sun becomes a seed.
+/// Each ends with a New Horizons game over. Ctrl+1/2/3 (setting) skip straight to an ending.
 /// The ISAE is switched off in game through NH interaction volumes that set persistent conditions.
 /// The centrepiece is a Blender model (Models.cs); every other prop is copied from the game by New Horizons
 /// and GameProps.cs finishes their placement in game.
@@ -26,6 +29,10 @@ public class ZekiISAE : ModBehaviour
     public const string DrainActive = "ZEKISAE_ENTZUG";
     public const string UniverseEnds = "ZEKISAE_UNIVERSUM_ENDET";
     public const string Prelude = "ZEKISAE_VORBOTE";
+    public const string SeedTaken = "ZEKISAE_SAMEN_GENOMMEN";
+    public const string SeedInserted = "ZEKISAE_SAMEN_EINGESETZT";
+    public const string EndRift = "ZEKISAE_ENDE_RISS";
+    public const string EndRoots = "ZEKISAE_ENDE_WURZEL";
     /// <summary>Persistent condition of one cut phase coupler; {0} = A, B or C.</summary>
     public const string CouplerCut = "ZEKISAE_KOPPLER_{0}";
 
@@ -40,12 +47,19 @@ public class ZekiISAE : ModBehaviour
     public bool Cinematic = true;
     public string MaterialSource = "Vessel";
     public bool ShowOnTitle = true;
+    public float WreckSeconds = 300f;
+    public string EndingKeys = "Strg + 1/2/3";
+    /// <summary>Set by a skip key: this ending comes, whatever the state of the ISAE.</summary>
+    public EndingKind ForcedEnding;
+    /// <summary>The ending was reached with a skip key: waiting phases are short.</summary>
+    public bool SkipFast;
     /// <summary>The last two minutes of the loop: the ISAE charges up.</summary>
     public bool Awakening;
 
     private bool _warnedAtStart;
     private bool _warnedBeforeEnd;
     private bool _wasDeactivated;
+    private bool _warnedRooted;
     private float _sceneLoadedAt = -1f;
 
     public void Awake()
@@ -71,6 +85,8 @@ public class ZekiISAE : ModBehaviour
         Cinematic = config.GetSettingsValue<bool>("cinematic");
         MaterialSource = config.GetSettingsValue<string>("materialSource") ?? "Vessel";
         ShowOnTitle = config.GetSettingsValue<bool>("showOnTitle");
+        WreckSeconds = Mathf.Clamp(config.GetSettingsValue<float>("wreckSeconds"), 60f, 600f);
+        EndingKeys = config.GetSettingsValue<string>("endingKeys") ?? "Strg + 1/2/3";
     }
 
     public void Log(string message, bool warning = false)
@@ -111,6 +127,9 @@ public class ZekiISAE : ModBehaviour
         _warnedAtStart = false;
         _warnedBeforeEnd = false;
         Awakening = false;
+        ForcedEnding = EndingKind.Vanilla;
+        SkipFast = false;
+        _warnedRooted = false;
         _wasDeactivated = PlayerData.GetPersistentCondition(Deactivated);
         _sceneLoadedAt = newScene == OWScene.SolarSystem ? Time.time : -1f;
     }
@@ -125,13 +144,64 @@ public class ZekiISAE : ModBehaviour
         return true;
     }
 
+    /// <summary>Which ending replaces the supernova now (Vanilla = the normal supernova).</summary>
+    public EndingKind ChooseEnding()
+    {
+        if (LoadManager.GetCurrentScene() != OWScene.SolarSystem) return EndingKind.Vanilla;
+        if (NewHorizons != null && NewHorizons.GetCurrentStarSystem() != "SolarSystem") return EndingKind.Vanilla;
+        if (ForcedEnding != EndingKind.Vanilla) return ForcedEnding;
+        var seed = DialogueConditionManager.SharedInstance != null && DialogueConditionManager.SharedInstance.GetConditionState(SeedInserted);
+        if (seed) return PlayerData.GetPersistentCondition(Deactivated) ? EndingKind.Verwurzelt : EndingKind.Riss;
+        return IsArmed() ? EndingKind.Aussendung : EndingKind.Vanilla;
+    }
+
+    /// <summary>Skip key: jump straight to an ending (the loop ends in a moment).</summary>
+    public void SkipTo(EndingKind kind)
+    {
+        if (LoadManager.GetCurrentScene() != OWScene.SolarSystem || (NewHorizons != null && NewHorizons.GetCurrentStarSystem() != "SolarSystem")) return;
+        if (Ending.Current is RootEnding root && kind == EndingKind.Verwurzelt)
+        {
+            root.SkipWait();
+            return;
+        }
+        if (Ending.Running || !TimeLoop.IsTimeFlowing()) return;
+        var dm = Locator.GetDeathManager();
+        if (dm != null && (dm.IsPlayerDying() || dm.IsPlayerDead())) return;
+        ForcedEnding = kind;
+        SkipFast = true;
+        // Ende 2 and 3 need the rooted cannon: the roots are there at once
+        if (kind != EndingKind.Aussendung) SeedSystem.Instance?.StartRooting(true);
+        var name = kind switch { EndingKind.Aussendung => "AUSSENDUNG", EndingKind.Riss => "RISS", _ => "VERWURZELT" };
+        Notify($"SPRUNG ZU ENDE {(int)kind}: {name}", 4f);
+        Log($"Skip-Taste: Ende {(int)kind} ({kind}).");
+        TimeLoop.SetSecondsRemaining(1.5f);
+    }
+
+    private void CheckSkipKeys()
+    {
+        if (EndingKeys == "Aus") return;
+        var keyboard = UnityEngine.InputSystem.Keyboard.current;
+        if (keyboard == null) return;
+        if (EndingKeys.StartsWith("Strg") && !keyboard.ctrlKey.isPressed) return;
+        if (keyboard.digit1Key.wasPressedThisFrame || keyboard.numpad1Key.wasPressedThisFrame) SkipTo(EndingKind.Aussendung);
+        else if (keyboard.digit2Key.wasPressedThisFrame || keyboard.numpad2Key.wasPressedThisFrame) SkipTo(EndingKind.Riss);
+        else if (keyboard.digit3Key.wasPressedThisFrame || keyboard.numpad3Key.wasPressedThisFrame) SkipTo(EndingKind.Verwurzelt);
+    }
+
     public void Update()
     {
         if (_sceneLoadedAt < 0f) return;
+        CheckSkipKeys();
         if (!_wasDeactivated && PlayerData.GetPersistentCondition(Deactivated))
         {
             _wasDeactivated = true;
             Notify("DIE AUSSENDUNGSEINHEIT IST ABGESCHALTET. DIE SONNE GEHÖRT WIEDER SICH SELBST.", 8f);
+        }
+        if (!_warnedRooted && SeedSystem.Rooted && PlayerData.GetPersistentCondition(Deactivated) && TimeLoop.IsTimeFlowing()
+            && TimeLoop.GetSecondsRemaining() < PreludeSeconds && TimeLoop.GetSecondsRemaining() > 0f)
+        {
+            _warnedRooted = true;
+            Notify("DER VERWURZELTE KERN DER AUSSENDUNGSEINHEIT WIRD UNRUHIG", 7f);
         }
         if (!IsArmed() || !TimeLoop.IsTimeFlowing()) return;
 
@@ -170,25 +240,34 @@ public static class SunPatches
         return astro != null && astro.GetAstroObjectName() == AstroObject.Name.Sun;
     }
 
-    private static bool Armed => ZekiISAE.Instance != null && ZekiISAE.Instance.IsArmed();
+    private static EndingKind Chosen => ZekiISAE.Instance != null ? ZekiISAE.Instance.ChooseEnding() : EndingKind.Vanilla;
 
-    /// <summary>The loop is over: the ISAE takes the dying sun instead of the supernova.</summary>
+    /// <summary>The loop is over: one of the three endings takes the dying sun instead of the supernova.</summary>
     [HarmonyPrefix]
     [HarmonyPatch(typeof(SunController), nameof(SunController.OnTriggerSupernova))]
     public static bool OnTriggerSupernova(SunController __instance)
     {
-        if (!Armed || !IsHearthianSun(__instance)) return true;
-        if (__instance.GetComponent<Finale>() == null) __instance.gameObject.AddComponent<Finale>().Sun = __instance;
+        if (!IsHearthianSun(__instance)) return true;
+        if (__instance.GetComponent<Ending>() != null) return false;
+        Ending ending = Chosen switch
+        {
+            EndingKind.Aussendung => __instance.gameObject.AddComponent<Finale>(),
+            EndingKind.Riss => __instance.gameObject.AddComponent<RiftEnding>(),
+            EndingKind.Verwurzelt => __instance.gameObject.AddComponent<RootEnding>(),
+            _ => null,
+        };
+        if (ending == null) return true;
+        ending.Sun = __instance;
         return false;
     }
 
-    /// <summary>While the sun is drained, the vanilla growth/collapse animation must not run.</summary>
+    /// <summary>During an ending the vanilla growth/collapse animation must not run.</summary>
     [HarmonyPrefix]
     [HarmonyPatch(typeof(SunController), nameof(SunController.Update))]
-    public static bool Update(SunController __instance) => __instance.GetComponent<Finale>() == null;
+    public static bool Update(SunController __instance) => __instance.GetComponent<Ending>() == null;
 
-    /// <summary>The far-away picture of the sun must not explode either; the Finale shrinks it.</summary>
+    /// <summary>The far-away picture of the sun must not explode either; the endings handle it.</summary>
     [HarmonyPrefix]
     [HarmonyPatch(typeof(DistantSunController), nameof(DistantSunController.OnTriggerSupernova))]
-    public static bool DistantSupernova() => !Armed;
+    public static bool DistantSupernova() => Chosen == EndingKind.Vanilla;
 }

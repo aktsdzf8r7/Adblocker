@@ -14,7 +14,9 @@ namespace ZekiISAE;
 ///     deck, inside a Blender emitter frame,
 ///   * red energy tethers from the focus emitters to the lens of the main cannon; a tether goes out when its
 ///     phase coupler is cut,
-///   * the copy of the Nomai probe in the launch module, remembered for the finale.
+///   * the copy of the Nomai probe in its cradle between the claws, turned along the barrel for the endings,
+///   * the projection pools of the module copies: the NH pools of this mod take their place (FixPools),
+///   * the Samenkern, the Pulskern and the roots (SeedSystem, Seed.cs).
 /// </summary>
 public static class GameProps
 {
@@ -52,10 +54,12 @@ public static class GameProps
             AlignPlatform(mod, focus, greek);
         }
         MountModules(mod);
-        PrepareProbe();
+        PrepareProbe(mod);
+        FixPools(mod);
         Pivot.gameObject.AddComponent<SunAim>();
         if (FocusCircle != null) FocusCircle.gameObject.AddComponent<FocusOrbit>();
         Pivot.gameObject.AddComponent<Tethers>();
+        SeedSystem.Setup(mod);
     }
 
     /// <summary>A named point from placements.json (frame of the pivot) in world space.</summary>
@@ -70,10 +74,15 @@ public static class GameProps
 
     public static Vector3 AxisWorld() => Pivot != null ? Pivot.up : Vector3.up;
 
-    private static void PrepareProbe()
+    /// <summary>The probe lies in its cradle at the muzzle: centred on the cradle, its long axis along the barrel.</summary>
+    private static void PrepareProbe(ZekiISAE mod)
     {
-        var probe = Pivot.Find("ISAE_Modul_Start/Interstellare_Sonde");
-        if (probe == null) return;
+        var probe = Pivot.Find("Interstellare_Sonde");
+        if (probe == null)
+        {
+            mod.Log("Interstellare Sonde nicht gefunden.", true);
+            return;
+        }
         Probe = probe.gameObject;
         var filter = Probe.GetComponentInChildren<MeshFilter>(true);
         if (filter != null && filter.sharedMesh != null)
@@ -82,6 +91,69 @@ public static class GameProps
             var local = size.x >= size.y && size.x >= size.z ? Vector3.right : size.y >= size.z ? Vector3.up : Vector3.forward;
             ProbeAxis = Probe.transform.InverseTransformDirection(filter.transform.TransformDirection(local)).normalized;
         }
+        var cradle = Point("sonde");
+        probe.rotation = Quaternion.FromToRotation(probe.TransformDirection(ProbeAxis), Pivot.up) * probe.rotation;
+        if (filter != null && filter.sharedMesh != null)
+            probe.position += cradle - filter.transform.TransformPoint(filter.sharedMesh.bounds.center);
+    }
+
+    // ------------------------------------------------------------------------------------------ projection pools
+    /// <summary>
+    /// The module copies come with the pool of the real module, which has nothing to show. This mod's NH pools
+    /// (ISAE_Becken_*) take their place, their stones lie next to them; the copied pool is switched off.
+    /// </summary>
+    private static void FixPools(ZekiISAE mod)
+    {
+        var vanilla = Locator.GetAstroObject(AstroObject.Name.ProbeCannon);
+        var real = vanilla == null ? null : vanilla.transform.Find("Sector_OrbitalProbeCannon/Sector_Module_Intact");
+        foreach (var (_, name) in Modules)
+        {
+            var copy = Pivot.Find("ISAE_Modul_" + name);
+            if (copy == null) continue;
+            var ours = FindDeep(copy, "ISAE_Becken_" + name);
+            Transform target = null;
+            foreach (var platform in copy.GetComponentsInChildren<NomaiRemoteCameraPlatform>(true))
+            {
+                if (ours != null && platform.transform.IsChildOf(ours)) continue;
+                if (target == null) target = platform.transform;
+                platform.gameObject.SetActive(false);
+            }
+            Vector3 position;
+            Quaternion rotation;
+            if (target != null)
+            {
+                position = target.position;
+                rotation = target.rotation;
+            }
+            else
+            {
+                // no pool left in the copy: take its place on the real module
+                var vanillaPool = real == null ? null : real.GetComponentInChildren<NomaiRemoteCameraPlatform>(true);
+                if (vanillaPool == null)
+                {
+                    mod.Log($"Modul {name}: kein Projektionsbecken gefunden, das eigene bleibt am Ersatzplatz.");
+                    continue;
+                }
+                position = copy.TransformPoint(real.InverseTransformPoint(vanillaPool.transform.position));
+                rotation = copy.rotation * (Quaternion.Inverse(real.rotation) * vanillaPool.transform.rotation);
+            }
+            if (ours != null)
+            {
+                ours.SetPositionAndRotation(position, rotation);
+                // the projection stone of this module lies on the floor beside the pool
+                foreach (var stone in copy.GetComponentsInChildren<Transform>(true))
+                    if (stone.name.StartsWith("ISAE_Stein_" + name + "_"))
+                        stone.position = position + rotation * new Vector3(3.4f, 0.5f, 0f);
+            }
+            mod.Log($"Modul {name}: Projektionsbecken {(target != null ? "der Kopie ersetzt" : "vom echten Modul übernommen")}.");
+        }
+    }
+
+    private static Transform FindDeep(Transform root, string name)
+    {
+        foreach (var t in root.GetComponentsInChildren<Transform>(true))
+            if (t.name == name) return t;
+        return null;
     }
 
     // ------------------------------------------------------------------------------------------ bounds
@@ -264,7 +336,7 @@ public class FocusOrbit : MonoBehaviour
 
     public void Update()
     {
-        var target = Finale.Running ? 6f : GameProps.PlayerFar(transform) ? 1.2f : 0f;
+        var target = Ending.Current is Finale ? 6f : GameProps.PlayerFar(transform) ? 1.2f : 0f;
         _speed = Mathf.MoveTowards(_speed, target, Time.deltaTime * 0.6f);
         if (_speed != 0f) transform.Rotate(Vector3.up, _speed * Time.deltaTime, Space.Self);
     }
@@ -316,7 +388,7 @@ public class Tethers : MonoBehaviour
                 var wave = Mathf.Sin(u * 14f - t * 5f) * Mathf.Sin(u * Mathf.PI) * 3.5f;
                 line.SetPosition(i, from + dir * u + side * wave);
             }
-            line.widthMultiplier = (Finale.Running ? 9f : 2.2f) * (1f + 0.3f * Mathf.Sin(t * 7f + focus.GetInstanceID()));
+            line.widthMultiplier = (Ending.Current is Finale ? 9f : 2.2f) * (1f + 0.3f * Mathf.Sin(t * 7f + focus.GetInstanceID()));
         }
     }
 }

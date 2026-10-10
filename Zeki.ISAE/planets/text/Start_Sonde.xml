@@ -18,7 +18,7 @@
   <TextBlock>
     <ID>4</ID>
     <ParentID>3</ParentID>
-    <Text>Startfenster: Tod des Sterns. Flugdauer bis zum Heimatstern: unbekannt. Die Sonde verlässt die Kanone durch den Lauf.</Text>
+    <Text>Startfenster: Tod des Sterns. Die Sonde wartet nicht hier, sondern in ihrer Wiege zwischen den Klauen, vor der Linse. Von dort verlässt sie die Kanone.</Text>
   </TextBlock>
   <ShipLogConditions>
     <RevealFact>

@@ -39,7 +39,7 @@ MOD = os.path.abspath(sys.argv[1] if len(sys.argv) > 1 else os.path.join(os.path
 sb.MOD = MOD  # the shared helpers write into this mod
 
 NAME = "Interstellare Sonden Aussendungseinheit"
-VERSION = "1.4.0"
+VERSION = "1.5.0"
 FOCUS_NAMES = (("A", "Alpha"), ("B", "Beta"), ("C", "Gamma"))
 MODULES = (("kontrolle", "Kontrolle"), ("start", "Start"), ("navigation", "Navigation"))
 
@@ -53,6 +53,18 @@ ENTZUG = "ZEKISAE_ENTZUG"                # dialogue: set by the DLL while the su
 VORBOTE = "ZEKISAE_VORBOTE"              # dialogue: set by the DLL two minutes before the end of the loop
 KOPPLER = "ZEKISAE_KOPPLER_%s"           # persistent: one phase coupler cut
 KOPPLER_ALLE = "ZEKISAE_KOPPLER_ALLE"    # persistent: all three cut, the main switch appears
+SAMEN_GENOMMEN = "ZEKISAE_SAMEN_GENOMMEN"      # dialogue: the Samenkern was taken out of the seed chamber
+SAMEN_EINGESETZT = "ZEKISAE_SAMEN_EINGESETZT"  # dialogue: the Samenkern lies in the Pulskern, the roots grow
+ENDE_RISS = "ZEKISAE_ENDE_RISS"                # dialogue: ending 2 (set by the DLL right before the game over)
+ENDE_WURZEL = "ZEKISAE_ENDE_WURZEL"            # dialogue: ending 3
+UNIVERSUM_ENDET = "ZEKISAE_UNIVERSUM_ENDET"    # dialogue: ending 1
+
+KEIMDORN = "Keimdorn"          # the small bramble seed planet around Dark Bramble
+SAMENKAMMER = "Samenkammer"    # the small bramble dimension inside it
+KEIM_NODE = "ZEKISAE_Keimdorn_Knoten"
+BABY_NODE = "ZEKISAE_Babysamen_Knoten"
+SAMENKERN = "Sector/ZEKISAE_Samenkern"
+GREEN = (color(110, 255, 140), color(200, 255, 190))
 
 # free spots in the control module of the real Orbital Probe Cannon (used by the published addon EyeWitness);
 # the same spots work in our copies of that module. "Up" of the pedestal spot is -z of the module.
@@ -63,6 +75,10 @@ SPOT_ROT = (270, 0, 0)
 OPC_MODULE = "Sector_OrbitalProbeCannon/Sector_Module_Intact"
 
 RED = (color(235, 90, 50), color(255, 170, 120))
+
+# projection pools: id -> (decal, where the platform is, where the stones lie); the module pools are the
+# pools of the module copies (the DLL moves the NH platforms onto them and switches the copied pools off)
+REMOTES = ("KAMMER", "FOKUS", "SAMENKAMMER", "KONTROLLE", "START", "NAVI")
 
 
 def rot(e):
@@ -98,6 +114,18 @@ def at(a, up=0.0):
 
 def yaw(a, extra=0.0):
     return (0, round((a.get("yaw", 0) + extra) % 360, 1), 0)
+
+
+def yaw_towards(p, target):
+    """Unity yaw that turns +z from p towards target (both Unity points)."""
+    return (0, round(math.degrees(math.atan2(target[0] - p[0], target[2] - p[2])) % 360, 1), 0)
+
+
+def towards(p, target, distance):
+    """The point distance metres from p towards target, in the horizontal plane."""
+    dx, dz = target[0] - p[0], target[2] - p[2]
+    n = math.hypot(dx, dz) or 1.0
+    return [p[0] + dx / n * distance, p[1], p[2] + dz / n * distance]
 
 
 # ==============================================================================================
@@ -138,7 +166,6 @@ def isae_config(A):
     # inside the modules (frames of the module copies)
     kontrolle, start, navigation = (module_path(n) for _, n in MODULES)
     switch = kontrolle + "/ISAE_Hauptschalter"
-    pedestal_up = lambda h: add(SPOT_PEDESTAL, (0, 0, -h))  # noqa: E731
     details += [
         # the main switch, wakes up once all three couplers are cut: the Vessel's coordinate interface with an
         # advanced warp core floating above it (Vessel technology that Sedum copied)
@@ -147,9 +174,12 @@ def isae_config(A):
         relative(switch, (0, 0, 0), path=P["vessel_interface"], scale=0.7, rename="Hauptschalter_Vessel_Interface"),
         # removeComponents strips the item from the root, so the copy can not be picked up like the real core
         relative(switch, (0, 2.3, 0), path=P["warpcore_vessel"], rename="Hauptschalter_Warpkern", removeComponents=True),
-        # the interstellar probe waits in the launch module; the DLL fires it through the barrel in the finale
-        relative(start, pedestal_up(1.2), path=P["nomai_probe"], rename="Interstellare_Sonde", keepLoaded=True),
+        # the interstellar probe waits in its cradle between the claws, in front of the lens (the DLL turns it
+        # along the barrel and fires it in the finale)
+        relative(PIVOT, at(I["sonde"]), path=P["nomai_probe"], scale=4, rename="Interstellare_Sonde", keepLoaded=True),
+        relative(PIVOT, at(I["sonde"]), path=P["warp_particles"], scale=1.5, rename="Sondenglut", keepLoaded=True, deactivationCondition=DEAKTIVIERT),
     ]
+    details += pulskern_props(K)
     texts = [
         relative(kontrolle, SPOT_COMPUTER, SPOT_ROT, type="computer", xmlFile="planets/text/ISAE_Status.xml", rename="Computer_Status"),
         relative(kontrolle, SPOT_RECORDER, SPOT_ROT, type="recorder", xmlFile="planets/text/ISAE_Linum.xml", rename="Recorder_Linum"),
@@ -161,6 +191,9 @@ def isae_config(A):
         relative(PIVOT, at(K["computer"]), yaw(K["computer"]), type="computer", xmlFile="planets/text/Sedum_Abschied.xml", rename="Computer_Sedum"),
         relative(PIVOT, at(K["recorder"]), yaw(K["recorder"]), type="recorder", xmlFile="planets/text/Kammer_Zweifel.xml", rename="Recorder_Zweifel"),
     ]
+    puls = at(K["pulskern"])
+    spot = towards(puls, at(K["boden"]), 4.2)
+    texts.append(relative(PIVOT, spot, yaw_towards(spot, puls), type="computer", xmlFile="planets/text/Pulskern.xml", rename="Computer_Pulskern"))
     volumes = {
         "interactionVolumes": [relative(switch, (0, 1.4, 0), radius=1.6, range=3, prompt="Aussendungseinheit abschalten", condition=DEAKTIVIERT,
                                         persistent=True, reusable=False, audio="NomaiPowerOff", rename="Hauptschalter_Volumen")],
@@ -168,6 +201,7 @@ def isae_config(A):
             reveal([0, 0, 0], 1300, ["ZEKISAE_FOUND"]),
             reveal([0, 0, 0], 450, ["ZEKISAE_FOKUS_RUMOR"], "observe", maxDistance=4000, maxAngle=25),
             dict(reveal(at(K["boden"], 3), 24, ["ZEKISAE_KERN_FOUND"]), parentPath=PIVOT, isRelativeToParent=True),
+            dict(reveal(at(K["pulskern"], 2), 7, ["ZEKISAE_PULSKERN_FOUND"]), parentPath=PIVOT, isRelativeToParent=True),
         ] + [dict(reveal(SPOT_COMPUTER, 12, [f"ZEKISAE_{fact}_FOUND"]), parentPath=module_path(name), isRelativeToParent=True)
              for (_, name), fact in zip(MODULES, ("KONTROLLE", "START", "NAVI"))],
         "forces": {"directionalVolumes": [
@@ -175,11 +209,16 @@ def isae_config(A):
             relative(PIVOT, at(K["boden"], K["hoehe"] / 2), force=9, normal=vec([0, -1, 0]),
                      shape={"type": "cylinder", "radius": K["bodenRadius"] - 0.3, "height": K["hoehe"] - 0.4}, rename="Schwerkraft_Kernkammer"),
         ]},
+        # the seedling over the Pulskern burns: energy and heat of the core (only there once the Samenkern is in)
+        "hazardVolumes": [relative(PIVOT + "/ISAE_Keimling_Hitze", (0, 0, 0), type="heat", damagePerSecond=30, radius=2.8,
+                                   firstContactDamageType="electrical", firstContactDamage=10, rename="Keimling_Hitze")],
     }
     entries = [
         relative(PIVOT, at(I["kern"], 80), id="ZEKISAE_ISAE"),
         relative(PIVOT, at(K["boden"], 3), id="ZEKISAE_KERN"),
         relative(PIVOT, at(K["sedum"], 1), id="ZEKISAE_SEDUM"),
+        relative(PIVOT, at(K["pulskern"], 2), id="ZEKISAE_PULSKERN"),
+        relative(PIVOT, at(I["kern"], 120), id="ZEKISAE_WURZELN"),
     ] + [relative(module_path(name), SPOT_PEDESTAL, id=entry) for (_, name), entry in zip(MODULES, ("ZEKISAE_KONTROLLE", "ZEKISAE_START", "ZEKISAE_NAVI"))]
     for e in entries:
         e.pop("rotation", None)
@@ -206,9 +245,165 @@ def isae_config(A):
             "signals": [{"frequency": "Energiesignaturen", "name": "Aussendungseinheit", "audio": "OW_NM_WhiteHoleAmbienceL",
                          "position": vec([0, 0, 0]), "sourceRadius": 20, "detectionRadius": 9000, "identificationRadius": 900}],
             "entryLocation": entries,
+            "remotes": isae_remotes(K, F),
         },
         "Volumes": volumes,
     })
+    return cfg
+
+
+KEIMLING_UP = 4.6  # the seedling over the Pulskern, metres above the socket
+
+
+def pulskern_props(K):
+    """The Pulskern on the chamber floor (Blender model, placements.json) takes the Samenkern. The socket is an
+    empty NH detail; the DLL makes the seedling over it grow and the roots swallow the cannon."""
+    socket = at(K["pulskern_mitte"])
+    return [
+        relative(PIVOT, socket, path="", rename="ISAE_Pulskern_Fassung", keepLoaded=True,
+                 itemSocket={"itemType": "Samenkern", "insertCondition": SAMEN_EINGESETZT, "clearInsertConditionOnRemoval": False,
+                             "insertFact": "ZEKISAE_PULSKERN_GEFUETTERT", "colliderRadius": 1.3, "interactRange": 3.5}),
+        # heat around the seedling (the hazard volume hangs below this container)
+        relative(PIVOT, add(socket, (0, KEIMLING_UP, 0)), path="", rename="ISAE_Keimling_Hitze", activationCondition=SAMEN_EINGESETZT),
+        relative(PIVOT, add(socket, (0, KEIMLING_UP, 0)), path=P["warp_particles"], scale=1.2, rename="ISAE_Keimling_Glut",
+                 activationCondition=SAMEN_EINGESETZT),
+    ]
+
+
+def remote(rid, platform=None, stones=(), **platform_extra):
+    r = {"id": "ZEKISAE_" + rid, "decalPath": f"planets/assets/remotes/{rid.lower()}.png"}
+    if platform is not None:
+        platform.update(platform_extra)
+        r["platform"] = platform
+    if stones:
+        r["stones"] = list(stones)
+    return r
+
+
+def module_pool(name):
+    """Fallback spot of a module's pool platform; the DLL moves it onto the pool of the module copy."""
+    return relative(module_path(name), add(SPOT_RECORDER, (2.6, 2.6, -0.2)), SPOT_ROT, rename=f"ISAE_Becken_{name}")
+
+
+def module_stone(name, rid):
+    return relative(module_path(name), add(SPOT_COMPUTER, (1.2, -1.2, -0.4)), SPOT_ROT, rename=f"ISAE_Stein_{name}_{rid}")
+
+
+def isae_remotes(K, F):
+    """Projection pools: the three module pools show the core chamber, a focus cannon and the seed chamber."""
+    deck = [12.0, 0.0, 14.0]
+    return [
+        remote("KAMMER", relative(PIVOT, at(K["projektion"]), yaw(K["projektion"]), rename="ISAE_Becken_Kammer"),
+               [module_stone("Kontrolle", "KAMMER")], reveals="ZEKISAE_KERN_FOUND"),
+        remote("FOKUS", relative(focus_path("Alpha"), deck, yaw_towards(deck, [0, 0, 0]), rename="ISAE_Becken_Fokus"),
+               [module_stone("Start", "FOKUS")], reveals="ZEKISAE_FOKUS_FOUND"),
+        remote("SAMENKAMMER", None, [module_stone("Navigation", "SAMENKAMMER"),
+                                     relative(PIVOT, at(K["stein"], 0.3), rename="ISAE_Stein_Kammer_SAMENKAMMER")]),
+        remote("KONTROLLE", module_pool("Kontrolle"), reveals="ZEKISAE_KONTROLLE_FOUND"),
+        remote("START", module_pool("Start"), reveals="ZEKISAE_START_FOUND"),
+        remote("NAVI", module_pool("Navigation"), reveals="ZEKISAE_NAVI_FOUND"),
+    ]
+
+
+# ==============================================================================================
+# the Keimdorn (a small bramble seed around Dark Bramble) and its seed chamber
+# ==============================================================================================
+def keimdorn_config(A):
+    T = A.get("keimdorn", {})
+    details = []
+    # Nomai beacons on the tips of some thorns (the thorns are the Blender model "sternwurzeln", scaled)
+    for k in range(0, 18, 3):
+        tip = T.get(f"spitze{k}")
+        if tip:
+            details.append(placed(P["lamp_flare"], [c * KEIMDORN_SCALE for c in at(tip)], rename=f"Keimdorn_Leuchtfeuer_{k}"))
+    cfg = sb.body_header(KEIMDORN, "SolarSystem")
+    cfg.update({
+        "canShowOnTitle": False,
+        "Base": {"surfaceSize": 140, "surfaceGravity": 0, "showMinimap": False},
+        # a small moon of Dark Bramble, out of the plane of the planets
+        "Orbit": {"primaryBody": "DARK_BRAMBLE", "isMoon": True, "semiMajorAxis": 2600, "eccentricity": 0, "inclination": 24,
+                  "longitudeOfAscendingNode": 70, "trueAnomaly": 40, "axialTilt": 0, "siderealPeriod": 0, "tint": GREEN[0]},
+        "MapMarker": {"enabled": True},
+        "ShipLog": {"xmlFile": "planets/shiplogs/Keimdorn.xml", "spriteFolder": "planets/assets/shiplog/entries",
+                    "mapMode": {"revealedSprite": "planets/assets/shiplog/map/keimdorn.png",
+                                "outlineSprite": "planets/assets/shiplog/map/isae_outline.png", "scale": 0.8}},
+        "Bramble": {"nodes": [{"position": vec([0, 0, 0]), "rotation": vec([0, 0, 0]), "linksTo": SAMENKAMMER, "name": KEIM_NODE, "scale": 0.6,
+                               "fogTint": color(120, 255, 150), "lightTint": color(150, 255, 170)}]},
+        "Props": {"details": details,
+                  "entryLocation": [{"id": "ZEKISAE_KEIMDORN", "position": vec([0, 60, 0])}]},
+        "Volumes": {"revealVolumes": [reveal([0, 0, 0], 420, ["ZEKISAE_KEIMDORN_FOUND"])]},
+    })
+    return cfg
+
+
+KEIMDORN_SCALE = 30.0   # the thorns of the Keimdorn (sternwurzeln.obj is unit size)
+SAMENKAMMER_AT = (-26000, 21000, 33000)
+
+
+def samenkammer_config(A):
+    G = A["keim"]
+    plat = at(G["plattform"])
+    herz = at(G["herz"])
+    details = [
+        # the heart of every seed, floating in the Nomai frame (the frame and the heart itself are Blender models)
+        placed("", herz, rename="ZEKISAE_Samenkern", keepLoaded=True,
+               item={"name": "Samenkern", "itemType": "Samenkern", "colliderRadius": 0.7, "interactRange": 3.5,
+                     "pickupCondition": SAMEN_GENOMMEN, "clearPickupConditionOnDrop": False, "pickupFact": "ZEKISAE_SAMENKERN_GENOMMEN",
+                     "holdOffset": vec([0, -0.1, 0.25]), "socketOffset": vec([0, 0, 0])}),
+        placed(P["warp_particles"], herz, scale=0.7, rename="Samenkern_Glut", deactivationCondition=SAMEN_GENOMMEN, blinkWhenActiveChanged=True),
+        # the research building: a Nomai shrine on the platform, Nomai technology around it
+        placed(P["shrine"], at(G["schrein"], -0.35), yaw(G["schrein"]), rename="Forschungsschrein"),
+        placed(P["eye_symbol"], at(G["schrein"], 9.5), yaw(G["schrein"]), rename="Forschungsschrein_Auge"),
+        placed(P["warpcore_vessel"], at(G["technik1"], 1.2), rename="Forschung_Warpkern", removeComponents=True),
+        placed(P["gravity_crystal"], at(G["technik2"]), yaw(G["technik2"]), rename="Forschung_Kristall"),
+        placed(P["transponder"], at(G["technik3"], -0.2), yaw(G["technik3"]), rename="Forschung_Sender"),
+        placed(P["skeleton"], towards(at(G["recorder"]), plat, 2.2), yaw(G["recorder"]), rename="Tamarisks_Ueberreste"),
+        placed(P["staff"], add(towards(at(G["recorder"]), plat, 3.2), (0, 0.05, 0)), (0, 40, 90), rename="Tamarisks_Stab"),
+    ]
+    details += [placed(P["lamp_flare"], at(G[f"lampe{i}"]), rename=f"Forschungslampe_{i}") for i in range(1, 7)]
+    texts = [
+        placed("", at(G["computer"]), yaw(G["computer"]), type="computer", xmlFile="planets/text/Keim_Forschung.xml", rename="Computer_Forschung"),
+        placed("", at(G["recorder"]), yaw(G["recorder"]), type="recorder", xmlFile="planets/text/Keim_Tamarisk.xml", rename="Recorder_Tamarisk"),
+        placed("", at(G["tafel"]), yaw(G["tafel"]), type="whiteboard", xmlFile="planets/text/Keim_Tafel.xml", rename="Tafel_Samenkern"),
+    ]
+    for t in texts:
+        t.pop("path")
+    cfg = sb.body_header(SAMENKAMMER, "SolarSystem")
+    cfg.update({
+        "canShowOnTitle": False,
+        "Orbit": {"staticPosition": vec(SAMENKAMMER_AT)},
+        "ShipLog": {"mapMode": {"remove": True}},
+        "Bramble": {
+            "dimension": {"radius": 320, "fogTint": color(70, 200, 105), "fogDensity": 2.2, "linksTo": KEIM_NODE, "vinePrefab": "smallNest"},
+            # a baby seed at the edge of the chamber: the DLL links it to the dimension of the Vessel
+            "nodes": [{"position": vec(at(G["babysamen"])), "rotation": vec([0, 0, 0]), "linksTo": SAMENKAMMER, "name": BABY_NODE,
+                       "scale": 0.16, "preventRecursionCrash": True, "fogTint": color(255, 230, 170), "lightTint": color(255, 220, 160)}],
+        },
+        "Props": {
+            "details": details,
+            "translatorText": texts,
+            "remotes": [
+                remote("SAMENKAMMER", placed("", at(G["projektion"]), yaw(G["projektion"]), rename="Keim_Becken"), reveals="ZEKISAE_SAMENKAMMER_FOUND"),
+                remote("KAMMER", None, [placed("", at(G["stein"], 0.3), rename="Keim_Stein_KAMMER")]),
+            ],
+            "signals": [{"frequency": "Energiesignaturen", "name": "Samenkern", "audio": "OW_NM_WhiteHoleAmbienceL",
+                         "position": vec(herz), "sourceRadius": 2, "detectionRadius": 600, "identificationRadius": 120}],
+            "entryLocation": [{"id": "ZEKISAE_SAMENKAMMER", "position": vec(add(plat, (0, 4, 0)))},
+                              {"id": "ZEKISAE_SAMENKERN", "position": vec(herz)}],
+        },
+        "Volumes": {
+            "revealVolumes": [reveal(herz, 300, ["ZEKISAE_SAMENKAMMER_FOUND"]),
+                              reveal(herz, 12, ["ZEKISAE_SAMENKERN_FOUND"])],
+            "forces": {"directionalVolumes": [
+                {"position": vec(add(plat, (0, 9, 0))), "force": 9, "normal": vec([0, -1, 0]),
+                 "shape": {"type": "cylinder", "radius": G["deckRadius"] + 0.5, "height": 18}, "rename": "Forschungsschwerkraft"}]},
+        },
+    })
+    for r in cfg["Props"]["remotes"]:
+        for st in r.get("stones", []):
+            st.pop("path", None)
+        if "platform" in r:
+            r["platform"].pop("path", None)
     return cfg
 
 
@@ -245,7 +440,7 @@ def focus_props(F, letter, greek, details, texts, volumes, entries):
                  xmlFile=f"planets/text/Fokus_{greek}_{dict(A='Erica', B='Sedum', C='Linum')[letter]}.xml", rename=f"Recorder_Fokus_{greek}"),
     ]
     volumes["interactionVolumes"].append(relative(path, add(spot, (0, 1.0 * up, 0)), radius=1.6, range=3, prompt="Phasenkoppler trennen",
-                                                  condition=cond, persistent=True, reusable=False, audio="NomaiPowerSwitch",
+                                                  condition=cond, persistent=True, reusable=False, audio="NomaiPowerOff",
                                                   rename=f"Koppler_{greek}_Volumen"))
     volumes["revealVolumes"].append(dict(reveal([0, 3, 0], 45, ["ZEKISAE_FOKUS_FOUND"]), parentPath=path, isRelativeToParent=True))
     # Nomai gravity over the deck, and over the small platform under the emitter
@@ -274,11 +469,15 @@ def placements(A):
          "position": vec(add(SPOT_PEDESTAL, (0, 0, -1.8)))},
     ]
     props += [{"model": "fokusgeruest", "name": f"Fokus_{greek}_Geruest", "parentPath": focus_path(greek), "collider": True} for _, greek in FOCUS_NAMES]
-    for p in props:
-        p["body"] = NAME
-        p.setdefault("position", {"x": 0, "y": 0, "z": 0})
-        p.setdefault("rotation", {"x": 0, "y": 0, "z": 0})
-        p.setdefault("scale", 1)
+    props += [
+        # the Pulskern on the chamber floor; its heart pulses (the DLL), the Samenkern goes into the socket above it
+        {"model": "pulskern", "name": "ISAE_Pulskern", "parentPath": PIVOT, "collider": True, "position": K["pulskern"]["position"]},
+        {"model": "pulsglut", "name": "ISAE_Pulsglut", "parentPath": PIVOT, "position": K["pulskern_mitte"]["position"]},
+        # Verwurzelt: hidden until the Samenkern lies in the Pulskern, then the DLL lets them grow
+        {"model": "babysamen", "name": "ISAE_Keimling", "parentPath": PIVOT, "hidden": True,
+         "position": vec(add(at(K["pulskern_mitte"]), (0, KEIMLING_UP, 0)))},
+        {"model": "wurzeln", "name": "ISAE_Wurzeln", "parentPath": PIVOT, "hidden": True},
+    ]
     lights = [{"name": "Licht_Kernkammer", "body": NAME, "parentPath": PIVOT, "position": K["licht"]["position"],
                "color": {"x": 1.0, "y": 0.42, "z": 0.2}, "range": 45, "intensity": 2.2}]
     lights += [{"name": f"Licht_Emitter_{greek}", "body": NAME, "parentPath": focus_path(greek), "position": F["emitter"]["position"],
@@ -287,10 +486,39 @@ def placements(A):
     points.update({f"modul_{key}": I[f"modul_{key}"]["position"] for key, _ in MODULES})
     points.update({f"fokus_{x}": I[f"fokus_{x}"]["position"] for x, _ in FOCUS_NAMES})
     points["fokus_emitter"] = F["emitter"]["position"]
+    points["sonde"] = I["sonde"]["position"]
+    points["pulskern"] = K["pulskern_mitte"]["position"]
+    points["keimling"] = vec(add(at(K["pulskern_mitte"]), (0, KEIMLING_UP, 0)))
+
+    # the Keimdorn and the seed chamber
+    G = A["keim"]
+    keim = [
+        {"model": "sternwurzeln", "name": "Keimdorn_Dornen", "body": KEIMDORN, "collider": True, "scale": KEIMDORN_SCALE},
+        {"model": "forschungsplattform", "name": "Forschungsplattform", "body": SAMENKAMMER, "collider": True, "position": G["plattform"]["position"]},
+        {"model": "herzgeruest", "name": "Herzgeruest", "body": SAMENKAMMER, "spin": 5, "position": G["herz"]["position"]},
+        # the heart itself hangs below the NH item, so it travels with the player
+        {"model": "samenkern", "name": "Samenkern_Modell", "body": SAMENKAMMER, "parentPath": SAMENKERN, "spin": 40},
+    ]
+    for p in props + keim:
+        p.setdefault("body", NAME)
+        p.setdefault("position", {"x": 0, "y": 0, "z": 0})
+        p.setdefault("rotation", {"x": 0, "y": 0, "z": 0})
+        p.setdefault("scale", 1)
+    lights += [
+        {"name": "Licht_Pulskern", "body": NAME, "parentPath": PIVOT, "position": K["pulskern_mitte"]["position"],
+         "color": {"x": 1.0, "y": 0.5, "z": 0.22}, "range": 14, "intensity": 2.0},
+        {"name": "Licht_Samenkern", "body": SAMENKAMMER, "parentPath": SAMENKERN, "position": {"x": 0, "y": 0, "z": 0},
+         "color": {"x": 0.45, "y": 1.0, "z": 0.55}, "range": 30, "intensity": 2.4},
+        {"name": "Licht_Forschung", "body": SAMENKAMMER, "position": vec(add(at(G["plattform"]), (0, 12, 0))),
+         "color": {"x": 0.7, "y": 1.0, "z": 0.75}, "range": 45, "intensity": 1.3},
+        {"name": "Licht_Keimdorn", "body": KEIMDORN, "position": {"x": 0, "y": 0, "z": 0},
+         "color": {"x": 0.5, "y": 1.0, "z": 0.6}, "range": 260, "intensity": 1.6},
+    ]
     return {
-        # exact names of game materials for the Blender material slots; empty = taken from the Vessel
-        "materials": {"VesselHuelle": "", "VesselKupfer": "", "VesselDunkel": "", "VesselGlut": "", "VesselLeuchten": ""},
-        "props": props,
+        # exact names of game materials for the Blender material slots; empty = taken from the game
+        "materials": {"VesselHuelle": "", "VesselKupfer": "", "VesselDunkel": "", "VesselGlut": "", "VesselLeuchten": "",
+                      "Dornranke": "", "Keimlicht": ""},
+        "props": props + keim,
         "lights": lights,
         "points": points,
     }
@@ -335,17 +563,21 @@ def opc_config():
 
 def solar_system():
     entries = {"ZEKISAE_ISAE": (1650, 450), "ZEKISAE_KONTROLLE": (2080, 640), "ZEKISAE_KERN": (2080, 260), "ZEKISAE_START": (2500, 780),
-               "ZEKISAE_NAVI": (2500, 470), "ZEKISAE_FOKUS": (1650, 880), "ZEKISAE_SEDUM": (1650, 30), "ZEKISAE_SPUREN": (1220, 450)}
+               "ZEKISAE_NAVI": (2500, 470), "ZEKISAE_FOKUS": (1650, 880), "ZEKISAE_SEDUM": (1650, 30), "ZEKISAE_SPUREN": (1220, 450),
+               "ZEKISAE_PULSKERN": (2500, 160), "ZEKISAE_WURZELN": (2080, -60),
+               "ZEKISAE_KEIMDORN": (2950, 450), "ZEKISAE_SAMENKAMMER": (3380, 620), "ZEKISAE_SAMENKERN": (3380, 260)}
     checks = [
         {"check": {"allFactsRevealed": ["ZEKISAE_FOUND"]}, "then": {"setPersistentConditions": [ENTDECKT]}},
         {"check": {"allPersistentConditionsSet": [KOPPLER % x for x, _ in FOCUS_NAMES]}, "then": {"setPersistentConditions": [KOPPLER_ALLE]}},
     ]
     checks += [{"check": {"allPersistentConditionsSet": [KOPPLER % x]}, "then": {"revealFacts": [f"ZEKISAE_KOPPLER_{x}_FACT"]}} for x, _ in FOCUS_NAMES]
     checks.append({"check": {"allPersistentConditionsSet": [DEAKTIVIERT]}, "then": {"revealFacts": ["ZEKISAE_ABGESCHALTET"]}})
+    checks.append({"check": {"allConditionsSet": [SAMEN_EINGESETZT]}, "then": {"revealFacts": ["ZEKISAE_WURZELN_FOUND"]}})
     return {
         "$schema": NH + "star_system_schema.json",
         "initialReveal": ["ZEKISAE_SIGNATUR"],
-        "curiosities": [{"id": "ZEKISAE_ISAE", "color": RED[0], "highlightColor": RED[1]}],
+        "curiosities": [{"id": "ZEKISAE_ISAE", "color": RED[0], "highlightColor": RED[1]},
+                        {"id": "ZEKISAE_KEIMDORN", "color": GREEN[0], "highlightColor": GREEN[1]}],
         "entryPositions": [{"id": k, "position": {"x": v[0], "y": v[1]}} for k, v in entries.items()],
         "conditionalChecks": checks,
     }
@@ -390,6 +622,16 @@ def art(seed, motif, size=512):
             x, y = c + r * math.cos(a), c + r * math.sin(a) * 0.5
             d.ellipse([x - 4, y - 4, x + 4, y + 4], fill=(170, 220, 255, 255))
         d.line([(c, c), (c + 150, c - 110), (c + 210, c - 190)], fill=(255, 190, 120, 255), width=4)
+    elif motif == "keimdorn":
+        # the small seed planet: a glowing node with thorns, Dark Bramble behind it
+        d.ellipse([c + 60, c - 240, c + 420, c + 120], fill=(70, 80, 70, 255), outline=(150, 170, 150, 255), width=4)
+        for k in range(18):
+            a = math.radians(k * 137.5)
+            r1, r2 = 70, 150 + (k * 29) % 90
+            d.line([(c + r1 * math.cos(a), c + r1 * math.sin(a)), (c + r2 * math.cos(a + 0.25), c + r2 * math.sin(a + 0.25))],
+                   fill=(70, 55, 40, 255), width=9 - k % 4)
+        d.ellipse([c - 75, c - 75, c + 75, c + 75], fill=(150, 255, 170, 255), outline=(230, 255, 220, 255), width=6)
+        d.ellipse([c - 30, c - 30, c + 30, c + 30], fill=(255, 255, 230, 255))
     elif motif == "spuren":
         d.ellipse([c - 40, c - 40, c + 40, c + 40], fill=(255, 150, 70, 255))
         planets = [(150, 30, (210, 120, 80)), (230, 140, (140, 160, 110)), (300, 250, (90, 140, 180)), (205, 320, (120, 100, 150))]
@@ -398,6 +640,78 @@ def art(seed, motif, size=512):
             d.ellipse([c - r, c - r, c + r, c + r], outline=(120, 70, 50, 255), width=2)
             d.ellipse([x - 16, y - 16, x + 16, y + 16], fill=col + (255,))
             sb.spiral(d, x + 26, y - 22, 12, 1.6, 2, (255, 200, 140, 255), reverse=k % 2 == 1)
+    return img
+
+
+def map_sprite(size=256):
+    """Map sprite of the Keimdorn: a green node with thorns."""
+    img = Image.new("RGBA", (size, size), (0, 0, 0, 0))
+    d = ImageDraw.Draw(img)
+    c = size / 2
+    for k in range(14):
+        a = math.radians(k * 137.5)
+        d.line([(c + 40 * math.cos(a), c + 40 * math.sin(a)), (c + 118 * math.cos(a + 0.2), c + 118 * math.sin(a + 0.2))],
+               fill=(95, 75, 55, 255), width=8)
+    d.ellipse([c - 62, c - 62, c + 62, c + 62], fill=(120, 230, 140, 255), outline=(220, 255, 220, 255), width=5)
+    return img
+
+
+def decal(rid, size=256):
+    """Icon of a projection pool on its stones and pedestal (white on transparent, like the game's decals)."""
+    img = Image.new("RGBA", (size, size), (0, 0, 0, 0))
+    d = ImageDraw.Draw(img)
+    c, w = size / 2, (255, 255, 255, 255)
+    d.ellipse([12, 12, size - 12, size - 12], outline=w, width=10)
+    if rid == "KAMMER":      # the burning heart in its rings
+        for r in (70, 45):
+            d.ellipse([c - r, c - r * 0.45, c + r, c + r * 0.45], outline=w, width=8)
+        d.ellipse([c - 24, c - 24, c + 24, c + 24], fill=w)
+    elif rid == "FOKUS":     # three emitters around a triangle
+        pts = [(c + 75 * math.cos(math.radians(a)), c + 75 * math.sin(math.radians(a))) for a in (-90, 30, 150)]
+        d.polygon(pts, outline=w, width=8)
+        for x, y in pts:
+            d.ellipse([x - 16, y - 16, x + 16, y + 16], fill=w)
+    elif rid == "SAMENKAMMER":  # a seed with thorns
+        d.ellipse([c - 38, c - 38, c + 38, c + 38], fill=w)
+        for k in range(8):
+            a = math.radians(k * 45)
+            d.line([(c + 38 * math.cos(a), c + 38 * math.sin(a)), (c + 85 * math.cos(a + 0.3), c + 85 * math.sin(a + 0.3))], fill=w, width=9)
+    elif rid == "KONTROLLE":  # interface with the core above it
+        d.rectangle([c - 55, c + 20, c + 55, c + 45], fill=w)
+        d.ellipse([c - 28, c - 75, c + 28, c - 19], outline=w, width=9)
+    elif rid == "START":      # the probe in its cradle
+        d.polygon([(c, c - 85), (c - 26, c + 30), (c, c + 60), (c + 26, c + 30)], fill=w)
+        d.arc([c - 70, c - 10, c + 70, c + 90], 200, 340, fill=w, width=9)
+    else:                     # NAVI: star chart
+        for r in (40, 80):
+            d.ellipse([c - r, c - r * 0.5, c + r, c + r * 0.5], outline=w, width=7)
+        d.ellipse([c - 14, c - 14, c + 14, c + 14], fill=w)
+    return img
+
+
+def crack_overlay(size=1024, seed=7):
+    """Cracks in reality (Ende 2): white branching lines on transparent, the DLL fades it in over the screen."""
+    import random
+    rnd = random.Random(seed)
+    img = Image.new("RGBA", (size, size), (0, 0, 0, 0))
+    d = ImageDraw.Draw(img)
+
+    def branch(x, y, a, length, width, depth):
+        while length > 8 and width >= 1:
+            step = rnd.uniform(14, 34)
+            a += rnd.uniform(-0.45, 0.45)
+            nx, ny = x + math.cos(a) * step, y + math.sin(a) * step
+            d.line([(x, y), (nx, ny)], fill=(255, 255, 255, 235), width=int(width))
+            d.line([(x, y), (nx, ny)], fill=(180, 255, 200, 90), width=int(width) + 6)
+            x, y, length = nx, ny, length - step
+            if depth < 4 and rnd.random() < 0.16:
+                branch(x, y, a + rnd.choice((-1, 1)) * rnd.uniform(0.5, 1.1), length * 0.6, width * 0.7, depth + 1)
+            width *= 0.985
+
+    c = size / 2
+    for k in range(9):
+        a = k / 9 * math.tau + rnd.uniform(-0.2, 0.2)
+        branch(c + math.cos(a) * 30, c + math.sin(a) * 30, a, size * 0.75, 7, 0)
     return img
 
 
@@ -434,6 +748,11 @@ def manifests():
             "materialSource": {"type": "selector", "value": "Vessel", "options": ["Vessel", "Sondenkanone", "Einfach"],
                                "title": "Materialien der Hauptkanone",
                                "tooltip": "Vessel: die Materialien des Vessels. Sondenkanone: die der echten Sondenkanone. Einfach: schlichte Farben."},
+            "wreckSeconds": {"type": "slider", "value": 300, "min": 60, "max": 600, "title": "Ende 3: Zeit im Wrack (Sekunden)",
+                             "tooltip": "Wie lange du im Ende \"Verwurzelt\" nach der Explosion noch lebst, bevor der Energiekern instabil wird."},
+            "endingKeys": {"type": "selector", "value": "Strg + 1/2/3", "options": ["Strg + 1/2/3", "1/2/3", "Aus"],
+                           "title": "Skip-Tasten für die Enden",
+                           "tooltip": "Springt sofort zu einem Ende: 1 = Aussendung, 2 = Riss, 3 = Verwurzelt."},
         },
     })
     write_json("addon-manifest.json", {
@@ -441,10 +760,18 @@ def manifests():
         "credits": ["Zeki"],
         "popupMessage": "Die Aussendungseinheit: Zwischen der Sonne und Timber Hearth zielt eine riesige Nomai-Kanone auf die Sonne. "
                         "Wenn du nichts tust, endet diese Schleife nicht mit einer Supernova.",
-        "gameOver": [{"text": "Das Universum endet, aber du endest vor ihm...", "condition": "ZEKISAE_UNIVERSUM_ENDET",
-                      "colour": color(255, 120, 70),
-                      # custom = the credits roll with the game's final music, but without the Big Bang epilogue
-                      "creditsType": "custom", "audio": "FinalCredits", "length": 110}],
+        # custom = the credits roll with the game's final music, but without the Big Bang epilogue
+        "gameOver": [
+            # Ende 1 "Aussendung": the ISAE drains the sun and fires its probe
+            {"text": "Das Universum endet, aber du endest vor ihm...", "condition": UNIVERSUM_ENDET,
+             "colour": color(255, 120, 70), "creditsType": "custom", "audio": "FinalCredits", "length": 110},
+            # Ende 2 "Riss": the rooted ISAE fires a broken seed into the sun and reality breaks
+            {"text": "Das Universum hätte noch lange gelebt, wenn du nicht wärst...", "condition": ENDE_RISS,
+             "colour": color(190, 255, 200), "creditsType": "custom", "audio": "FinalCredits", "length": 110},
+            # Ende 3 "Verwurzelt": the switched-off ISAE shoots its rooted probe into the sun, the sun dissolves into a seed
+            {"text": "Das Universum endet, aber du pflanzt invasive Pflanzen in Sternen", "condition": ENDE_WURZEL,
+             "colour": color(130, 255, 150), "creditsType": "custom", "audio": "FinalCredits", "length": 110},
+        ],
     })
 
 
@@ -454,15 +781,21 @@ def main():
     write_json("planets/OrbitalProbeCannon.json", opc_config())
     for body, filename, xml, pos, rotation in PLANET_TEXTS:
         write_json("planets/" + filename, planet_config(body, xml, pos, rotation))
+    write_json("planets/Keimdorn.json", keimdorn_config(A))
+    write_json("planets/Samenkammer.json", samenkammer_config(A))
     write_json("systems/SolarSystem.json", solar_system())
     write_json("assets/models/placements.json", placements(A))
     manifests()
 
     E = "planets/assets/shiplog/entries/"
     for entry, motif, seed in (("ZEKISAE_SEDUM", "sedum", 33), ("ZEKISAE_SPUREN", "spuren", 34), ("ZEKISAE_KONTROLLE", "kontrolle", 35),
-                               ("ZEKISAE_START", "start", 36), ("ZEKISAE_NAVI", "navi", 37)):
+                               ("ZEKISAE_START", "start", 36), ("ZEKISAE_NAVI", "navi", 37), ("ZEKISAE_KEIMDORN", "keimdorn", 38)):
         sb.save(art(seed, motif), E + entry + ".png")
     sb.save(outline_sprite(), "planets/assets/shiplog/map/isae_outline.png")
+    sb.save(map_sprite(), "planets/assets/shiplog/map/keimdorn.png")
+    for rid in REMOTES:
+        sb.save(decal(rid), f"planets/assets/remotes/{rid.lower()}.png")
+    sb.save(crack_overlay(), "assets/riss.png")
     # left-overs of older versions: rocks (1.0) and separate focus cannon bodies (1.0 - 1.3)
     terrain = os.path.join(MOD, "planets", "assets", "terrain")
     if os.path.isdir(terrain):

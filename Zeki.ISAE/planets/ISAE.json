@@ -372,12 +372,12 @@
         "removeComponents": true
       },
       {
-        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Modul_Start",
+        "parentPath": "Sector/ISAE_Ausrichtung",
         "isRelativeToParent": true,
         "position": {
-          "x": -8.881,
-          "y": -4.881,
-          "z": 7.532
+          "x": 0.0,
+          "y": 795.0,
+          "z": 0.0
         },
         "rotation": {
           "x": 0.0,
@@ -385,8 +385,88 @@
           "z": 0.0
         },
         "path": "NomaiProbe_Body/Structure_NOM_Probe_Renderer",
+        "scale": 4,
         "rename": "Interstellare_Sonde",
         "keepLoaded": true
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 795.0,
+          "z": 0.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "path": "TowerTwin_Body/Sector_TowerTwin/Sector_TimeLoopInterior/Interactables_TimeLoopInterior/WarpCoreSocket/Prefab_NOM_WarpCoreVessel/Effects_NOM_AdvancedWarpCore/Effects_NOM_WarpParticlesWhite",
+        "scale": 1.5,
+        "rename": "Sondenglut",
+        "keepLoaded": true,
+        "deactivationCondition": "ZEKISAE_DEAKTIVIERT"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung",
+        "isRelativeToParent": true,
+        "position": {
+          "x": -10.337,
+          "y": -11.4,
+          "z": 3.762
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "path": "",
+        "rename": "ISAE_Pulskern_Fassung",
+        "keepLoaded": true,
+        "itemSocket": {
+          "itemType": "Samenkern",
+          "insertCondition": "ZEKISAE_SAMEN_EINGESETZT",
+          "clearInsertConditionOnRemoval": false,
+          "insertFact": "ZEKISAE_PULSKERN_GEFUETTERT",
+          "colliderRadius": 1.3,
+          "interactRange": 3.5
+        }
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung",
+        "isRelativeToParent": true,
+        "position": {
+          "x": -10.337,
+          "y": -6.8,
+          "z": 3.762
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "path": "",
+        "rename": "ISAE_Keimling_Hitze",
+        "activationCondition": "ZEKISAE_SAMEN_EINGESETZT"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung",
+        "isRelativeToParent": true,
+        "position": {
+          "x": -10.337,
+          "y": -6.8,
+          "z": 3.762
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "path": "TowerTwin_Body/Sector_TowerTwin/Sector_TimeLoopInterior/Interactables_TimeLoopInterior/WarpCoreSocket/Prefab_NOM_WarpCoreVessel/Effects_NOM_AdvancedWarpCore/Effects_NOM_WarpParticlesWhite",
+        "scale": 1.2,
+        "rename": "ISAE_Keimling_Glut",
+        "activationCondition": "ZEKISAE_SAMEN_EINGESETZT"
       },
       {
         "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Alpha",
@@ -1159,6 +1239,23 @@
         "rename": "Recorder_Zweifel"
       },
       {
+        "parentPath": "Sector/ISAE_Ausrichtung",
+        "isRelativeToParent": true,
+        "position": {
+          "x": -6.39,
+          "y": -14.0,
+          "z": 2.326
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 290.0,
+          "z": 0.0
+        },
+        "type": "computer",
+        "xmlFile": "planets/text/Pulskern.xml",
+        "rename": "Computer_Pulskern"
+      },
+      {
         "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Alpha",
         "isRelativeToParent": true,
         "position": {
@@ -1308,6 +1405,26 @@
         "id": "ZEKISAE_SEDUM"
       },
       {
+        "parentPath": "Sector/ISAE_Ausrichtung",
+        "isRelativeToParent": true,
+        "position": {
+          "x": -10.337,
+          "y": -12.0,
+          "z": 3.762
+        },
+        "id": "ZEKISAE_PULSKERN"
+      },
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 120.0,
+          "z": 0.0
+        },
+        "id": "ZEKISAE_WURZELN"
+      },
+      {
         "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Modul_Kontrolle",
         "isRelativeToParent": true,
         "position": {
@@ -1346,6 +1463,178 @@
           "z": 0.0
         },
         "id": "ZEKISAE_FOKUS"
+      }
+    ],
+    "remotes": [
+      {
+        "id": "ZEKISAE_KAMMER",
+        "decalPath": "planets/assets/remotes/kammer.png",
+        "platform": {
+          "parentPath": "Sector/ISAE_Ausrichtung",
+          "isRelativeToParent": true,
+          "position": {
+            "x": -10.898,
+            "y": -14.0,
+            "z": -15.564
+          },
+          "rotation": {
+            "x": 0.0,
+            "y": 35.0,
+            "z": 0.0
+          },
+          "rename": "ISAE_Becken_Kammer",
+          "reveals": "ZEKISAE_KERN_FOUND"
+        },
+        "stones": [
+          {
+            "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Modul_Kontrolle",
+            "isRelativeToParent": true,
+            "position": {
+              "x": -5.681,
+              "y": -8.13,
+              "z": 8.314
+            },
+            "rotation": {
+              "x": 270.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rename": "ISAE_Stein_Kontrolle_KAMMER"
+          }
+        ]
+      },
+      {
+        "id": "ZEKISAE_FOKUS",
+        "decalPath": "planets/assets/remotes/fokus.png",
+        "platform": {
+          "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Fokuskreis/Fokus_Alpha",
+          "isRelativeToParent": true,
+          "position": {
+            "x": 12.0,
+            "y": 0.0,
+            "z": 14.0
+          },
+          "rotation": {
+            "x": 0.0,
+            "y": 220.6,
+            "z": 0.0
+          },
+          "rename": "ISAE_Becken_Fokus",
+          "reveals": "ZEKISAE_FOKUS_FOUND"
+        },
+        "stones": [
+          {
+            "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Modul_Start",
+            "isRelativeToParent": true,
+            "position": {
+              "x": -5.681,
+              "y": -8.13,
+              "z": 8.314
+            },
+            "rotation": {
+              "x": 270.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rename": "ISAE_Stein_Start_FOKUS"
+          }
+        ]
+      },
+      {
+        "id": "ZEKISAE_SAMENKAMMER",
+        "decalPath": "planets/assets/remotes/samenkammer.png",
+        "stones": [
+          {
+            "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Modul_Navigation",
+            "isRelativeToParent": true,
+            "position": {
+              "x": -5.681,
+              "y": -8.13,
+              "z": 8.314
+            },
+            "rotation": {
+              "x": 270.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rename": "ISAE_Stein_Navigation_SAMENKAMMER"
+          },
+          {
+            "parentPath": "Sector/ISAE_Ausrichtung",
+            "isRelativeToParent": true,
+            "position": {
+              "x": -13.926,
+              "y": -13.7,
+              "z": -9.751
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rename": "ISAE_Stein_Kammer_SAMENKAMMER"
+          }
+        ]
+      },
+      {
+        "id": "ZEKISAE_KONTROLLE",
+        "decalPath": "planets/assets/remotes/kontrolle.png",
+        "platform": {
+          "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Modul_Kontrolle",
+          "isRelativeToParent": true,
+          "position": {
+            "x": -7.835,
+            "y": -0.459,
+            "z": 7.971
+          },
+          "rotation": {
+            "x": 270.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "rename": "ISAE_Becken_Kontrolle",
+          "reveals": "ZEKISAE_KONTROLLE_FOUND"
+        }
+      },
+      {
+        "id": "ZEKISAE_START",
+        "decalPath": "planets/assets/remotes/start.png",
+        "platform": {
+          "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Modul_Start",
+          "isRelativeToParent": true,
+          "position": {
+            "x": -7.835,
+            "y": -0.459,
+            "z": 7.971
+          },
+          "rotation": {
+            "x": 270.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "rename": "ISAE_Becken_Start",
+          "reveals": "ZEKISAE_START_FOUND"
+        }
+      },
+      {
+        "id": "ZEKISAE_NAVI",
+        "decalPath": "planets/assets/remotes/navi.png",
+        "platform": {
+          "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Modul_Navigation",
+          "isRelativeToParent": true,
+          "position": {
+            "x": -7.835,
+            "y": -0.459,
+            "z": 7.971
+          },
+          "rotation": {
+            "x": 270.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "rename": "ISAE_Becken_Navigation",
+          "reveals": "ZEKISAE_NAVI_FOUND"
+        }
       }
     ]
   },
@@ -1392,7 +1681,7 @@
         "condition": "ZEKISAE_KOPPLER_A",
         "persistent": true,
         "reusable": false,
-        "audio": "NomaiPowerSwitch",
+        "audio": "NomaiPowerOff",
         "rename": "Koppler_Alpha_Volumen"
       },
       {
@@ -1414,7 +1703,7 @@
         "condition": "ZEKISAE_KOPPLER_B",
         "persistent": true,
         "reusable": false,
-        "audio": "NomaiPowerSwitch",
+        "audio": "NomaiPowerOff",
         "rename": "Koppler_Beta_Volumen"
       },
       {
@@ -1436,7 +1725,7 @@
         "condition": "ZEKISAE_KOPPLER_C",
         "persistent": true,
         "reusable": false,
-        "audio": "NomaiPowerSwitch",
+        "audio": "NomaiPowerOff",
         "rename": "Koppler_Gamma_Volumen"
       }
     ],
@@ -1477,6 +1766,20 @@
         "revealOn": "enter",
         "reveals": [
           "ZEKISAE_KERN_FOUND"
+        ],
+        "parentPath": "Sector/ISAE_Ausrichtung",
+        "isRelativeToParent": true
+      },
+      {
+        "position": {
+          "x": -10.337,
+          "y": -12.0,
+          "z": 3.762
+        },
+        "radius": 7,
+        "revealOn": "enter",
+        "reveals": [
+          "ZEKISAE_PULSKERN_FOUND"
         ],
         "parentPath": "Sector/ISAE_Ausrichtung",
         "isRelativeToParent": true
@@ -1751,6 +2054,28 @@
           "rename": "Emitterschwerkraft_Gamma"
         }
       ]
-    }
+    },
+    "hazardVolumes": [
+      {
+        "parentPath": "Sector/ISAE_Ausrichtung/ISAE_Keimling_Hitze",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "type": "heat",
+        "damagePerSecond": 30,
+        "radius": 2.8,
+        "firstContactDamageType": "electrical",
+        "firstContactDamage": 10,
+        "rename": "Keimling_Hitze"
+      }
+    ]
   }
 }

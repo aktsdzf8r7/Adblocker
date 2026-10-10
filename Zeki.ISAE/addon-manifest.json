@@ -17,6 +17,32 @@
       "creditsType": "custom",
       "audio": "FinalCredits",
       "length": 110
+    },
+    {
+      "text": "Das Universum hätte noch lange gelebt, wenn du nicht wärst...",
+      "condition": "ZEKISAE_ENDE_RISS",
+      "colour": {
+        "r": 190,
+        "g": 255,
+        "b": 200,
+        "a": 255
+      },
+      "creditsType": "custom",
+      "audio": "FinalCredits",
+      "length": 110
+    },
+    {
+      "text": "Das Universum endet, aber du pflanzt invasive Pflanzen in Sternen",
+      "condition": "ZEKISAE_ENDE_WURZEL",
+      "colour": {
+        "r": 130,
+        "g": 255,
+        "b": 150,
+        "a": 255
+      },
+      "creditsType": "custom",
+      "audio": "FinalCredits",
+      "length": 110
     }
   ]
 }

@@ -58,10 +58,13 @@ TAIL_Z = -300.0
 ARM_END = 150.0                    # radius where a module is mounted
 RINGS_Z = (140, 230, 320, 410, 500, 590)
 CHAMBER_R, CHAMBER_FLOOR = 34.0, -14.0
-TUNNEL_AZ, TUNNEL_Z = 90.0, -10.0
+TUNNEL_AZ, TUNNEL_Z = 90.0, -7.5          # tunnel floor flush with the chamber floor
 FOCUS_RADIUS, FOCUS_Z = 420.0, 300.0
 MODULES = (("kontrolle", "Kontrollmodul", 30.0), ("start", "Startmodul", 150.0), ("navigation", "Navigationsmodul", 270.0))
 FOCUS = (("A", "Alpha", 0.0), ("B", "Beta", 120.0), ("C", "Gamma", 240.0))
+PROBE_Z = 795.0                    # the interstellar probe waits in a cradle between the claws, in front of the lens
+PULS_AT = (11.0, 340.0)            # Pulskern on the chamber floor (radius, azimuth)
+KEIM_PLATFORM = (0.0, -55.0, -30.0)  # research platform in the seed dimension (the heart floats at the origin)
 
 # ------------------------------------------------------------------------------------------ helpers
 def reset():
@@ -90,6 +93,9 @@ def materials():
         "dark": material("VesselDunkel", (0.10, 0.09, 0.10), 0.4, 0.6),
         "glow": material("VesselLeuchten", (0.5, 0.82, 1.0), 0.0, 0.3, (0.4, 0.78, 1.0), 7.0),
         "ember": material("VesselGlut", (1.0, 0.35, 0.12), 0.0, 0.3, (1.0, 0.28, 0.06), 9.0),
+        # bramble: bark of the Dark Bramble vines in game, and the pale green light of a seed
+        "bark": material("Dornranke", (0.075, 0.07, 0.045), 0.0, 0.9),
+        "seed": material("Keimlicht", (0.7, 1.0, 0.75), 0.0, 0.3, (0.55, 1.0, 0.6), 8.0),
     }
 
 
@@ -151,12 +157,12 @@ def box(name, size, at, mat, rot=(0, 0, 0)):
     return link(name, bm, mat, smooth=False)
 
 
-def tube(name, points, radius, mat):
+def tube(name, points, radius, mat, res=10, bevel=4):
     cu = bpy.data.curves.new(name, "CURVE")
     cu.dimensions = "3D"
     cu.bevel_depth = radius
-    cu.bevel_resolution = 4
-    cu.resolution_u = 10
+    cu.bevel_resolution = bevel
+    cu.resolution_u = res
     cu.use_fill_caps = True
     sp = cu.splines.new("BEZIER")
     sp.bezier_points.add(len(points) - 1)
@@ -349,6 +355,10 @@ def hauptkanone(M):
         parts.append(fin(f"blade{k}", [(28, -55), (95, -170), (120, -290), (96, -322), (56, -250), (30, -180)], 7, az, M["hull"]))
         parts.append(fin(f"blade_edge{k}", [(95, -170), (120, -290), (118, -294), (93, -174)], 8, az, M["copper"]))
     parts.append(torus("claw_ring", 30, 3, 700, M["hull"], 72, 10))
+    # cradle of the interstellar probe, held between the claws in front of the lens
+    parts.append(torus("probe_cradle", 3.4, 0.45, PROBE_Z, M["copper"], 32, 8))
+    for k, az in enumerate(RAIL_AZ):
+        parts.append(tube(f"cradle_strut{k}", [polar(3.6, az, PROBE_Z), polar(14, az, PROBE_Z - 6), polar(26, az, PROBE_Z - 4)], 0.5, M["dark"]))
     parts.append(sphere("lens", 12, (0, 0, LENS_Z), M["ember"], seg=40, rings=20))
     parts.append(torus("lens_halo", 20, 1.4, LENS_Z, M["ember"], 72, 8))
     # tail spine and exhaust
@@ -372,6 +382,7 @@ def hauptkanone(M):
     anchor("isae", "kern", (0, 0, 0))
     anchor("isae", "linse", (0, 0, LENS_Z))
     anchor("isae", "muendung", (0, 0, LENS_Z + 25))
+    anchor("isae", "sonde", (0, 0, PROBE_Z))
     anchor("isae", "heck", (0, 0, TAIL_Z + 15))
     anchor("isae", "luke", polar(HUB_R + 14, TUNNEL_AZ, TUNNEL_Z))
     for letter, _, az in FOCUS:
@@ -404,6 +415,9 @@ def kernkammer(M):
     parts.append(torus("floor_glow", floor_r - 2, 0.15, CHAMBER_FLOOR + 0.02, M["ember"], 96, 6))
     parts.append(cylinder("pillar", 4.0, 2.2, CHAMBER_FLOOR, -6.5, M["copper"], 32))
     parts.append(sphere("heart", 7, (0, 0, 0), M["ember"], seg=40, rings=20))
+    # conduit from the Pulskern on the floor up into the heart
+    puls = polar(PULS_AT[0], PULS_AT[1], CHAMBER_FLOOR)
+    parts.append(tube("conduit", [puls + Vector((0, 0, 4.2)), puls * 0.55 + Vector((0, 0, -3)), Vector((0, 0, -6.5))], 0.55, M["ember"]))
     # tunnel from the chamber to the hatch in the armour
     tunnel = cylinder("tunnel", 6.5, 6.5, 0, HUB_R + 3 - (CHAMBER_R - 1.5), M["hull"], 32, cap=False,
                       matrix=Matrix.Translation(door_dir * (CHAMBER_R - 1.5) + Vector((0, 0, TUNNEL_Z))) @ Matrix.Rotation(math.radians(TUNNEL_AZ), 4, "Z") @ Matrix.Rotation(math.pi / 2, 4, "Y"))
@@ -420,6 +434,10 @@ def kernkammer(M):
     for i, a in enumerate((300, 20, 130)):
         anchor("kammer", f"lampe{i + 1}", floor(26, a))
     anchor("kammer", "licht", (0, 0, -5))
+    anchor("kammer", "pulskern", polar(PULS_AT[0], PULS_AT[1], CHAMBER_FLOOR))
+    anchor("kammer", "pulskern_mitte", polar(PULS_AT[0], PULS_AT[1], CHAMBER_FLOOR + 2.6))
+    anchor("kammer", "projektion", floor(19, 55), face=centre)
+    anchor("kammer", "stein", floor(17, 35), face=centre)
     ANCHORS["kammer"]["bodenRadius"] = round(floor_r, 2)
     ANCHORS["kammer"]["hoehe"] = round(CHAMBER_R - 2 - CHAMBER_FLOOR, 2)
     return obj
@@ -488,6 +506,209 @@ def sternkarte(M):
         parts.append(sphere(f"star{k}", 0.07 + 0.03 * (k % 3), polar(r, a, z), M["glow"], seg=8, rings=4))
     parts.append(tube("path", [(0, 0, 0), (0.8, 0.4, 0.6), (1.6, 1.2, 0.9), (2.3, 2.0, 0.6)], 0.03, M["copper"]))
     return join("Sternkarte", parts, uv_size=1.0)
+
+
+def pulskern(M):
+    """The new pulsing core on the chamber floor: a cage on a pedestal, open for the Samenkern. Origin = floor."""
+    parts = [cylinder("base", 2.2, 1.8, 0, 0.6, M["copper"], 32), cylinder("post", 0.9, 0.7, 0.6, 1.2, M["dark"], 24)]
+    for k in range(4):
+        a = k * 90.0 + 45
+        parts.append(tube(f"prong{k}", [polar(1.0, a, 1.1), polar(1.9, a, 2.2), polar(1.5, a, 3.6), polar(0.5, a, 4.3)], 0.13, M["copper"]))
+    parts.append(torus("collar", 1.55, 0.12, 2.6, M["dark"], 32, 6))
+    return join("Pulskern", parts, uv_size=2.0)
+
+
+def pulsglut(M):
+    """The glowing heart inside the Pulskern cage (the DLL lets it pulse). Origin = its centre."""
+    return join("Pulsglut", [sphere("glow", 0.8, (0, 0, 0), M["ember"], seg=24, rings=12), torus("halo", 1.05, 0.04, 0, M["ember"], 32, 4)], uv_size=1.0)
+
+
+def samenkern(M):
+    """The heart of every bramble seed - the item the player carries. About 0.8 m across, origin = centre."""
+    parts = [sphere("core", 0.22, (0, 0, 0), M["seed"], seg=24, rings=12)]
+    for k in range(6):
+        a = k * 60.0
+        d = polar(1, a, 0.35 if k % 2 else -0.35).normalized()
+        parts.append(cone_along(f"petal{k}", d * 0.18, d, 0.32, 0.11, 0.01, M["bark"], 10))
+    parts.append(torus("vein", 0.27, 0.018, 0, M["seed"], 32, 4, matrix=Matrix.Rotation(0.6, 4, "X")))
+    parts.append(torus("vein2", 0.25, 0.015, 0, M["seed"], 32, 4, matrix=Matrix.Rotation(-0.9, 4, "Y")))
+    return join("Samenkern", parts, uv_size=0.5)
+
+
+def herzgeruest(M):
+    """Nomai containment frame around the seed heart in the middle of the dimension."""
+    parts = []
+    for k, rot in enumerate((Matrix.Identity(4), Matrix.Rotation(math.pi / 2, 4, "X"), Matrix.Rotation(math.pi / 2, 4, "Y"))):
+        parts.append(torus(f"ring{k}", 5.0, 0.22, 0, M["copper"], 64, 8, matrix=rot))
+    parts.append(torus("outer", 8.5, 0.35, 0, M["hull"], 72, 8))
+    for k in range(6):
+        a = k * 60.0
+        parts.append(tube(f"spoke{k}", [polar(5.2, a, 0), polar(8.3, a, 0)], 0.15, M["dark"]))
+    for k in range(3):
+        a = k * 120.0 + 30
+        parts.append(tube(f"anchor{k}", [polar(8.5, a, 0), polar(20, a, 6), polar(34, a, 18)], 0.6, M["hull"]))
+    return join("Herzgeruest", parts, uv_size=3.0)
+
+
+def forschungsplattform(M):
+    """The Nomai research platform in the seed dimension, with a walkway towards the heart. Origin = deck top."""
+    parts = [
+        cylinder("deck", 24, 24, -1.6, 0, M["hull"], 64),
+        torus("rim", 24, 0.9, -0.6, M["copper"], 96, 8),
+        torus("inlay", 21, 0.15, 0.01, M["seed"], 96, 6),
+        cylinder("keel", 0.8, 14, -22, -1.6, M["hull"], 48),
+        torus("keel_glow", 9, 0.4, -9, M["seed"], 64, 6),
+    ]
+    # walkway from the deck edge towards the heart (the heart floats at -KEIM_PLATFORM)
+    heart = -Vector(KEIM_PLATFORM)
+    flat = Vector((heart.x, heart.y, 0)).normalized()
+    start = flat * 23.5
+    end = heart - (heart - start).normalized() * 11
+    parts.append(tube("walkway", [start + Vector((0, 0, -0.6)), (start + end) / 2 + Vector((0, 0, 4)), end], 1.0, M["copper"]))
+    for k in range(3):
+        a = k * 120.0 + 90
+        parts.append(tube(f"pylon{k}", [polar(22, a, 0), polar(22.5, a, 7), polar(20, a, 11)], 0.35, M["dark"]))
+        parts.append(sphere(f"pylon_light{k}", 0.7, polar(20, a, 11.5), M["seed"], seg=16, rings=8))
+    obj = join("Forschungsplattform", parts, uv_size=6.0)
+
+    o = Vector(KEIM_PLATFORM)
+    centre = o.copy()
+    A = "keim"
+    anchor(A, "herz", (0, 0, 0))
+    anchor(A, "plattform", o)
+    anchor(A, "schrein", o + polar(4, 200), face=o + polar(20, 20))
+    anchor(A, "computer", o + polar(14, 20), face=centre)
+    anchor(A, "recorder", o + polar(14, 330), face=centre)
+    anchor(A, "tafel", o + polar(15, 75), face=centre)
+    anchor(A, "projektion", o + polar(15, 140), face=centre)
+    anchor(A, "stein", o + polar(13, 165), face=centre)
+    for i, a in enumerate((0, 60, 120, 180, 240, 300)):
+        anchor(A, f"lampe{i + 1}", o + polar(21, a + 30))
+    for i, a in enumerate((100, 220, 340)):
+        anchor(A, f"technik{i + 1}", o + polar(9, a), face=centre)
+    anchor(A, "babysamen", polar(70, 250, 25))
+    ANCHORS[A]["deckRadius"] = 24.0
+    return obj
+
+
+def babysamen(M):
+    """A baby bramble seed, 2 m across (the DLL scales it): dark husk, thorns, pale green light."""
+    parts = [sphere("husk", 1.0, (0, 0, 0), M["bark"], seg=32, rings=16), torus("band", 1.02, 0.08, 0, M["seed"], 48, 6)]
+    for k in range(14):
+        a, z = k * 137.5, math.sin(k * 2.1) * 0.8
+        d = (polar(1, a, 0) + Vector((0, 0, z))).normalized()
+        parts.append(cone_along(f"thorn{k}", d * 0.95, d, 0.7, 0.14, 0.01, M["bark"], 10))
+    parts.append(sphere("glow", 0.42, (0, 0, 1.0), M["seed"], seg=16, rings=8))
+    return join("Babysamen", parts, uv_size=1.0)
+
+
+def thorned_tube(name, points, radius, mat, thorn_every=3, res=4):
+    """A bramble vine through points, with thorns."""
+    parts = [tube(name, points, radius, mat, res=res, bevel=2)]
+    for i in range(1, len(points) - 1, thorn_every):
+        p, q = Vector(points[i]), Vector(points[i + 1])
+        side = (q - p).cross(Vector((0, 0, 1)))
+        if side.length < 0.01:
+            side = Vector((1, 0, 0))
+        side.normalize()
+        for sgn in (1, -1):
+            parts.append(cone_along(f"{name}_thorn{i}{sgn}", p + side * sgn * radius * 0.8, side * sgn + (q - p).normalized() * 0.4,
+                                    radius * 2.4, radius * 0.45, 0.05, mat, 6))
+    return parts
+
+
+def vine(name, points, r0, r1, mat, thorn_every=3, chunks=3):
+    """A vine that tapers from r0 to r1 (split into a few tubes of falling radius)."""
+    parts, n = [], len(points)
+    for c in range(chunks):
+        a = c * (n - 1) // chunks
+        b = min(n, (c + 1) * (n - 1) // chunks + 2)
+        r = r0 + (r1 - r0) * c / max(1, chunks - 1)
+        parts += thorned_tube(f"{name}_{c}", points[a:b], r, mat, thorn_every)
+    return parts
+
+
+def knot(name, at, r, mat, seed_mat):
+    """A thick, thorny knot where roots meet, with a little seed light."""
+    at = Vector(at)
+    parts = [sphere(name, r, at, mat, scale=(1, 1, 0.8), seg=16, rings=8)]
+    for k in range(10):
+        a, z = k * 137.5, math.sin(k * 1.9) * 0.7
+        d = (polar(1, a, 0) + Vector((0, 0, z))).normalized()
+        parts.append(cone_along(f"{name}_dorn{k}", at + d * r * 0.85, d, r * 1.3, r * 0.3, 0.05, mat, 6))
+    parts.append(sphere(f"{name}_licht", r * 0.3, at + Vector((0, 0, r * 0.75)), seed_mat, seg=12, rings=6))
+    return parts
+
+
+def wurzeln(M):
+    """Bramble roots that swallow the cannon (Verwurzelt). The DLL grows them from the core outwards."""
+    bark, parts = M["bark"], []
+    # along the rails, two thick roots winding around each rail
+    for k, az in enumerate(RAIL_AZ):
+        for j in range(2):
+            pts = []
+            for i in range(44):
+                t = i / 43
+                z = 20 + 640 * t
+                a = az + 34 * math.sin(5 * math.pi * t + k + j * math.pi)
+                r = 47 + 7 * math.sin(8 * math.pi * t + j)
+                pts.append(polar(r, a, z))
+            parts += vine(f"rail_root{k}{j}", pts, 6.5 - 2 * j, 2.6, bark, 3)
+        # into the claws, and around them
+        parts += vine(f"claw_root{k}", [polar(48, az, 640), polar(52, az + 8, 700), polar(56, az - 6, 760), polar(48, az + 5, 830),
+                                        polar(36, az - 4, 880)], 4.2, 1.8, bark, 1, chunks=2)
+        # along the tail blades
+        parts += vine(f"tail_root{k}", [polar(62, az + 12, -30), polar(86, az + 5, -120), polar(108, az - 4, -210), polar(116, az, -280)],
+                      5.0, 2.2, bark, 1, chunks=2)
+        parts += knot(f"rail_knot{k}", polar(52, az + 10, 330 + 60 * k), 11, bark, M["seed"])
+    # around the armoured core, a thick net
+    for k in range(9):
+        tilt, phase = 0.3 + k * 0.19, k * 41.0
+        pts = []
+        for i in range(25):
+            u = math.tau * i / 24
+            v = Vector((math.cos(u), math.sin(u), 0))
+            v = Matrix.Rotation(tilt, 3, "X") @ v
+            v = Matrix.Rotation(math.radians(phase), 3, "Z") @ v
+            pts.append(v * (HUB_R + 6 + 3 * math.sin(5 * u + k)))
+        parts += thorned_tube(f"core_root{k}", pts, 4.6, bark, 2)
+    for k, az in enumerate((60, 180, 300)):
+        parts += knot(f"core_knot{k}", polar(HUB_R + 8, az, 25 - 20 * k), 14, bark, M["seed"])
+    # along the arms to the modules
+    for key, _, az in MODULES:
+        parts += vine(f"arm_root_{key}", [polar(HUB_R + 4, az, 10), polar(95, az + 4, 14), polar(120, az - 3, 8), polar(ARM_END - 6, az + 2, 12)],
+                      4.0, 2.0, bark, 1, chunks=2)
+    # loose roots reaching out into space
+    for k in range(12):
+        az, z = k * 137.5, -120 + (k * 97) % 760
+        base = polar(HUB_R if z < 60 else 50, az, z)
+        out = polar(1, az, 0)
+        pts = [base + out * (i * 26) + Vector((0, 0, 14 * math.sin(i * 1.3 + k))) + polar(1, az + 90, 0) * (10 * math.sin(i * 0.9 + k)) for i in range(7)]
+        parts += vine(f"loose_root{k}", pts, 3.2, 1.0, bark, 1, chunks=2)
+    # inside the chamber: from the Pulskern up the walls
+    puls = polar(PULS_AT[0], PULS_AT[1], CHAMBER_FLOOR)
+    for k in range(6):
+        a = PULS_AT[1] + k * 60
+        parts += thorned_tube(f"chamber_root{k}", [puls + Vector((0, 0, 1)), polar(20, a, CHAMBER_FLOOR + 1), polar(30, a + 10, 4),
+                                                    polar(24, a + 25, 20), polar(10, a + 40, 30)], 0.8, bark, 1)
+    parts.append(sphere("seedling_light", 1.2, puls + Vector((0, 0, 2.6)), M["seed"], seg=16, rings=8))
+    return join("Wurzeln", parts, uv_size=8.0)
+
+
+def sternwurzeln(M):
+    """Roots growing out of a baby bramble core where the sun was (Verwurzelt). Unit size, the DLL scales it."""
+    parts = []
+    for k in range(18):
+        a, z = k * 137.5, math.sin(k * 1.3) * 0.9
+        d = (polar(1, a, 0) + Vector((0, 0, z))).normalized()
+        side = d.cross(Vector((0, 0, 1)))
+        if side.length < 0.01:
+            side = Vector((1, 0, 0))
+        side.normalize()
+        pts = [d * (1.0 + 0.6 * i) + side * 0.25 * math.sin(i * 1.7 + k) for i in range(8)]
+        parts += thorned_tube(f"tendril{k}", pts, 0.16 - 0.004 * k, M["bark"], 2)
+        anchor("keimdorn", f"spitze{k}", pts[-1])
+    return join("Sternwurzeln", parts, uv_size=1.0)
 
 
 # ------------------------------------------------------------------------------------------ export / render
@@ -572,6 +793,14 @@ def main():
         "kernringe": kernringe(M),
         "fokusgeruest": fokusgeruest(M),
         "sternkarte": sternkarte(M),
+        "pulskern": pulskern(M),
+        "pulsglut": pulsglut(M),
+        "samenkern": samenkern(M),
+        "herzgeruest": herzgeruest(M),
+        "forschungsplattform": forschungsplattform(M),
+        "babysamen": babysamen(M),
+        "wurzeln": wurzeln(M),
+        "sternwurzeln": sternwurzeln(M),
     }
     print("OBJ export:")
     for key, obj in models.items():
@@ -597,6 +826,25 @@ def main():
     render(cam, os.path.join(E, "ZEKISAE_FOKUS.png"), (120, -150, 70), (0, 0, 30), lens=35, show=[focus.name])
     render(cam, os.path.join(E, "ZEKISAE_KERN.png"), polar(25, TUNNEL_AZ - 25, CHAMBER_FLOOR + 6), (0, 0, -2), lens=20,
            show=[models["kernkammer"].name, models["kernringe"].name], key_light=False)
+    # 1.5: the Pulskern in the chamber, the seed chamber and the rooted cannon
+    puls, glut = models["pulskern"], models["pulsglut"]
+    puls.location = polar(PULS_AT[0], PULS_AT[1], CHAMBER_FLOOR)
+    glut.location = polar(PULS_AT[0], PULS_AT[1], CHAMBER_FLOOR + 2.6)
+    kammer = [models["kernkammer"].name, models["kernringe"].name, puls.name, glut.name]
+    render(cam, os.path.join(E, "ZEKISAE_PULSKERN.png"), polar(PULS_AT[0] + 9, PULS_AT[1] + 40, CHAMBER_FLOOR + 5),
+           polar(PULS_AT[0], PULS_AT[1], CHAMBER_FLOOR + 2), lens=28, show=kammer, key_light=False)
+    plattform, herz, kern = models["forschungsplattform"], models["herzgeruest"], models["samenkern"]
+    plattform.location = KEIM_PLATFORM
+    kern.scale = (4, 4, 4)
+    baby = models["babysamen"]
+    baby.location = polar(70, 250, 25)
+    baby.scale = (3, 3, 3)
+    keim = [plattform.name, herz.name, kern.name, baby.name]
+    render(cam, os.path.join(E, "ZEKISAE_SAMENKAMMER.png"), (70, -95, 30), (0, -25, -15), lens=30, show=keim)
+    render(cam, os.path.join(E, "ZEKISAE_SAMENKERN.png"), (9, -14, 5), (0, 0, 0), lens=40, show=[herz.name, kern.name])
+    roots = models["wurzeln"]
+    rooted = ensemble[:2] + [roots.name]
+    render(cam, os.path.join(E, "ZEKISAE_WURZELN.png"), (900, -800, 700), (0, 0, 250), lens=38, show=rooted)
     # the modules are copies of the real OPC module (not modelled here); their ship log pictures are drawn by isae_build.py
     scn = bpy.context.scene
     scn.render.film_transparent = True
@@ -620,6 +868,18 @@ def main():
         render(cam, os.path.join(PREVIEWS, "fokuskanone.png"), (130, -160, 80), (0, 0, 30), (1600, 1000), lens=32, show=[focus.name])
         render(cam, os.path.join(PREVIEWS, "kernkammer.png"), polar(25, TUNNEL_AZ - 25, CHAMBER_FLOOR + 6), (0, 0, -2), (1600, 1000), lens=20,
                show=[models["kernkammer"].name, models["kernringe"].name], key_light=False)
+        render(cam, os.path.join(PREVIEWS, "pulskern.png"), polar(PULS_AT[0] + 9, PULS_AT[1] + 40, CHAMBER_FLOOR + 5),
+               polar(PULS_AT[0], PULS_AT[1], CHAMBER_FLOOR + 2), (1600, 1000), lens=28, show=kammer, key_light=False)
+        render(cam, os.path.join(PREVIEWS, "samenkammer.png"), (70, -95, 30), (0, -25, -15), (1600, 1000), lens=30, show=keim)
+        render(cam, os.path.join(PREVIEWS, "samenkern.png"), (9, -14, 5), (0, 0, 0), (1600, 1000), lens=40, show=[herz.name, kern.name])
+        render(cam, os.path.join(PREVIEWS, "verwurzelt.png"), (900, -800, 700), (0, 0, 250), (1600, 1000), lens=38, show=rooted)
+        render(cam, os.path.join(PREVIEWS, "sonde_wiege.png"), (60, -80, 830), (0, 0, 795), (1600, 1000), lens=32, show=ensemble[:1])
+        stern = models["sternwurzeln"]
+        baby.location, baby.scale = (0, 0, 0), (1, 1, 1)
+        render(cam, os.path.join(PREVIEWS, "sternwurzeln.png"), (9, -12, 6), (0, 0, 0), (1600, 1000), lens=35, show=[stern.name, baby.name])
+    for o in (puls, glut, plattform, baby):
+        o.location = (0, 0, 0)
+    kern.scale = baby.scale = (1, 1, 1)
     for c in copies:
         bpy.data.objects.remove(c, do_unlink=True)
     models["sternkarte"].location = (0, 0, 0)

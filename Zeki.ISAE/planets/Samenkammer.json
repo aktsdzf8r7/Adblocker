@@ -1,0 +1,470 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+  "name": "Samenkammer",
+  "starSystem": "SolarSystem",
+  "canShowOnTitle": false,
+  "Orbit": {
+    "staticPosition": {
+      "x": -26000.0,
+      "y": 21000.0,
+      "z": 33000.0
+    }
+  },
+  "ShipLog": {
+    "mapMode": {
+      "remove": true
+    }
+  },
+  "Bramble": {
+    "dimension": {
+      "radius": 320,
+      "fogTint": {
+        "r": 70,
+        "g": 200,
+        "b": 105,
+        "a": 255
+      },
+      "fogDensity": 2.2,
+      "linksTo": "ZEKISAE_Keimdorn_Knoten",
+      "vinePrefab": "smallNest"
+    },
+    "nodes": [
+      {
+        "position": {
+          "x": 23.941,
+          "y": 25.0,
+          "z": 65.778
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "linksTo": "Samenkammer",
+        "name": "ZEKISAE_Babysamen_Knoten",
+        "scale": 0.16,
+        "preventRecursionCrash": true,
+        "fogTint": {
+          "r": 255,
+          "g": 230,
+          "b": 170,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 255,
+          "g": 220,
+          "b": 160,
+          "a": 255
+        }
+      }
+    ]
+  },
+  "Props": {
+    "details": [
+      {
+        "path": "",
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "ZEKISAE_Samenkern",
+        "keepLoaded": true,
+        "item": {
+          "name": "Samenkern",
+          "itemType": "Samenkern",
+          "colliderRadius": 0.7,
+          "interactRange": 3.5,
+          "pickupCondition": "ZEKISAE_SAMEN_GENOMMEN",
+          "clearPickupConditionOnDrop": false,
+          "pickupFact": "ZEKISAE_SAMENKERN_GENOMMEN",
+          "holdOffset": {
+            "x": 0.0,
+            "y": -0.1,
+            "z": 0.25
+          },
+          "socketOffset": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          }
+        }
+      },
+      {
+        "path": "TowerTwin_Body/Sector_TowerTwin/Sector_TimeLoopInterior/Interactables_TimeLoopInterior/WarpCoreSocket/Prefab_NOM_WarpCoreVessel/Effects_NOM_AdvancedWarpCore/Effects_NOM_WarpParticlesWhite",
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "scale": 0.7,
+        "rename": "Samenkern_Glut",
+        "deactivationCondition": "ZEKISAE_SAMEN_GENOMMEN",
+        "blinkWhenActiveChanged": true
+      },
+      {
+        "path": "QuantumMoon_Body/Sector_QuantumMoon/QuantumShrine/Structure_NOM_QuantumShrine",
+        "position": {
+          "x": 3.759,
+          "y": -30.35,
+          "z": 56.368
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 250.0,
+          "z": 0.0
+        },
+        "rename": "Forschungsschrein"
+      },
+      {
+        "path": "CaveTwin_Body/Sector_CaveTwin/Sector_SouthHemisphere/Sector_SouthUnderground/Sector_City/Lighting_City/Lights_EyeDistrict/Props_NOM_EyeSymbolCopper",
+        "position": {
+          "x": 3.759,
+          "y": -20.5,
+          "z": 56.368
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 250.0,
+          "z": 0.0
+        },
+        "rename": "Forschungsschrein_Auge"
+      },
+      {
+        "path": "TowerTwin_Body/Sector_TowerTwin/Sector_TimeLoopInterior/Interactables_TimeLoopInterior/WarpCoreSocket/Prefab_NOM_WarpCoreVessel",
+        "position": {
+          "x": 1.563,
+          "y": -28.8,
+          "z": 46.137
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "Forschung_Warpkern",
+        "removeComponents": true
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector Quantum Pole Path/Fragment QuantumPolePath 2/Interactables_QPP2/Prefab_NOM_GravityCrystal",
+        "position": {
+          "x": 6.894,
+          "y": -30.0,
+          "z": 60.785
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 230.0,
+          "z": 0.0
+        },
+        "rename": "Forschung_Kristall"
+      },
+      {
+        "path": "CaveTwin_Body/Sector_CaveTwin/Sector_SouthHemisphere/Sector_EscapePod/Interactables_EscapePod/EscapePod_VisibleFrom_Far/DistressBeaconTransmitter/Props_NOM_Transponder",
+        "position": {
+          "x": -8.457,
+          "y": -30.2,
+          "z": 58.078
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 110.0,
+          "z": 0.0
+        },
+        "rename": "Forschung_Sender"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_NorthPoleSurface/Props_NorthPoleSurface/OtherComponentsGroup/LowBuilding/Prefab_NOM_Skeleton_Large_Pile_A",
+        "position": {
+          "x": -10.219,
+          "y": -30.0,
+          "z": 60.9
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 120.0,
+          "z": 0.0
+        },
+        "rename": "Tamarisks_Ueberreste"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge/BlackHoleForgePivot/Props_BlackHoleForge/Prefab_NOM_Staff",
+        "position": {
+          "x": -9.353,
+          "y": -29.95,
+          "z": 60.4
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 40.0,
+          "z": 90.0
+        },
+        "rename": "Tamarisks_Stab"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
+        "position": {
+          "x": -18.187,
+          "y": -30.0,
+          "z": 44.5
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "Forschungslampe_1"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
+        "position": {
+          "x": -0.0,
+          "y": -30.0,
+          "z": 34.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "Forschungslampe_2"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
+        "position": {
+          "x": 18.187,
+          "y": -30.0,
+          "z": 44.5
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "Forschungslampe_3"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
+        "position": {
+          "x": 18.187,
+          "y": -30.0,
+          "z": 65.5
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "Forschungslampe_4"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
+        "position": {
+          "x": 0.0,
+          "y": -30.0,
+          "z": 76.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "Forschungslampe_5"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
+        "position": {
+          "x": -18.187,
+          "y": -30.0,
+          "z": 65.5
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "Forschungslampe_6"
+      }
+    ],
+    "translatorText": [
+      {
+        "position": {
+          "x": -13.156,
+          "y": -30.0,
+          "z": 50.212
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 70.0,
+          "z": 0.0
+        },
+        "type": "computer",
+        "xmlFile": "planets/text/Keim_Forschung.xml",
+        "rename": "Computer_Forschung"
+      },
+      {
+        "position": {
+          "x": -12.124,
+          "y": -30.0,
+          "z": 62.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 120.0,
+          "z": 0.0
+        },
+        "type": "recorder",
+        "xmlFile": "planets/text/Keim_Tamarisk.xml",
+        "rename": "Recorder_Tamarisk"
+      },
+      {
+        "position": {
+          "x": -3.882,
+          "y": -30.0,
+          "z": 40.511
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 15.0,
+          "z": 0.0
+        },
+        "type": "whiteboard",
+        "xmlFile": "planets/text/Keim_Tafel.xml",
+        "rename": "Tafel_Samenkern"
+      }
+    ],
+    "remotes": [
+      {
+        "id": "ZEKISAE_SAMENKAMMER",
+        "decalPath": "planets/assets/remotes/samenkammer.png",
+        "platform": {
+          "position": {
+            "x": 11.491,
+            "y": -30.0,
+            "z": 45.358
+          },
+          "rotation": {
+            "x": 0.0,
+            "y": 310.0,
+            "z": 0.0
+          },
+          "rename": "Keim_Becken",
+          "reveals": "ZEKISAE_SAMENKAMMER_FOUND"
+        }
+      },
+      {
+        "id": "ZEKISAE_KAMMER",
+        "decalPath": "planets/assets/remotes/kammer.png",
+        "stones": [
+          {
+            "position": {
+              "x": 12.557,
+              "y": -29.7,
+              "z": 51.635
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rename": "Keim_Stein_KAMMER"
+          }
+        ]
+      }
+    ],
+    "signals": [
+      {
+        "frequency": "Energiesignaturen",
+        "name": "Samenkern",
+        "audio": "OW_NM_WhiteHoleAmbienceL",
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "sourceRadius": 2,
+        "detectionRadius": 600,
+        "identificationRadius": 120
+      }
+    ],
+    "entryLocation": [
+      {
+        "id": "ZEKISAE_SAMENKAMMER",
+        "position": {
+          "x": 0.0,
+          "y": -26.0,
+          "z": 55.0
+        }
+      },
+      {
+        "id": "ZEKISAE_SAMENKERN",
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        }
+      }
+    ]
+  },
+  "Volumes": {
+    "revealVolumes": [
+      {
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "radius": 300,
+        "revealOn": "enter",
+        "reveals": [
+          "ZEKISAE_SAMENKAMMER_FOUND"
+        ]
+      },
+      {
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "radius": 12,
+        "revealOn": "enter",
+        "reveals": [
+          "ZEKISAE_SAMENKERN_FOUND"
+        ]
+      }
+    ],
+    "forces": {
+      "directionalVolumes": [
+        {
+          "position": {
+            "x": 0.0,
+            "y": -21.0,
+            "z": 55.0
+          },
+          "force": 9,
+          "normal": {
+            "x": 0.0,
+            "y": -1.0,
+            "z": 0.0
+          },
+          "shape": {
+            "type": "cylinder",
+            "radius": 24.5,
+            "height": 18
+          },
+          "rename": "Forschungsschwerkraft"
+        }
+      ]
+    }
+  }
+}

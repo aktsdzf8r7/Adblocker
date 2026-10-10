@@ -34,6 +34,8 @@ public class PropPlacement
     public bool collider;
     /// <summary>Degrees per second around the prop's own up axis.</summary>
     public float spin;
+    /// <summary>Built but switched off; the DLL shows it later (the roots of "Verwurzelt").</summary>
+    public bool hidden;
 }
 
 public class LightPlacement
@@ -183,6 +185,7 @@ public static class ModelPlacer
             return false;
         }
         var go = Build(mod, p, parent, false);
+        if (go != null && p.hidden) go.SetActive(false);
         return go != null;
     }
 
@@ -251,7 +254,9 @@ public static class ModelPlacer
             if (m == null) mod.Log($"Material '{wanted}' für {slot} nicht gefunden, nehme Ersatz.", true);
         }
         var rank = slot switch { "VesselKupfer" => 1, "VesselDunkel" => 2, _ => 0 };
-        if (m == null && !IsGlow(slot))
+        // the bramble roots take the material of Dark Bramble's own vines
+        if (m == null && slot == "Dornranke" && mod.MaterialSource != "Einfach") m = BrambleVine();
+        if (m == null && !IsGlow(slot) && slot != "Dornranke")
         {
             if (mod.MaterialSource == "Vessel") m = FromRenderers(VesselRoot(), rank) ?? FromRenderers(CannonRoot(), rank);
             else if (mod.MaterialSource == "Sondenkanone") m = FromRenderers(CannonRoot(), rank);
@@ -272,6 +277,19 @@ public static class ModelPlacer
             fallback = t;
         }
         return fallback;
+    }
+
+    private static Material BrambleVine()
+    {
+        foreach (var r in Resources.FindObjectsOfTypeAll<MeshRenderer>())
+        {
+            if (!r.gameObject.scene.IsValid() || r.sharedMaterial == null) continue;
+            if (!r.name.Contains("DB_Vine") && !r.name.Contains("BrambleVine")) continue;
+            var s = r.sharedMaterial.shader != null ? r.sharedMaterial.shader.name.ToLowerInvariant() : "";
+            if (s.Contains("particle") || s.Contains("transparent") || s.Contains("fog")) continue;
+            return r.sharedMaterial;
+        }
+        return null;
     }
 
     private static Transform CannonRoot()
@@ -301,7 +319,7 @@ public static class ModelPlacer
         return ordered.Count == 0 ? null : ordered[Mathf.Min(rank, ordered.Count - 1)];
     }
 
-    private static bool IsGlow(string slot) => slot == "VesselLeuchten" || slot == "VesselGlut";
+    private static bool IsGlow(string slot) => slot == "VesselLeuchten" || slot == "VesselGlut" || slot == "Keimlicht";
 
     private static readonly Dictionary<string, Material> SimpleMaterials = new();
 
@@ -321,6 +339,8 @@ public static class ModelPlacer
         {
             "VesselLeuchten" => new Color(1.3f, 2.1f, 2.8f),
             "VesselGlut" => new Color(3.2f, 1.1f, 0.35f),
+            "Keimlicht" => new Color(0.9f, 2.8f, 1.2f),
+            "Dornranke" => new Color(0.17f, 0.12f, 0.085f),
             "VesselDunkel" => new Color(0.11f, 0.1f, 0.11f),
             "VesselKupfer" => new Color(0.72f, 0.43f, 0.22f),
             _ => new Color(0.46f, 0.36f, 0.28f),
@@ -336,7 +356,7 @@ public class Spinner : MonoBehaviour
 
     public void Update()
     {
-        var boost = Finale.Running ? 8f : ZekiISAE.Instance != null && ZekiISAE.Instance.Awakening ? 3f : 1f;
+        var boost = Ending.Current is Finale ? 8f : ZekiISAE.Instance != null && ZekiISAE.Instance.Awakening ? 3f : 1f;
         transform.Rotate(Vector3.up, DegreesPerSecond * boost * Time.deltaTime, Space.Self);
     }
 }
