@@ -1,0 +1,12 @@
+{
+  "$schema": "https://raw.githubusercontent.com/ow-mods/owml/master/schemas/config_schema.json",
+  "enabled": true,
+  "settings": {
+    "cinematic": {
+      "type": "toggle",
+      "value": true,
+      "title": "Filmische Übergänge",
+      "tooltip": "Nebel-Übergang beim Durchqueren des Samens."
+    }
+  }
+}
