@@ -4,7 +4,7 @@
   "author": "Zeki",
   "name": "Verdornt",
   "uniqueName": "Zeki.Verdornt",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "owmlVersion": "2.15.5",
   "dependencies": [
     "xen.NewHorizons"

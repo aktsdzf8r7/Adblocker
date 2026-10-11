@@ -33,6 +33,11 @@ Das DLC ist nicht nötig. Die Mod läuft neben *Die Aussendungseinheit* und dem 
   - Mit ihm kennst du zehn Grundwörter. Weitere lernst du aus Tansys Notizen im Observatorium und von den leuchtenden **Wortkernen** auf den Planeten und in den Pforten.
   - Jedes neue Wort wird in **allen** Dornentexten übersetzt.
 - **16 neue Nomai-Texte**, 12 Dornentexte mit 40 Wörtern, neue Logbuch-Einträge.
+- **Logbuch:**
+  - Jeder Eintrag ist mit Pfeilen verbunden.
+  - Auf Timber Hearth liegen unsere Karten nicht mehr über denen des Spiels. Überlappen sie, schiebt die DLL sie darunter.
+- **Computer sprechen wie Computer:** Protokolle, Messreihen, Wegmarken. Die Nomai selbst sprechen auf den Aufzeichnungen.
+- **Kleinere Planetendateien**, damit das Laden schneller geht.
 
 ## Was es in Etappe 1 gibt
 

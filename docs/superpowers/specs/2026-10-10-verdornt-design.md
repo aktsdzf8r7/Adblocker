@@ -259,6 +259,8 @@ tools/nh_validate.py           Validierung (bei Bedarf erweitert)
 | `Crossing.cs` | Strudel, Systemwechsel, Ankunft, Rücksamen, Schiff + Notiz |
 | `CrashSite.cs` | Absturzstelle auf Timber Hearth: Höhenkarte per Strahlen, flachste Stelle neben dem alten Krater, Krater ans Gelände angepasst, Samen eingesetzt |
 | `MarbleTube.cs` | Murmel-Röhren und Mulden |
+| `BrambleScript.cs` + `Logic/Vocabulary.cs` | Dornensprache: Schriften, Wortkerne, Lesefenster, Lernen (Spez. 2026-10-11) |
+| `ShipLogPlacement.cs` + `Logic/ShipLogLayout.cs` | eigene Logbuch-Karten unter die anderen schieben, wenn sie überlappen |
 | `ReactiveComputers.cs` | zustandsabhängige Computertexte |
 | `Network.cs` | Kernschrein, Knoten, die sich öffnen oder schließen |
 | `Ernesto.cs` | pendelnder Anglerfisch ohne KI |

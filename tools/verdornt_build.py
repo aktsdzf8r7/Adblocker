@@ -23,7 +23,7 @@ from schleier_build import NH, color, vec, write_json  # noqa: E402
 MOD = os.path.abspath(sys.argv[1] if len(sys.argv) > 1 else os.path.join(os.path.dirname(__file__), "..", "Zeki.Verdornt"))
 sb.MOD = MOD
 
-VERSION = "0.1.1"
+VERSION = "0.2.0"
 SYSTEM = "Verdornt"
 
 
