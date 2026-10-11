@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DialogueTree xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/dialogue_schema.xsd">
+  <NameField>Notiz am Wrack</NameField>
+  <DialogueNode>
+    <Name>START</Name>
+    <EntryCondition>DEFAULT</EntryCondition>
+    <Dialogue>
+      <Page>Das ist mein Schiff. Beziehungsweise: Das war es.</Page>
+      <Page>Ich bin durch einen roten Knoten geflogen, bevor ich die Farben kannte. Der Anglerfisch hat das Heck erwischt, und ich bin mit den Resten hierher getrieben.</Page>
+      <Page>Das Skelett war schon da, als ich kam. Ein Nomai. Die Nomai waren also auch hier, und sie haben es auch nicht hinausgeschafft.</Page>
+      <Page>Seitdem fliege ich mit dem Anzug weiter. Der Anzug hält, die Vorräte nicht mehr lange.</Page>
+      <Page>– Gneis</Page>
+    </Dialogue>
+    <RevealFacts>
+      <FactID>ZEKIDL_GNEIS_WRACK</FactID>
+    </RevealFacts>
+  </DialogueNode>
+</DialogueTree>

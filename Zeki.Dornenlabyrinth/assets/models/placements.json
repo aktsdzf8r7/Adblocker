@@ -1,0 +1,247 @@
+{
+  "props": [
+    {
+      "model": "notiz",
+      "name": "ZEKIDL_Floss_Vorhof",
+      "body": "Labyrinth_Vorhof",
+      "position": {
+        "x": 0.0,
+        "y": -6.0,
+        "z": 25.0
+      }
+    },
+    {
+      "model": "notiz",
+      "name": "ZEKIDL_Floss_Wrack",
+      "body": "Labyrinth_Wrack",
+      "position": {
+        "x": 26.0,
+        "y": -10.0,
+        "z": -18.0
+      }
+    },
+    {
+      "model": "notiz",
+      "name": "ZEKIDL_Floss_Herzpfad",
+      "body": "Labyrinth_Herzpfad",
+      "position": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      }
+    },
+    {
+      "model": "wrack",
+      "name": "ZEKIDL_Wrack",
+      "body": "Labyrinth_Wrack",
+      "position": {
+        "x": 42.0,
+        "y": -20.0,
+        "z": -30.0
+      },
+      "rotation": {
+        "x": 20.0,
+        "y": 50.0,
+        "z": 10.0
+      },
+      "collider": true
+    },
+    {
+      "model": "eisblock",
+      "name": "ZEKIDL_Eisblock",
+      "body": "Labyrinth_Frostkammer",
+      "position": {
+        "x": -70.0,
+        "y": 35.0,
+        "z": 55.0
+      },
+      "rotation": {
+        "x": 5.0,
+        "y": 120.0,
+        "z": 15.0
+      },
+      "collider": true
+    },
+    {
+      "model": "herznest",
+      "name": "ZEKIDL_Herznest",
+      "body": "Labyrinth_Herzkammer",
+      "collider": true,
+      "spin": 1.5
+    },
+    {
+      "model": "herz",
+      "name": "ZEKIDL_Herz_Modell",
+      "body": "Labyrinth_Herzkammer",
+      "parentPath": "Sector/ZEKIDL_Herz",
+      "spin": 20
+    },
+    {
+      "model": "wasserkristalle",
+      "name": "ZEKIDL_Kristalle_0",
+      "body": "Labyrinth_Frostkammer",
+      "position": {
+        "x": -31.284,
+        "y": 92.485,
+        "z": 62.414
+      },
+      "rotation": {
+        "x": 339.282,
+        "y": 266.363,
+        "z": 332.037
+      },
+      "scale": 0.7174031369701688,
+      "collider": true
+    },
+    {
+      "model": "wasserkristalle",
+      "name": "ZEKIDL_Kristalle_1",
+      "body": "Labyrinth_Frostkammer",
+      "position": {
+        "x": -22.962,
+        "y": 50.112,
+        "z": -98.772
+      },
+      "rotation": {
+        "x": 324.324,
+        "y": 40.754,
+        "z": 168.865
+      },
+      "scale": 0.8479436995718982,
+      "collider": true
+    },
+    {
+      "model": "wasserkristalle",
+      "name": "ZEKIDL_Kristalle_2",
+      "body": "Labyrinth_Frostkammer",
+      "position": {
+        "x": 88.641,
+        "y": 0.0,
+        "z": 44.313
+      },
+      "rotation": {
+        "x": 78.023,
+        "y": 100.614,
+        "z": 329.884
+      },
+      "scale": 1.159435270977485,
+      "collider": true
+    },
+    {
+      "model": "wasserkristalle",
+      "name": "ZEKIDL_Kristalle_3",
+      "body": "Labyrinth_Frostkammer",
+      "position": {
+        "x": -79.319,
+        "y": -47.305,
+        "z": 12.636
+      },
+      "rotation": {
+        "x": 222.283,
+        "y": 45.612,
+        "z": 0.639
+      },
+      "scale": 1.2228428468345691,
+      "collider": true
+    },
+    {
+      "model": "wasserkristalle",
+      "name": "ZEKIDL_Kristalle_4",
+      "body": "Labyrinth_Frostkammer",
+      "position": {
+        "x": 33.528,
+        "y": -72.274,
+        "z": -59.829
+      },
+      "rotation": {
+        "x": 314.067,
+        "y": 104.15,
+        "z": 346.132
+      },
+      "scale": 1.0235340813224862,
+      "collider": true
+    }
+  ],
+  "lights": [
+    {
+      "name": "ZEKIDL_Laterne_Vorhof",
+      "body": "Labyrinth_Vorhof",
+      "position": {
+        "x": 0.9,
+        "y": -4.0,
+        "z": 24.5
+      },
+      "color": {
+        "x": 1.0,
+        "y": 0.78,
+        "z": 0.45
+      },
+      "range": 18,
+      "intensity": 1.6
+    },
+    {
+      "name": "ZEKIDL_Laterne_Wrack",
+      "body": "Labyrinth_Wrack",
+      "position": {
+        "x": 26.9,
+        "y": -8.0,
+        "z": -18.5
+      },
+      "color": {
+        "x": 1.0,
+        "y": 0.78,
+        "z": 0.45
+      },
+      "range": 18,
+      "intensity": 1.6
+    },
+    {
+      "name": "ZEKIDL_Laterne_Herzpfad",
+      "body": "Labyrinth_Herzpfad",
+      "position": {
+        "x": 0.9,
+        "y": 2.0,
+        "z": -0.5
+      },
+      "color": {
+        "x": 1.0,
+        "y": 0.78,
+        "z": 0.45
+      },
+      "range": 18,
+      "intensity": 1.6
+    },
+    {
+      "name": "ZEKIDL_Herzlicht",
+      "body": "Labyrinth_Herzkammer",
+      "position": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "color": {
+        "x": 0.75,
+        "y": 0.35,
+        "z": 1.0
+      },
+      "range": 70,
+      "intensity": 3.0
+    },
+    {
+      "name": "ZEKIDL_Glut",
+      "body": "Labyrinth_Hitzekammer",
+      "position": {
+        "x": 0.0,
+        "y": -25.0,
+        "z": 0.0
+      },
+      "color": {
+        "x": 1.0,
+        "y": 0.42,
+        "z": 0.12
+      },
+      "range": 220,
+      "intensity": 2.2
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+  "name": "Labyrinth_Herzkammer",
+  "starSystem": "SolarSystem",
+  "canShowOnTitle": false,
+  "Orbit": {
+    "staticPosition": {
+      "x": -12000.0,
+      "y": -90000.0,
+      "z": 12000.0
+    }
+  },
+  "ShipLog": {
+    "mapMode": {
+      "remove": true
+    }
+  },
+  "Bramble": {
+    "dimension": {
+      "radius": 260,
+      "fogTint": {
+        "r": 150,
+        "g": 60,
+        "b": 195,
+        "a": 255
+      },
+      "fogDensity": 3.0,
+      "linksTo": "ZEKIDL_Treibsamen",
+      "vinePrefab": "smallNest"
+    },
+    "nodes": [
+      {
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 182.0
+        },
+        "linksTo": "Labyrinth_Vorhof",
+        "name": "ZEKIDL_Herzkammer_K0",
+        "scale": 0.5,
+        "fogTint": {
+          "r": 150,
+          "g": 60,
+          "b": 195,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 190,
+          "g": 215,
+          "b": 170,
+          "a": 255
+        },
+        "preventRecursionCrash": true
+      }
+    ]
+  },
+  "Props": {
+    "details": [
+      {
+        "path": "",
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "ZEKIDL_Herz",
+        "keepLoaded": true,
+        "item": {
+          "name": "Bramble-Herz",
+          "itemType": "BrambleHerz",
+          "colliderRadius": 0.55,
+          "interactRange": 3,
+          "pickupFact": "ZEKIDL_HERZ_GENOMMEN",
+          "holdOffset": {
+            "x": 0.0,
+            "y": -0.15,
+            "z": 0.45
+          }
+        }
+      }
+    ]
+  },
+  "Volumes": {
+    "revealVolumes": [
+      {
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "radius": 260,
+        "reveals": [
+          "ZEKIDL_HERZ_FOUND"
+        ]
+      }
+    ]
+  }
+}

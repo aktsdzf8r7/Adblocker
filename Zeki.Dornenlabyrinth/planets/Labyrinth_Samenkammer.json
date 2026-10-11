@@ -1,0 +1,272 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+  "name": "Labyrinth_Samenkammer",
+  "starSystem": "SolarSystem",
+  "canShowOnTitle": false,
+  "Orbit": {
+    "staticPosition": {
+      "x": -12000.0,
+      "y": -90000.0,
+      "z": -12000.0
+    }
+  },
+  "ShipLog": {
+    "mapMode": {
+      "remove": true
+    }
+  },
+  "Bramble": {
+    "dimension": {
+      "radius": 280,
+      "fogTint": {
+        "r": 110,
+        "g": 145,
+        "b": 90,
+        "a": 255
+      },
+      "fogDensity": 5.0,
+      "linksTo": "ZEKIDL_Treibsamen",
+      "vinePrefab": "smallNest"
+    },
+    "nodes": [
+      {
+        "position": {
+          "x": -119.375,
+          "y": 0.0,
+          "z": -97.291
+        },
+        "linksTo": "Labyrinth_Vorhof",
+        "name": "ZEKIDL_Samenkammer_K0",
+        "scale": 0.5,
+        "fogTint": {
+          "r": 110,
+          "g": 145,
+          "b": 90,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 190,
+          "g": 215,
+          "b": 170,
+          "a": 255
+        },
+        "preventRecursionCrash": true
+      },
+      {
+        "position": {
+          "x": 23.616,
+          "y": 85.75,
+          "z": -41.149
+        },
+        "linksTo": "Labyrinth_Vorhof",
+        "name": "ZEKIDL_Samenkammer_S0",
+        "isSeed": true,
+        "scale": 1.0,
+        "fogTint": {
+          "r": 110,
+          "g": 145,
+          "b": 90,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 190,
+          "g": 215,
+          "b": 170,
+          "a": 255
+        },
+        "hasFogLight": true,
+        "preventRecursionCrash": true
+      },
+      {
+        "position": {
+          "x": 16.741,
+          "y": 61.25,
+          "z": 74.647
+        },
+        "linksTo": "Labyrinth_Vorhof",
+        "name": "ZEKIDL_Samenkammer_S1",
+        "isSeed": true,
+        "scale": 1.0,
+        "fogTint": {
+          "r": 110,
+          "g": 145,
+          "b": 90,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 190,
+          "g": 215,
+          "b": 170,
+          "a": 255
+        },
+        "hasFogLight": true,
+        "preventRecursionCrash": true
+      },
+      {
+        "position": {
+          "x": -74.539,
+          "y": 36.75,
+          "z": -51.936
+        },
+        "linksTo": "Labyrinth_Vorhof",
+        "name": "ZEKIDL_Samenkammer_S2",
+        "isSeed": true,
+        "scale": 1.0,
+        "fogTint": {
+          "r": 110,
+          "g": 145,
+          "b": 90,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 190,
+          "g": 215,
+          "b": 170,
+          "a": 255
+        },
+        "hasFogLight": true,
+        "preventRecursionCrash": true
+      },
+      {
+        "position": {
+          "x": 96.372,
+          "y": 12.25,
+          "z": -12.902
+        },
+        "linksTo": "Labyrinth_Vorhof",
+        "name": "ZEKIDL_Samenkammer_S3",
+        "isSeed": true,
+        "scale": 1.0,
+        "fogTint": {
+          "r": 110,
+          "g": 145,
+          "b": 90,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 190,
+          "g": 215,
+          "b": 170,
+          "a": 255
+        },
+        "hasFogLight": true,
+        "preventRecursionCrash": true
+      },
+      {
+        "position": {
+          "x": -62.346,
+          "y": -12.25,
+          "z": 74.611
+        },
+        "linksTo": "Labyrinth_Vorhof",
+        "name": "ZEKIDL_Samenkammer_S4",
+        "isSeed": true,
+        "scale": 1.0,
+        "fogTint": {
+          "r": 110,
+          "g": 145,
+          "b": 90,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 190,
+          "g": 215,
+          "b": 170,
+          "a": 255
+        },
+        "hasFogLight": true,
+        "preventRecursionCrash": true
+      },
+      {
+        "position": {
+          "x": -4.136,
+          "y": -36.75,
+          "z": -90.754
+        },
+        "linksTo": "Labyrinth_Vorhof",
+        "name": "ZEKIDL_Samenkammer_S5",
+        "isSeed": true,
+        "scale": 1.0,
+        "fogTint": {
+          "r": 110,
+          "g": 145,
+          "b": 90,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 190,
+          "g": 215,
+          "b": 170,
+          "a": 255
+        },
+        "hasFogLight": true,
+        "preventRecursionCrash": true
+      },
+      {
+        "position": {
+          "x": 54.191,
+          "y": -61.25,
+          "z": 53.998
+        },
+        "linksTo": "Labyrinth_Vorhof",
+        "name": "ZEKIDL_Samenkammer_S6",
+        "isSeed": true,
+        "scale": 1.0,
+        "fogTint": {
+          "r": 110,
+          "g": 145,
+          "b": 90,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 190,
+          "g": 215,
+          "b": 170,
+          "a": 255
+        },
+        "hasFogLight": true,
+        "preventRecursionCrash": true
+      },
+      {
+        "position": {
+          "x": -47.402,
+          "y": -85.75,
+          "z": -1.992
+        },
+        "linksTo": "Labyrinth_Vorhof",
+        "name": "ZEKIDL_Samenkammer_S7",
+        "isSeed": true,
+        "scale": 1.0,
+        "fogTint": {
+          "r": 110,
+          "g": 145,
+          "b": 90,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 190,
+          "g": 215,
+          "b": 170,
+          "a": 255
+        },
+        "hasFogLight": true,
+        "preventRecursionCrash": true
+      }
+    ]
+  },
+  "Volumes": {
+    "revealVolumes": [
+      {
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "radius": 280,
+        "reveals": [
+          "ZEKIDL_SAMENKAMMER_FOUND"
+        ]
+      }
+    ]
+  }
+}

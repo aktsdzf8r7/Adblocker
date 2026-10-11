@@ -1,0 +1,216 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+  "name": "Labyrinth_Dornenwald",
+  "starSystem": "SolarSystem",
+  "canShowOnTitle": false,
+  "Orbit": {
+    "staticPosition": {
+      "x": -60000.0,
+      "y": -90000.0,
+      "z": -12000.0
+    }
+  },
+  "ShipLog": {
+    "mapMode": {
+      "remove": true
+    }
+  },
+  "Bramble": {
+    "dimension": {
+      "radius": 300,
+      "fogTint": {
+        "r": 66,
+        "g": 80,
+        "b": 52,
+        "a": 255
+      },
+      "fogDensity": 7.0,
+      "linksTo": "ZEKIDL_Treibsamen",
+      "vinePrefab": "cluster"
+    },
+    "nodes": [
+      {
+        "position": {
+          "x": -73.262,
+          "y": 123.75,
+          "z": 80.892
+        },
+        "linksTo": "Labyrinth_Vorhof",
+        "name": "ZEKIDL_Dornenwald_K0",
+        "scale": 0.5,
+        "fogTint": {
+          "r": 66,
+          "g": 80,
+          "b": 52,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 190,
+          "g": 215,
+          "b": 170,
+          "a": 255
+        },
+        "preventRecursionCrash": true
+      },
+      {
+        "position": {
+          "x": -0.908,
+          "y": 41.25,
+          "z": -159.758
+        },
+        "linksTo": "Labyrinth_Vorhof",
+        "name": "ZEKIDL_Dornenwald_K1",
+        "scale": 0.5,
+        "fogTint": {
+          "r": 66,
+          "g": 80,
+          "b": 52,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 190,
+          "g": 215,
+          "b": 170,
+          "a": 255
+        },
+        "preventRecursionCrash": true
+      },
+      {
+        "position": {
+          "x": 108.585,
+          "y": -41.25,
+          "z": 117.187
+        },
+        "linksTo": "Labyrinth_Vorhof",
+        "name": "ZEKIDL_Dornenwald_K2",
+        "scale": 0.5,
+        "fogTint": {
+          "r": 66,
+          "g": 80,
+          "b": 52,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 190,
+          "g": 215,
+          "b": 170,
+          "a": 255
+        },
+        "preventRecursionCrash": true
+      },
+      {
+        "position": {
+          "x": -108.772,
+          "y": -123.75,
+          "z": -8.923
+        },
+        "linksTo": "Labyrinth_Vorhof",
+        "name": "ZEKIDL_Dornenwald_K3",
+        "scale": 0.5,
+        "fogTint": {
+          "r": 66,
+          "g": 80,
+          "b": 52,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 190,
+          "g": 215,
+          "b": 170,
+          "a": 255
+        },
+        "preventRecursionCrash": true
+      },
+      {
+        "position": {
+          "x": 61.011,
+          "y": 84.0,
+          "z": -71.398
+        },
+        "linksTo": "Labyrinth_Vorhof",
+        "name": "ZEKIDL_Dornenwald_S0",
+        "isSeed": true,
+        "scale": 1.0,
+        "fogTint": {
+          "r": 66,
+          "g": 80,
+          "b": 52,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 190,
+          "g": 215,
+          "b": 170,
+          "a": 255
+        },
+        "hasFogLight": true,
+        "preventRecursionCrash": true
+      },
+      {
+        "position": {
+          "x": 4.348,
+          "y": 0.0,
+          "z": 125.925
+        },
+        "linksTo": "Labyrinth_Vorhof",
+        "name": "ZEKIDL_Dornenwald_S1",
+        "isSeed": true,
+        "scale": 1.0,
+        "fogTint": {
+          "r": 66,
+          "g": 80,
+          "b": 52,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 190,
+          "g": 215,
+          "b": 170,
+          "a": 255
+        },
+        "hasFogLight": true,
+        "preventRecursionCrash": true
+      },
+      {
+        "position": {
+          "x": -65.79,
+          "y": -84.0,
+          "z": -67.02
+        },
+        "linksTo": "Labyrinth_Vorhof",
+        "name": "ZEKIDL_Dornenwald_S2",
+        "isSeed": true,
+        "scale": 1.0,
+        "fogTint": {
+          "r": 66,
+          "g": 80,
+          "b": 52,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 190,
+          "g": 215,
+          "b": 170,
+          "a": 255
+        },
+        "hasFogLight": true,
+        "preventRecursionCrash": true
+      }
+    ]
+  },
+  "Volumes": {
+    "revealVolumes": [
+      {
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "radius": 300,
+        "reveals": [
+          "ZEKIDL_DORNENWALD_FOUND"
+        ]
+      }
+    ]
+  }
+}

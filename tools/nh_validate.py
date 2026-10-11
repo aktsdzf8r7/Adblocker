@@ -241,6 +241,11 @@ def check_consistency(bodies, systems):
                     err(f"{rel(path)}: entryLocation {loc['id']} is not an entry")
             for t in props.get("translatorText", []):
                 check_text(path, t, need_fact)
+            # notes and characters reveal facts when read (<RevealFacts> in the dialogue tree)
+            for dlg in props.get("dialogue", []):
+                if dlg.get("xmlFile") and os.path.exists(os.path.join(MOD, dlg["xmlFile"])):
+                    for f in ET.parse(os.path.join(MOD, dlg["xmlFile"])).getroot().iter("FactID"):
+                        need_fact(f"{dlg['xmlFile']} RevealFacts", f.text.strip())
             for d in props.get("details", []):
                 for k in ("activationCondition", "deactivationCondition"):
                     if d.get(k):

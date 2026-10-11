@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Logbuch: der Treibsamen und das Dornenlabyrinth -->
+<AstroObjectEntry xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/shiplog_schema.xsd">
+  <ID>ZEKIDL_TREIBSAMEN_KOERPER</ID>
+  <Entry>
+    <ID>ZEKIDL_TREIBSAMEN</ID>
+    <Name>Der Treibsamen</Name>
+    <IsCuriosity/>
+    <ExploreFact>
+      <ID>ZEKIDL_TREIBSAMEN_SIGNAL</ID>
+      <Text>Auf der Frequenz Dornenrufe ruft etwas zwischen Giant's Deep und Dark Bramble: ein einzelner Dornensamen, der um die Sonne treibt.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKIDL_TREIBSAMEN_FOUND</ID>
+      <Text>Der Treibsamen ist nur ein großer Knoten mit grünlichem Licht. Man kann hineinfliegen.</Text>
+    </ExploreFact>
+    <Entry>
+      <ID>ZEKIDL_VORHOF</ID>
+      <Name>Der Vorhof</Name>
+      <Curiosity>ZEKIDL_TREIBSAMEN</Curiosity>
+      <ExploreFact>
+        <ID>ZEKIDL_VORHOF_FOUND</ID>
+        <Text>Hinter dem Treibsamen liegt ein Vorhof aus Ranken mit fünf Knoten. Von hier geht es tiefer hinein oder durch die Wand wieder hinaus.</Text>
+      </ExploreFact>
+    </Entry>
+    <Entry>
+      <ID>ZEKIDL_FARBEN</ID>
+      <Name>Die Farben der Knoten</Name>
+      <Curiosity>ZEKIDL_TREIBSAMEN</Curiosity>
+      <RumorFact>
+        <ID>ZEKIDL_FARBEN_RUMOR</ID>
+        <SourceID>ZEKIDL_VORHOF</SourceID>
+        <RumorName>Eine Notiz im Vorhof</RumorName>
+        <Text>Im Vorhof treibt ein Floß mit einer Notiz und einer Laterne.</Text>
+      </RumorFact>
+      <ExploreFact>
+        <ID>ZEKIDL_FARBE_GRUEN</ID>
+        <Text>Ein grüner Kranz führt zurück in den Vorhof, und von dort geht es hinaus.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKIDL_FARBE_ROT</ID>
+        <Text>Ein roter Kranz führt in ein Anglerfisch-Nest.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKIDL_FARBE_GELB</ID>
+        <Text>Ein gelber Kranz führt in eine echte Dimension von Dark Bramble. Zurück geht es nur durch Dark Bramble.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKIDL_FARBE_LILA</ID>
+        <Text>Ein lila Kranz führt einen Schritt näher an das Innere des Labyrinths.</Text>
+      </ExploreFact>
+    </Entry>
+    <Entry>
+      <ID>ZEKIDL_RAEUME</ID>
+      <Name>Die Räume des Labyrinths</Name>
+      <Curiosity>ZEKIDL_TREIBSAMEN</Curiosity>
+      <RumorFact>
+        <ID>ZEKIDL_RAEUME_RUMOR</ID>
+        <SourceID>ZEKIDL_VORHOF</SourceID>
+        <RumorName>Jedes Mal ein anderer Raum</RumorName>
+        <Text>Die Knoten des Vorhofs führen in Räume, die jedes Mal anders aussehen, und immer tiefer hinein.</Text>
+      </RumorFact>
+      <ExploreFact>
+        <ID>ZEKIDL_DORNENGANG_FOUND</ID>
+        <Text>Ein gewöhnlicher Raum voller Ranken, mit mehreren Knoten und Samen.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKIDL_DORNENWALD_FOUND</ID>
+        <Text>Die Ranken stehen hier so dicht wie Bäume. Zwischen ihnen bleiben nur schmale Lücken.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKIDL_HITZEKAMMER_FOUND</ID>
+        <Text>Eine glühende Kammer voller Samen, die alle in dieselbe Kammer zurückführen. Mit jeder Runde wird es heißer. Nur der eine große Knoten führt hinaus.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKIDL_FROSTKAMMER_FOUND</ID>
+        <Text>Eine eiskalte Kammer mit festen Wasserkristallen. Ein Anglerfisch ist im Eis eingefroren. Die Kälte bremst jede Bewegung.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKIDL_NEST_FOUND</ID>
+        <Text>Ein Anglerfisch-Nest: dunkler, roter Nebel, und es leben Anglerfische darin.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKIDL_SAMENKAMMER_FOUND</ID>
+        <Text>Ein Raum voller Baby-Samen. Jeder führt woanders hin.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKIDL_NEBELKAMMER_FOUND</ID>
+        <Text>So dichter Nebel, dass man die Knoten nur an ihrem Licht erkennt.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKIDL_LEERE_FOUND</ID>
+        <Text>Ein riesiger, fast dunkler Raum. Ganz weit weg leuchtet ein einziger Knoten.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKIDL_STROEMUNG_FOUND</ID>
+        <Text>Eine Strömung treibt alles quer durch den Raum.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKIDL_ECHOKAMMER_FOUND</ID>
+        <Text>Hier rufen mehrere Signale namens „Echo“. Nur eines davon sitzt an einem Knoten.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKIDL_WRACK_FOUND</ID>
+        <Text>Die Trümmer eines Hearthianer-Schiffs treiben durch den Raum, daneben ein Nomai-Skelett.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKIDL_SPIEGELKAMMER_FOUND</ID>
+        <Text>Fast jeder Ausgang führt in eine weitere Spiegelkammer, und dort verliert man den Weg zum Herz. Nur einer führt hinaus.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKIDL_HERZPFAD_FOUND</ID>
+        <Text>Lila Nebel und Wegmarken. Hier ist man dem Herz nahe.</Text>
+      </ExploreFact>
+    </Entry>
+    <Entry>
+      <ID>ZEKIDL_GNEIS</ID>
+      <Name>Gneis</Name>
+      <Curiosity>ZEKIDL_TREIBSAMEN</Curiosity>
+      <RumorFact>
+        <ID>ZEKIDL_GNEIS_RUMOR</ID>
+        <SourceID>ZEKIDL_FARBEN</SourceID>
+        <RumorName>Ein Hearthianer im Samen</RumorName>
+        <Text>Die Notiz im Vorhof ist von Gneis unterschrieben, einem Hearthianer, der mit seinem Schiff in den Samen geflogen ist.</Text>
+      </RumorFact>
+      <ExploreFact>
+        <ID>ZEKIDL_GNEIS_WRACK</ID>
+        <Text>Gneis ist durch einen roten Knoten geflogen, und ein Anglerfisch hat sein Schiff zerbissen. Danach ist er mit dem Anzug weitergeflogen.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKIDL_GNEIS_HERZPFAD</ID>
+        <Text>Gneis hat das Herz gefunden. Er wollte es hinausbringen und die Sonne noch einmal sehen.</Text>
+      </ExploreFact>
+    </Entry>
+    <Entry>
+      <ID>ZEKIDL_HERZ</ID>
+      <Name>Das Bramble-Herz</Name>
+      <Curiosity>ZEKIDL_TREIBSAMEN</Curiosity>
+      <RumorFact>
+        <ID>ZEKIDL_HERZ_RUMOR</ID>
+        <SourceID>ZEKIDL_FARBEN</SourceID>
+        <RumorName>Etwas schlägt im Inneren</RumorName>
+        <Text>Gneis glaubt, dass im Inneren des Labyrinths etwas schlägt. Die lila Knoten führen dorthin.</Text>
+      </RumorFact>
+      <RumorFact>
+        <ID>ZEKIDL_HERZ_RUMOR_SINGT</ID>
+        <SourceID>ZEKIDL_GNEIS</SourceID>
+        <RumorName>Das Herz singt</RumorName>
+        <Text>Neun lila Knoten führen vom Vorhof zum Herz. Das Herz singt, und die Anglerfische werden still, wenn sie es hören.</Text>
+      </RumorFact>
+      <ExploreFact>
+        <ID>ZEKIDL_HERZ_FOUND</ID>
+        <Text>In einer Kammer aus lila Licht schwebt das Bramble-Herz in einem Nest aus Wurzeln. Der einzige Ausgang ist grün.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKIDL_HERZ_GENOMMEN</ID>
+        <Text>Ich habe das Bramble-Herz genommen.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKIDL_HERZ_BLUTET</ID>
+        <Text>Seit ich das Herz trage, blutet das Labyrinth: Jeder Knoten ist rot, nur die grünen nicht.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKIDL_HERZ_SINGT</ID>
+        <Text>Draußen singt das Herz. Die Anglerfische hören es und jagen niemanden mehr, bis die Schleife endet.</Text>
+      </ExploreFact>
+    </Entry>
+  </Entry>
+</AstroObjectEntry>

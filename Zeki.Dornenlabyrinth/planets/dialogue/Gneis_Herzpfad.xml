@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DialogueTree xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/dialogue_schema.xsd">
+  <NameField>Notiz im lila Nebel</NameField>
+  <DialogueNode>
+    <Name>START</Name>
+    <EntryCondition>DEFAULT</EntryCondition>
+    <Dialogue>
+      <Page>Lila Nebel. Ich bin nah dran.</Page>
+      <Page>Ich habe die lila Knoten gezählt: neun Stück vom Vorhof bis zum Herz, wenn man keinen Fehler macht. In einer Spiegelkammer verliert man den Faden, dann geht das Zählen wieder von vorne los.</Page>
+      <Page>Hinter dem letzten lila Knoten schlägt das Herz des Labyrinths. Es singt. Die Anglerfische hören es und werden still.</Page>
+      <Page>Wer es nimmt, bringt das Labyrinth zum Bluten, sagt das Singen. Dann ist jeder Weg rot, nur der grüne nach Hause nicht.</Page>
+      <Page>Ich nehme es mit. Ich bringe es hinaus. Ich will die Sonne noch einmal sehen.</Page>
+      <Page>– Gneis (seine letzte Notiz)</Page>
+    </Dialogue>
+    <RevealFacts>
+      <FactID>ZEKIDL_GNEIS_HERZPFAD</FactID>
+      <FactID>ZEKIDL_HERZ_RUMOR_SINGT</FactID>
+    </RevealFacts>
+  </DialogueNode>
+</DialogueTree>

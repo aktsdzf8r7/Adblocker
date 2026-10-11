@@ -1,0 +1,224 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+  "name": "Labyrinth_Echokammer",
+  "starSystem": "SolarSystem",
+  "canShowOnTitle": false,
+  "Orbit": {
+    "staticPosition": {
+      "x": -60000.0,
+      "y": -90000.0,
+      "z": 12000.0
+    }
+  },
+  "ShipLog": {
+    "mapMode": {
+      "remove": true
+    }
+  },
+  "Bramble": {
+    "dimension": {
+      "radius": 300,
+      "fogTint": {
+        "r": 95,
+        "g": 82,
+        "b": 120,
+        "a": 255
+      },
+      "fogDensity": 6.0,
+      "linksTo": "ZEKIDL_Treibsamen",
+      "vinePrefab": "smallNest"
+    },
+    "nodes": [
+      {
+        "position": {
+          "x": -109.632,
+          "y": 110.0,
+          "z": -55.73
+        },
+        "linksTo": "Labyrinth_Vorhof",
+        "name": "ZEKIDL_Echokammer_K0",
+        "scale": 0.5,
+        "fogTint": {
+          "r": 95,
+          "g": 82,
+          "b": 120,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 190,
+          "g": 215,
+          "b": 170,
+          "a": 255
+        },
+        "preventRecursionCrash": true
+      },
+      {
+        "position": {
+          "x": 158.963,
+          "y": 0.0,
+          "z": -44.223
+        },
+        "linksTo": "Labyrinth_Vorhof",
+        "name": "ZEKIDL_Echokammer_K1",
+        "scale": 0.5,
+        "fogTint": {
+          "r": 95,
+          "g": 82,
+          "b": 120,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 190,
+          "g": 215,
+          "b": 170,
+          "a": 255
+        },
+        "preventRecursionCrash": true
+      },
+      {
+        "position": {
+          "x": -65.101,
+          "y": -110.0,
+          "z": 104.34
+        },
+        "linksTo": "Labyrinth_Vorhof",
+        "name": "ZEKIDL_Echokammer_K2",
+        "scale": 0.5,
+        "fogTint": {
+          "r": 95,
+          "g": 82,
+          "b": 120,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 190,
+          "g": 215,
+          "b": 170,
+          "a": 255
+        },
+        "preventRecursionCrash": true
+      },
+      {
+        "position": {
+          "x": -27.535,
+          "y": 63.0,
+          "z": -105.588
+        },
+        "linksTo": "Labyrinth_Vorhof",
+        "name": "ZEKIDL_Echokammer_S0",
+        "isSeed": true,
+        "scale": 1.0,
+        "fogTint": {
+          "r": 95,
+          "g": 82,
+          "b": 120,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 190,
+          "g": 215,
+          "b": 170,
+          "a": 255
+        },
+        "hasFogLight": true,
+        "preventRecursionCrash": true
+      },
+      {
+        "position": {
+          "x": 91.627,
+          "y": -63.0,
+          "z": 59.258
+        },
+        "linksTo": "Labyrinth_Vorhof",
+        "name": "ZEKIDL_Echokammer_S1",
+        "isSeed": true,
+        "scale": 1.0,
+        "fogTint": {
+          "r": 95,
+          "g": 82,
+          "b": 120,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 190,
+          "g": 215,
+          "b": 170,
+          "a": 255
+        },
+        "hasFogLight": true,
+        "preventRecursionCrash": true
+      }
+    ]
+  },
+  "Props": {
+    "signals": [
+      {
+        "frequency": "Dornenrufe",
+        "name": "Echo",
+        "audio": "DB_Ambience_LP",
+        "position": {
+          "x": -109.632,
+          "y": 110.0,
+          "z": -55.73
+        },
+        "sourceRadius": 5,
+        "identificationRadius": 15,
+        "rename": "ZEKIDL_Echo_0"
+      },
+      {
+        "frequency": "Dornenrufe",
+        "name": "Echo",
+        "audio": "DB_Ambience_LP",
+        "position": {
+          "x": -70.492,
+          "y": 69.051,
+          "z": -67.357
+        },
+        "sourceRadius": 5,
+        "identificationRadius": 15,
+        "rename": "ZEKIDL_Echo_1"
+      },
+      {
+        "frequency": "Dornenrufe",
+        "name": "Echo",
+        "audio": "DB_Ambience_LP",
+        "position": {
+          "x": 96.147,
+          "y": 0.0,
+          "z": -10.783
+        },
+        "sourceRadius": 5,
+        "identificationRadius": 15,
+        "rename": "ZEKIDL_Echo_2"
+      },
+      {
+        "frequency": "Dornenrufe",
+        "name": "Echo",
+        "audio": "DB_Ambience_LP",
+        "position": {
+          "x": -47.925,
+          "y": -90.446,
+          "z": 51.333
+        },
+        "sourceRadius": 5,
+        "identificationRadius": 15,
+        "rename": "ZEKIDL_Echo_3"
+      }
+    ]
+  },
+  "Volumes": {
+    "revealVolumes": [
+      {
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "radius": 300,
+        "reveals": [
+          "ZEKIDL_ECHOKAMMER_FOUND"
+        ]
+      }
+    ]
+  }
+}

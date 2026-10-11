@@ -1,0 +1,168 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+  "name": "Labyrinth_Nebelkammer",
+  "starSystem": "SolarSystem",
+  "canShowOnTitle": false,
+  "Orbit": {
+    "staticPosition": {
+      "x": 0.0,
+      "y": -90000.0,
+      "z": -12000.0
+    }
+  },
+  "ShipLog": {
+    "mapMode": {
+      "remove": true
+    }
+  },
+  "Bramble": {
+    "dimension": {
+      "radius": 350,
+      "fogTint": {
+        "r": 185,
+        "g": 185,
+        "b": 172,
+        "a": 255
+      },
+      "fogDensity": 18.0,
+      "linksTo": "ZEKIDL_Treibsamen",
+      "vinePrefab": "smallNest"
+    },
+    "nodes": [
+      {
+        "position": {
+          "x": 76.439,
+          "y": 128.333,
+          "z": -121.424
+        },
+        "linksTo": "Labyrinth_Vorhof",
+        "name": "ZEKIDL_Nebelkammer_K0",
+        "scale": 0.5,
+        "fogTint": {
+          "r": 185,
+          "g": 185,
+          "b": 172,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 190,
+          "g": 215,
+          "b": 170,
+          "a": 255
+        },
+        "preventRecursionCrash": true
+      },
+      {
+        "position": {
+          "x": 34.423,
+          "y": 0.0,
+          "z": 189.397
+        },
+        "linksTo": "Labyrinth_Vorhof",
+        "name": "ZEKIDL_Nebelkammer_K1",
+        "scale": 0.5,
+        "fogTint": {
+          "r": 185,
+          "g": 185,
+          "b": 172,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 190,
+          "g": 215,
+          "b": 170,
+          "a": 255
+        },
+        "preventRecursionCrash": true
+      },
+      {
+        "position": {
+          "x": -114.277,
+          "y": -128.333,
+          "z": -86.762
+        },
+        "linksTo": "Labyrinth_Vorhof",
+        "name": "ZEKIDL_Nebelkammer_K2",
+        "scale": 0.5,
+        "fogTint": {
+          "r": 185,
+          "g": 185,
+          "b": 172,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 190,
+          "g": 215,
+          "b": 170,
+          "a": 255
+        },
+        "preventRecursionCrash": true
+      },
+      {
+        "position": {
+          "x": -7.975,
+          "y": 73.5,
+          "z": 127.056
+        },
+        "linksTo": "Labyrinth_Vorhof",
+        "name": "ZEKIDL_Nebelkammer_S0",
+        "isSeed": true,
+        "scale": 1.0,
+        "fogTint": {
+          "r": 185,
+          "g": 185,
+          "b": 172,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 190,
+          "g": 215,
+          "b": 170,
+          "a": 255
+        },
+        "hasFogLight": true,
+        "preventRecursionCrash": true
+      },
+      {
+        "position": {
+          "x": -79.944,
+          "y": -73.5,
+          "z": -99.074
+        },
+        "linksTo": "Labyrinth_Vorhof",
+        "name": "ZEKIDL_Nebelkammer_S1",
+        "isSeed": true,
+        "scale": 1.0,
+        "fogTint": {
+          "r": 185,
+          "g": 185,
+          "b": 172,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 190,
+          "g": 215,
+          "b": 170,
+          "a": 255
+        },
+        "hasFogLight": true,
+        "preventRecursionCrash": true
+      }
+    ]
+  },
+  "Volumes": {
+    "revealVolumes": [
+      {
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "radius": 350,
+        "reveals": [
+          "ZEKIDL_NEBELKAMMER_FOUND"
+        ]
+      }
+    ]
+  }
+}

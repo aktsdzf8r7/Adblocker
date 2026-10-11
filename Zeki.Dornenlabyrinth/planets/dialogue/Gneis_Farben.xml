@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DialogueTree xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/dialogue_schema.xsd">
+  <NameField>Notiz auf einem Floß</NameField>
+  <DialogueNode>
+    <Name>START</Name>
+    <EntryCondition>DEFAULT</EntryCondition>
+    <Dialogue>
+      <Page>WER DAS LIEST: MERK DIR DIE FARBEN.</Page>
+      <Page>Ich bin Gneis. Ich bin mit meinem Schiff in diesen Samen geflogen, weil er so schön grün geleuchtet hat. Das war ein Fehler.</Page>
+      <Page>Die Knoten hier drin führen jedes Mal woanders hin. Aber manche tragen einen leuchtenden Kranz, und dessen Farbe lügt nie.</Page>
+      <Page>GRÜN bringt dich hierher zurück, in den Vorhof. Von hier aus kommst du durch die Wand nach draußen.</Page>
+      <Page>ROT heißt: Da wohnt ein Anglerfisch. Licht aus, langsam fliegen. Besser gar nicht erst hinein.</Page>
+      <Page>GELB führt ganz woanders hin, nämlich in die echten Dimensionen von Dark Bramble. Von dort geht es nur durch Dark Bramble selbst wieder hinaus.</Page>
+      <Page>LILA zieht nach innen. Wer dem Lila folgt, dem wird es immer wärmer und stiller. Ich glaube, da drin schlägt etwas.</Page>
+      <Page>Wer sich verirrt, fliegt einfach durch die Wand zurück. Das Labyrinth merkt sich, woher man kam. Meistens.</Page>
+      <Page>– Gneis</Page>
+    </Dialogue>
+    <RevealFacts>
+      <FactID>ZEKIDL_FARBE_GRUEN</FactID>
+      <FactID>ZEKIDL_FARBE_ROT</FactID>
+      <FactID>ZEKIDL_FARBE_GELB</FactID>
+      <FactID>ZEKIDL_FARBE_LILA</FactID>
+      <FactID>ZEKIDL_GNEIS_RUMOR</FactID>
+      <FactID>ZEKIDL_HERZ_RUMOR</FactID>
+    </RevealFacts>
+  </DialogueNode>
+</DialogueTree>
