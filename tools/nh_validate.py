@@ -330,7 +330,45 @@ def check_consistency(bodies, systems):
     for path, cond in conditions_used:
         if cond not in conditions_set:
             err(f"{rel(path)}: condition {cond} is never set")
+    check_language({f for s in per_system.values() for f in s["facts"]}, conditions_set)
     return per_system
+
+
+def check_language(facts, conditions_set):
+    """assets/sprache.json of an addon with a language of its own (Verdornt's bramble language): every word a text
+    uses exists, every learnt word has a source that can happen, every placed script has its text."""
+    path = os.path.join(MOD, "assets", "sprache.json")
+    if not os.path.exists(path):
+        return
+    lang = load_json(path)
+    ids = [w["id"] for w in lang.get("woerter", [])]
+    for i in sorted({i for i in ids if ids.count(i) > 1}):
+        err(f"sprache.json: word {i} exists twice")
+    for w in lang.get("woerter", []):
+        if not w.get("grund") and not w.get("quellen"):
+            err(f"sprache.json: word {w['id']} can never be learnt (no source)")
+        for q in w.get("quellen", []):
+            kind, _, ref = q.partition(":")
+            if kind == "fact" and ref not in facts:
+                err(f"sprache.json: word {w['id']} is learnt from fact {ref}, which does not exist")
+            elif kind == "kern" and f"ZEKIVD_WORTKERN_{ref.upper()}" not in conditions_set:
+                err(f"sprache.json: word {w['id']} is learnt from word core {ref}, which is never touched")
+            elif kind not in ("fact", "kern"):
+                err(f"sprache.json: word {w['id']}: source {q} needs fact: or kern:")
+    texts = set()
+    for t in lang.get("texte", []):
+        texts.add(t["id"])
+        for line in t.get("zeilen", []):
+            if line.count("{") != line.count("}"):
+                err(f"sprache.json: text {t['id']} has unbalanced braces: {line}")
+            for word in re.findall(r"\{([^}]*)\}", line):
+                if word not in ids:
+                    err(f"sprache.json: text {t['id']} uses unknown word {word}")
+    placements = os.path.join(MOD, "assets", "models", "placements.json")
+    if os.path.exists(placements):
+        for sp in load_json(placements).get("schriften", []):
+            if sp.get("text") not in texts:
+                err(f"placements.json: script {sp.get('name')} shows text {sp.get('text')}, which does not exist")
 
 
 conditions_used = []

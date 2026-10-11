@@ -1,6 +1,6 @@
 # Verdornt
 
-*Eine New-Horizons-Mod für Outer Wilds. Version 0.1.1, Etappe 1 von 3: „Ankunft“.*
+*Eine New-Horizons-Mod für Outer Wilds. Version 0.2.0: „Ankunft“ plus die Planeten und die Dornensprache.*
 
 Zu Beginn der Schleife ist ein riesiger Dornensamen auf Timber Hearth eingeschlagen, gleich neben dem alten Krater. Er raucht noch, und er ist offen. Wer hineinfliegt, landet in **Dornenkranz**: einem fremden System, in dem die Dornen alles überwuchert haben. Vier Planeten, und dort, wo die Sonne sein sollte, ein Käfig aus Dornen um einen gefangenen Stern.
 
@@ -14,6 +14,26 @@ Drei Nomai vom Vessel sind in Dark Bramble falsch abgebogen und hier gestrandet:
 
 Das DLC ist nicht nötig. Die Mod läuft neben *Die Aussendungseinheit* und dem *Schleiersystem*.
 
+## Neu in 0.2.0
+
+- **Die Planeten sind neu.** Jeder Planet ist ein riesiger Bramble-Kern, dessen Wurzeln die Reste des Planeten festhalten. Jeder ist anders zerstört:
+
+| Planet | Was von ihm übrig ist | Station |
+|---|---|---|
+| Erstling | eine Eiskruste, von sechs Schluchten bis zum Kern aufgerissen | das **Wurzellabor** von Hyssop, unten in der breitesten Schlucht |
+| Glutdorn | vierzehn Schollen, die an Wurzeln über dem glühenden Kern hängen | das **Glutwerk**: eine Murmel-Röhre schiebt die Brücke zur Knoten-Scholle hinaus |
+| Nebelranke | ein Ring aus Inseln im grünen Nebel | die **Treibstation** von Rue, mit einem Hinweis auf einen sprechenden Fisch |
+| Hohlsamen | Splitter der Samenhülle in einem Wurzelnetz um einen Kristallkern | das **Kristallobservatorium** von Tansy, mit einem Becken, das den Herzdorn zeigt |
+
+- **Jeder Planet hat einen Bramble-Knoten:** Glutpforte, Nebelpforte und Hohlpforte. Die tieferen Dimensionen dahinter kommen später.
+- **Die Dornensprache.**
+  - Die Brambles reden miteinander, mit den Wächtern (den Anglerfischen) und über die Nomai.
+  - Ihre Schrift wächst als leuchtende Spiralen auf Rinde. Zieh deinen Übersetzer und ziel darauf.
+  - Ohne den **verbrambelten Übersetzer** im Wurzellabor hörst du nur Laute.
+  - Mit ihm kennst du zehn Grundwörter. Weitere lernst du aus Tansys Notizen im Observatorium und von den leuchtenden **Wortkernen** auf den Planeten und in den Pforten.
+  - Jedes neue Wort wird in **allen** Dornentexten übersetzt.
+- **16 neue Nomai-Texte**, 12 Dornentexte mit 40 Wörtern, neue Logbuch-Einträge.
+
 ## Was es in Etappe 1 gibt
 
 - **Der Absturzsamen** auf Timber Hearth: ein Krater von gut 90 m Durchmesser mit aufgeworfenem Rand, verbranntem Boden und grün glühenden Rissen, Rauch, einer Absperrung samt Notiz von Hornfels und einer Nomai-Schrift von Tansy. Das Signalskop findet ihn auf der Frequenz *Dornenrufe*.
@@ -23,10 +43,10 @@ Das DLC ist nicht nötig. Die Mod läuft neben *Die Aussendungseinheit* und dem 
 | Körper | Aussehen |
 |---|---|
 | Herzdorn | ein gefangener Stern, dessen Licht durch einen Käfig aus Dornen fällt |
-| Erstling | Eis-Kristalle auf Rinde |
-| Glutdorn | Glutrisse und glühende Dornspitzen |
-| Nebelranke | grüner Nebel mit riesigen treibenden Ranken |
-| Hohlsamen | ein aufgebrochener Riesensamen mit Kristallen innen |
+| Erstling | Eiskruste mit Schluchten, darunter ein leuchtender Bramble-Kern |
+| Glutdorn | Schollen mit Glutrissen um einen glühenden Kern |
+| Nebelranke | grüner Nebel, ein Inselring und riesige treibende Ranken |
+| Hohlsamen | Hüllensplitter im Wurzelnetz um einen Kristallkern |
 
 - **Das Lager auf Erstling:**
   - drei Kuppeln und ein Kernrechner, der auf deinen Fortschritt reagiert
@@ -55,6 +75,14 @@ Das DLC ist nicht nötig. Die Mod läuft neben *Die Aussendungseinheit* und dem 
    2. Drinnen liegt der **Planetenkern von Erstling**.
 7. **Nach Hause:** Interagiere mit dem kleinen Samen in der Kupferwiege im Lager. Oder warte das Ende der Schleife ab: Dann explodiert der gefangene Stern, und du wachst auf Timber Hearth auf.
 
+### Komplettlösung 0.2.0 (Spoiler)
+
+1. **Wurzellabor:** Auf Erstling in die breiteste Schlucht hinunter. Mit dem Jetpack geht es bis zum Wurzelteller am Kern. Dort steht das Labor. Berühre den verbrambelten Übersetzer auf der Werkbank. Von da an liest dein Übersetzer Dornenschrift.
+2. **Glutwerk:** Auf Glutdorn steht es auf der größten Scholle. Rolle die Murmel am Brückenkopf ans andere Ende. Die Brücke fährt über die Lavaspalte. Auf der anderen Scholle schwebt der Knoten zur Glutpforte.
+3. **Treibstation:** Auf Nebelranke landest du auf den Inseln im Nebel. Die Station steht auf der größten. Der Knoten zur Nebelpforte hängt über einer anderen Insel.
+4. **Kristallobservatorium:** Auf Hohlsamen steht es auf dem größten Hüllensplitter. Tansys vier Notizen lehren je ein paar Wörter. Leg den Stein „Herz“ ins Becken. Der Knoten zur Hohlpforte schwebt über dem Kristallkern.
+5. **Wortkerne:** Es gibt elf. Zwei liegen auf jedem Planeten, je einer in jeder Pforte. Berühren lehrt neue Wörter.
+
 ## Einstellungen
 
 | Einstellung | Standard | Bedeutung |
@@ -73,7 +101,7 @@ Das DLC ist nicht nötig. Die Mod läuft neben *Die Aussendungseinheit* und dem 
 
 ## Testliste (bitte im Spiel prüfen)
 
-Ich kann Outer Wilds nicht selbst starten. Alles ist gegen die Schemas von New Horizons geprüft, die DLL baut ohne Warnungen, und die Logik hat 26 Unit-Tests. Bitte prüf im Spiel:
+Ich kann Outer Wilds nicht selbst starten. Alles ist gegen die Schemas von New Horizons geprüft, die DLL baut ohne Warnungen, und die Logik hat 38 Unit-Tests. Bitte prüf im Spiel:
 
 - [ ] Kurz nach dem Aufwachen erscheint die Meldung „SIGNALSKOP: UNBEKANNTES SIGNAL NAHE DEM ALTEN EINSCHLAGKRATER“. Erscheint stattdessen „ABSTURZSTELLE NICHT GESETZT“, bitte das OWML-Log schicken: alle Zeilen von *Verdornt*.
 - [ ] Der Krater liegt neben dem alten Krater auf dem Boden, sein Rand folgt dem Gelände. Er schwebt nicht und versinkt nicht. Das OWML-Log meldet „Absturzstelle gesetzt“ mit Abstand und Gelände-Unterschied.
@@ -88,6 +116,13 @@ Ich kann Outer Wilds nicht selbst starten. Alles ist gegen die Schemas von New H
 - [ ] Das Becken auf dem Ausguck zeigt das ganze System.
 - [ ] Das Licht von Herzdorn fällt durch den Käfig.
 - [ ] Am Ende der Schleife explodiert Herzdorn, und du wachst auf Timber Hearth auf.
+- [ ] Die Planeten: Erstling hat Schluchten bis zum Kern, Glutdorn Schollen, Nebelranke Inseln, Hohlsamen Splitter, und überall halten Wurzeln die Reste. Man kann auf Krusten, Schollen und Inseln laufen und landen. Durch die Kruste fällt man nicht hindurch.
+- [ ] Die Kerne leuchten und erhellen das Innere der Planeten.
+- [ ] Die Glutwerk-Brücke fährt aus, wenn die Murmel am anderen Ende liegt.
+- [ ] Die drei neuen Knoten führen in Glutpforte, Nebelpforte und Hohlpforte und wieder zurück.
+- [ ] Dornensprache: Mit gezogenem Übersetzer auf eine Dornenschrift zielen öffnet das grüne Fenster. Wegsehen oder Wegstecken schließt es.
+- [ ] Vor dem verbrambelten Übersetzer stehen dort nur Laute. Danach gibt es die Meldung mit zehn bekannten Wörtern.
+- [ ] Wortkerne und Tansys Notizen lehren neue Wörter. Die Meldung „NEUES WORT“ kommt nur einmal pro Wort, auch in späteren Schleifen.
 - [ ] Die Materialien: Rinde von den echten Dark-Bramble-Ranken, Nomai-Hülle von echten Nomai-Bauten. Das OWML-Log zeigt die Zuordnung.
 
 ## Als Nächstes
@@ -106,7 +141,7 @@ python tools/verdornt_build.py Zeki.Verdornt              # Configs, Texte, Logb
 python tools/nh_validate.py Zeki.Verdornt                 # Schemas, Logbuch, Bedingungen, Bramble-Netz
 python tools/obj_check.py Zeki.Verdornt/assets/models     # Ausrichtung der Meshes
 cd Zeki.Verdornt.Source && dotnet build -c Release        # ZekiVerdornt.dll
-dotnet test Zeki.Verdornt.Tests                           # Logik: Übergang, Computer, Röhren, Höhenkarte
+dotnet test Zeki.Verdornt.Tests                           # Logik: Übergang, Computer, Röhren, Höhenkarte, Dornensprache
 ```
 
 Design und Plan stehen in `docs/superpowers/specs/2026-10-10-verdornt-design.md` und `docs/superpowers/plans/2026-10-10-verdornt-etappe1.md`.

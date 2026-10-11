@@ -308,9 +308,9 @@ def random_axis(rnd):
     return Vector((s * math.cos(a), s * math.sin(a), z))
 
 
-def thorned_tube(name, points, radius, mat, thorn_every=3, thorn_scale=2.4, rnd=None):
+def thorned_tube(name, points, radius, mat, thorn_every=3, thorn_scale=2.4, rnd=None, res=5):
     """A bramble vine through points, with pairs of thorns."""
-    parts = [tube(name, points, radius, mat, res=5, bevel=2, taper=True)]
+    parts = [tube(name, points, radius, mat, res=res, bevel=2, taper=True)]
     for i in range(1, len(points) - 1, thorn_every):
         p, q = Vector(points[i]), Vector(points[i + 1])
         side = (q - p).cross(Vector(p).normalized() if Vector(p).length > 0.01 else Vector((0, 0, 1)))
@@ -323,7 +323,7 @@ def thorned_tube(name, points, radius, mat, thorn_every=3, thorn_scale=2.4, rnd=
     return parts
 
 
-def great_circle_vine(name, R, radius, mat, rnd, sink=0.3, waves=7, amp=0.04, n=64, arc=1.0, avoid=()):
+def great_circle_vine(name, R, radius, mat, rnd, sink=0.3, waves=7, amp=0.04, n=64, arc=1.0, avoid=(), res=5):
     """A vine along a (partial) great circle around the body, bulging in and out of the surface.
     avoid: (direction, angular radius) areas the circle must stay clear of (camp, arrival seed)."""
     margin = radius / R + 0.05
@@ -341,7 +341,7 @@ def great_circle_vine(name, R, radius, mat, rnd, sink=0.3, waves=7, amp=0.04, n=
         d = ref * math.cos(u) + other * math.sin(u)
         r = R * (1 + amp * math.sin(waves * u + phase)) + radius * (1 - 2 * sink)
         pts.append(d * r)
-    return thorned_tube(name, pts, radius, mat, 3)
+    return thorned_tube(name, pts, radius, mat, 3, res=res)
 
 
 def surface_thorns(name, R, count, length, mat, rnd, exclude=(), base=0.12, skip=None):
@@ -394,8 +394,9 @@ def bramble_core(name, R, M, rnd, light):
     light shows through the gaps."""
     parts = [sphere(name + "_licht", R * 0.7, (0, 0, 0), light, seg=32, rings=16)]
     for k in range(rnd.randint(30, 40)):
+        # few points and a coarse ring: the cores are many vines, and the DLL reads every vertex at load time
         parts += great_circle_vine(f"{name}_ranke{k}", R * rnd.uniform(0.85, 1.05), R * rnd.uniform(0.04, 0.08), M["bark"], rnd,
-                                   sink=0.5, waves=rnd.randint(5, 9), amp=0.07, n=80, arc=rnd.uniform(0.6, 1.0))
+                                   sink=0.5, waves=rnd.randint(5, 9), amp=0.07, n=48, arc=rnd.uniform(0.6, 1.0), res=2)
     return parts
 
 
@@ -1348,6 +1349,78 @@ def kristallobservatorium(M):
     return ob
 
 
+# ------------------------------------------------------------------------------------------ the bramble language (0.2.0)
+def spiral(name, centre, r0, r1, turns, plane, mat, radius=0.03, n=60):
+    """A glowing script spiral in a plane (plane: two Vectors spanning it)."""
+    u, w = plane
+    pts = [Vector(centre) + (u * math.cos(TAU * turns * i / n) + w * math.sin(TAU * turns * i / n)) * (r0 + (r1 - r0) * i / n)
+           for i in range(n + 1)]
+    return [tube(name, pts, radius, mat, res=3, bevel=2, taper=True)] + \
+        [sphere(f"{name}_knoten{k}", radius * 2.2, pts[k], mat, seg=8, rings=4) for k in range(6, n, 11)]
+
+
+def script_marks(prefix, centre, plane, normal, M, rnd):
+    """The bramble script: one large spiral with two small ones and short glowing strokes between them, plus thorns."""
+    u, w = plane
+    parts = spiral(prefix + "_gross", centre, 0.05, 0.55, 2.6, plane, M["seed"])
+    for k, (dx, dz) in enumerate(((-0.62, 0.42), (0.6, -0.38))):
+        parts += spiral(f"{prefix}_klein{k}", Vector(centre) + u * dx + w * dz, 0.03, 0.22, 1.8, plane, M["seed"], radius=0.022, n=36)
+    for k in range(5):
+        a = rnd.uniform(0, TAU)
+        p0 = Vector(centre) + (u * math.cos(a) + w * math.sin(a)) * rnd.uniform(0.62, 0.8)
+        p1 = p0 + (u * math.cos(a + 1.2) + w * math.sin(a + 1.2)) * rnd.uniform(0.12, 0.25)
+        parts.append(tube(f"{prefix}_strich{k}", [p0, (p0 + p1) / 2 + Vector(normal) * 0.02, p1], 0.02, M["seed"], res=2, bevel=1, taper=True))
+    for k in range(6):
+        a = rnd.uniform(0, TAU)
+        base = Vector(centre) + (u * math.cos(a) + w * math.sin(a)) * rnd.uniform(0.3, 0.9) - Vector(normal) * 0.05
+        parts.append(cone_along(f"{prefix}_dorn{k}", base, Vector(normal) + (u * math.cos(a) + w * math.sin(a)) * 0.5, 0.25, 0.05, 0.005, M["bark"], 5))
+    return parts
+
+
+def dornenschrift(M):
+    """A standing slab of bark, about 2.2 x 1.6 m, on whose front (Unity +z) the bramble script grows and glows."""
+    rnd = random.Random(91)
+    parts = [box("platte", (2.2, 0.3, 1.6), (0, 0, 1.15), M["bark"]),
+             tube("wurzel_l", [Vector((-1.0, 0.1, 0.0)), Vector((-0.9, 0.05, 0.5)), Vector((-0.8, 0.0, 0.5))], 0.14, M["bark"], radii=[1, 0.8, 0.3]),
+             tube("wurzel_r", [Vector((1.0, 0.1, 0.0)), Vector((0.9, 0.05, 0.5)), Vector((0.8, 0.0, 0.5))], 0.14, M["bark"], radii=[1, 0.8, 0.3]),
+             cylinder("fuss", 0.5, 0.7, -0.4, 0.4, M["bark"], 16)]
+    parts += script_marks("schrift", (0, -0.17, 1.15), (Vector((1, 0, 0)), Vector((0, 0, 1))), (0, -1, 0), M, rnd)
+    return join("Dornenschrift", parts, uv_size=1.0)
+
+
+def dornenschrift_boden(M):
+    """The bramble script grown flat on a disc of bark on the ground, about 2.2 m across."""
+    rnd = random.Random(92)
+    parts = [cylinder("scheibe", 1.1, 1.2, -0.3, 0.15, M["bark"], 32)]
+    parts += script_marks("schrift", (0, 0, 0.17), (Vector((1, 0, 0)), Vector((0, 1, 0))), (0, 0, 1), M, rnd)
+    return join("Dornenschrift_Boden", parts, uv_size=1.0)
+
+
+def verbrambelter_uebersetzer(M):
+    """Hyssop's translator, overgrown: a Nomai translator (handle, ring, lens) with a thin vine wound round it, the
+    lens glowing green. About 0.6 m; origin under the handle."""
+    parts = [cylinder("griff", 0.035, 0.03, 0.0, 0.32, M["hull"], 12),
+             torus("ring", 0.13, 0.025, 0, M["copper"], 32, 6, matrix=Matrix.Translation((0, 0, 0.42)) @ Matrix.Rotation(math.radians(90), 4, "X")),
+             sphere("linse", 0.09, (0, 0, 0.42), M["seed"], seg=16, rings=8)]
+    vine = [Vector((0.06 * math.cos(t * 0.9), 0.06 * math.sin(t * 0.9), 0.02 + t * 0.03)) for t in range(16)]
+    vine += [Vector((0.16 * math.cos(1.0 + t * 0.6), 0.03, 0.42 + 0.16 * math.sin(1.0 + t * 0.6))) for t in range(9)]
+    parts.append(tube("ranke", vine, 0.012, M["bark"], res=3, bevel=2, taper=True))
+    for k in range(5):
+        p = vine[3 + k * 4]
+        parts.append(cone_along(f"dorn{k}", p, p - Vector((0, 0, p.z)) + Vector((0.3, 0.2, 0.1)), 0.04, 0.008, 0.001, M["bark"], 4))
+    return join("Verbrambelter_Uebersetzer", parts, uv_size=0.3)
+
+
+def wortkern(M):
+    """A word core: a small glowing seed held by four little claws of vine, about 0.35 m."""
+    parts = [sphere("samen", 0.13, (0, 0, 0.2), M["seed"], scale=(1, 1, 1.35), seg=16, rings=8)]
+    for k in range(4):
+        a = k * 90 + 45
+        parts.append(tube(f"klaue{k}", [polar(0.18, a, 0.0), polar(0.17, a, 0.14), polar(0.1, a, 0.3), polar(0.04, a, 0.37)], 0.02, M["bark"],
+                          res=3, bevel=2, radii=[1, 0.8, 0.5, 0.15]))
+    return join("Wortkern", parts, uv_size=0.3)
+
+
 def buildings(M):
     return {
         "lager": lager(M),
@@ -1365,6 +1438,10 @@ def buildings(M):
         "glutbruecke": glutbruecke(M),
         "treibstation": treibstation(M),
         "kristallobservatorium": kristallobservatorium(M),
+        "dornenschrift": dornenschrift(M),
+        "dornenschrift_boden": dornenschrift_boden(M),
+        "verbrambelter_uebersetzer": verbrambelter_uebersetzer(M),
+        "wortkern": wortkern(M),
     }
 
 
@@ -1384,9 +1461,11 @@ def preview_buildings(cam, models):
         render(cam, os.path.join(PREVIEWS, key + ".png"), c + up * dist * 0.6 + side * dist, c, (900, 600), lens=35, show=show)
     for key, loc, dist in (("warpturm", (40000, 0, 0), 30), ("strudel", (41000, 0, 0), 32), ("krater", (42000, 0, 0), 70),
                            ("absperrung", (43000, 0, 0), 9), ("eiszapfen", (44000, 0, 0), 55), ("ausguck_lift", (45000, 0, 0), 7),
-                           ("planetenkern_erstling", (46000, 0, 0), 1.6)):
+                           ("planetenkern_erstling", (46000, 0, 0), 1.6), ("dornenschrift", (47000, 0, 0), 4.5),
+                           ("dornenschrift_boden", (48000, 0, 0), 4), ("verbrambelter_uebersetzer", (49000, 0, 0), 1.3),
+                           ("wortkern", (50000, 0, 0), 0.9)):
         models[key].location = loc
-        target = Vector(loc) + Vector((0, 0, 12 if key == "warpturm" else 0))
+        target = Vector(loc) + Vector((0, 0, {"warpturm": 12, "dornenschrift": 1.1, "verbrambelter_uebersetzer": 0.3, "wortkern": 0.2}.get(key, 0)))
         render(cam, os.path.join(PREVIEWS, key + ".png"), target + Vector((dist * 0.8, -dist * 0.9, dist * 0.45)), target, (900, 600),
                lens=35, show=[models[key].name])
         models[key].location = (0, 0, 0)

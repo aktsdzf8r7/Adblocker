@@ -487,6 +487,59 @@ def bridge_offset(B):
     return vec([round(n["x"] * d, 3), round(n["y"] * d, 3), round(n["z"] * d, 3)])
 
 
+STATIONS = ("wurzellabor", "glutwerk", "treibstation", "kristallobservatorium")
+
+
+def facing(a, target):
+    """Euler angles that stand a model on an anchor (+y along its normal) with its front (+z) towards target."""
+    n = a["normal"]
+    up = [n["x"], n["y"], n["z"]]
+    p = at(a)
+    fwd = [target[i] - p[i] for i in range(3)]
+    d = sum(fwd[i] * up[i] for i in range(3))
+    fwd = [fwd[i] - up[i] * d for i in range(3)]
+    return look_rotation(fwd, up) if any(abs(c) > 1e-6 for c in fwd) else upright(a)
+
+
+def language_spots(A):
+    """The bramble language in the world (spec 2026-10-11, 4): the scripts and word cores the DLL draws, and the NH
+    interaction volumes that teach (touching a word core, touching the overgrown translator), per body."""
+    import verdornt_sprache as vs
+    schriften, kerne, volumes = [], [], {}
+
+    def spot(body, group, name, front_to_centre):
+        if group is None:  # a fixed point in a dimension: face its middle
+            pos = list(name)
+            return pos, look_rotation([-c for c in pos], [0.0, 1.0, 0.0]), pos
+        a = A[group][name]
+        if front_to_centre and group in STATIONS:
+            return at(a), facing(a, at(A[group]["mitte"])), at(a, 0.3)
+        return at(a), upright(a), at(a, 0.3)
+
+    for tid, (body, group, name, flat) in vs.TEXT_SPOTS.items():
+        pos, rot, _ = spot(body, group, name, not flat)
+        schriften.append({"name": "VD_Schrift_" + tid, "body": body, "position": vec(pos), "rotation": vec(rot), "text": tid, "boden": flat})
+    for kid, (body, group, name) in vs.KERN_SPOTS.items():
+        pos, rot, touch = spot(body, group, name, False)
+        kerne.append({"id": kid, "body": body, "position": vec(pos), "rotation": vec(rot)})
+        volumes.setdefault(body, []).append({"position": vec(touch), "radius": 1.0, "range": 2.5, "prompt": "Wortkern berühren",
+                                             "condition": "ZEKIVD_WORTKERN_" + kid, "persistent": True, "reusable": False,
+                                             "rename": "VD_Wortkern_" + kid})
+    u = A["wurzellabor"]["uebersetzer"]
+    volumes.setdefault("Erstling", []).append({"position": vec(at(u, 0.3)), "radius": 0.8, "range": 2.5, "prompt": "Verbrambelten Übersetzer berühren",
+                                               "condition": "ZEKIVD_DORNSPRACHE", "persistent": True, "reusable": False,
+                                               "rename": "VD_Uebersetzer_Volumen"})
+    return schriften, kerne, volumes
+
+
+def with_language(A, body, cfg):
+    """Adds the language's interaction volumes of this body to its config."""
+    vols = language_spots(A)[2].get(body, [])
+    if vols:
+        cfg.setdefault("Volumes", {}).setdefault("interactionVolumes", []).extend(vols)
+    return cfg
+
+
 def placements(A):
     """assets/models/placements.json: where the DLL puts the Blender models (see Models.cs)."""
     props = [
@@ -559,7 +612,15 @@ def placements(A):
     T = tubes(A)
     # conditions the DLL builds at runtime (MarbleTube.Condition), declared for the validator
     sets = sorted(f"ZEKIVD_{t['name'].upper()}_{slot.upper()}" for t in T for slot in t["mulden"])
-    return {"props": props, "lights": lights, "bramble": bramble, "computers": computers(), "tubes": T, "setsConditions": sets}
+    import verdornt_sprache as vs
+    schriften, kerne, _ = language_spots(A)
+    u = A["wurzellabor"]["uebersetzer"]
+    props.append({"model": "verbrambelter_uebersetzer", "name": "VD_Verbrambelter_Uebersetzer", "body": "Erstling", "collider": False,
+                  "position": vec(at(u)), "rotation": vec(facing(u, at(A["wurzellabor"]["mitte"]))), "scale": 1})
+    # the words the DLL remembers once learnt (BrambleScript.cs, Vocabulary.WordCondition)
+    sets += sorted("ZEKIVD_WORT_" + w[0].upper() for w in vs.WORDS)
+    return {"props": props, "lights": lights, "bramble": bramble, "computers": computers(), "tubes": T, "setsConditions": sets,
+            "schriften": schriften, "wortkerne": kerne}
 
 
 # ship log layout (rumor mode)
@@ -689,10 +750,12 @@ def main():
     manifests()
     write_json(f"systems/{SYSTEM}.json", system())
     write_json("planets/Herzdorn.json", herzdorn())
-    write_json("planets/Erstling.json", erstling(A))
-    write_json("planets/Glutdorn.json", glutdorn(A))
-    write_json("planets/Nebelranke.json", nebelranke(A))
-    write_json("planets/Hohlsamen.json", hohlsamen(A))
+    import verdornt_sprache  # the bramble language (assets/sprache.json)
+    verdornt_sprache.write_all(MOD)
+    write_json("planets/Erstling.json", with_language(A, "Erstling", erstling(A)))
+    write_json("planets/Glutdorn.json", with_language(A, "Glutdorn", glutdorn(A)))
+    write_json("planets/Nebelranke.json", with_language(A, "Nebelranke", nebelranke(A)))
+    write_json("planets/Hohlsamen.json", with_language(A, "Hohlsamen", hohlsamen(A)))
     write_json("planets/Ausguck.json", ausguck(A))
     write_json("planets/Fernlager.json", fernlager())
     write_json("planets/TimberHearth.json", timber_hearth())
@@ -708,7 +771,7 @@ def main():
                                                         extra={"Props": {"translatorText": [nomai("computer", "Ankunft_Tansy", [0, -10, 40])]}}))
     dialogue_hornfels()
     for name, cfg in dimensions().items():
-        write_json(f"planets/{name}.json", cfg)
+        write_json(f"planets/{name}.json", with_language(A, name, cfg))
     write_json("assets/models/placements.json", placements(A))
 
 

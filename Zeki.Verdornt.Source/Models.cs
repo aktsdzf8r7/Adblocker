@@ -20,6 +20,9 @@ public class Placements
     public List<ReactiveComputer> computers = new();
     /// <summary>Marble tubes (MarbleTube.cs).</summary>
     public List<TubeConfig> tubes = new();
+    /// <summary>Texts in bramble script and the word cores (BrambleScript.cs).</summary>
+    public List<ScriptPlacement> schriften = new();
+    public List<KernPlacement> wortkerne = new();
 }
 
 public class PropPlacement

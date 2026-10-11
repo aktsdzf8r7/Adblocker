@@ -56,6 +56,7 @@ public class ZekiVerdornt : ModBehaviour
         if (system == "SolarSystem") Guard("Absturzstelle", () => CrashSite.Begin(this));
         Guard("Computer", () => ReactiveComputers.Setup(this));
         Guard("Murmelröhren", () => MarbleTube.Setup(this));
+        if (system == SystemName) Guard("Dornensprache", () => BrambleScript.Setup(this));
     }
 
     /// <summary>
