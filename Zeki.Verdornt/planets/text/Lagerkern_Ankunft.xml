@@ -18,7 +18,12 @@
   <TextBlock>
     <ID>4</ID>
     <ParentID>3</ParentID>
-    <Text>Der Rücksamen in seiner Kupferwiege führt dorthin zurück, woher du kamst.</Text>
+    <Text>Rückweg: der Rücksamen in seiner Kupferwiege. Ziel: das Herkunftssystem der Lebensform.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>5</ID>
+    <ParentID>4</ParentID>
+    <Text>Bewohner des Lagers: Hyssop, Rue, Tansy, Yarrow. Anwesend: keiner.</Text>
   </TextBlock>
   <ShipLogConditions>
     <RevealFact>
@@ -28,6 +33,10 @@
     <RevealFact>
       <FactID>ZEKIVD_RUECKSAMEN</FactID>
       <Condition>4</Condition>
+    </RevealFact>
+    <RevealFact>
+      <FactID>ZEKIVD_VIER_RUMOR</FactID>
+      <Condition>5</Condition>
     </RevealFact>
   </ShipLogConditions>
 </NomaiObject>

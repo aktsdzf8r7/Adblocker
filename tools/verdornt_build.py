@@ -624,10 +624,12 @@ def placements(A):
 
 
 # ship log layout (rumor mode)
-ENTRIES_HOME = {"ZEKIVD_ABSTURZ": (2900, -400)}
-ENTRIES = {"ZEKIVD_LAGER": (0, 0), "ZEKIVD_AUSGUCK": (420, 220), "ZEKIVD_NETZ": (420, -220), "ZEKIVD_KERNE": (-500, 0), "ZEKIVD_VIER": (0, 420),
-           "ZEKIVD_LABOR": (-320, 680), "ZEKIVD_SPRACHE": (320, 680), "ZEKIVD_GLUTWERK": (950, 0), "ZEKIVD_TREIBSTATION": (950, 420),
-           "ZEKIVD_OBSERVATORIUM": (950, -420)}
+ENTRIES_HOME = {"ZEKIVD_ABSTURZ": (2900, -400), "ZEKIVD_SCHLUND": (3350, -400)}   # the DLL moves them off the game's cards
+# every card is reached by an arrow (rumors with a SourceID): the camp feeds the Ausguck, the network, the cores and the
+# four; the stations form a ring (Treibstation -> Glutwerk -> Labor -> Observatorium -> Treibstation), the lab feeds the language
+ENTRIES = {"ZEKIVD_LAGER": (0, 0), "ZEKIVD_KERNE": (-550, 0), "ZEKIVD_AUSGUCK": (550, 260), "ZEKIVD_NETZ": (550, -260),
+           "ZEKIVD_VIER": (-550, 460), "ZEKIVD_GLUTWERK": (0, 620), "ZEKIVD_LABOR": (-460, 1020), "ZEKIVD_SPRACHE": (-980, 1020),
+           "ZEKIVD_TREIBSTATION": (460, 1020), "ZEKIVD_OBSERVATORIUM": (0, 1420)}
 ORANGE = (color(150, 230, 120), color(220, 255, 200))
 
 
@@ -698,7 +700,7 @@ def entry_art(entry, seed):
     """Ship log pictures for stage 1 (a thorn ball with the entry's own tint; renders follow later)."""
     from PIL import ImageDraw
     rnd = random.Random(seed)
-    tint = {"ZEKIVD_ABSTURZ": (150, 230, 120), "ZEKIVD_LAGER": (150, 200, 255), "ZEKIVD_AUSGUCK": (255, 210, 140),
+    tint = {"ZEKIVD_ABSTURZ": (150, 230, 120), "ZEKIVD_SCHLUND": (90, 200, 110), "ZEKIVD_LAGER": (150, 200, 255), "ZEKIVD_AUSGUCK": (255, 210, 140),
             "ZEKIVD_NETZ": (120, 190, 255), "ZEKIVD_KERNE": (190, 230, 255), "ZEKIVD_VIER": (255, 190, 220),
             "ZEKIVD_LABOR": (140, 255, 170), "ZEKIVD_SPRACHE": (120, 255, 150), "ZEKIVD_GLUTWERK": (255, 140, 80),
             "ZEKIVD_TREIBSTATION": (150, 230, 160), "ZEKIVD_OBSERVATORIUM": (200, 150, 255)}[entry]

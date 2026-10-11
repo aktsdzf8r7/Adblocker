@@ -15,4 +15,10 @@
     <ParentID>2</ParentID>
     <Text>Rücksamen: bereit. Warp-Turm: schläft. Kernhöhle: verschlossen.</Text>
   </TextBlock>
+  <ShipLogConditions>
+    <RevealFact>
+      <FactID>ZEKIVD_VIER_RUMOR</FactID>
+      <Condition>1</Condition>
+    </RevealFact>
+  </ShipLogConditions>
 </NomaiObject>

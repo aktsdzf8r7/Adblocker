@@ -36,6 +36,12 @@
       <Name>Der Ausguck</Name>
       <Curiosity>ZEKIVD_LAGER</Curiosity>
       <RumorFact>
+        <ID>ZEKIVD_AUSGUCK_RUMOR</ID>
+        <SourceID>ZEKIVD_LAGER</SourceID>
+        <RumorName>Ein Ausguck über dem System</RumorName>
+        <Text>Tansy sagt, der Warp-Turm von Erstling führt zu einem Ausguck, von dem man alles sieht, was die drei hier gefunden haben.</Text>
+      </RumorFact>
+      <RumorFact>
         <ID>ZEKIVD_HERZDORN_RUMOR</ID>
         <RumorName>Ein gefangener Stern</RumorName>
         <Text>In der Mitte des Systems ist ein Stern in einem Käfig aus Dornen gefangen. Die Dornen trinken sein Licht.</Text>
@@ -63,6 +69,7 @@
       <Curiosity>ZEKIVD_LAGER</Curiosity>
       <RumorFact>
         <ID>ZEKIVD_KAELTE_HINWEIS</ID>
+        <SourceID>ZEKIVD_LAGER</SourceID>
         <RumorName>Ein Licht in der Kälte</RumorName>
         <Text>Rue warnt vor einem Licht in einer kalten Dimension: Es ist kein Stern, sondern ein Anglerfisch.</Text>
       </RumorFact>
@@ -100,6 +107,12 @@
     <ID>ZEKIVD_VIER</ID>
     <Name>Hyssop, Rue, Tansy und Yarrow</Name>
     <IsCuriosity/>
+    <RumorFact>
+      <ID>ZEKIVD_VIER_RUMOR</ID>
+      <SourceID>ZEKIVD_LAGER</SourceID>
+      <RumorName>Vier Bewohner</RumorName>
+      <Text>Der Lagerkern nennt vier Bewohner des Lagers: Hyssop, Rue, Tansy und Yarrow.</Text>
+    </RumorFact>
     <ExploreFact>
       <ID>ZEKIVD_FALSCH_ABGEBOGEN</ID>
       <Text>Drei Nomai vom Vessel – Hyssop, Rue und Tansy – suchten in den Dornen nach den Rettungskapseln. Ein alter Samen zog sie in dieses System.</Text>
@@ -118,8 +131,9 @@
       <Curiosity>ZEKIVD_VIER</Curiosity>
       <RumorFact>
         <ID>ZEKIVD_LABOR_RUMOR</ID>
+        <SourceID>ZEKIVD_GLUTWERK</SourceID>
         <RumorName>Hyssop hört die Wurzeln</RumorName>
-        <Text>Rue schreibt, dass Hyssop unten in der breitesten Schlucht von Erstling arbeitet. Er sagt, er hört die Wurzeln.</Text>
+        <Text>Das Glutwerk führt Hyssop als Personal im Wurzellabor, unten in der breitesten Schlucht von Erstling. Er hört die Wurzeln.</Text>
       </RumorFact>
       <ExploreFact>
         <ID>ZEKIVD_LABOR_FOUND</ID>
@@ -130,6 +144,12 @@
       <ID>ZEKIVD_SPRACHE</ID>
       <Name>Die Dornensprache</Name>
       <Curiosity>ZEKIVD_VIER</Curiosity>
+      <RumorFact>
+        <ID>ZEKIVD_SPRACHE_RUMOR</ID>
+        <SourceID>ZEKIVD_LABOR</SourceID>
+        <RumorName>Ein Übersetzer, der die Dornen hört</RumorName>
+        <Text>Im Wurzellabor ist eine Wurzel um einen Übersetzer gewachsen. Er gibt Laute wieder, und die Wurzeln antworten.</Text>
+      </RumorFact>
       <ExploreFact>
         <ID>ZEKIVD_DORNSPRACHE_FAKT</ID>
         <Text>Im Wurzellabor ist eine Wurzel um einen Nomai-Übersetzer gewachsen. Seit ich ihn berührt habe, übersetzt mein Übersetzer die leuchtende Dornenschrift – aber nur die Wörter, die ich kenne.</Text>
@@ -158,13 +178,15 @@
     <IsCuriosity/>
     <RumorFact>
       <ID>ZEKIVD_MUTTERKERN_RUMOR</ID>
+      <SourceID>ZEKIVD_LAGER</SourceID>
       <RumorName>Der Mutterkern</RumorName>
       <Text>Alle Planetenkerne gleichen einem Kern im Herzdorn: dem Mutterkern, der jeden Samen dieses Systems geworfen hat.</Text>
     </RumorFact>
     <RumorFact>
       <ID>ZEKIVD_KERN_SCHREIN_RUMOR</ID>
+      <SourceID>ZEKIVD_LAGER</SourceID>
       <RumorName>Ein Schrein für vier Kerne</RumorName>
-      <Text>Hyssop schreibt, dass alle vier Planetenkerne zum Kernschrein vor dem Herzdorn gehören. Dann öffnet sich der Weg nach innen.</Text>
+      <Text>Alle vier Planetenkerne gehören zum Kernschrein vor dem Herzdorn. Dann öffnet sich der Weg nach innen.</Text>
     </RumorFact>
     <ExploreFact>
       <ID>ZEKIVD_KERN_PLAN</ID>

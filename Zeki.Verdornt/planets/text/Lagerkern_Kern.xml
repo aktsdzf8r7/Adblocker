@@ -8,17 +8,26 @@
   <TextBlock>
     <ID>2</ID>
     <ParentID>1</ParentID>
-    <Text>Hyssop: Jeder Planet hier trägt einen solchen Kern. Alle stammen vom selben Herzen.</Text>
+    <Text>Archiv (Hyssop): Jeder Planet trägt einen solchen Kern. Alle stammen vom selben Herzen.</Text>
   </TextBlock>
   <TextBlock>
     <ID>3</ID>
     <ParentID>2</ParentID>
-    <Text>Hyssop: Bringt man alle vier zum Kernschrein vor dem Herzdorn, öffnet sich der Weg nach innen.</Text>
+    <Text>Kernschrein vor dem Herzdorn: 4 Fassungen. Bei 4 eingesetzten Kernen öffnet sich der Weg nach innen.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>4</ID>
+    <ParentID>3</ParentID>
+    <Text>Bewohner des Lagers: Hyssop, Rue, Tansy, Yarrow. Anwesend: keiner.</Text>
   </TextBlock>
   <ShipLogConditions>
     <RevealFact>
       <FactID>ZEKIVD_KERN_SCHREIN_RUMOR</FactID>
       <Condition>3</Condition>
+    </RevealFact>
+    <RevealFact>
+      <FactID>ZEKIVD_VIER_RUMOR</FactID>
+      <Condition>4</Condition>
     </RevealFact>
   </ShipLogConditions>
 </NomaiObject>

@@ -105,6 +105,36 @@
           "ZEKIVD_GLUTWERK_FOUND"
         ]
       }
+    ],
+    "interactionVolumes": [
+      {
+        "position": {
+          "x": -82.642,
+          "y": -77.571,
+          "z": 188.134
+        },
+        "radius": 1.0,
+        "range": 2.5,
+        "prompt": "Wortkern berühren",
+        "condition": "ZEKIVD_WORTKERN_GLUT_1",
+        "persistent": true,
+        "reusable": false,
+        "rename": "VD_Wortkern_GLUT_1"
+      },
+      {
+        "position": {
+          "x": -190.474,
+          "y": 19.94,
+          "z": 106.681
+        },
+        "radius": 1.0,
+        "range": 2.5,
+        "prompt": "Wortkern berühren",
+        "condition": "ZEKIVD_WORTKERN_GLUT_2",
+        "persistent": true,
+        "reusable": false,
+        "rename": "VD_Wortkern_GLUT_2"
+      }
     ]
   }
 }

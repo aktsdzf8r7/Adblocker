@@ -31,8 +31,13 @@ ABSTURZ = (
              'Neben dem alten Einschlagkrater auf Timber Hearth liegt ein frischer: Ein riesiger Dornensamen ist zu Beginn dieser Schleife eingeschlagen. Er ist offen – man kann hineinfliegen.'),
         fact('ZEKIVD_ABSTURZ_NOMAI',
              'Auf einem Nomai-Computer am Samen steht: Der Samen ist nicht gewachsen, er wurde geworfen – von einer Nomai namens Tansy.'),
-        fact('ZEKIVD_ABSTURZ_SCHLUND',
-             'Im Samen liegt eine kleine, dunkle Dimension. In ihrer Mitte dreht sich ein Strudel aus Dornen, der alles in sich hineinzieht.'),
+    ], [
+        entry('ZEKIVD_SCHLUND', 'Der Samenschlund', [
+            rumor('ZEKIVD_SCHLUND_RUMOR', 'Ein Strudel im Samen',
+                  'Das Flugprotokoll des Samens nennt seine Ladung: einen Strudel, der zum Lager auf Erstling führt.', 'ZEKIVD_ABSTURZ'),
+            fact('ZEKIVD_ABSTURZ_SCHLUND',
+                 'Im Samen liegt eine kleine, dunkle Dimension. In ihrer Mitte dreht sich ein Strudel aus Dornen, der alles in sich hineinzieht.'),
+        ]),
     ], curiosity=True),
 )
 
@@ -52,6 +57,9 @@ VERDORNT = (
              'Ich habe den Warp-Turm von Erstling geweckt. Er führt zum Ausguck hoch über dem System.'),
     ], [
         entry('ZEKIVD_AUSGUCK', 'Der Ausguck', [
+            rumor('ZEKIVD_AUSGUCK_RUMOR', 'Ein Ausguck über dem System',
+                  'Tansy sagt, der Warp-Turm von Erstling führt zu einem Ausguck, von dem man alles sieht, was die drei hier gefunden haben.',
+                  'ZEKIVD_LAGER'),
             rumor('ZEKIVD_HERZDORN_RUMOR', 'Ein gefangener Stern',
                   'In der Mitte des Systems ist ein Stern in einem Käfig aus Dornen gefangen. Die Dornen trinken sein Licht.'),
             fact('ZEKIVD_SYSTEM_NAMEN',
@@ -65,7 +73,7 @@ VERDORNT = (
         ]),
         entry('ZEKIVD_NETZ', 'Das Dornen-Netz', [
             rumor('ZEKIVD_KAELTE_HINWEIS', 'Ein Licht in der Kälte',
-                  'Rue warnt vor einem Licht in einer kalten Dimension: Es ist kein Stern, sondern ein Anglerfisch.'),
+                  'Rue warnt vor einem Licht in einer kalten Dimension: Es ist kein Stern, sondern ein Anglerfisch.', 'ZEKIVD_LAGER'),
             fact('ZEKIVD_NETZ_RUE',
                  'Rue hat die Knoten kartiert: Die Dornen bilden ein Netz zwischen den Planeten. Der Weg zu den anderen führt über einen Kreuzweg.'),
             fact('ZEKIVD_EISPFORTE_FOUND',
@@ -83,6 +91,8 @@ VERDORNT = (
         ]),
     ], curiosity=True),
     entry('ZEKIVD_VIER', 'Hyssop, Rue, Tansy und Yarrow', [
+        rumor('ZEKIVD_VIER_RUMOR', 'Vier Bewohner',
+              'Der Lagerkern nennt vier Bewohner des Lagers: Hyssop, Rue, Tansy und Yarrow.', 'ZEKIVD_LAGER'),
         fact('ZEKIVD_FALSCH_ABGEBOGEN',
              'Drei Nomai vom Vessel – Hyssop, Rue und Tansy – suchten in den Dornen nach den Rettungskapseln. Ein alter Samen zog sie in dieses System.'),
         fact('ZEKIVD_URSPRUNG',
@@ -92,11 +102,14 @@ VERDORNT = (
     ], [
         entry('ZEKIVD_LABOR', 'Das Wurzellabor', [
             rumor('ZEKIVD_LABOR_RUMOR', 'Hyssop hört die Wurzeln',
-                  'Rue schreibt, dass Hyssop unten in der breitesten Schlucht von Erstling arbeitet. Er sagt, er hört die Wurzeln.'),
+                  'Das Glutwerk führt Hyssop als Personal im Wurzellabor, unten in der breitesten Schlucht von Erstling. Er hört die Wurzeln.',
+                  'ZEKIVD_GLUTWERK'),
             fact('ZEKIVD_LABOR_FOUND',
                  'Unten in der breitesten Schlucht von Erstling steht Hyssops Labor auf einem Teller aus Wurzeln, direkt am leuchtenden Kern.'),
         ]),
         entry('ZEKIVD_SPRACHE', 'Die Dornensprache', [
+            rumor('ZEKIVD_SPRACHE_RUMOR', 'Ein Übersetzer, der die Dornen hört',
+                  'Im Wurzellabor ist eine Wurzel um einen Übersetzer gewachsen. Er gibt Laute wieder, und die Wurzeln antworten.', 'ZEKIVD_LABOR'),
             fact('ZEKIVD_DORNSPRACHE_FAKT',
                  'Im Wurzellabor ist eine Wurzel um einen Nomai-Übersetzer gewachsen. Seit ich ihn berührt habe, übersetzt mein Übersetzer die leuchtende Dornenschrift – aber nur die Wörter, die ich kenne.'),
             fact('ZEKIVD_SPRACHE_1', 'Tansy kannte die ersten Wörter: Herz, tragen, Welten.'),
@@ -107,13 +120,13 @@ VERDORNT = (
     ], curiosity=True),
     entry('ZEKIVD_KERNE', 'Die Planetenkerne', [
         rumor('ZEKIVD_MUTTERKERN_RUMOR', 'Der Mutterkern',
-              'Alle Planetenkerne gleichen einem Kern im Herzdorn: dem Mutterkern, der jeden Samen dieses Systems geworfen hat.'),
+              'Alle Planetenkerne gleichen einem Kern im Herzdorn: dem Mutterkern, der jeden Samen dieses Systems geworfen hat.', 'ZEKIVD_LAGER'),
         fact('ZEKIVD_KERN_PLAN',
              'Ein Planetenkern ist der Samenkern, aus dem ein ganzer Planet gewachsen ist.'),
         fact('ZEKIVD_KERN_ERSTLING_GENOMMEN',
              'In der Höhle hinter dem Lagertor lag der Planetenkern von Erstling: das Herz des Samens, aus dem dieser Planet gewachsen ist.'),
         rumor('ZEKIVD_KERN_SCHREIN_RUMOR', 'Ein Schrein für vier Kerne',
-              'Hyssop schreibt, dass alle vier Planetenkerne zum Kernschrein vor dem Herzdorn gehören. Dann öffnet sich der Weg nach innen.'),
+              'Alle vier Planetenkerne gehören zum Kernschrein vor dem Herzdorn. Dann öffnet sich der Weg nach innen.', 'ZEKIVD_LAGER'),
     ], curiosity=True),
 )
 
@@ -121,7 +134,7 @@ VERDORNT = (
 GLUTDORN = (
     entry('ZEKIVD_GLUTWERK', 'Das Glutwerk', [
         rumor('ZEKIVD_GLUTWERK_RUMOR', 'Ein Wärmewerk auf Glutdorn',
-              'Rue schreibt, dass Hyssop auf der größten Scholle von Glutdorn ein Wärmewerk baut.'),
+              'Die Karte der Treibstation verzeichnet ein Wärmewerk auf der größten Scholle von Glutdorn, erbaut von Hyssop.', 'ZEKIVD_TREIBSTATION'),
         fact('ZEKIVD_GLUTWERK_FOUND',
              'Auf der größten Scholle von Glutdorn steht das Glutwerk. Eine Brücke führt über die Lavaspalte zur Scholle mit dem Knoten – wenn ihre Murmel richtig liegt.'),
     ]),
@@ -129,7 +142,7 @@ GLUTDORN = (
 NEBELRANKE = (
     entry('ZEKIVD_TREIBSTATION', 'Die Treibstation', [
         rumor('ZEKIVD_TREIBSTATION_RUMOR', 'Rues Station im Nebel',
-              'Tansy schreibt, dass Rue in einer Treibstation auf der größten Insel im Nebel von Nebelranke sitzt.'),
+              'Das Wortarchiv führt Rue in einer Treibstation auf der größten Insel im Nebel von Nebelranke.', 'ZEKIVD_OBSERVATORIUM'),
         rumor('ZEKIVD_ERNESTO_RUMOR', 'Ein Fisch, der spricht',
               'Rue behauptet, im Nebel habe ein Fisch mit ihr gesprochen – höflich, wie ein Gelehrter.'),
         fact('ZEKIVD_TREIBSTATION_FOUND',
@@ -139,7 +152,7 @@ NEBELRANKE = (
 HOHLSAMEN = (
     entry('ZEKIVD_OBSERVATORIUM', 'Das Kristallobservatorium', [
         rumor('ZEKIVD_OBSERVATORIUM_RUMOR', 'Tansys Wörter',
-              'Hyssop schreibt, dass Tansy in ihrem Observatorium auf Hohlsamen die Wörter der Dornen sammelt.'),
+              'Das Wurzellabor verweist auf ein Wortarchiv der Dornensprache im Kristallobservatorium auf Hohlsamen, verwaltet von Tansy.', 'ZEKIVD_LABOR'),
         fact('ZEKIVD_OBSERVATORIUM_FOUND',
              'Auf dem größten Splitter der Samenhülle von Hohlsamen steht Tansys Observatorium, offen zum Himmel.'),
         fact('ZEKIVD_HERZ_BLICK',

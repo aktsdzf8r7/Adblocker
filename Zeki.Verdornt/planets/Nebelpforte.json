@@ -42,6 +42,22 @@
           "ZEKIVD_NEBELPFORTE_FOUND"
         ]
       }
+    ],
+    "interactionVolumes": [
+      {
+        "position": {
+          "x": 50.0,
+          "y": -40.0,
+          "z": -30.0
+        },
+        "radius": 1.0,
+        "range": 2.5,
+        "prompt": "Wortkern berühren",
+        "condition": "ZEKIVD_WORTKERN_NEBELPFORTE",
+        "persistent": true,
+        "reusable": false,
+        "rename": "VD_Wortkern_NEBELPFORTE"
+      }
     ]
   },
   "Props": {

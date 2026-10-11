@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Kristallobservatorium: Tansys erste Wörter -->
+<!-- Kristallobservatorium: Wortarchiv, Eintrag 1 -->
 <NomaiObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/text_schema.xsd">
   <TextBlock>
     <ID>1</ID>
-    <Text>Tansy: Die Dornen sprechen in Lauten, nicht in Zeichen. Der überwachsene Übersetzer gibt sie wieder.</Text>
+    <Text>WORTARCHIV DER DORNENSPRACHE – EINTRAG 1. Form: Laute, keine Zeichen. Wiedergabe: der überwachsene Übersetzer.</Text>
   </TextBlock>
   <TextBlock>
     <ID>2</ID>
     <ParentID>1</ParentID>
-    <Text>Tansy: Sicher sind diese: „marh“ heißt Herz. „vrass“ heißt tragen. „gaar“ heißt Welten.</Text>
+    <Text>Gesichert: „marh“ = Herz. „vrass“ = tragen. „gaar“ = Welten.</Text>
   </TextBlock>
   <ShipLogConditions>
     <RevealFact>

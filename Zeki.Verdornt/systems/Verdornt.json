@@ -63,66 +63,66 @@
       }
     },
     {
+      "id": "ZEKIVD_KERNE",
+      "position": {
+        "x": -550,
+        "y": 0
+      }
+    },
+    {
       "id": "ZEKIVD_AUSGUCK",
       "position": {
-        "x": 420,
-        "y": 220
+        "x": 550,
+        "y": 260
       }
     },
     {
       "id": "ZEKIVD_NETZ",
       "position": {
-        "x": 420,
-        "y": -220
-      }
-    },
-    {
-      "id": "ZEKIVD_KERNE",
-      "position": {
-        "x": -500,
-        "y": 0
+        "x": 550,
+        "y": -260
       }
     },
     {
       "id": "ZEKIVD_VIER",
       "position": {
-        "x": 0,
-        "y": 420
-      }
-    },
-    {
-      "id": "ZEKIVD_LABOR",
-      "position": {
-        "x": -320,
-        "y": 680
-      }
-    },
-    {
-      "id": "ZEKIVD_SPRACHE",
-      "position": {
-        "x": 320,
-        "y": 680
+        "x": -550,
+        "y": 460
       }
     },
     {
       "id": "ZEKIVD_GLUTWERK",
       "position": {
-        "x": 950,
-        "y": 0
+        "x": 0,
+        "y": 620
+      }
+    },
+    {
+      "id": "ZEKIVD_LABOR",
+      "position": {
+        "x": -460,
+        "y": 1020
+      }
+    },
+    {
+      "id": "ZEKIVD_SPRACHE",
+      "position": {
+        "x": -980,
+        "y": 1020
       }
     },
     {
       "id": "ZEKIVD_TREIBSTATION",
       "position": {
-        "x": 950,
-        "y": 420
+        "x": 460,
+        "y": 1020
       }
     },
     {
       "id": "ZEKIVD_OBSERVATORIUM",
       "position": {
-        "x": 950,
-        "y": -420
+        "x": 0,
+        "y": 1420
       }
     }
   ]

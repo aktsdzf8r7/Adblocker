@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Kristallobservatorium: hören und Kern -->
+<!-- Kristallobservatorium: Wortarchiv, Eintrag 3 -->
 <NomaiObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/text_schema.xsd">
   <TextBlock>
     <ID>1</ID>
-    <Text>Tansy: „shii“ heißt hören. „dhuum“ heißt Kern – der Kern, aus dem ein Planet wächst.</Text>
+    <Text>WORTARCHIV – EINTRAG 3. „shii“ = hören. „dhuum“ = Kern, aus dem ein Planet wächst.</Text>
   </TextBlock>
   <TextBlock>
     <ID>2</ID>
     <ParentID>1</ParentID>
-    <Text>Tansy: Ich glaube, die Dornen hören uns, seit wir angekommen sind.</Text>
+    <Text>Befund: Die Dornen hören uns seit unserer Ankunft.</Text>
   </TextBlock>
   <TextBlock>
     <ID>3</ID>
     <ParentID>2</ParentID>
-    <Text>Tansy: Rue sitzt in ihrer Treibstation auf der größten Insel im Nebel von Nebelranke.</Text>
+    <Text>Personal: Rue, Treibstation auf der größten Insel im Nebel von Nebelranke.</Text>
   </TextBlock>
   <ShipLogConditions>
     <RevealFact>

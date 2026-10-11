@@ -14,9 +14,20 @@
       <ID>ZEKIVD_ABSTURZ_NOMAI</ID>
       <Text>Auf einem Nomai-Computer am Samen steht: Der Samen ist nicht gewachsen, er wurde geworfen – von einer Nomai namens Tansy.</Text>
     </ExploreFact>
-    <ExploreFact>
-      <ID>ZEKIVD_ABSTURZ_SCHLUND</ID>
-      <Text>Im Samen liegt eine kleine, dunkle Dimension. In ihrer Mitte dreht sich ein Strudel aus Dornen, der alles in sich hineinzieht.</Text>
-    </ExploreFact>
+    <Entry>
+      <ID>ZEKIVD_SCHLUND</ID>
+      <Name>Der Samenschlund</Name>
+      <Curiosity>ZEKIVD_ABSTURZ</Curiosity>
+      <RumorFact>
+        <ID>ZEKIVD_SCHLUND_RUMOR</ID>
+        <SourceID>ZEKIVD_ABSTURZ</SourceID>
+        <RumorName>Ein Strudel im Samen</RumorName>
+        <Text>Das Flugprotokoll des Samens nennt seine Ladung: einen Strudel, der zum Lager auf Erstling führt.</Text>
+      </RumorFact>
+      <ExploreFact>
+        <ID>ZEKIVD_ABSTURZ_SCHLUND</ID>
+        <Text>Im Samen liegt eine kleine, dunkle Dimension. In ihrer Mitte dreht sich ein Strudel aus Dornen, der alles in sich hineinzieht.</Text>
+      </ExploreFact>
+    </Entry>
   </Entry>
 </AstroObjectEntry>

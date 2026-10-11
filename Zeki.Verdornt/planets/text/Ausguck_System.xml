@@ -3,27 +3,27 @@
 <NomaiObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/text_schema.xsd">
   <TextBlock>
     <ID>1</ID>
-    <Text>AUSGUCK. Blick auf das System, das wir Dornenkranz nennen.</Text>
+    <Text>AUSGUCK. Blick auf das System Dornenkranz.</Text>
   </TextBlock>
   <TextBlock>
     <ID>2</ID>
     <ParentID>1</ParentID>
-    <Text>Innen: Herzdorn, der gefangene Stern. Dann Erstling, Glutdorn, Nebelranke, Hohlsamen.</Text>
+    <Text>Körper, von innen: Herzdorn (gefangener Stern), Erstling, Glutdorn, Nebelranke, Hohlsamen.</Text>
   </TextBlock>
   <TextBlock>
     <ID>3</ID>
     <ParentID>2</ParentID>
-    <Text>Der Stern lebt noch. Sein Licht fällt durch die Lücken im Geflecht. Die Dornen trinken es.</Text>
+    <Text>Herzdorn: Stern aktiv. Licht dringt durch die Lücken im Geflecht. Die Dornen trinken es.</Text>
   </TextBlock>
   <TextBlock>
     <ID>4</ID>
     <ParentID>3</ParentID>
-    <Text>Hyssop: Ich zähle die Samen, die der Herzdorn hinauswirft. Ich nenne es die Bramblesation. Sie wächst.</Text>
+    <Text>Samenzählung (Hyssop): steigend. Bezeichnung der Zählung: Bramblesation.</Text>
   </TextBlock>
   <TextBlock>
     <ID>5</ID>
     <ParentID>4</ParentID>
-    <Text>Yarrow: Schlechtes Wortspiel.</Text>
+    <Text>Kommentar zur Bezeichnung: „Schlechtes Wortspiel.“ Eingetragen von: Yarrow.</Text>
   </TextBlock>
   <ShipLogConditions>
     <RevealFact>

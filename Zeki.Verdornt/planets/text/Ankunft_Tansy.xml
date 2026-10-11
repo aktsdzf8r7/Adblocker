@@ -3,12 +3,12 @@
 <NomaiObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/text_schema.xsd">
   <TextBlock>
     <ID>1</ID>
-    <Text>Tansy: Ankunftskammer. Wer hier erwacht, ist durch meinen Samen gekommen.</Text>
+    <Text>ANKUNFTSKAMMER. Ankunft registriert: eine Lebensform. Weg: Samen 1, geworfen von Tansy in Richtung des Vessel-Systems.</Text>
   </TextBlock>
   <TextBlock>
     <ID>2</ID>
     <ParentID>1</ParentID>
-    <Text>Tansy: Der kleine Samen dort führt hinaus nach Erstling. Unser Lager ist nicht weit.</Text>
+    <Text>Ausgang: der kleine Samen. Ziel: Erstling. Entfernung zum Lager: gering.</Text>
   </TextBlock>
   <ShipLogConditions>
     <RevealFact>

@@ -1,3 +1,4 @@
+using HarmonyLib;
 using OWML.Common;
 using OWML.ModHelper;
 using System;
@@ -40,6 +41,8 @@ public class ZekiVerdornt : ModBehaviour
         }
         NewHorizons.GetStarSystemLoadedEvent().AddListener(OnSystemLoaded);
         NewHorizons.LoadConfigs(this);
+        // only for the ship log layout (ShipLogPlacement.cs); the world does not depend on it
+        Guard("Harmony", () => new Harmony("Zeki.Verdornt").PatchAll(typeof(ZekiVerdornt).Assembly));
         LoadManager.OnStartSceneLoad += (_, _) => _built = false;
         GlobalMessenger.AddListener("WakeUp", OnWakeUp);
         Log("Verdornt ist geladen.");

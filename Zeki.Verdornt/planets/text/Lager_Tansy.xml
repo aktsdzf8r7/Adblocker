@@ -24,5 +24,9 @@
       <FactID>ZEKIVD_TUERME</FactID>
       <Condition>1</Condition>
     </RevealFact>
+    <RevealFact>
+      <FactID>ZEKIVD_AUSGUCK_RUMOR</FactID>
+      <Condition>3</Condition>
+    </RevealFact>
   </ShipLogConditions>
 </NomaiObject>

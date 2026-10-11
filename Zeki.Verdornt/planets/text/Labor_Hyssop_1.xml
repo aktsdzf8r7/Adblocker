@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Wurzellabor auf Erstling: Hyssop hört den Wurzeln zu -->
+<!-- Wurzellabor auf Erstling: Messreihe 1 -->
 <NomaiObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/text_schema.xsd">
   <TextBlock>
     <ID>1</ID>
-    <Text>Hyssop: Die Wurzeln hier unten summen. Nicht wie Wind – wie Stimmen.</Text>
+    <Text>WURZELLABOR – MESSREIHE 1. Schwingung der großen Wurzel: gleichmäßig. Muster: wie Stimmen, nicht wie Wind.</Text>
   </TextBlock>
   <TextBlock>
     <ID>2</ID>
     <ParentID>1</ParentID>
-    <Text>Hyssop: Ich habe einen Übersetzer neben die große Wurzel gelegt. Er soll hören, was sie sagt.</Text>
+    <Text>Versuchsaufbau: ein Übersetzer an der großen Wurzel. Ziel: hören, was sie sagt. Leitung: Hyssop.</Text>
   </TextBlock>
 </NomaiObject>

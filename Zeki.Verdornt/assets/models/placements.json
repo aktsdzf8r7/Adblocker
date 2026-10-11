@@ -462,6 +462,23 @@
         "z": 0.0
       },
       "scale": 1.3585466774246413
+    },
+    {
+      "model": "verbrambelter_uebersetzer",
+      "name": "VD_Verbrambelter_Uebersetzer",
+      "body": "Erstling",
+      "collider": false,
+      "position": {
+        "x": 43.591,
+        "y": 7.193,
+        "z": -110.534
+      },
+      "rotation": {
+        "x": 81.73,
+        "y": 82.753,
+        "z": -75.383
+      },
+      "scale": 1
     }
   ],
   "lights": [
@@ -4509,6 +4526,396 @@
     "ZEKIVD_TOR_OFFEN",
     "ZEKIVD_TOR_RUHE",
     "ZEKIVD_TURM_RUHE",
-    "ZEKIVD_TURM_WACH"
+    "ZEKIVD_TURM_WACH",
+    "ZEKIVD_WORT_ANTWORTEN",
+    "ZEKIVD_WORT_BRENNEN",
+    "ZEKIVD_WORT_DUNKEL",
+    "ZEKIVD_WORT_EINER",
+    "ZEKIVD_WORT_EIS",
+    "ZEKIVD_WORT_FALLEN",
+    "ZEKIVD_WORT_FREMDE",
+    "ZEKIVD_WORT_GESCHWISTER",
+    "ZEKIVD_WORT_GLUT",
+    "ZEKIVD_WORT_HALTEN",
+    "ZEKIVD_WORT_HERZ",
+    "ZEKIVD_WORT_HIER",
+    "ZEKIVD_WORT_HINAUS",
+    "ZEKIVD_WORT_HOEREN",
+    "ZEKIVD_WORT_HUETEN",
+    "ZEKIVD_WORT_KERN",
+    "ZEKIVD_WORT_KLEIN",
+    "ZEKIVD_WORT_KREIS",
+    "ZEKIVD_WORT_LEBEN",
+    "ZEKIVD_WORT_LICHT",
+    "ZEKIVD_WORT_MASKEN",
+    "ZEKIVD_WORT_MUTTER",
+    "ZEKIVD_WORT_NICHT",
+    "ZEKIVD_WORT_NIEMAND",
+    "ZEKIVD_WORT_RUFEN",
+    "ZEKIVD_WORT_SAMEN",
+    "ZEKIVD_WORT_SCHLAFEN",
+    "ZEKIVD_WORT_SINGEN",
+    "ZEKIVD_WORT_STERN",
+    "ZEKIVD_WORT_TRAGEN",
+    "ZEKIVD_WORT_VERGESSEN",
+    "ZEKIVD_WORT_WACHSEN",
+    "ZEKIVD_WORT_WAECHTER",
+    "ZEKIVD_WORT_WAERME",
+    "ZEKIVD_WORT_WARTEN",
+    "ZEKIVD_WORT_WEGE",
+    "ZEKIVD_WORT_WEIT",
+    "ZEKIVD_WORT_WELTEN",
+    "ZEKIVD_WORT_WIR",
+    "ZEKIVD_WORT_ZERBRECHEN"
+  ],
+  "schriften": [
+    {
+      "name": "VD_Schrift_Labor_Ruf",
+      "body": "Erstling",
+      "position": {
+        "x": 32.374,
+        "y": 7.52,
+        "z": -113.911
+      },
+      "rotation": {
+        "x": 14.989,
+        "y": 68.839,
+        "z": -87.846
+      },
+      "text": "Labor_Ruf",
+      "boden": false
+    },
+    {
+      "name": "VD_Schrift_Erstling_Kluft",
+      "body": "Erstling",
+      "position": {
+        "x": -196.193,
+        "y": -148.274,
+        "z": 91.124
+      },
+      "rotation": {
+        "x": -0.0,
+        "y": 24.915,
+        "z": 124.428
+      },
+      "text": "Erstling_Kluft",
+      "boden": true
+    },
+    {
+      "name": "VD_Schrift_Glut_Ruf",
+      "body": "Glutdorn",
+      "position": {
+        "x": -151.604,
+        "y": 73.382,
+        "z": -141.998
+      },
+      "rotation": {
+        "x": -9.323,
+        "y": -36.575,
+        "z": 69.721
+      },
+      "text": "Glut_Ruf",
+      "boden": false
+    },
+    {
+      "name": "VD_Schrift_Glut_Schollen",
+      "body": "Glutdorn",
+      "position": {
+        "x": 101.571,
+        "y": -182.537,
+        "z": 66.289
+      },
+      "rotation": {
+        "x": -0.0,
+        "y": 146.87,
+        "z": 146.395
+      },
+      "text": "Glut_Schollen",
+      "boden": false
+    },
+    {
+      "name": "VD_Schrift_Glut_Waerme",
+      "body": "Glutdorn",
+      "position": {
+        "x": -198.292,
+        "y": -62.316,
+        "z": -75.006
+      },
+      "rotation": {
+        "x": -0.0,
+        "y": -20.717,
+        "z": 106.379
+      },
+      "text": "Glut_Waerme",
+      "boden": true
+    },
+    {
+      "name": "VD_Schrift_Nebel_Waechter",
+      "body": "Nebelranke",
+      "position": {
+        "x": 394.951,
+        "y": 171.529,
+        "z": -283.635
+      },
+      "rotation": {
+        "x": -0.0,
+        "y": -144.316,
+        "z": 70.568
+      },
+      "text": "Nebel_Waechter",
+      "boden": false
+    },
+    {
+      "name": "VD_Schrift_Nebel_Lied",
+      "body": "Nebelranke",
+      "position": {
+        "x": -384.711,
+        "y": -150.015,
+        "z": 313.399
+      },
+      "rotation": {
+        "x": -0.0,
+        "y": 39.17,
+        "z": 106.822
+      },
+      "text": "Nebel_Lied",
+      "boden": true
+    },
+    {
+      "name": "VD_Schrift_Hohl_Masken",
+      "body": "Hohlsamen",
+      "position": {
+        "x": 149.396,
+        "y": 249.668,
+        "z": 79.63
+      },
+      "rotation": {
+        "x": -0.0,
+        "y": 151.942,
+        "z": 34.141
+      },
+      "text": "Hohl_Masken",
+      "boden": false
+    },
+    {
+      "name": "VD_Schrift_Hohl_Vergessen",
+      "body": "Hohlsamen",
+      "position": {
+        "x": 35.916,
+        "y": -210.016,
+        "z": 211.027
+      },
+      "rotation": {
+        "x": -0.0,
+        "y": 99.662,
+        "z": 134.452
+      },
+      "text": "Hohl_Vergessen",
+      "boden": true
+    },
+    {
+      "name": "VD_Schrift_Glutpforte_Text",
+      "body": "Glutpforte",
+      "position": {
+        "x": 40.0,
+        "y": -30.0,
+        "z": 60.0
+      },
+      "rotation": {
+        "x": -22.589,
+        "y": -146.31,
+        "z": 0.0
+      },
+      "text": "Glutpforte_Text",
+      "boden": false
+    },
+    {
+      "name": "VD_Schrift_Nebelpforte_Text",
+      "body": "Nebelpforte",
+      "position": {
+        "x": -50.0,
+        "y": 20.0,
+        "z": 40.0
+      },
+      "rotation": {
+        "x": 17.346,
+        "y": 128.66,
+        "z": 0.0
+      },
+      "text": "Nebelpforte_Text",
+      "boden": false
+    },
+    {
+      "name": "VD_Schrift_Hohlpforte_Text",
+      "body": "Hohlpforte",
+      "position": {
+        "x": 30.0,
+        "y": 40.0,
+        "z": -50.0
+      },
+      "rotation": {
+        "x": 34.45,
+        "y": -30.964,
+        "z": -0.0
+      },
+      "text": "Hohlpforte_Text",
+      "boden": false
+    }
+  ],
+  "wortkerne": [
+    {
+      "id": "ERSTLING_1",
+      "body": "Erstling",
+      "position": {
+        "x": 194.44,
+        "y": 139.008,
+        "z": -91.409
+      },
+      "rotation": {
+        "x": -0.0,
+        "y": -154.821,
+        "z": 57.097
+      }
+    },
+    {
+      "id": "ERSTLING_2",
+      "body": "Erstling",
+      "position": {
+        "x": 42.25,
+        "y": -9.794,
+        "z": -109.714
+      },
+      "rotation": {
+        "x": -0.0,
+        "y": -111.059,
+        "z": 94.761
+      }
+    },
+    {
+      "id": "GLUT_1",
+      "body": "Glutdorn",
+      "position": {
+        "x": -82.529,
+        "y": -77.465,
+        "z": 187.877
+      },
+      "rotation": {
+        "x": -0.0,
+        "y": 66.284,
+        "z": 110.682
+      }
+    },
+    {
+      "id": "GLUT_2",
+      "body": "Glutdorn",
+      "position": {
+        "x": -190.213,
+        "y": 19.913,
+        "z": 106.535
+      },
+      "rotation": {
+        "x": -0.0,
+        "y": 29.25,
+        "z": 84.779
+      }
+    },
+    {
+      "id": "NEBEL_1",
+      "body": "Nebelranke",
+      "position": {
+        "x": 276.352,
+        "y": 124.361,
+        "z": 398.814
+      },
+      "rotation": {
+        "x": -0.0,
+        "y": 124.719,
+        "z": 75.623
+      }
+    },
+    {
+      "id": "NEBEL_2",
+      "body": "Nebelranke",
+      "position": {
+        "x": -433.118,
+        "y": -157.542,
+        "z": -285.707
+      },
+      "rotation": {
+        "x": -0.0,
+        "y": -33.413,
+        "z": 106.888
+      }
+    },
+    {
+      "id": "HOHL_1",
+      "body": "Hohlsamen",
+      "position": {
+        "x": -242.797,
+        "y": 171.511,
+        "z": -51.087
+      },
+      "rotation": {
+        "x": -0.0,
+        "y": -11.884,
+        "z": 55.348
+      }
+    },
+    {
+      "id": "HOHL_2",
+      "body": "Hohlsamen",
+      "position": {
+        "x": -169.188,
+        "y": -226.071,
+        "z": 102.626
+      },
+      "rotation": {
+        "x": -0.0,
+        "y": 31.243,
+        "z": 138.806
+      }
+    },
+    {
+      "id": "GLUTPFORTE",
+      "body": "Glutpforte",
+      "position": {
+        "x": -60.0,
+        "y": 10.0,
+        "z": -40.0
+      },
+      "rotation": {
+        "x": 7.895,
+        "y": 56.31,
+        "z": 0.0
+      }
+    },
+    {
+      "id": "NEBELPFORTE",
+      "body": "Nebelpforte",
+      "position": {
+        "x": 50.0,
+        "y": -40.0,
+        "z": -30.0
+      },
+      "rotation": {
+        "x": -34.45,
+        "y": -59.036,
+        "z": -0.0
+      }
+    },
+    {
+      "id": "HOHLPFORTE",
+      "body": "Hohlpforte",
+      "position": {
+        "x": -40.0,
+        "y": -20.0,
+        "z": 60.0
+      },
+      "rotation": {
+        "x": -15.501,
+        "y": 146.31,
+        "z": 0.0
+      }
+    }
   ]
 }

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Rues Computer im Splittergang -->
+<!-- Computer im Splittergang -->
 <NomaiObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/text_schema.xsd">
   <TextBlock>
     <ID>1</ID>
-    <Text>Rue: Splittergang. Nur Eis. Kein Weg weiter – noch nicht.</Text>
+    <Text>SPLITTERGANG – WEGMARKE. Weiterer Weg: keiner. Noch nicht.</Text>
   </TextBlock>
   <TextBlock>
     <ID>2</ID>
     <ParentID>1</ParentID>
-    <Text>Rue: Die anderen Planeten erreicht man über den Kreuzweg. Sein Knoten wächst noch zu.</Text>
+    <Text>Andere Planeten: über den Kreuzweg. Knoten zum Kreuzweg: wächst noch zu. Kartiert von: Rue.</Text>
   </TextBlock>
   <ShipLogConditions>
     <RevealFact>

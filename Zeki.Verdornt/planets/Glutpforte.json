@@ -42,6 +42,22 @@
           "ZEKIVD_GLUTPFORTE_FOUND"
         ]
       }
+    ],
+    "interactionVolumes": [
+      {
+        "position": {
+          "x": -60.0,
+          "y": 10.0,
+          "z": -40.0
+        },
+        "radius": 1.0,
+        "range": 2.5,
+        "prompt": "Wortkern berühren",
+        "condition": "ZEKIVD_WORTKERN_GLUTPFORTE",
+        "persistent": true,
+        "reusable": false,
+        "rename": "VD_Wortkern_GLUTPFORTE"
+      }
     ]
   },
   "Props": {

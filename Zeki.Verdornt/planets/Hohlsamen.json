@@ -147,6 +147,36 @@
           "ZEKIVD_OBSERVATORIUM_FOUND"
         ]
       }
+    ],
+    "interactionVolumes": [
+      {
+        "position": {
+          "x": -243.038,
+          "y": 171.682,
+          "z": -51.138
+        },
+        "radius": 1.0,
+        "range": 2.5,
+        "prompt": "Wortkern berühren",
+        "condition": "ZEKIVD_WORTKERN_HOHL_1",
+        "persistent": true,
+        "reusable": false,
+        "rename": "VD_Wortkern_HOHL_1"
+      },
+      {
+        "position": {
+          "x": -169.357,
+          "y": -226.297,
+          "z": 102.728
+        },
+        "radius": 1.0,
+        "range": 2.5,
+        "prompt": "Wortkern berühren",
+        "condition": "ZEKIVD_WORTKERN_HOHL_2",
+        "persistent": true,
+        "reusable": false,
+        "rename": "VD_Wortkern_HOHL_2"
+      }
     ]
   }
 }

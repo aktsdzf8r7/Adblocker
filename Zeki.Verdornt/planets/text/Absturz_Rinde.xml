@@ -1,24 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Nomai-Schrift auf einem Computer am Absturzsamen (Timber Hearth) -->
+<!-- Computer am Absturzsamen (Timber Hearth): das Flugprotokoll des Samens -->
 <NomaiObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/text_schema.xsd">
   <TextBlock>
     <ID>1</ID>
-    <Text>Tansy: Wer dies liest, hat den Samen gefunden. Er ist nicht gewachsen – er wurde geworfen.</Text>
+    <Text>SAMEN 1 – FLUGPROTOKOLL. Start: Dornenkranz. Ziel: der Stern, den das Vessel verließ.</Text>
   </TextBlock>
   <TextBlock>
     <ID>2</ID>
     <ParentID>1</ParentID>
-    <Text>Tansy: Wir haben ihn auf den Stern gezielt, den das Vessel verlassen hat. Der Flug dauert länger als jedes Leben.</Text>
+    <Text>Antrieb: keiner. Der Samen wurde geworfen, nicht gepflanzt. Werferin: Tansy. Flugzeit: länger als ein Leben.</Text>
   </TextBlock>
   <TextBlock>
     <ID>3</ID>
     <ParentID>2</ParentID>
-    <Text>Tansy: Im Samen wartet ein Strudel. Er führt zu uns. Hab keine Angst vor den Dornen. Sie gehören hierher – wir nicht.</Text>
+    <Text>Ladung: ein Strudel. Er führt zum Lager auf Erstling. Hinweis für Ankömmlinge: Die Dornen gehören dorthin. Wir nicht.</Text>
   </TextBlock>
   <ShipLogConditions>
     <RevealFact>
       <FactID>ZEKIVD_ABSTURZ_NOMAI</FactID>
       <Condition>1,2</Condition>
+    </RevealFact>
+    <RevealFact>
+      <FactID>ZEKIVD_SCHLUND_RUMOR</FactID>
+      <Condition>3</Condition>
     </RevealFact>
   </ShipLogConditions>
 </NomaiObject>

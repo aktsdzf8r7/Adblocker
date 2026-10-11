@@ -1,0 +1,446 @@
+{
+  "woerter": [
+    {
+      "id": "wir",
+      "de": "wir",
+      "laut": "krrh",
+      "grund": true,
+      "quellen": []
+    },
+    {
+      "id": "licht",
+      "de": "Licht",
+      "laut": "vael",
+      "grund": true,
+      "quellen": []
+    },
+    {
+      "id": "wachsen",
+      "de": "wachsen",
+      "laut": "thorrn",
+      "grund": true,
+      "quellen": []
+    },
+    {
+      "id": "samen",
+      "de": "Samen",
+      "laut": "ssk",
+      "grund": true,
+      "quellen": []
+    },
+    {
+      "id": "stern",
+      "de": "Stern",
+      "laut": "ahl-vael",
+      "grund": true,
+      "quellen": []
+    },
+    {
+      "id": "weit",
+      "de": "weit",
+      "laut": "oroom",
+      "grund": true,
+      "quellen": []
+    },
+    {
+      "id": "rufen",
+      "de": "rufen",
+      "laut": "hhuun",
+      "grund": true,
+      "quellen": []
+    },
+    {
+      "id": "klein",
+      "de": "Kleinen",
+      "laut": "tik",
+      "grund": true,
+      "quellen": []
+    },
+    {
+      "id": "hier",
+      "de": "hier",
+      "laut": "dah",
+      "grund": true,
+      "quellen": []
+    },
+    {
+      "id": "nicht",
+      "de": "nicht",
+      "laut": "nekh",
+      "grund": true,
+      "quellen": []
+    },
+    {
+      "id": "herz",
+      "de": "Herz",
+      "laut": "marh",
+      "grund": false,
+      "quellen": [
+        "fact:ZEKIVD_SPRACHE_1"
+      ]
+    },
+    {
+      "id": "tragen",
+      "de": "tragen",
+      "laut": "vrass",
+      "grund": false,
+      "quellen": [
+        "fact:ZEKIVD_SPRACHE_1"
+      ]
+    },
+    {
+      "id": "welten",
+      "de": "Welten",
+      "laut": "gaar",
+      "grund": false,
+      "quellen": [
+        "fact:ZEKIVD_SPRACHE_1"
+      ]
+    },
+    {
+      "id": "hinaus",
+      "de": "hinaus",
+      "laut": "essh",
+      "grund": false,
+      "quellen": [
+        "fact:ZEKIVD_SPRACHE_2"
+      ]
+    },
+    {
+      "id": "fremde",
+      "de": "Fremde",
+      "laut": "zhiv",
+      "grund": false,
+      "quellen": [
+        "fact:ZEKIVD_SPRACHE_2"
+      ]
+    },
+    {
+      "id": "schlafen",
+      "de": "schlafen",
+      "laut": "luum",
+      "grund": false,
+      "quellen": [
+        "fact:ZEKIVD_SPRACHE_2"
+      ]
+    },
+    {
+      "id": "hoeren",
+      "de": "hören",
+      "laut": "shii",
+      "grund": false,
+      "quellen": [
+        "fact:ZEKIVD_SPRACHE_3"
+      ]
+    },
+    {
+      "id": "kern",
+      "de": "Kern",
+      "laut": "dhuum",
+      "grund": false,
+      "quellen": [
+        "fact:ZEKIVD_SPRACHE_3"
+      ]
+    },
+    {
+      "id": "mutter",
+      "de": "Mutter",
+      "laut": "maa-dhuum",
+      "grund": false,
+      "quellen": [
+        "fact:ZEKIVD_SPRACHE_4"
+      ]
+    },
+    {
+      "id": "kreis",
+      "de": "Kreis",
+      "laut": "oro-oro",
+      "grund": false,
+      "quellen": [
+        "fact:ZEKIVD_SPRACHE_4"
+      ]
+    },
+    {
+      "id": "niemand",
+      "de": "niemand",
+      "laut": "nekh-ohn",
+      "grund": false,
+      "quellen": [
+        "fact:ZEKIVD_SPRACHE_4"
+      ]
+    },
+    {
+      "id": "eis",
+      "de": "Eis",
+      "laut": "kiirr",
+      "grund": false,
+      "quellen": [
+        "kern:ERSTLING_1"
+      ]
+    },
+    {
+      "id": "halten",
+      "de": "halten",
+      "laut": "gripp",
+      "grund": false,
+      "quellen": [
+        "kern:ERSTLING_1"
+      ]
+    },
+    {
+      "id": "antworten",
+      "de": "antworten",
+      "laut": "ha-ruun",
+      "grund": false,
+      "quellen": [
+        "kern:ERSTLING_2"
+      ]
+    },
+    {
+      "id": "warten",
+      "de": "warten",
+      "laut": "ehhm",
+      "grund": false,
+      "quellen": [
+        "kern:ERSTLING_2"
+      ]
+    },
+    {
+      "id": "glut",
+      "de": "Glut",
+      "laut": "rhaash",
+      "grund": false,
+      "quellen": [
+        "kern:GLUT_1"
+      ]
+    },
+    {
+      "id": "zerbrechen",
+      "de": "zerbrechen",
+      "laut": "krak",
+      "grund": false,
+      "quellen": [
+        "kern:GLUT_1"
+      ]
+    },
+    {
+      "id": "waerme",
+      "de": "Wärme",
+      "laut": "rhaa",
+      "grund": false,
+      "quellen": [
+        "kern:GLUT_2"
+      ]
+    },
+    {
+      "id": "brennen",
+      "de": "brennen",
+      "laut": "rhaash-ka",
+      "grund": false,
+      "quellen": [
+        "kern:GLUTPFORTE"
+      ]
+    },
+    {
+      "id": "waechter",
+      "de": "Wächter",
+      "laut": "ghorrm",
+      "grund": false,
+      "quellen": [
+        "kern:NEBEL_1"
+      ]
+    },
+    {
+      "id": "leben",
+      "de": "Leben",
+      "laut": "vii",
+      "grund": false,
+      "quellen": [
+        "kern:NEBEL_1"
+      ]
+    },
+    {
+      "id": "wege",
+      "de": "Wege",
+      "laut": "tharr",
+      "grund": false,
+      "quellen": [
+        "kern:NEBEL_2"
+      ]
+    },
+    {
+      "id": "geschwister",
+      "de": "Geschwister",
+      "laut": "ssk-ssk",
+      "grund": false,
+      "quellen": [
+        "kern:NEBEL_2"
+      ]
+    },
+    {
+      "id": "hueten",
+      "de": "hüten",
+      "laut": "gorrh",
+      "grund": false,
+      "quellen": [
+        "kern:NEBELPFORTE"
+      ]
+    },
+    {
+      "id": "singen",
+      "de": "singen",
+      "laut": "lhaa",
+      "grund": false,
+      "quellen": [
+        "kern:NEBELPFORTE"
+      ]
+    },
+    {
+      "id": "masken",
+      "de": "Masken",
+      "laut": "vesk",
+      "grund": false,
+      "quellen": [
+        "kern:HOHL_1"
+      ]
+    },
+    {
+      "id": "fallen",
+      "de": "fallen",
+      "laut": "vuuh",
+      "grund": false,
+      "quellen": [
+        "kern:HOHL_1"
+      ]
+    },
+    {
+      "id": "einer",
+      "de": "Einer",
+      "laut": "ohn",
+      "grund": false,
+      "quellen": [
+        "kern:HOHL_2"
+      ]
+    },
+    {
+      "id": "dunkel",
+      "de": "Dunkel",
+      "laut": "umbr",
+      "grund": false,
+      "quellen": [
+        "kern:HOHLPFORTE"
+      ]
+    },
+    {
+      "id": "vergessen",
+      "de": "vergessen",
+      "laut": "lethh",
+      "grund": false,
+      "quellen": [
+        "kern:HOHLPFORTE"
+      ]
+    }
+  ],
+  "texte": [
+    {
+      "id": "Labor_Ruf",
+      "titel": "Der Ruf des Herzens",
+      "zeilen": [
+        "{wir} {rufen}. {wir} {rufen} {weit}.",
+        "{samen}, {wachsen}! {tragen} das {licht} {hinaus}.",
+        "Das {herz} {rufen}, und die {samen} {antworten}."
+      ]
+    },
+    {
+      "id": "Erstling_Kluft",
+      "titel": "Was der Riss sagt",
+      "zeilen": [
+        "{hier} {schlafen} {eis}. {wir} {halten} es.",
+        "{nicht} {zerbrechen}. {wir} {halten}, bis das {herz} {rufen}."
+      ]
+    },
+    {
+      "id": "Glut_Ruf",
+      "titel": "Gespräch mit der Glut",
+      "zeilen": [
+        "{glut}, {wir} {hoeren} dich.",
+        "Deine {waerme} ist unsere {waerme}. Das {licht} des {stern} ist in dir.",
+        "{wir} {zerbrechen} die {welten} {nicht}. {wir} {halten} sie."
+      ]
+    },
+    {
+      "id": "Glut_Schollen",
+      "titel": "An die Schollen",
+      "zeilen": [
+        "Ihr Stücke, {nicht} {fallen}. {wir} {halten} euch.",
+        "{wir} {tragen} euch, wie das {herz} uns {tragen}."
+      ]
+    },
+    {
+      "id": "Glut_Waerme",
+      "titel": "Glutlied",
+      "zeilen": [
+        "{brennen}, {brennen}, {wachsen}.",
+        "Wo {glut} ist, ist {leben}. Wo {leben} ist, {wachsen} {wir}."
+      ]
+    },
+    {
+      "id": "Nebel_Waechter",
+      "titel": "An die Wächter",
+      "zeilen": [
+        "{waechter}, {hueten} die {wege}.",
+        "Die {klein} {nicht} hinein. {nicht} zum {herz}.",
+        "Wer {singen} kann, ist {nicht} {fremde}."
+      ]
+    },
+    {
+      "id": "Nebel_Lied",
+      "titel": "Lied im Nebel",
+      "zeilen": [
+        "{geschwister}, {hoeren}! Im Nebel {singen} {wir}.",
+        "Die {waechter} {singen} {nicht}. Sie {warten}.",
+        "{einer} {singen} doch. Er spricht mit den {klein}."
+      ]
+    },
+    {
+      "id": "Hohl_Masken",
+      "titel": "Über die Kleinen mit den Masken",
+      "zeilen": [
+        "Die {klein} mit den {masken} kamen. Drei. Sie {hoeren} uns.",
+        "{einer} spricht mit {niemand}.",
+        "{wir} zählten wieder: drei {masken}. Immer drei."
+      ]
+    },
+    {
+      "id": "Hohl_Vergessen",
+      "titel": "Was der Samen vergaß",
+      "zeilen": [
+        "{wir} {vergessen} {nicht}. {wir} {schlafen} nur.",
+        "Ein {samen} {fallen} ins {dunkel}. Er {schlafen} im {eis}, {weit}.",
+        "Er {antworten} {nicht}. Aber er {wachsen}."
+      ]
+    },
+    {
+      "id": "Glutpforte_Text",
+      "titel": "Pforte der Glut",
+      "zeilen": [
+        "{hier} {brennen} der Weg. {fremde}, {nicht} weiter. Noch {nicht}."
+      ]
+    },
+    {
+      "id": "Nebelpforte_Text",
+      "titel": "Pforte im Nebel",
+      "zeilen": [
+        "{wege} im Nebel. Die {waechter} {warten}. {wir} {hoeren} dich, {fremde}."
+      ]
+    },
+    {
+      "id": "Hohlpforte_Text",
+      "titel": "Pforte des Dunkels",
+      "zeilen": [
+        "Im {dunkel} {wachsen} der {kreis}. Die {mutter} im {kern} {rufen}.",
+        "Der {kreis} {wachsen}, und doch {wachsen} er {weit}."
+      ]
+    }
+  ]
+}

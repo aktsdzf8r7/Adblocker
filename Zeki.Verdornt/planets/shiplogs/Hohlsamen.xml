@@ -8,8 +8,9 @@
     <Curiosity>ZEKIVD_VIER</Curiosity>
     <RumorFact>
       <ID>ZEKIVD_OBSERVATORIUM_RUMOR</ID>
+      <SourceID>ZEKIVD_LABOR</SourceID>
       <RumorName>Tansys Wörter</RumorName>
-      <Text>Hyssop schreibt, dass Tansy in ihrem Observatorium auf Hohlsamen die Wörter der Dornen sammelt.</Text>
+      <Text>Das Wurzellabor verweist auf ein Wortarchiv der Dornensprache im Kristallobservatorium auf Hohlsamen, verwaltet von Tansy.</Text>
     </RumorFact>
     <ExploreFact>
       <ID>ZEKIVD_OBSERVATORIUM_FOUND</ID>

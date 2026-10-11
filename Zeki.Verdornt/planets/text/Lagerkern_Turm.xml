@@ -15,10 +15,19 @@
     <ParentID>2</ParentID>
     <Text>Kernhöhle: verschlossen. Die Murmel des Tores liegt am Rand der Plattform.</Text>
   </TextBlock>
+  <TextBlock>
+    <ID>4</ID>
+    <ParentID>3</ParentID>
+    <Text>Bewohner des Lagers: Hyssop, Rue, Tansy, Yarrow. Anwesend: keiner.</Text>
+  </TextBlock>
   <ShipLogConditions>
     <RevealFact>
       <FactID>ZEKIVD_TURM_WACH_FACT</FactID>
       <Condition>1</Condition>
+    </RevealFact>
+    <RevealFact>
+      <FactID>ZEKIVD_VIER_RUMOR</FactID>
+      <Condition>4</Condition>
     </RevealFact>
   </ShipLogConditions>
 </NomaiObject>

@@ -523,6 +523,48 @@
         "persistent": false,
         "reusable": true,
         "rename": "VD_Ruecksamen_Volumen"
+      },
+      {
+        "position": {
+          "x": 194.668,
+          "y": 139.171,
+          "z": -91.516
+        },
+        "radius": 1.0,
+        "range": 2.5,
+        "prompt": "Wortkern berühren",
+        "condition": "ZEKIVD_WORTKERN_ERSTLING_1",
+        "persistent": true,
+        "reusable": false,
+        "rename": "VD_Wortkern_ERSTLING_1"
+      },
+      {
+        "position": {
+          "x": 42.357,
+          "y": -9.819,
+          "z": -109.993
+        },
+        "radius": 1.0,
+        "range": 2.5,
+        "prompt": "Wortkern berühren",
+        "condition": "ZEKIVD_WORTKERN_ERSTLING_2",
+        "persistent": true,
+        "reusable": false,
+        "rename": "VD_Wortkern_ERSTLING_2"
+      },
+      {
+        "position": {
+          "x": 43.702,
+          "y": 7.204,
+          "z": -110.813
+        },
+        "radius": 0.8,
+        "range": 2.5,
+        "prompt": "Verbrambelten Übersetzer berühren",
+        "condition": "ZEKIVD_DORNSPRACHE",
+        "persistent": true,
+        "reusable": false,
+        "rename": "VD_Uebersetzer_Volumen"
       }
     ]
   }

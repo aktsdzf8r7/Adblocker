@@ -105,6 +105,36 @@
           "ZEKIVD_TREIBSTATION_FOUND"
         ]
       }
+    ],
+    "interactionVolumes": [
+      {
+        "position": {
+          "x": 276.518,
+          "y": 124.435,
+          "z": 399.053
+        },
+        "radius": 1.0,
+        "range": 2.5,
+        "prompt": "Wortkern berühren",
+        "condition": "ZEKIVD_WORTKERN_NEBEL_1",
+        "persistent": true,
+        "reusable": false,
+        "rename": "VD_Wortkern_NEBEL_1"
+      },
+      {
+        "position": {
+          "x": -433.358,
+          "y": -157.629,
+          "z": -285.865
+        },
+        "radius": 1.0,
+        "range": 2.5,
+        "prompt": "Wortkern berühren",
+        "condition": "ZEKIVD_WORTKERN_NEBEL_2",
+        "persistent": true,
+        "reusable": false,
+        "rename": "VD_Wortkern_NEBEL_2"
+      }
     ]
   },
   "Atmosphere": {
