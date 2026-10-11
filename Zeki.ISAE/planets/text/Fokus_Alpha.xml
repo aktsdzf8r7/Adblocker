@@ -13,7 +13,7 @@
   <TextBlock>
     <ID>3</ID>
     <ParentID>2</ParentID>
-    <Text>Linum: Den ersten Koppler habe ich offen gelassen. Trenne ihn, dann erlischt die rote Leitung zur Hauptkanone.</Text>
+    <Text>Wartungsnotiz (Linum): Koppler 1 offen gelassen. Trennen löscht die rote Leitung zur Hauptkanone.</Text>
   </TextBlock>
   <ShipLogConditions>
     <RevealFact>

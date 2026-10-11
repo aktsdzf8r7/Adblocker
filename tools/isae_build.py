@@ -39,7 +39,7 @@ MOD = os.path.abspath(sys.argv[1] if len(sys.argv) > 1 else os.path.join(os.path
 sb.MOD = MOD  # the shared helpers write into this mod
 
 NAME = "Interstellare Sonden Aussendungseinheit"
-VERSION = "1.5.0"
+VERSION = "1.5.1"
 FOCUS_NAMES = (("A", "Alpha"), ("B", "Beta"), ("C", "Gamma"))
 MODULES = (("kontrolle", "Kontrolle"), ("start", "Start"), ("navigation", "Navigation"))
 

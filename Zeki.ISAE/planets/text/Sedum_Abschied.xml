@@ -3,27 +3,27 @@
 <NomaiObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/text_schema.xsd">
   <TextBlock>
     <ID>1</ID>
-    <Text>Sedum: Die Geisterwolke hat die Sonnenstation erreicht. Pye ruft alle zurück. Ich bleibe hier, beim Herz der Einheit.</Text>
+    <Text>LETZTER EINTRAG DER EINHEIT. Geisterwolke: hat die Sonnenstation erreicht. Pye: ruft alle zurück. Sedum: bleibt beim Herz der Einheit.</Text>
   </TextBlock>
   <TextBlock>
     <ID>2</ID>
     <ParentID>1</ParentID>
-    <Text>Sedum: Linum, ich habe deine Koppler gefunden. Du hast eine Abschaltung in meine Einheit gebaut.</Text>
+    <Text>Fund (Sedum): eine Abschaltung über die Phasenkoppler. Eingebaut von: Linum.</Text>
   </TextBlock>
   <TextBlock>
     <ID>3</ID>
     <ParentID>2</ParentID>
-    <Text>Sedum: Ich habe sie nicht entfernt. Wenn du recht hast, soll jemand anderes entscheiden können.</Text>
+    <Text>Abschaltung: nicht entfernt. Begründung (Sedum): Wenn Linum recht hat, soll jemand anderes entscheiden können.</Text>
   </TextBlock>
   <TextBlock>
     <ID>4</ID>
     <ParentID>3</ParentID>
-    <Text>Sedum: Ich lasse die Einheit schlafen, bis die Sonne stirbt. Dann trägt sie unsere Warnung zu den Clans.</Text>
+    <Text>Einheit: schläft bis zum Tod der Sonne. Danach: Start der Warnung an die Clans.</Text>
   </TextBlock>
   <TextBlock>
     <ID>5</ID>
     <ParentID>4</ParentID>
-    <Text>Sedum: Wer immer dies liest: Die Entscheidung gehört jetzt dir.</Text>
+    <Text>Entscheidung über die Einheit: übertragen an den nächsten Leser.</Text>
   </TextBlock>
   <ShipLogConditions>
     <RevealFact>

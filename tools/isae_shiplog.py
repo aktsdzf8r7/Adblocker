@@ -29,7 +29,8 @@ LOG = (
         rumor('ZEKISAE_SIGNATUR', 'Eine fremde Energiesignatur',
               'Seit dem Start meldet mein Schiff eine unbekannte Nomai-Energiesignatur zwischen der Sonne und Timber Hearth, weit über der Bahnebene der Planeten. Mein Signalskop empfängt sie auf der Frequenz „Energiesignaturen“.'),
         rumor('ZEKISAE_RUMOR', 'Sedums verbotener Entwurf',
-              'Ein Nomai namens Sedum wollte gegen Pyes Verbot eine zweite, stärkere Kanone bauen. Sie soll Sonden zu anderen Sternen schicken und braucht dafür mehr Energie, als ein lebender Stern hergibt.'),
+              'Ein Nomai namens Sedum wollte gegen Pyes Verbot eine zweite, stärkere Kanone bauen. Sie soll Sonden zu anderen Sternen schicken und braucht dafür mehr Energie, als ein lebender Stern hergibt.',
+              source='ZEKISAE_SPUREN'),
         fact('ZEKISAE_FOUND',
              'Eine riesige Kanone im Stil des Vessels kreist um die Sonne, über einen Kilometer lang, mit gepanzertem Kern, gezahnten Schienen und Klauen an der Mündung. Sie zielt auf die Sonne, und drei Fokuskanonen umkreisen ihren Lauf.'),
         fact('ZEKISAE_ZWECK',
@@ -124,16 +125,23 @@ LOG = (
                  'Ich habe den Samenkern in den Pulskern gelegt. Er pulsiert jetzt elfmal in jeder Sekunde.'),
         ]),
         entry('ZEKISAE_WURZELN', 'Die verwurzelte Einheit', [
+            rumor('ZEKISAE_WURZELN_RUMOR', 'Ein Samen im Pulskern',
+                  'Tamarisk warnt: Ein Samenkern im Pulskern würde in Augenblicken Jahrtausende wachsen und alles verschlingen, woran er Wurzeln schlägt.',
+                  source='ZEKISAE_PULSKERN'),
             fact('ZEKISAE_WURZELN_FOUND',
                  'Aus dem Pulskern ist ein Babysamen gewachsen. Seine Wurzeln haben in Sekunden die ganze Aussendungseinheit umschlungen: den Kern, die Schienen, die Klauen, die Arme.'),
         ]),
         entry('ZEKISAE_SEDUM', 'Sedum, Linum, Pye und Erica', [
+            rumor('ZEKISAE_SEDUM_RUMOR', 'Die Erbauer',
+                  'Im Kontrollmodul spricht Linum über Sedums Einheit. Pye und Erica wussten mehr, als sie sagten.', source='ZEKISAE_KONTROLLE'),
             fact('ZEKISAE_SEDUM_PLAN',
                  'Sedum baute die Aussendungseinheit, weil das Auge vielleicht nicht in diesem System liegt. Eine Sonde zu den Sternen schien ihm wichtiger als alles andere.'),
             fact('ZEKISAE_LINUM_REUE',
                  'Linum half Sedum, prüfte seine Rechnungen und entschied sich am Ende gegen ihn: Niemand darf das Ende eines anderen wählen.'),
         ]),
         entry('ZEKISAE_SPUREN', 'Spuren im Sonnensystem', [
+            rumor('ZEKISAE_SPUREN_RUMOR', 'Spuren der Erbauer',
+                  'Erica holte die Schienen vom Konstruktionshof. Die Erbauer der Einheit haben im ganzen System Spuren hinterlassen.', source='ZEKISAE_SEDUM'),
             fact('ZEKISAE_SPUR_ET',
                  'Auf Ember Twin hat Erica die Schwerkraftkanone vermessen, für drei Kanonen, deren Zweck Sedum ihr nicht verriet.'),
             fact('ZEKISAE_SPUR_ATTLE',
@@ -156,6 +164,8 @@ KEIM = (
              'Um Dark Bramble kreist ein kleiner Dornensamen: ein grün leuchtender Knoten, aus dem riesige Dornen ins All stechen. Auf den Spitzen brennen Nomai-Lampen.'),
     ], [
         entry('ZEKISAE_SAMENKAMMER', 'Die Samenkammer', [
+            rumor('ZEKISAE_SAMENKAMMER_RUMOR', 'Eine Station im Samen',
+                  'Tamarisk forschte in einer Station im Inneren des Keimdorns.', source='ZEKISAE_KEIMDORN'),
             fact('ZEKISAE_SAMENKAMMER_FOUND',
                  'Im Keimdorn liegt eine kleine, grüne Dimension. Die Nomai haben dort eine Forschungsstation gebaut: eine Plattform mit einem Schrein, einem Warpkern und einem Steg zur Mitte.'),
             fact('ZEKISAE_SAMENKERN_PLAN',
@@ -164,6 +174,8 @@ KEIM = (
                  'Ein Babysamen am Rand der Samenkammer führt in die Dimension, in der das Vessel liegt.'),
         ]),
         entry('ZEKISAE_SAMENKERN', 'Der Samenkern', [
+            rumor('ZEKISAE_SAMENKERN_RUMOR', 'Das Herz des Samens',
+                  'Die Forschungsstation untersucht den Samenkern, das Herz eines jeden Dornensamens.', source='ZEKISAE_SAMENKAMMER'),
             fact('ZEKISAE_SAMENKERN_FOUND',
                  'In der Mitte der Samenkammer schwebt in einem Nomai-Gerüst der Samenkern: das Herz eines jeden Samens. Er pulsiert einmal alle elf Sekunden.'),
             fact('ZEKISAE_SAMENKERN_GENOMMEN',

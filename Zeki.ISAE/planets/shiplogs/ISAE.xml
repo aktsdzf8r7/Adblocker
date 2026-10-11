@@ -13,6 +13,7 @@
     </RumorFact>
     <RumorFact>
       <ID>ZEKISAE_RUMOR</ID>
+      <SourceID>ZEKISAE_SPUREN</SourceID>
       <RumorName>Sedums verbotener Entwurf</RumorName>
       <Text>Ein Nomai namens Sedum wollte gegen Pyes Verbot eine zweite, stärkere Kanone bauen. Sie soll Sonden zu anderen Sternen schicken und braucht dafür mehr Energie, als ein lebender Stern hergibt.</Text>
     </RumorFact>
@@ -218,6 +219,12 @@
       <ID>ZEKISAE_WURZELN</ID>
       <Name>Die verwurzelte Einheit</Name>
       <Curiosity>ZEKISAE_ISAE</Curiosity>
+      <RumorFact>
+        <ID>ZEKISAE_WURZELN_RUMOR</ID>
+        <SourceID>ZEKISAE_PULSKERN</SourceID>
+        <RumorName>Ein Samen im Pulskern</RumorName>
+        <Text>Tamarisk warnt: Ein Samenkern im Pulskern würde in Augenblicken Jahrtausende wachsen und alles verschlingen, woran er Wurzeln schlägt.</Text>
+      </RumorFact>
       <ExploreFact>
         <ID>ZEKISAE_WURZELN_FOUND</ID>
         <Text>Aus dem Pulskern ist ein Babysamen gewachsen. Seine Wurzeln haben in Sekunden die ganze Aussendungseinheit umschlungen: den Kern, die Schienen, die Klauen, die Arme.</Text>
@@ -227,6 +234,12 @@
       <ID>ZEKISAE_SEDUM</ID>
       <Name>Sedum, Linum, Pye und Erica</Name>
       <Curiosity>ZEKISAE_ISAE</Curiosity>
+      <RumorFact>
+        <ID>ZEKISAE_SEDUM_RUMOR</ID>
+        <SourceID>ZEKISAE_KONTROLLE</SourceID>
+        <RumorName>Die Erbauer</RumorName>
+        <Text>Im Kontrollmodul spricht Linum über Sedums Einheit. Pye und Erica wussten mehr, als sie sagten.</Text>
+      </RumorFact>
       <ExploreFact>
         <ID>ZEKISAE_SEDUM_PLAN</ID>
         <Text>Sedum baute die Aussendungseinheit, weil das Auge vielleicht nicht in diesem System liegt. Eine Sonde zu den Sternen schien ihm wichtiger als alles andere.</Text>
@@ -240,6 +253,12 @@
       <ID>ZEKISAE_SPUREN</ID>
       <Name>Spuren im Sonnensystem</Name>
       <Curiosity>ZEKISAE_ISAE</Curiosity>
+      <RumorFact>
+        <ID>ZEKISAE_SPUREN_RUMOR</ID>
+        <SourceID>ZEKISAE_SEDUM</SourceID>
+        <RumorName>Spuren der Erbauer</RumorName>
+        <Text>Erica holte die Schienen vom Konstruktionshof. Die Erbauer der Einheit haben im ganzen System Spuren hinterlassen.</Text>
+      </RumorFact>
       <ExploreFact>
         <ID>ZEKISAE_SPUR_ET</ID>
         <Text>Auf Ember Twin hat Erica die Schwerkraftkanone vermessen, für drei Kanonen, deren Zweck Sedum ihr nicht verriet.</Text>

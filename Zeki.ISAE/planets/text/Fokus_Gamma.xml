@@ -13,7 +13,7 @@
   <TextBlock>
     <ID>3</ID>
     <ParentID>2</ParentID>
-    <Text>Linum: Der dritte Koppler hängt unter dem Kiel, in der Leere. Dort sucht niemand.</Text>
+    <Text>Wartungsnotiz (Linum): Koppler 3 hängt unter dem Kiel, in der Leere. Dort sucht niemand.</Text>
   </TextBlock>
   <ShipLogConditions>
     <RevealFact>

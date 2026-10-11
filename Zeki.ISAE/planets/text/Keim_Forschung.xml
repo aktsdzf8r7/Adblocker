@@ -33,5 +33,9 @@
       <FactID>ZEKISAE_BABYSAMEN</FactID>
       <Condition>4</Condition>
     </RevealFact>
+    <RevealFact>
+      <FactID>ZEKISAE_SAMENKERN_RUMOR</FactID>
+      <Condition>1</Condition>
+    </RevealFact>
   </ShipLogConditions>
 </NomaiObject>

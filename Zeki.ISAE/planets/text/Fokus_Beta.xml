@@ -8,12 +8,12 @@
   <TextBlock>
     <ID>2</ID>
     <ParentID>1</ParentID>
-    <Text>Sedum: Die drei Kanonen bilden ein Dreieck. Nur gemeinsam halten sie den Strom eines ganzen Sterns.</Text>
+    <Text>Aufbau (Sedum): Die drei Kanonen bilden ein Dreieck. Nur gemeinsam halten sie den Strom eines ganzen Sterns.</Text>
   </TextBlock>
   <TextBlock>
     <ID>3</ID>
     <ParentID>2</ParentID>
-    <Text>Linum: Den zweiten Koppler habe ich nach oben gebracht, unter den Emitter. Sedum klettert dort nie hinauf.</Text>
+    <Text>Wartungsnotiz (Linum): Koppler 2 nach oben verlegt, unter den Emitter. Sedum steigt dort nie hinauf.</Text>
   </TextBlock>
   <ShipLogConditions>
     <RevealFact>

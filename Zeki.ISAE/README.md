@@ -11,6 +11,14 @@ Seit Beginn der Schleife meldet dein Schiff eine fremde Nomai-Energiesignatur. Z
 
 Und um Dark Bramble kreist neuerdings ein kleiner Dornensamen, der **Keimdorn**. In ihm liegt das Herz eines jeden Samens.
 
+
+## Neu in 1.5.1
+
+- **Logbuch:**
+  - Die Karten der Aussendungseinheit liegen nicht mehr über den Karten des Spiels. Überlappen sie, schiebt die DLL sie beim Laden darunter.
+  - Jeder Eintrag ist jetzt mit Pfeilen verbunden.
+- **Computer sprechen wie Computer:** Status, Protokolle, Wartungsnotizen. Die Nomai selbst sprechen auf den Aufzeichnungen.
+
 ## Die drei Enden
 
 | Taste | Ende | Wann | Letzter Satz |

@@ -8,17 +8,17 @@
   <TextBlock>
     <ID>2</ID>
     <ParentID>1</ParentID>
-    <Text>Sedum: In dieser Fassung altert alles. Was hier hineinfällt, erlebt in einer Minute sechzig Jahre.</Text>
+    <Text>Warnung (Sedum): In dieser Fassung altert alles. Was hineinfällt, erlebt in einer Minute sechzig Jahre.</Text>
   </TextBlock>
   <TextBlock>
     <ID>3</ID>
     <ParentID>2</ParentID>
-    <Text>Tamarisk: Ich forsche im Keimdorn, dem kleinen Dornensamen, der um Dark Bramble kreist. Im Herzen jedes Samens liegt ein Kern – und er passt in diese Fassung.</Text>
+    <Text>Eingang, Absenderin Tamarisk, Forschungsstation Keimdorn (ein kleiner Dornensamen im Umlauf um Dark Bramble): Im Herzen jedes Samens liegt ein Kern. Er passt in diese Fassung.</Text>
   </TextBlock>
   <TextBlock>
     <ID>4</ID>
     <ParentID>3</ParentID>
-    <Text>Tamarisk: Sedum, lege niemals einen Samenkern in den Pulskern. Ein Samen, der in Augenblicken Jahrtausende wächst, verschlingt alles, woran er Wurzeln schlägt.</Text>
+    <Text>Eingang, Absenderin Tamarisk: Niemals einen Samenkern in den Pulskern legen. Ein Samen, der in Augenblicken Jahrtausende wächst, verschlingt alles, woran er Wurzeln schlägt.</Text>
   </TextBlock>
   <ShipLogConditions>
     <RevealFact>
@@ -30,7 +30,15 @@
       <Condition>3</Condition>
     </RevealFact>
     <RevealFact>
+      <FactID>ZEKISAE_SAMENKAMMER_RUMOR</FactID>
+      <Condition>3</Condition>
+    </RevealFact>
+    <RevealFact>
       <FactID>ZEKISAE_PULSKERN_WARNUNG</FactID>
+      <Condition>4</Condition>
+    </RevealFact>
+    <RevealFact>
+      <FactID>ZEKISAE_WURZELN_RUMOR</FactID>
       <Condition>4</Condition>
     </RevealFact>
   </ShipLogConditions>

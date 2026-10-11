@@ -34,5 +34,9 @@
       <FactID>ZEKISAE_START_KERN</FactID>
       <Condition>3,4,5</Condition>
     </RevealFact>
+    <RevealFact>
+      <FactID>ZEKISAE_SPUREN_RUMOR</FactID>
+      <Condition>1</Condition>
+    </RevealFact>
   </ShipLogConditions>
 </NomaiObject>

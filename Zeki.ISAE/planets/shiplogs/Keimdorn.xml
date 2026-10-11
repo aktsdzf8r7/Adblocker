@@ -20,6 +20,12 @@
       <ID>ZEKISAE_SAMENKAMMER</ID>
       <Name>Die Samenkammer</Name>
       <Curiosity>ZEKISAE_KEIMDORN</Curiosity>
+      <RumorFact>
+        <ID>ZEKISAE_SAMENKAMMER_RUMOR</ID>
+        <SourceID>ZEKISAE_KEIMDORN</SourceID>
+        <RumorName>Eine Station im Samen</RumorName>
+        <Text>Tamarisk forschte in einer Station im Inneren des Keimdorns.</Text>
+      </RumorFact>
       <ExploreFact>
         <ID>ZEKISAE_SAMENKAMMER_FOUND</ID>
         <Text>Im Keimdorn liegt eine kleine, grüne Dimension. Die Nomai haben dort eine Forschungsstation gebaut: eine Plattform mit einem Schrein, einem Warpkern und einem Steg zur Mitte.</Text>
@@ -37,6 +43,12 @@
       <ID>ZEKISAE_SAMENKERN</ID>
       <Name>Der Samenkern</Name>
       <Curiosity>ZEKISAE_KEIMDORN</Curiosity>
+      <RumorFact>
+        <ID>ZEKISAE_SAMENKERN_RUMOR</ID>
+        <SourceID>ZEKISAE_SAMENKAMMER</SourceID>
+        <RumorName>Das Herz des Samens</RumorName>
+        <Text>Die Forschungsstation untersucht den Samenkern, das Herz eines jeden Dornensamens.</Text>
+      </RumorFact>
       <ExploreFact>
         <ID>ZEKISAE_SAMENKERN_FOUND</ID>
         <Text>In der Mitte der Samenkammer schwebt in einem Nomai-Gerüst der Samenkern: das Herz eines jeden Samens. Er pulsiert einmal alle elf Sekunden.</Text>

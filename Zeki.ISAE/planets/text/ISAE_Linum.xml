@@ -43,5 +43,9 @@
       <FactID>ZEKISAE_KERN_RUMOR</FactID>
       <Condition>6</Condition>
     </RevealFact>
+    <RevealFact>
+      <FactID>ZEKISAE_SEDUM_RUMOR</FactID>
+      <Condition>1</Condition>
+    </RevealFact>
   </ShipLogConditions>
 </NomaiObject>
