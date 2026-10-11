@@ -344,21 +344,21 @@ def great_circle_vine(name, R, radius, mat, rnd, sink=0.3, waves=7, amp=0.04, n=
     return thorned_tube(name, pts, radius, mat, 3)
 
 
-def surface_thorns(name, R, count, length, mat, rnd, exclude=(), base=0.12):
+def surface_thorns(name, R, count, length, mat, rnd, exclude=(), base=0.12, skip=None):
     parts = []
     for k in range(count):
         d = random_axis(rnd)
-        if any(d.angle(e) < w for e, w in exclude):
+        if any(d.angle(e) < w for e, w in exclude) or (skip is not None and skip(d)):
             continue
         L = length * rnd.uniform(0.5, 1.4)
         parts.append(cone_along(f"{name}{k}", d * R * 0.99, d + random_axis(rnd) * 0.25, L, L * base, 0.08, mat, 7))
     return parts
 
 
-def displaced_ball(name, R, mat, strength, scale, seed, flats=()):
+def displaced_ball(name, R, mat, strength, scale, seed, flats=(), subdiv=5):
     """An icosphere with cloudy displacement; areas in flats (direction, angular radius) stay at exactly R."""
     bm = bmesh.new()
-    bmesh.ops.create_icosphere(bm, subdivisions=5, radius=R)
+    bmesh.ops.create_icosphere(bm, subdivisions=subdiv, radius=R)
     ob = link(name, bm, mat)
     tex = bpy.data.textures.new(name + "_noise", "CLOUDS")
     tex.noise_scale = scale
@@ -431,9 +431,9 @@ def roots(name, R_core, targets, M, rnd, rise=4.0):
     return parts
 
 
-def crust_shard(name, R, centre_dir, ang, thickness, mat, rnd, flats=()):
+def crust_shard(name, R, centre_dir, ang, thickness, mat, rnd, flats=(), rough=0.04):
     """A piece of a planet's crust: a thick spherical-shell cap of angular radius ang (rad) around centre_dir,
-    its top at R with displacement, its bottom at R - thickness, its rim jagged (+-15 %). flats (direction, angle)
+    its top at R with displacement (rough x R), its bottom at R - thickness, its rim jagged (+-15 %). flats (direction, angle)
     stay at exactly R (building sites)."""
     c = Vector(centre_dir).normalized()
     u, w = basis(c)
@@ -449,7 +449,7 @@ def crust_shard(name, R, centre_dir, ang, thickness, mat, rnd, flats=()):
         a = edge * i / nr
         d = c * math.cos(a) + (u * math.cos(az) + w * math.sin(az)) * math.sin(a)
         if top:
-            r = R + 0.04 * R * noise.noise(d * 3 + off)
+            r = R + rough * R * noise.noise(d * 3 + off)
             for f, fw in flats:
                 fa = d.angle(Vector(f))
                 if fa < fw * 1.6:
@@ -486,133 +486,363 @@ def surface_anchor(group, name, R, d, up=0.0, face=None):
 
 
 # ------------------------------------------------------------------------------------------ the bodies
+# Every planet of Dornenkranz is a great bramble in the middle whose roots hold what is left of the planet
+# (spec 2026-10-11, section 2). Each one is broken to a different degree.
+PREVIEW_NEAR = {}   # key -> (camera position, target) for the close-up preview
+SITES = {}          # "group.name" -> Blender point on the ground (stations are built there, in planet coordinates)
+
+
+def top_anchor(group, name, ob, d, up=0.0):
+    """An anchor on the outer surface of ob in direction d (a ray from far outside), with the radial normal."""
+    d = Vector(d).normalized()
+    hit, loc, _, _ = ob.ray_cast(d * 5000, -d)
+    assert hit, f"{group}.{name}: no ground in that direction"
+    surface_anchor(group, name, loc.length, d, up)
+    SITES[f"{group}.{name}"] = Vector(loc)
+    return loc
+
+
+def site_frame(key, toward_point=None):
+    """A frame standing on the ground at SITES[key]: local z outwards, local y towards toward_point (if given)."""
+    p = SITES[key]
+    up = p.normalized()
+    if toward_point is None:
+        return Matrix.Translation(p) @ up.to_track_quat("Z", "Y").to_matrix().to_4x4()
+    fwd = Vector(toward_point) - p
+    fwd = (fwd - up * fwd.dot(up)).normalized()
+    x = fwd.cross(up).normalized()
+    m = Matrix(((x.x, fwd.x, up.x, p.x), (x.y, fwd.y, up.y, p.y), (x.z, fwd.z, up.z, p.z), (0, 0, 0, 1)))
+    return m
+
+
+def toward(a, b, t):
+    """The direction t radians from a on the great circle towards b."""
+    a, b = Vector(a).normalized(), Vector(b).normalized()
+    perp = (b - a * a.dot(b)).normalized()
+    return (a * math.cos(t) + perp * math.sin(t)).normalized()
+
+
+def place_caps(rnd, n, ang_range, gap, R, fixed=(), tries=20000):
+    """Directions and angular radii of n caps on a sphere, gap metres apart at least."""
+    caps = list(fixed)
+    for _ in range(tries):
+        if len(caps) >= n:
+            break
+        d, a = random_axis(rnd), rnd.uniform(*ang_range)
+        if all(d.angle(c) > a + ca + gap / R for c, ca in caps):
+            caps.append((d, a))
+    assert len(caps) == n, f"only {len(caps)} of {n} caps fit"
+    return caps
+
+
+def shard_thorns(name, ob, c, ang, count, mat, rnd, tip=None, length=(8, 22)):
+    """Thorns growing out of the top of a shard (optionally with glowing tips)."""
+    parts = []
+    for k in range(count):
+        d = toward(c, random_axis(rnd), rnd.uniform(0.1, 0.8) * ang)
+        hit, loc, _, _ = ob.ray_cast(d * 5000, -d)
+        if not hit:
+            continue
+        L = rnd.uniform(*length)
+        parts.append(cone_along(f"{name}{k}", loc - d * 0.5, d + random_axis(rnd) * 0.25, L, L * 0.13, 0.08, mat, 7))
+        if tip is not None:
+            parts.append(sphere(f"{name}{k}_spitze", L * 0.06, loc + d * L * 0.92, tip, seg=8, rings=4))
+    return parts
+
+
+# ---------------------------------------------------------------- Erstling: an ice crust torn by canyons
 ERSTLING_R = 260.0
 ERSTLING_LAGER = direction(32, 70)
 ERSTLING_ANKUNFT = direction(26, 52)
+ERSTLING_SHELL = 40.0      # thickness of the ice crust
+ERSTLING_CORE = 100.0
+CANYON_CLEAR = 0.35        # rad: no canyon comes this close to the camp or the arrival seed (Review Focus 2)
+
+
+def arc_points(axis, start, arc, n):
+    u, w = basis(axis)
+    return [u * math.cos(start + arc * i / n) + w * math.sin(start + arc * i / n) for i in range(n + 1)]
+
+
+def thick_shell(ob, inner):
+    """Gives an open, displaced surface its thickness by pushing a copy of every vertex radially down to the radius
+    inner, with straight radial walls along the open rims. Unlike solidify it cannot fold or twist."""
+    bm = bmesh.new()
+    bm.from_mesh(ob.data)
+    rim = [e for e in bm.edges if e.is_boundary]
+    outer = list(bm.faces)
+    low = {v: bm.verts.new(v.co.normalized() * inner) for v in list(bm.verts)}
+    for f in outer:
+        bm.faces.new([low[v] for v in reversed(f.verts)])
+    for e in rim:
+        f = e.link_faces[0]
+        a, b = e.verts
+        loop = list(f.verts)
+        i = loop.index(a)
+        if loop[(i + 1) % len(loop)] is not b:  # walk the rim the other way round than its face does
+            a, b = b, a
+        bm.faces.new((b, a, low[a], low[b]))
+    bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
+    bm.to_mesh(ob.data)
+    bm.free()
+    ob.data.update()
+
+
+def erstling_canyons(rnd):
+    """Six canyons along great-circle arcs; the first is the widest (the lab lies below it)."""
+    canyons = []
+    for k in range(6):
+        for _ in range(2000):
+            width = 85.0 if k == 0 else rnd.uniform(35, 65)
+            dirs = arc_points(random_axis(rnd), rnd.uniform(0, TAU), rnd.uniform(0.6, 1.2), 24)
+            half = width / 2 / ERSTLING_R
+            if any(d.angle(p) < CANYON_CLEAR + half for d in dirs for p in (ERSTLING_LAGER, ERSTLING_ANKUNFT)):
+                continue
+            if any(d.angle(e) < 0.3 for c in canyons for d in dirs[::3] for e in c["dirs"][::3]):
+                continue
+            break
+        else:
+            raise AssertionError("no room for canyon %d" % k)
+        widths = [max(3.0, width * math.sin(math.pi * i / (len(dirs) - 1)) ** 0.5) for i in range(len(dirs))]
+        canyons.append({"dirs": dirs, "widths": widths, "width": width})
+    return canyons
+
+
+def in_canyon(d, canyons, margin=8.0):
+    return any(d.angle(e) < (w / 2 + margin) / ERSTLING_R for c in canyons for e, w in zip(c["dirs"], c["widths"]))
 
 
 def erstling(M):
-    """The arrival planet: ice-armoured and bare, closest to the real Dark Bramble - but ice plates over bark."""
+    """The arrival planet: an ice crust, still almost whole, torn by six canyons down to its glowing bramble core.
+    Roots climb the canyon walls and grip the rims. The camp and the arrival seed keep their places."""
     rnd = random.Random(11)
+    G = "erstling"
     flats = ((ERSTLING_LAGER, 0.17), (ERSTLING_ANKUNFT, 0.07))
-    parts = [displaced_ball("erstling_kern", ERSTLING_R, M["bark"], 34, ERSTLING_R * 0.16, 11, flats)]
+    canyons = erstling_canyons(rnd)
+    for c in canyons:  # Review Focus 2: the camp stands on solid crust
+        for d in c["dirs"]:
+            assert d.angle(ERSTLING_LAGER) >= CANYON_CLEAR and d.angle(ERSTLING_ANKUNFT) >= CANYON_CLEAR, "canyon under the camp"
+    # the canyons are faces taken out of the crust; solidify then gives the crust its thickness and the canyons walls
+    shell = displaced_ball("erstling_kruste", ERSTLING_R, M["ice"], 34, ERSTLING_R * 0.16, 11, flats, subdiv=7)
+    bm = bmesh.new()
+    bm.from_mesh(shell.data)
+    bmesh.ops.delete(bm, geom=[f for f in bm.faces if in_canyon(f.calc_center_median().normalized(), canyons, 0.0)], context="FACES")
+    # clean the canyon rims: no single triangles sticking out and no faces touching at a corner only (solidify
+    # turns those into twisted walls)
+    for _ in range(4):
+        spikes = [f for f in bm.faces if sum(1 for e in f.edges if len(e.link_faces) == 1) >= 2]
+        corners = {f for v in bm.verts if len(v.link_faces) and not v.is_manifold for f in v.link_faces}
+        gone = set(spikes) | corners
+        if not gone:
+            break
+        bmesh.ops.delete(bm, geom=list(gone), context="FACES")
+    # round the jagged rims a little (keeping each vertex's height)
+    rim = [v for v in bm.verts if v.is_boundary]
+    for _ in range(4):
+        r = {v: v.co.length for v in rim}
+        bmesh.ops.smooth_vert(bm, verts=rim, factor=0.6, use_axis_x=True, use_axis_y=True, use_axis_z=True)
+        for v in rim:
+            v.co = v.co.normalized() * r[v]
+    bm.to_mesh(shell.data)
+    bm.free()
+    thick_shell(shell, ERSTLING_R - ERSTLING_SHELL)
+    # the lab's root plate at the core, below the widest canyon
+    lab = canyons[0]["dirs"][12]
+    teller = crust_shard("labor_teller", ERSTLING_CORE + 18, lab, 0.2, 8, M["bark"], rnd, flats=((lab, 0.14),), rough=0.0)
+    surface_anchor(G, "ankunft", ERSTLING_R, ERSTLING_ANKUNFT)
+    surface_anchor(G, "lager", ERSTLING_R, ERSTLING_LAGER)
+    top_anchor(G, "labor", teller, lab)
+    top_anchor(G, "wortkern2", teller, toward(lab, canyons[0]["dirs"][14], 0.12))
+    rim = canyons[1]["dirs"][12]
+    across = rim.cross(canyons[1]["dirs"][13] - canyons[1]["dirs"][11]).normalized()
+    top_anchor(G, "wortkern1", shell, (rim * ERSTLING_R + across * (canyons[1]["widths"][12] / 2 + 6)).normalized())
+    rim2 = canyons[2]["dirs"][8]
+    across2 = rim2.cross(canyons[2]["dirs"][9] - canyons[2]["dirs"][7]).normalized()
+    top_anchor(G, "schrift1", shell, (rim2 * ERSTLING_R + across2 * (canyons[2]["widths"][8] / 2 + 5)).normalized())
+    ANCHORS[G]["radius"] = ERSTLING_R
+
+    parts = [shell, teller] + bramble_core("erstling_kern", ERSTLING_CORE, M, rnd, M["nomai_glow"])
+    # roots under the crust (seen through the canyons), up the canyon walls, and under the lab plate
+    under = [d * (ERSTLING_R - ERSTLING_SHELL - 12) for d in (random_axis(rnd) for _ in range(40)) if not in_canyon(d, canyons, 0)]
+    parts += roots("erstling_wurzel", ERSTLING_CORE, under[:28], M, rnd, rise=0.0)
+    walls = []
+    for c in canyons:
+        for i in (6, 12, 18):
+            d, w = c["dirs"][i], c["widths"][i]
+            side = d.cross(c["dirs"][i + 1] - c["dirs"][i - 1]).normalized() * (w / 2 - 2) * rnd.choice((-1, 1))
+            walls.append((d * (ERSTLING_R - 14) + side))
+    parts += roots("erstling_klammer", ERSTLING_CORE, walls, M, rnd, rise=16.0)
+    parts += roots("erstling_teller", ERSTLING_CORE, [toward(lab, random_axis(rnd), 0.15) * (ERSTLING_CORE + 12) for _ in range(4)], M, rnd)
+    # vines over the crust, spanning the canyons
     excl = [(f, w * 1.3) for f, w in flats]
-    for k in range(9):
+    for k in range(6):
         parts += great_circle_vine(f"vine{k}", ERSTLING_R, rnd.uniform(7, 13), M["bark"], rnd, sink=0.35, arc=rnd.uniform(0.35, 0.8), avoid=excl)
-    # ice: clusters of slanted crystal shards growing out of the bark, like the ice crust of Dark Bramble
+    # ice: clusters of slanted crystal shards on the crust
     for k in range(60):
         c = random_axis(rnd)
-        if any(c.angle(e) < w for e, w in excl):
+        if any(c.angle(e) < w for e, w in excl) or in_canyon(c, canyons):
             continue
         for j in range(rnd.randint(4, 9)):
             d = (c + random_axis(rnd) * 0.06).normalized()
             L = rnd.uniform(8, 30)
             lean = (d + random_axis(rnd) * 0.6).normalized()
             parts.append(cone_along(f"eis{k}_{j}", d * (ERSTLING_R - 4), lean, L, L * rnd.uniform(0.25, 0.45), L * 0.03, M["ice"], 5))
-    parts += surface_thorns("eisdorn", ERSTLING_R, 70, 38, M["ice"], rnd, excl)
-    parts += surface_thorns("dorn", ERSTLING_R, 60, 26, M["bark"], rnd, excl)
+    gone = lambda d: in_canyon(d, canyons)  # noqa: E731
+    parts += surface_thorns("eisdorn", ERSTLING_R, 70, 38, M["ice"], rnd, excl, skip=gone)
+    parts += surface_thorns("dorn", ERSTLING_R, 60, 26, M["bark"], rnd, excl, skip=gone)
     ob = join("Erstling", parts, uv_size=12.0)
-    G = "erstling"
-    surface_anchor(G, "ankunft", ERSTLING_R, ERSTLING_ANKUNFT)
-    surface_anchor(G, "lager", ERSTLING_R, ERSTLING_LAGER)
-    ANCHORS[G]["radius"] = ERSTLING_R
+    PREVIEW_NEAR["erstling"] = (lab * (ERSTLING_R + 160) + across * 120, lab * (ERSTLING_CORE + 20))
     return ob
+
+
+# ---------------------------------------------------------------- Glutdorn: slabs hanging over the glowing core
+GLUT_R = 220.0
+GLUT_CORE = 90.0
+GLUT_THICK = 25.0
 
 
 def glutdorn(M):
-    """Glowing red vines around a lava core: bark with ember cracks, glowing thorn tips."""
+    """Fourteen slabs of the broken crust hang on roots over a bramble core that glows like lava. Root bridges join
+    some of them; the Glutwerk's own bridge spans the gap to the node slab."""
     rnd = random.Random(23)
-    R = 220.0
-    parts = [displaced_ball("glut_kern", R, M["bark"], 24, R * 0.18, 23)]
-    for k in range(12):
-        parts += great_circle_vine(f"vine{k}", R, rnd.uniform(8, 15), M["bark"], rnd, sink=0.2, amp=0.07, arc=rnd.uniform(0.4, 1.0))
-    # ember cracks: thin glowing tubes along random walks over the surface
-    for k in range(26):
-        d = random_axis(rnd)
+    G = "glutdorn"
+    werk = direction(20, 40)
+    gap_m = 32.0
+    knoten = toward(werk, direction(-10, 60), 0.32 + 0.26 + gap_m / GLUT_R)
+    caps = place_caps(rnd, 14, (0.18, 0.3), 15, GLUT_R, fixed=((werk, 0.32), (knoten, 0.26)))
+    # flat ground for the Glutwerk, the node, and the strip the bridge slides over
+    flat = {0: ((werk, 0.09), (toward(werk, knoten, 0.32 * 0.7), 0.1)), 1: ((knoten, 0.09), (toward(knoten, werk, 0.26 * 0.75), 0.07))}
+    slabs = [crust_shard(f"scholle{k}", GLUT_R, d, a, GLUT_THICK, M["bark"], rnd, rough=0.015, flats=flat.get(k, ()))
+             for k, (d, a) in enumerate(caps)]
+    # anchors: the Glutwerk, the node slab, the ends of the Glutwerk bridge, texts and word cores on other slabs
+    top_anchor(G, "werk", slabs[0], werk)
+    top_anchor(G, "knoten_scholle", slabs[1], knoten)
+    top_anchor(G, "knoten", slabs[1], toward(knoten, werk, -0.08), up=40.0)
+    top_anchor(G, "bruecke_ein", slabs[0], toward(werk, knoten, 0.32 * 0.88))
+    top_anchor(G, "bruecke_aus", slabs[1], toward(knoten, werk, 0.26 * 0.88))
+    for name, k in (("schrift1", 3), ("schrift2", 6), ("wortkern1", 9), ("wortkern2", 12)):
+        top_anchor(G, name, slabs[k], caps[k][0])
+    ANCHORS[G]["radius"] = GLUT_R
+    parts = list(slabs) + bramble_core("glut_kern", GLUT_CORE, M, rnd, M["ember"])
+    targets = []
+    for d, a in caps:
+        for j in range(2):
+            targets.append(toward(d, random_axis(rnd), a * 0.4) * (GLUT_R - GLUT_THICK - 2))
+    parts += roots("glut_wurzel", GLUT_CORE, targets, M, rnd, rise=GLUT_THICK + 3)
+    # root bridges between neighbouring slabs (not across the Glutwerk gap: that bridge is the Glutwerk's own)
+    pairs = sorted(((caps[i][0].angle(caps[j][0]) - caps[i][1] - caps[j][1], i, j) for i in range(len(caps)) for j in range(i + 1, len(caps))
+                    if (i, j) != (0, 1)))
+    for n, (_, i, j) in enumerate(pairs[:6]):
+        (ci, ai), (cj, aj) = caps[i], caps[j]
+        t0, t1 = ai * 0.85, ci.angle(cj) - aj * 0.85
+        pts = [toward(ci, cj, t0 + (t1 - t0) * s / 10) * (GLUT_R - 2.5) for s in range(11)]
+        parts.append(tube(f"bruecke{n}", pts, 3.5, M["bark"], res=4, bevel=3))
+    # ember cracks over the slabs and glowing thorn tips
+    for k, ((d, a), ob) in enumerate(zip(caps, slabs)):
+        if k < 2:
+            continue
         pts = []
-        heading = random_axis(rnd).cross(d).normalized()
-        for i in range(14):
-            pts.append(d * (R + 0.5))
-            heading = (heading + random_axis(rnd) * 0.35).normalized()
-            heading = (heading - d * heading.dot(d)).normalized()
-            d = (d + heading * 0.035).normalized()
-        parts.append(tube(f"riss{k}", pts, rnd.uniform(1.0, 2.2), M["ember"], res=4, bevel=1))
-    for k in range(80):
-        d = random_axis(rnd)
-        L = rnd.uniform(14, 40)
-        parts.append(cone_along(f"glutdorn{k}", d * R * 0.99, d, L, L * 0.13, 0.08, M["bark"], 7))
-        parts.append(sphere(f"glutspitze{k}", L * 0.06, d * (R + L * 0.92), M["ember"], seg=8, rings=4))
+        p, heading = d, random_axis(rnd)
+        for i in range(12):
+            hit, loc, _, _ = ob.ray_cast(p * 5000, -p)
+            if not hit or (pts and (loc - pts[-1]).length > 10):
+                break
+            pts.append(loc + p * 0.4)
+            heading = (heading + random_axis(rnd) * 0.15).normalized()
+            q = toward(p, heading, 0.025)
+            if q.angle(d) < a * 0.6:
+                p = q
+        if len(pts) > 2:
+            parts.append(tube(f"riss{k}", pts, rnd.uniform(0.6, 1.0), M["ember"], res=2, bevel=1))
+        parts += shard_thorns(f"glutdorn{k}_", ob, d, a, 5, M["bark"], rnd, tip=M["ember"], length=(10, 26))
     ob = join("Glutdorn", parts, uv_size=12.0)
-    ANCHORS.setdefault("glutdorn", {})["radius"] = R
+    mid = toward(werk, knoten, (0.32 + werk.angle(knoten) - 0.26) / 2)
+    PREVIEW_NEAR["glutdorn"] = (mid * (GLUT_R + 230) + werk.cross(knoten).normalized() * 90, mid * (GLUT_R - 40))
     return ob
 
 
-def nebelranke_ranken(M):
-    """The gas giant: green fog (New Horizons) - here only the giant drifting vines that loop through it."""
+# ---------------------------------------------------------------- Nebelranke: a ring of islands in the fog
+NEBEL_R = 640.0
+NEBEL_CORE = 220.0
+
+
+def nebelranke(M):
+    """The gas giant: deep in the green fog (New Horizons) a bramble core, around it a tilted ring of twelve islands
+    of the old surface, held by roots; the giant drifting vines loop between them."""
     rnd = random.Random(37)
-    R = 640.0
-    parts = []
-    for k in range(16):
-        parts += great_circle_vine(f"ranke{k}", R * rnd.uniform(0.7, 1.15), rnd.uniform(14, 26), M["bark"], rnd,
+    G = "nebelranke"
+    n = Vector((math.sin(math.radians(25)), 0, math.cos(math.radians(25))))
+    u, w = basis(n)
+    islands = []
+    for k in range(12):
+        az = math.radians(k * 30 + rnd.uniform(-8, 8))
+        d = (u * math.cos(az) + w * math.sin(az) + n * rnd.uniform(-0.08, 0.08)).normalized()
+        r = rnd.uniform(420, 560)
+        across = 220 if k == 0 else rnd.uniform(130, 200)
+        thick = rnd.uniform(25, 40)
+        ob = crust_shard(f"insel{k}", r, d, across / 2 / r, thick, M["bark"], rnd, rough=0.01, flats=((d, 22 / r),) if k in (0, 3) else ())
+        islands.append((d, r, thick, across / 2 / r, ob))
+    top_anchor(G, "station", islands[0][4], islands[0][0])
+    top_anchor(G, "knoten", islands[3][4], islands[3][0], up=40.0)
+    for name, k in (("schrift1", 2), ("schrift2", 8), ("wortkern1", 5), ("wortkern2", 10)):
+        top_anchor(G, name, islands[k][4], islands[k][0])
+    ANCHORS[G]["radius"] = max(r for _, r, _, _, _ in islands) + 5
+    parts = [i[4] for i in islands] + bramble_core("nebel_kern", NEBEL_CORE, M, rnd, M["seed"])
+    targets = [toward(d, random_axis(rnd), a * 0.4) * (r - t - 2) for d, r, t, a, _ in islands for _ in range(2)]
+    parts += roots("nebel_wurzel", NEBEL_CORE, targets, M, rnd, rise=8.0)
+    for k, (d, r, t, a, ob) in enumerate(islands):
+        parts += shard_thorns(f"inseldorn{k}_", ob, d, a, 4, M["bark"], rnd, length=(8, 18))
+    for k in range(4):
+        parts += great_circle_vine(f"ranke{k}", NEBEL_R * rnd.uniform(0.95, 1.15), rnd.uniform(8, 12), M["bark"], rnd,
                                    sink=0.5, waves=5, amp=0.12, n=72, arc=rnd.uniform(0.3, 0.75))
     for k in range(10):
-        c = random_axis(rnd) * R * rnd.uniform(0.6, 1.0)
+        c = random_axis(rnd) * NEBEL_R * rnd.uniform(0.5, 1.0)
         parts.append(sphere(f"samenleuchte{k}", rnd.uniform(4, 9), c, M["seed"], seg=12, rings=6))
     ob = join("Nebelranke", parts, uv_size=16.0)
-    ANCHORS.setdefault("nebelranke", {})["radius"] = R
+    d0, r0 = islands[0][0], islands[0][1]
+    PREVIEW_NEAR["nebelranke"] = (d0 * (r0 + 260) + n * 260, d0 * r0)
     return ob
+
+
+# ---------------------------------------------------------------- Hohlsamen: splinters of a husk in a root net
+HOHL_R = 300.0
+HOHL_CORE = 110.0
 
 
 def hohlsamen(M):
-    """A giant seed broken open: a thick shell with a jagged opening, crystal thorns growing inwards."""
+    """A giant seed, almost eaten: only ten splinters of its husk and six broken ribs are left, caught in a dense net
+    of roots around a crystal core; crystal thorns grow out of the core."""
     rnd = random.Random(41)
-    R = 300.0
-    shell = displaced_ball("hohl_schale", R, M["bark"], 14, R * 0.3, 41)
-    m = shell.modifiers.new("dicke", "SOLIDIFY")
-    m.thickness = 22
-    m.offset = -1
-    select(shell)
-    bpy.ops.object.modifier_apply(modifier="dicke")
-    opening = direction(10, 200)
-    cutters = [sphere("loch", R * 0.55, opening * R, M["bark"], seg=24, rings=12)]
-    for k in range(7):
-        jag = (opening + random_axis(rnd) * 0.35).normalized()
-        cutters.append(sphere(f"zacke{k}", R * rnd.uniform(0.12, 0.22), jag * R, M["bark"], seg=12, rings=6))
-    cut(shell, cutters)
-    parts = [shell]
-    for k in range(70):
-        d = random_axis(rnd)
-        if d.angle(opening) < 0.7:
-            continue
-        L = rnd.uniform(18, 60)
-        parts.append(cone_along(f"kristall{k}", d * (R - 20), -d + random_axis(rnd) * 0.3, L, L * 0.12, 0.3, M["crystal"], 6))
-    for k in range(40):
-        d = random_axis(rnd)
-        if d.angle(opening) < 0.8:
-            continue
-        L = rnd.uniform(16, 36)
-        parts.append(cone_along(f"dorn{k}", d * R * 0.99, d, L, L * 0.12, 0.08, M["bark"], 7))
-    # the husk of a seed: ridges from pole to pole, broken where the shell burst open
-    for k in range(18):
-        lon = k * 20.0 + rnd.uniform(-4, 4)
-        pts = []
-        for i in range(41):
-            lat = -88 + 176 * i / 40
-            d = direction(lat, lon)
-            if d.angle(opening) < 0.75:
-                if len(pts) > 2:
-                    parts.append(tube(f"rippe{k}_{i}", pts, rnd.uniform(5, 8), M["bark"], res=5, bevel=2, taper=True))
-                pts = []
-                continue
-            pts.append(d * (R + 3))
-        if len(pts) > 2:
-            parts.append(tube(f"rippe{k}", pts, rnd.uniform(5, 8), M["bark"], res=5, bevel=2, taper=True))
-    for k in range(6):
-        parts += great_circle_vine(f"vine{k}", R, rnd.uniform(8, 12), M["bark"], rnd, sink=0.3, arc=rnd.uniform(0.3, 0.6))
-    ob = join("Hohlsamen", parts, uv_size=12.0)
     G = "hohlsamen"
-    surface_anchor(G, "oeffnung", R, opening)
-    ANCHORS[G]["radius"] = R
+    obs = direction(15, 120)
+    caps = place_caps(rnd, 10, (0.15, 0.27), 20, HOHL_R, fixed=((obs, 0.3),))
+    splinters = [crust_shard(f"splitter{k}", HOHL_R, d, a, 22, M["bark"], rnd, rough=0.02, flats=((d, 0.1),) if k == 0 else ())
+                 for k, (d, a) in enumerate(caps)]
+    top_anchor(G, "observatorium", splinters[0], obs)
+    for name, k in (("schrift1", 2), ("schrift2", 5), ("wortkern1", 7), ("wortkern2", 9)):
+        top_anchor(G, name, splinters[k], caps[k][0])
+    kn = toward(obs, direction(-30, 200), 0.6)
+    surface_anchor(G, "knoten", HOHL_CORE + 60, kn)
+    ANCHORS[G]["radius"] = HOHL_R
+    parts = list(splinters) + bramble_core("hohl_kern", HOHL_CORE, M, rnd, M["crystal"])
+    targets = [toward(d, random_axis(rnd), a * 0.4) * (HOHL_R - 24) for d, a in caps]
+    parts += roots("hohl_halt", HOHL_CORE, targets, M, rnd, rise=26.0)
+    free = [random_axis(rnd) * rnd.uniform(150, 290) for _ in range(30)]
+    parts += roots("hohl_netz", HOHL_CORE, free, M, rnd, rise=0.0)
+    for k, t in enumerate(free):
+        parts.append(cone_along(f"netzdorn{k}", t, t.normalized() + random_axis(rnd) * 0.3, rnd.uniform(8, 18), 2.2, 0.05, M["bark"], 6))
+    # broken ribs of the husk, hanging in the net
+    for k in range(6):
+        lon = rnd.uniform(0, 360)
+        lat0 = rnd.uniform(-70, 40)
+        pts = [direction(lat0 + i * rnd.uniform(5, 7), lon) * (HOHL_R - 6) for i in range(8)]
+        parts.append(tube(f"rippe{k}", pts, rnd.uniform(5, 8), M["bark"], res=5, bevel=2, taper=True))
+    for k in range(30):
+        d = random_axis(rnd)
+        L = rnd.uniform(40, 120)
+        parts.append(cone_along(f"kristall{k}", d * HOHL_CORE * 0.95, d + random_axis(rnd) * 0.2, L, L * 0.1, 0.3, M["crystal"], 6))
+    ob = join("Hohlsamen", parts, uv_size=12.0)
+    PREVIEW_NEAR["hohlsamen"] = (obs * (HOHL_R + 40) + basis(obs)[0] * 200, Vector((0, 0, 0)))
     return ob
 
 
@@ -964,6 +1194,160 @@ def eiszapfen(M):
     return join("Eiszapfen", parts, uv_size=4.0)
 
 
+# ------------------------------------------------------------------------------------------ the stations (0.2.0)
+# Built like the camp: in a frame standing on the planet (site_frame), exported in planet coordinates, so the
+# anchors can be used by New Horizons directly. Spec 2026-10-11, section 3.1.
+def station_anchors(group, F, up):
+    def a(name, p, face=None):
+        anchor(group, name, F @ Vector(p), face=(F @ Vector(face)) if face is not None else None, normal=up)
+    return a
+
+
+def lamp(name, p, h, M, glow):
+    return [cylinder(name + "_mast", 0.12, 0.09, 0, h, M["copper"], 10, at=(p.x, p.y, 0)),
+            sphere(name + "_licht", 0.5, (p.x, p.y, h + 0.4), glow, seg=12, rings=6)]
+
+
+def wurzellabor(M):
+    """Hyssop's root lab on the root plate at Erstling's core: a hut the roots have grown into. A root breaks
+    through the wall and holds the overgrown translator above the workbench."""
+    F = site_frame("erstling.labor")
+    up = SITES["erstling.labor"].normalized()
+    parts = [cylinder("boden", 9, 9.3, -0.6, 0.0, M["hull"], 64), torus("boden_rand", 9.15, 0.22, -0.05, M["copper"], 96, 6)]
+    parts += dome("huette", (0, 0, 0), 6.0, 270, M)
+    parts.append(box("werkbank", (3.0, 1.1, 0.9), polar(3.2, 70, 0.45), M["copper"], rot=(0, 0, math.radians(70 + 90))))
+    root = [polar(17, 110, -7), polar(13, 106, 2), polar(8.5, 102, 5.2), polar(5, 100, 3.6), polar(2.9, 98, 1.6)]
+    parts.append(tube("wurzel", root, 1.1, M["bark"], res=6, bevel=3, radii=[1.0, 0.9, 0.7, 0.45, 0.2]))
+    for k in range(5):  # side roots creeping over the floor
+        a0 = 110 + k * 12
+        parts.append(tube(f"kriecher{k}", [polar(9.5, a0, -0.2), polar(7, a0 - 8, 0.15), polar(5.5, a0 - 20, 0.1)], 0.35, M["bark"],
+                          res=4, bevel=2, radii=[1.0, 0.6, 0.15]))
+    for k, az in enumerate((20, 200, 320)):
+        parts += lamp(f"lampe{k}", polar(8.2, az), 2.6, M, M["nomai_glow"])
+    to_planet(parts, F)
+    ob = join("Wurzellabor", parts, uv_size=3.0)
+    a = station_anchors("wurzellabor", F, up)
+    a("mitte", (0, 0, 0))
+    a("computer1", polar(3.6, 200), face=(0, 0, 0))
+    a("computer2", polar(7.6, 320), face=(0, 0, 0))
+    a("computer3", polar(7.6, 40), face=(0, 0, 0))
+    a("uebersetzer", polar(2.9, 98, 1.0))
+    a("schrift", polar(12.5, 165), face=(0, 0, 0))
+    return ob
+
+
+def glutwerk(M):
+    """The Glutwerk on Glutdorn's largest slab: a tower with heat fins over a copper boiler that drew the core's heat."""
+    F = site_frame("glutdorn.werk", SITES["glutdorn.bruecke_ein"])
+    up = SITES["glutdorn.werk"].normalized()
+    parts = [cylinder("sockel", 7, 7.4, -1.0, 0.3, M["hull"], 64), torus("sockel_rand", 7.2, 0.25, 0.25, M["copper"], 96, 6),
+             sphere("kessel", 3.2, (0, 0, 4.0), M["copper"], scale=(1, 1, 1.2), seg=32, rings=16),
+             cylinder("turm", 1.6, 1.0, 2.0, 20.0, M["hull"], 32)]
+    for k in range(8):
+        az = k * 45
+        parts.append(box(f"rippe{k}", (0.25, 3.0, 11.0), polar(2.6, az, 12.5), M["copper"], rot=(0, 0, math.radians(az))))
+    parts += [torus("krone", 2.2, 0.3, 20.2, M["copper"], 48, 6), sphere("glut", 1.2, (0, 0, 21.2), M["ember"], seg=16, rings=8)]
+    parts.append(tube("rohr", [Vector((0, 2.8, 3.0)), Vector((0, 6.5, 1.4)), Vector((0, 10, 0.4))], 0.45, M["copper"], res=6, bevel=3))
+    for k, az in enumerate((150, 210, 330)):
+        parts += lamp(f"lampe{k}", polar(6.4, az), 3.0, M, M["ember"])
+    to_planet(parts, F)
+    ob = join("Glutwerk", parts, uv_size=3.0)
+    a = station_anchors("glutwerk", F, up)
+    a("mitte", (0, 0, 0))
+    a("computer1", polar(5.6, 200, 0.3), face=(0, 0, 0))
+    a("computer2", polar(5.6, 330, 0.3), face=(0, 0, 0))
+    a("recorder1", polar(5.6, 50, 0.3), face=(0, 0, 0))
+    a("schrift", polar(11.5, 135), face=(0, 0, 0))
+    return ob
+
+
+def brueckenkopf(M):
+    """The bridgehead at the edge of the Glutwerk slab: two pillars, and the marble tube that runs the bridge."""
+    ein, aus = SITES["glutdorn.bruecke_ein"], SITES["glutdorn.bruecke_aus"]
+    F = site_frame("glutdorn.bruecke_ein", aus)
+    parts = [box("bett", (5.0, 4.0, 0.8), (0, -1.5, 0.0), M["hull"])]
+    for sx in (-1, 1):
+        parts += [cylinder(f"pfeiler{sx}", 0.45, 0.35, 0, 4.2, M["hull"], 16, at=(2.6 * sx, 0.2, 0)),
+                  sphere(f"pfeiler_licht{sx}", 0.4, (2.6 * sx, 0.2, 4.5), M["ember"], seg=12, rings=6)]
+    pfad = [Vector((-3.2 + 6.4 * i / 9, -3.6, 1.2)) for i in range(10)]
+    parts += marble_tube("glutbruecke", pfad, {"ein": 0, "aus": len(pfad) - 1}, M, record_matrix=F)
+    for i, p in enumerate(pfad[::3]):
+        parts.append(cylinder(f"stuetze{i}", 0.12, 0.12, 0.0, 1.0, M["copper"], 8, at=(p.x, p.y, 0)))
+    to_planet(parts, F)
+    ob = join("Brueckenkopf", parts, uv_size=3.0)
+    # the gap the bridge spans, for the build script (the tube moves the deck by "luecke" metres towards "aus")
+    gap = (aus - ein).length
+    ANCHORS.setdefault("glutbruecke", {})["luecke"] = round(gap + 1.0, 3)
+    anchor("glutbruecke", "richtung", ein + (aus - ein).normalized(), normal=(aus - ein).normalized())
+    return ob
+
+
+def glutbruecke(M):
+    """The bridge deck, built retracted (pulled back over the slab); the marble tube pushes it out over the gap."""
+    ein, aus = SITES["glutdorn.bruecke_ein"], SITES["glutdorn.bruecke_aus"]
+    F = site_frame("glutdorn.bruecke_ein", aus)
+    gap = (aus - ein).length + 1.0
+    length = gap + 4.0
+    y0 = -gap - 2.0                   # retracted: the deck's front end lies 2 m past the bridgehead
+    parts = [box("deck", (3.2, length, 0.5), (0, y0 + length / 2, 0.7), M["hull"])]
+    for sx in (-1, 1):
+        parts.append(tube(f"gelaender{sx}", [Vector((1.5 * sx, y0 + 0.5, 1.6)), Vector((1.5 * sx, y0 + length - 0.5, 1.6))], 0.08, M["copper"]))
+        parts.append(box(f"leuchtstreifen{sx}", (0.15, length - 1, 0.1), (1.35 * sx, y0 + length / 2, 0.98), M["ember"]))
+    to_planet(parts, F)
+    return join("Glutbruecke", parts, uv_size=3.0)
+
+
+def treibstation(M):
+    """Rue's drifting station on Nebelranke's largest island: a platform on stilts with a hut and lanterns in the fog."""
+    F = site_frame("nebelranke.station")
+    up = SITES["nebelranke.station"].normalized()
+    parts = [cylinder("plattform", 9, 9, 2.6, 3.0, M["hull"], 64), torus("plattform_rand", 9.0, 0.2, 3.0, M["copper"], 96, 6),
+             torus("gelaender", 8.8, 0.07, 4.0, M["copper"], 96, 6)]
+    for k in range(6):
+        p = polar(7.5, k * 60 + 30)
+        parts.append(cylinder(f"stelze{k}", 0.3, 0.3, -2.5, 2.6, M["copper"], 12, at=(p.x, p.y, 0)))
+    parts.append(box("rampe", (2.4, 7.0, 0.3), polar(12.0, 0, 1.4), M["hull"], rot=(math.radians(22), 0, math.radians(-90))))
+    parts += dome("huette", (0, 0, 3.0), 4.0, 0, M)
+    for k, az in enumerate((60, 180, 300)):
+        p = polar(8.4, az)
+        parts += [cylinder(f"laterne{k}_mast", 0.1, 0.08, 3.0, 7.5, M["copper"], 10, at=(p.x, p.y, 0)),
+                  sphere(f"laterne{k}_licht", 0.6, (p.x, p.y, 7.9), M["seed"], seg=12, rings=6)]
+    to_planet(parts, F)
+    ob = join("Treibstation", parts, uv_size=3.0)
+    a = station_anchors("treibstation", F, up)
+    a("mitte", (0, 0, 3.0))
+    a("computer1", polar(1.8, 180, 3.0), face=(0, 0, 3.0))
+    a("computer2", polar(6.8, 100, 3.0), face=(0, 0, 3.0))
+    a("recorder1", polar(6.8, 260, 3.0), face=(0, 0, 3.0))
+    for k, az in enumerate((60, 180, 300)):
+        a(f"laterne{k + 1}", polar(8.4, az, 7.9))
+    return ob
+
+
+def kristallobservatorium(M):
+    """Tansy's observatory on the largest husk splinter of Hohlsamen: a ring hall open to the sky, crystals on its roof."""
+    F = site_frame("hohlsamen.observatorium")
+    up = SITES["hohlsamen.observatorium"].normalized()
+    parts = [cylinder("boden", 12, 12.4, -0.8, 0.0, M["hull"], 96), torus("boden_rand", 12.2, 0.25, -0.05, M["copper"], 128, 6),
+             torus("becken_ring", 3.4, 0.2, 0.05, M["nomai_glow"], 64, 6),
+             torus("dach", 11.0, 0.6, 8.0, M["copper"], 128, 8), torus("dach_licht", 10.4, 0.15, 7.4, M["crystal"], 128, 6)]
+    for k in range(12):
+        p = polar(11.0, k * 30)
+        parts.append(cylinder(f"saeule{k}", 0.5, 0.42, 0, 8.0, M["hull"], 16, at=(p.x, p.y, 0)))
+    for k in range(6):
+        p = polar(11.0, k * 60 + 15, 8.4)
+        parts.append(cone_along(f"kristall{k}", p, Vector((0, 0, 1)) + polar(0.35, k * 60 + 15), 3.5 + k % 3, 0.6, 0.05, M["crystal"], 6))
+    to_planet(parts, F)
+    ob = join("Kristallobservatorium", parts, uv_size=3.0)
+    a = station_anchors("kristallobservatorium", F, up)
+    a("mitte", (0, 0, 0))
+    a("becken", (0, 0, 0))
+    for k in range(4):
+        a(f"computer{k + 1}", polar(8.2, 45 + 90 * k), face=(0, 0, 0))
+    a("stein", polar(5.0, 200), face=(0, 0, 0))
+    return ob
+
+
 def buildings(M):
     return {
         "lager": lager(M),
@@ -975,6 +1359,12 @@ def buildings(M):
         "krater": krater(M),
         "absperrung": absperrung(M),
         "eiszapfen": eiszapfen(M),
+        "wurzellabor": wurzellabor(M),
+        "glutwerk": glutwerk(M),
+        "brueckenkopf": brueckenkopf(M),
+        "glutbruecke": glutbruecke(M),
+        "treibstation": treibstation(M),
+        "kristallobservatorium": kristallobservatorium(M),
     }
 
 
@@ -985,6 +1375,13 @@ def preview_buildings(cam, models):
     side = up.cross(Vector((0, 0, 1))).normalized()
     render(cam, os.path.join(PREVIEWS, "lager.png"), centre + up * 28 + side * 42, centre + up * 2, (1200, 800), lens=30,
            show=[models["lager"].name, models["erstling"].name, models["lager_tor"].name])
+    for key, dist in (("wurzellabor", 30), ("glutwerk", 40), ("brueckenkopf", 40), ("treibstation", 30), ("kristallobservatorium", 40)):
+        ob = models[key]
+        c = sum((Vector(v) for v in ob.bound_box), Vector()) / 8
+        up = c.normalized()
+        side = up.cross(Vector((0, 0, 1))).normalized()
+        show = [ob.name] + ([models["glutbruecke"].name] if key == "brueckenkopf" else [])
+        render(cam, os.path.join(PREVIEWS, key + ".png"), c + up * dist * 0.6 + side * dist, c, (900, 600), lens=35, show=show)
     for key, loc, dist in (("warpturm", (40000, 0, 0), 30), ("strudel", (41000, 0, 0), 32), ("krater", (42000, 0, 0), 70),
                            ("absperrung", (43000, 0, 0), 9), ("eiszapfen", (44000, 0, 0), 55), ("ausguck_lift", (45000, 0, 0), 7),
                            ("planetenkern_erstling", (46000, 0, 0), 1.6)):
@@ -1076,7 +1473,7 @@ def main():
     models = {
         "erstling": erstling(M),
         "glutdorn": glutdorn(M),
-        "nebelranke_ranken": nebelranke_ranken(M),
+        "nebelranke": nebelranke(M),
         "hohlsamen": hohlsamen(M),
         "herzdorn_kaefig": herzdorn_kaefig(M),
         "ausguck": ausguck(M),
@@ -1089,20 +1486,21 @@ def main():
         json.dump(ANCHORS, f, ensure_ascii=False, indent=2)
         f.write("\n")
     # spread the bodies out for the pictures
-    layout = {"erstling": (0, 0, 0), "glutdorn": (5000, 0, 0), "nebelranke_ranken": (10000, 0, 0), "hohlsamen": (15000, 0, 0),
+    layout = {"erstling": (0, 0, 0), "glutdorn": (5000, 0, 0), "nebelranke": (10000, 0, 0), "hohlsamen": (15000, 0, 0),
               "herzdorn_kaefig": (25000, 0, 0), "ausguck": (32000, 0, 0)}
     for key, at in layout.items():
         models[key].location = at
     cam = scene_setup()
     if PREVIEWS:
         os.makedirs(PREVIEWS, exist_ok=True)
-        for key, (dist, size) in {"erstling": (900, 260), "glutdorn": (780, 220), "nebelranke_ranken": (2200, 640), "hohlsamen": (1000, 300),
-                                  "herzdorn_kaefig": (3600, 1100), "ausguck": (45, 18)}.items():
+        for key, dist in {"erstling": 900, "glutdorn": 780, "nebelranke": 1900, "hohlsamen": 1000, "herzdorn_kaefig": 3600, "ausguck": 45}.items():
             at = Vector(layout[key])
             view = Vector((dist * 0.7, -dist * 0.75, dist * 0.35))
-            if key == "hohlsamen":  # look into the opening
-                view = direction(10, 200) * dist + Vector((0, 0, dist * 0.15))
-            render(cam, os.path.join(PREVIEWS, key + ".png"), at + view, at, (1200, 800), lens=35, show=[models[key].name])
+            name = f"planet_{key}_fern.png" if key in PREVIEW_NEAR else key + ".png"
+            render(cam, os.path.join(PREVIEWS, name), at + view, at, (1200, 800), lens=35, show=[models[key].name])
+            if key in PREVIEW_NEAR:
+                eye, target = PREVIEW_NEAR[key]
+                render(cam, os.path.join(PREVIEWS, f"planet_{key}_nah.png"), at + eye, at + target, (1200, 800), lens=30, show=[models[key].name])
         preview_buildings(cam, models)
     for key in layout:
         models[key].location = (0, 0, 0)

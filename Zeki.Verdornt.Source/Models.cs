@@ -316,7 +316,7 @@ public static class ModelPlacer
 /// <summary>Materials made at runtime: glow, glass, ice and fallbacks with a little noise so nothing looks flat.</summary>
 public static class Procedural
 {
-    public static bool IsGlow(string slot) => slot is "Keimlicht" or "Sternlicht" or "NomaiLeuchten" or "DornGlut";
+    public static bool IsGlow(string slot) => slot is "Keimlicht" or "Sternlicht" or "NomaiLeuchten" or "DornGlut" or "DornKristall";
 
     public static Material Make(string slot)
     {
@@ -328,7 +328,7 @@ public static class Procedural
             "DornGlut" => new Color(3.4f, 0.9f, 0.25f),
             "NomaiGlas" => new Color(0.75f, 0.9f, 1f, 0.22f),
             "DornEis" => new Color(0.62f, 0.76f, 0.86f),
-            "DornKristall" => new Color(0.55f, 0.38f, 0.9f),
+            "DornKristall" => new Color(0.95f, 0.7f, 1.8f),
             "NomaiKupfer" => new Color(0.72f, 0.43f, 0.22f),
             "NomaiHuelle" => new Color(0.46f, 0.36f, 0.28f),
             "HolzHearth" => new Color(0.45f, 0.3f, 0.18f),
