@@ -1,0 +1,66 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+  "name": "Nebelpforte",
+  "starSystem": "Verdornt",
+  "canShowOnTitle": false,
+  "Orbit": {
+    "staticPosition": {
+      "x": -45000.0,
+      "y": -50000.0,
+      "z": -40000.0
+    }
+  },
+  "ShipLog": {
+    "mapMode": {
+      "remove": true
+    }
+  },
+  "Bramble": {
+    "dimension": {
+      "radius": 300,
+      "fogTint": {
+        "r": 70,
+        "g": 160,
+        "b": 90,
+        "a": 255
+      },
+      "fogDensity": 3.2,
+      "linksTo": "ZEKIVD_Nebelranke_Knoten",
+      "vinePrefab": "smallNest"
+    }
+  },
+  "Volumes": {
+    "revealVolumes": [
+      {
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "radius": 300,
+        "reveals": [
+          "ZEKIVD_NEBELPFORTE_FOUND"
+        ]
+      }
+    ]
+  },
+  "Props": {
+    "translatorText": [
+      {
+        "type": "computer",
+        "xmlFile": "planets/text/Nebelpforte_Rue.xml",
+        "position": {
+          "x": -40.0,
+          "y": -20.0,
+          "z": 50.0
+        },
+        "rename": "VD_Nebelpforte_Rue",
+        "rotation": {
+          "x": 0.0,
+          "y": 200.0,
+          "z": 0.0
+        }
+      }
+    ]
+  }
+}

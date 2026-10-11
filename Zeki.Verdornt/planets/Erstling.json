@@ -363,6 +363,39 @@
         },
         "rename": "VD_Hoehle_Kern",
         "alignRadial": true
+      },
+      {
+        "type": "computer",
+        "xmlFile": "planets/text/Labor_Hyssop_1.xml",
+        "position": {
+          "x": 40.508,
+          "y": 3.056,
+          "z": -110.846
+        },
+        "rename": "VD_Labor_Hyssop_1",
+        "alignRadial": true
+      },
+      {
+        "type": "computer",
+        "xmlFile": "planets/text/Labor_Hyssop_2.xml",
+        "position": {
+          "x": 49.109,
+          "y": -0.595,
+          "z": -107.563
+        },
+        "rename": "VD_Labor_Hyssop_2",
+        "alignRadial": true
+      },
+      {
+        "type": "computer",
+        "xmlFile": "planets/text/Labor_Hyssop_3.xml",
+        "position": {
+          "x": 48.978,
+          "y": 9.169,
+          "z": -107.234
+        },
+        "rename": "VD_Labor_Hyssop_3",
+        "alignRadial": true
       }
     ],
     "warpTransmitters": [
@@ -462,6 +495,17 @@
         "radius": 32,
         "reveals": [
           "ZEKIVD_LAGER_FOUND"
+        ]
+      },
+      {
+        "position": {
+          "x": 44.744,
+          "y": 4.396,
+          "z": -112.338
+        },
+        "radius": 25,
+        "reveals": [
+          "ZEKIVD_LABOR_FOUND"
         ]
       }
     ],

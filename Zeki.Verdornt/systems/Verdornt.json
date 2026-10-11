@@ -89,6 +89,41 @@
         "x": 0,
         "y": 420
       }
+    },
+    {
+      "id": "ZEKIVD_LABOR",
+      "position": {
+        "x": -320,
+        "y": 680
+      }
+    },
+    {
+      "id": "ZEKIVD_SPRACHE",
+      "position": {
+        "x": 320,
+        "y": 680
+      }
+    },
+    {
+      "id": "ZEKIVD_GLUTWERK",
+      "position": {
+        "x": 950,
+        "y": 0
+      }
+    },
+    {
+      "id": "ZEKIVD_TREIBSTATION",
+      "position": {
+        "x": 950,
+        "y": 420
+      }
+    },
+    {
+      "id": "ZEKIVD_OBSERVATORIUM",
+      "position": {
+        "x": 950,
+        "y": -420
+      }
     }
   ]
 }

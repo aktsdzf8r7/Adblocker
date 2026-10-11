@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Logbuch: Hohlsamen -->
+<AstroObjectEntry xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/shiplog_schema.xsd">
+  <ID>ZEKIVD_HOHLSAMEN</ID>
+  <Entry>
+    <ID>ZEKIVD_OBSERVATORIUM</ID>
+    <Name>Das Kristallobservatorium</Name>
+    <Curiosity>ZEKIVD_VIER</Curiosity>
+    <RumorFact>
+      <ID>ZEKIVD_OBSERVATORIUM_RUMOR</ID>
+      <RumorName>Tansys Wörter</RumorName>
+      <Text>Hyssop schreibt, dass Tansy in ihrem Observatorium auf Hohlsamen die Wörter der Dornen sammelt.</Text>
+    </RumorFact>
+    <ExploreFact>
+      <ID>ZEKIVD_OBSERVATORIUM_FOUND</ID>
+      <Text>Auf dem größten Splitter der Samenhülle von Hohlsamen steht Tansys Observatorium, offen zum Himmel.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKIVD_HERZ_BLICK</ID>
+      <Text>Das Becken im Observatorium zeigt den Herzdorn ganz nah: einen Stern hinter Ranken, dicker als Planeten.</Text>
+    </ExploreFact>
+  </Entry>
+</AstroObjectEntry>

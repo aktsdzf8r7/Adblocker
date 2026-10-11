@@ -1,0 +1,66 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+  "name": "Hohlpforte",
+  "starSystem": "Verdornt",
+  "canShowOnTitle": false,
+  "Orbit": {
+    "staticPosition": {
+      "x": 55000.0,
+      "y": 30000.0,
+      "z": -55000.0
+    }
+  },
+  "ShipLog": {
+    "mapMode": {
+      "remove": true
+    }
+  },
+  "Bramble": {
+    "dimension": {
+      "radius": 300,
+      "fogTint": {
+        "r": 140,
+        "g": 90,
+        "b": 210,
+        "a": 255
+      },
+      "fogDensity": 3.0,
+      "linksTo": "ZEKIVD_Hohlsamen_Knoten",
+      "vinePrefab": "smallNest"
+    }
+  },
+  "Volumes": {
+    "revealVolumes": [
+      {
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "radius": 300,
+        "reveals": [
+          "ZEKIVD_HOHLPFORTE_FOUND"
+        ]
+      }
+    ]
+  },
+  "Props": {
+    "translatorText": [
+      {
+        "type": "computer",
+        "xmlFile": "planets/text/Hohlpforte_Tansy.xml",
+        "position": {
+          "x": 50.0,
+          "y": 10.0,
+          "z": 30.0
+        },
+        "rename": "VD_Hohlpforte_Tansy",
+        "rotation": {
+          "x": 0.0,
+          "y": 100.0,
+          "z": 0.0
+        }
+      }
+    ]
+  }
+}

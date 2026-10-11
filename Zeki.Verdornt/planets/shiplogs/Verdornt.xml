@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Logbuch: Dornenkranz, Etappe 1 -->
+<!-- Logbuch: Dornenkranz -->
 <AstroObjectEntry xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/shiplog_schema.xsd">
   <ID>ZEKIVD_ERSTLING</ID>
   <Entry>
@@ -82,6 +82,18 @@
         <ID>ZEKIVD_KAELTE_FOUND</ID>
         <Text>Eine dunkle, kalte Dimension. Etwas Großes lebt hier.</Text>
       </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKIVD_GLUTPFORTE_FOUND</ID>
+        <Text>Der Knoten von Glutdorn führt in eine glühende Dimension. Rues Karte endet hier.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKIVD_NEBELPFORTE_FOUND</ID>
+        <Text>Der Knoten von Nebelranke führt in eine Dimension voller grünem Nebel. Von hier geht es zu den Nestern der Wächter.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKIVD_HOHLPFORTE_FOUND</ID>
+        <Text>Der Knoten am Kristallkern von Hohlsamen führt in eine dunkle, violette Dimension. Dahinter liegt Tansys Werkstatt.</Text>
+      </ExploreFact>
     </Entry>
   </Entry>
   <Entry>
@@ -100,6 +112,45 @@
       <ID>ZEKIVD_TANSY_WURF</ID>
       <Text>Tansy hat einen Samen in Richtung unseres Systems geworfen, als Weg für alle, die nach ihnen kommen. Er schlug auf Timber Hearth ein.</Text>
     </ExploreFact>
+    <Entry>
+      <ID>ZEKIVD_LABOR</ID>
+      <Name>Das Wurzellabor</Name>
+      <Curiosity>ZEKIVD_VIER</Curiosity>
+      <RumorFact>
+        <ID>ZEKIVD_LABOR_RUMOR</ID>
+        <RumorName>Hyssop hört die Wurzeln</RumorName>
+        <Text>Rue schreibt, dass Hyssop unten in der breitesten Schlucht von Erstling arbeitet. Er sagt, er hört die Wurzeln.</Text>
+      </RumorFact>
+      <ExploreFact>
+        <ID>ZEKIVD_LABOR_FOUND</ID>
+        <Text>Unten in der breitesten Schlucht von Erstling steht Hyssops Labor auf einem Teller aus Wurzeln, direkt am leuchtenden Kern.</Text>
+      </ExploreFact>
+    </Entry>
+    <Entry>
+      <ID>ZEKIVD_SPRACHE</ID>
+      <Name>Die Dornensprache</Name>
+      <Curiosity>ZEKIVD_VIER</Curiosity>
+      <ExploreFact>
+        <ID>ZEKIVD_DORNSPRACHE_FAKT</ID>
+        <Text>Im Wurzellabor ist eine Wurzel um einen Nomai-Übersetzer gewachsen. Seit ich ihn berührt habe, übersetzt mein Übersetzer die leuchtende Dornenschrift – aber nur die Wörter, die ich kenne.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKIVD_SPRACHE_1</ID>
+        <Text>Tansy kannte die ersten Wörter: Herz, tragen, Welten.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKIVD_SPRACHE_2</ID>
+        <Text>Tansy lernte die Wörter für hinaus, Fremde und schlafen.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKIVD_SPRACHE_3</ID>
+        <Text>Tansy lernte die Wörter für hören und Kern.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKIVD_SPRACHE_4</ID>
+        <Text>Tansy lernte die Wörter für Mutter-Kern, Kreis und niemand. Die Dornen sagen, einer der Nomai spreche mit niemand.</Text>
+      </ExploreFact>
+    </Entry>
   </Entry>
   <Entry>
     <ID>ZEKIVD_KERNE</ID>

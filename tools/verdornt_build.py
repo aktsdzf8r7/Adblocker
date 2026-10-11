@@ -60,6 +60,9 @@ def herzdorn():
                  "lightRadius": 60000, "supernovaTint": color(200, 255, 190)},
         "Orbit": {"isStatic": True, "showOrbitLine": False},
         "MapMarker": {"enabled": True},
+        # the stone in Tansy's observatory shows the star from just outside its cage
+        "Props": {"remotes": [remote("HERZ", platform={"position": vec([0, 1180, 0]), "alignRadial": True, "rename": "VD_Becken_Herz",
+                                                       "reveals": "ZEKIVD_HERZ_BLICK"})]},
     })
     return cfg
 
@@ -214,7 +217,7 @@ def erstling(A):
             nomai("recorder", "Lager_Tansy", at(L["recorder3"]), radial=True),
             nomai("computer", "Turm_Erstling", tangent(L["turm"], -7.0), radial=True),
             nomai("computer", "Hoehle_Kern", at(L["hoehle"]), radial=True),
-        ],
+        ] + [nomai("computer", f"Labor_Hyssop_{k}", at(A["wurzellabor"][f"computer{k}"]), radial=True) for k in (1, 2, 3)],
         "warpTransmitters": [{"frequency": "ZEKIVD_AUSGUCK", "parentPath": "Sector/VD_Turm_Warp", "isRelativeToParent": True,
                               "position": vec([0, 0, 0])}],
         "warpReceivers": [{"frequency": "ZEKIVD_ERSTLING", "position": vec(tangent(L["turm"], 11.0)), "alignRadial": True}],
@@ -226,7 +229,8 @@ def erstling(A):
         ],
            "entryLocation": [{"id": "ZEKIVD_LAGER", "position": vec(at(L["mitte"], 6))}, {"id": "ZEKIVD_KERNE", "position": vec(at(L["kern"]))}]},
         "ShipLog": {"xmlFile": "planets/shiplogs/Verdornt.xml", "spriteFolder": "planets/assets/shiplog/entries"},
-        "Volumes": {"revealVolumes": [{"position": vec(at(L["mitte"], 4)), "radius": 32, "reveals": ["ZEKIVD_LAGER_FOUND"]}],
+        "Volumes": {"revealVolumes": [{"position": vec(at(L["mitte"], 4)), "radius": 32, "reveals": ["ZEKIVD_LAGER_FOUND"]},
+                                      {"position": vec(at(A["wurzellabor"]["mitte"], 3)), "radius": 25, "reveals": ["ZEKIVD_LABOR_FOUND"]}],
                     "interactionVolumes": [
             {"position": vec(home), "radius": 2.5, "range": 3.5, "prompt": "Durch den Rücksamen heimkehren", "condition": "ZEKIVD_HEIMREISE",
              "persistent": False, "reusable": True, "rename": "VD_Ruecksamen_Volumen"}]},
@@ -271,7 +275,8 @@ def timber_hearth():
 
 
 DIMENSION_FACTS = {"Samenschlund": "ZEKIVD_ABSTURZ_SCHLUND", "Eispforte": "ZEKIVD_EISPFORTE_FOUND", "Splittergang": "ZEKIVD_SPLITTER_FOUND",
-                   "Kaeltenest": "ZEKIVD_KAELTE_FOUND"}
+                   "Kaeltenest": "ZEKIVD_KAELTE_FOUND", "Glutpforte": "ZEKIVD_GLUTPFORTE_FOUND", "Nebelpforte": "ZEKIVD_NEBELPFORTE_FOUND",
+                   "Hohlpforte": "ZEKIVD_HOHLPFORTE_FOUND"}
 
 
 def dimension(name, at_, radius, fog, density, exit_node, vines="smallNest", nodes=None, extra=None, system=SYSTEM):
@@ -290,9 +295,52 @@ def dimension(name, at_, radius, fog, density, exit_node, vines="smallNest", nod
     return cfg
 
 
-def nebelranke():
-    return planet("Nebelranke", 640, 12, {
-        "Base": {"surfaceSize": 640, "surfaceGravity": 12, "groundSize": 120, "showMinimap": False},
+def node(anchor, to, name, fog):
+    """A great node on a planet, into its gate dimension (spec 2026-10-11, 3.2)."""
+    return {"position": vec(at(anchor)), "alignRadial": True, "linksTo": to, "name": name, "scale": 0.5, "fogTint": fog, "lightTint": fog}
+
+
+def station_log(planet_name):
+    return {"xmlFile": f"planets/shiplogs/{planet_name}.xml", "spriteFolder": "planets/assets/shiplog/entries"}
+
+
+def glutdorn(A):
+    G, W = A["glutdorn"], A["glutwerk"]
+    return planet("Glutdorn", round(G["radius"]), 9, {
+        "Bramble": {"nodes": [node(G["knoten"], "Glutpforte", "ZEKIVD_Glutdorn_Knoten", color(255, 140, 80))]},
+        "Props": {"translatorText": [nomai("computer", "Glutwerk_Hyssop", at(W["computer1"]), radial=True),
+                                     nomai("computer", "Glutwerk_Rue", at(W["computer2"]), radial=True),
+                                     nomai("recorder", "Glutwerk_Aufzeichnung", at(W["recorder1"]), radial=True)]},
+        "ShipLog": station_log("Glutdorn"),
+        "Volumes": {"revealVolumes": [{"position": vec(at(W["mitte"], 3)), "radius": 30, "reveals": ["ZEKIVD_GLUTWERK_FOUND"]}]},
+    })
+
+
+def hohlsamen(A):
+    H, O = A["hohlsamen"], A["kristallobservatorium"]
+    return planet("Hohlsamen", round(H["radius"]), 8, {
+        "Bramble": {"nodes": [node(H["knoten"], "Hohlpforte", "ZEKIVD_Hohlsamen_Knoten", color(190, 140, 255))]},
+        "Props": {"translatorText": [nomai("computer", f"Obs_Tansy_{k}", at(O[f"computer{k}"]), radial=True) for k in (1, 2, 3, 4)],
+                  "remotes": [remote("OBSERVATORIUM", platform={"position": vec(at(O["becken"])), "alignRadial": True,
+                                                                  "rename": "VD_Becken_Observatorium", "reveals": "ZEKIVD_OBSERVATORIUM_FOUND"}),
+                              remote("HERZ", stones=[{"position": vec(at(O["stein"], 0.4)), "alignRadial": True, "rename": "VD_Stein_Herz"}])]},
+        "ShipLog": station_log("Hohlsamen"),
+        "Volumes": {"revealVolumes": [{"position": vec(at(O["mitte"], 3)), "radius": 30, "reveals": ["ZEKIVD_OBSERVATORIUM_FOUND"]}]},
+    })
+
+
+def nebelranke(A):
+    # no NH ground: the player lands on the islands of the old surface around the bramble core (Blender model)
+    N, T = A["nebelranke"], A["treibstation"]
+    R = round(N["radius"])
+    return planet("Nebelranke", R, 10, {
+        "Bramble": {"nodes": [node(N["knoten"], "Nebelpforte", "ZEKIVD_Nebelranke_Knoten", color(120, 230, 140))]},
+        "Props": {"translatorText": [nomai("computer", "Treib_Rue_1", at(T["computer1"]), radial=True),
+                                     nomai("computer", "Treib_Rue_2", at(T["computer2"]), radial=True),
+                                     nomai("recorder", "Treib_Aufzeichnung", at(T["recorder1"]), radial=True)]},
+        "ShipLog": station_log("Nebelranke"),
+        "Volumes": {"revealVolumes": [{"position": vec(at(T["mitte"], 3)), "radius": 30, "reveals": ["ZEKIVD_TREIBSTATION_FOUND"]}]},
+        "Base": {"surfaceSize": R, "surfaceGravity": 10, "showMinimap": False},
         "Atmosphere": {"size": 820, "fogTint": color(70, 160, 90), "fogDensity": 0.55, "fogSize": 820, "useAtmosphereShader": True,
                        "atmosphereTint": color(90, 200, 120), "atmosphereSunIntensity": 0.6},
     })
@@ -341,6 +389,9 @@ def fernlager():
 EISPFORTE_AT = (-52000, -18000, 30000)
 SPLITTERGANG_AT = (-60000, 33000, -24000)
 KAELTENEST_AT = (47000, -36000, 51000)
+GLUTPFORTE_AT = (30000, 52000, 40000)
+NEBELPFORTE_AT = (-45000, -50000, -40000)
+HOHLPFORTE_AT = (55000, 30000, -55000)
 
 
 def dimensions():
@@ -357,6 +408,13 @@ def dimensions():
             # a real anglerfish lives here
             "Props": {"details": [{"path": P["angler"], "position": vec([60, -40, 30]), "rename": "VD_Anglerfisch"}],
                       "translatorText": [nomai("computer", "Kaelte_Hinweis", [-50, 30, 40], rotation=[0, 120, 0])]}}),
+        # the gates behind the planets' nodes (spec 2026-10-11, 3.2): simple for now, the deeper network comes later
+        "Glutpforte": dimension("Glutpforte", GLUTPFORTE_AT, 300, color(200, 90, 40), 2.6, "ZEKIVD_Glutdorn_Knoten",
+                                extra={"Props": {"translatorText": [nomai("computer", "Glutpforte_Rue", [30, 20, -60], rotation=[0, 30, 0])]}}),
+        "Nebelpforte": dimension("Nebelpforte", NEBELPFORTE_AT, 300, color(70, 160, 90), 3.2, "ZEKIVD_Nebelranke_Knoten",
+                                 extra={"Props": {"translatorText": [nomai("computer", "Nebelpforte_Rue", [-40, -20, 50], rotation=[0, 200, 0])]}}),
+        "Hohlpforte": dimension("Hohlpforte", HOHLPFORTE_AT, 300, color(140, 90, 210), 3.0, "ZEKIVD_Hohlsamen_Knoten",
+                                extra={"Props": {"translatorText": [nomai("computer", "Hohlpforte_Tansy", [50, 10, 30], rotation=[0, 100, 0])]}}),
     }
 
 
@@ -417,7 +475,16 @@ def tubes(A):
         # the lift of the Ausguck carries its own tube
         tube("lift", "Ausguck", "Sector/VD_Ausguck_Lift", [{"objekt": "VD_Ausguck_Lift", "versatz": {"oben": offset(U["lift_unten"], U["lift_oben"])},
                                                            "sekunden": 6, "traegt": 2.4}]),
+        # the Glutwerk bridge slides out over the lava gap while the marble lies in "aus" (spec 2026-10-11, 3.1)
+        # (no "traegt": the deck is built in planet coordinates, its origin is the core; one walks on it once it is out)
+        tube("glutbruecke", "Glutdorn", None, [{"objekt": "VD_Glutbruecke", "versatz": {"aus": bridge_offset(A["glutbruecke"])},
+                                                "sekunden": 4}]),
     ]
+
+
+def bridge_offset(B):
+    n, d = B["richtung"]["normal"], B["luecke"]
+    return vec([round(n["x"] * d, 3), round(n["y"] * d, 3), round(n["z"] * d, 3)])
 
 
 def placements(A):
@@ -427,7 +494,14 @@ def placements(A):
         {"model": "erstling", "body": "Erstling", "collider": True},
         {"model": "lager", "body": "Erstling", "collider": True},
         {"model": "glutdorn", "body": "Glutdorn", "collider": True},
-        {"model": "nebelranke_ranken", "body": "Nebelranke", "collider": True, "spin": 0.6},
+        {"model": "nebelranke", "body": "Nebelranke", "collider": True},
+        # the stations of 0.2.0, built in planet coordinates (tools/verdornt_models.py)
+        {"model": "wurzellabor", "name": "VD_Wurzellabor", "body": "Erstling", "collider": True},
+        {"model": "glutwerk", "name": "VD_Glutwerk", "body": "Glutdorn", "collider": True},
+        {"model": "brueckenkopf", "name": "VD_Glutbrueckenkopf", "body": "Glutdorn", "collider": True},
+        {"model": "glutbruecke", "name": "VD_Glutbruecke", "body": "Glutdorn", "collider": True},
+        {"model": "treibstation", "name": "VD_Treibstation", "body": "Nebelranke", "collider": True},
+        {"model": "kristallobservatorium", "name": "VD_Kristallobservatorium", "body": "Hohlsamen", "collider": True},
         {"model": "hohlsamen", "body": "Hohlsamen", "collider": True},
         {"model": "ausguck", "body": "Ausguck", "collider": True},
     ]
@@ -458,6 +532,19 @@ def placements(A):
         {"name": "Licht_Lager", "body": "Erstling", "position": vec(at(A["lager"]["mitte"], 14)), "color": vec([0.75, 0.9, 1.0]),
          "range": 60, "intensity": 1.4},
         {"name": "Licht_Ausguck", "body": "Ausguck", "position": vec([0, 8, 0]), "color": vec([0.75, 0.9, 1.0]), "range": 45, "intensity": 1.2},
+        # the glowing bramble cores light the inside of their planets (spec 2026-10-11, 2.1)
+        {"name": "Licht_Kern_Erstling", "body": "Erstling", "position": vec([0, 0, 0]), "color": vec([0.55, 0.8, 1.0]), "range": 330, "intensity": 2.2},
+        {"name": "Licht_Kern_Glutdorn", "body": "Glutdorn", "position": vec([0, 0, 0]), "color": vec([1.0, 0.45, 0.15]), "range": 300, "intensity": 2.6},
+        {"name": "Licht_Kern_Nebelranke", "body": "Nebelranke", "position": vec([0, 0, 0]), "color": vec([0.6, 1.0, 0.65]), "range": 700, "intensity": 2.4},
+        {"name": "Licht_Wurzellabor", "body": "Erstling", "position": vec(at(A["wurzellabor"]["mitte"], 8)), "color": vec([0.6, 1.0, 0.7]),
+         "range": 30, "intensity": 1.3},
+        {"name": "Licht_Glutwerk", "body": "Glutdorn", "position": vec(at(A["glutwerk"]["mitte"], 10)), "color": vec([1.0, 0.6, 0.3]),
+         "range": 35, "intensity": 1.3},
+        {"name": "Licht_Treibstation", "body": "Nebelranke", "position": vec(at(A["treibstation"]["mitte"], 8)), "color": vec([0.7, 1.0, 0.75]),
+         "range": 35, "intensity": 1.4},
+        {"name": "Licht_Observatorium", "body": "Hohlsamen", "position": vec(at(A["kristallobservatorium"]["mitte"], 9)), "color": vec([0.8, 0.65, 1.0]),
+         "range": 35, "intensity": 1.3},
+        {"name": "Licht_Kern_Hohlsamen", "body": "Hohlsamen", "position": vec([0, 0, 0]), "color": vec([0.7, 0.5, 1.0]), "range": 380, "intensity": 2.4},
     ]
     bramble = {
         "Ankunftskammer": {"pfade": vine_paths(1, 160, 7, (3, 6))},
@@ -465,6 +552,9 @@ def placements(A):
         "Splittergang": {"pfade": vine_paths(3, 320, 8, (4, 9))},
         "Kaeltenest": {"pfade": vine_paths(4, 280, 9, (4, 8)), "samen": [{"position": vec([-40, 70, -50]), "groesse": 14}]},
         "Samenschlund": {"pfade": vine_paths(5, 220, 6, (3, 7))},
+        "Glutpforte": {"pfade": vine_paths(6, 300, 8, (4, 9))},
+        "Nebelpforte": {"pfade": vine_paths(7, 300, 8, (4, 9))},
+        "Hohlpforte": {"pfade": vine_paths(8, 300, 8, (4, 9))},
     }
     T = tubes(A)
     # conditions the DLL builds at runtime (MarbleTube.Condition), declared for the validator
@@ -474,7 +564,9 @@ def placements(A):
 
 # ship log layout (rumor mode)
 ENTRIES_HOME = {"ZEKIVD_ABSTURZ": (2900, -400)}
-ENTRIES = {"ZEKIVD_LAGER": (0, 0), "ZEKIVD_AUSGUCK": (420, 220), "ZEKIVD_NETZ": (420, -220), "ZEKIVD_KERNE": (-500, 0), "ZEKIVD_VIER": (0, 420)}
+ENTRIES = {"ZEKIVD_LAGER": (0, 0), "ZEKIVD_AUSGUCK": (420, 220), "ZEKIVD_NETZ": (420, -220), "ZEKIVD_KERNE": (-500, 0), "ZEKIVD_VIER": (0, 420),
+           "ZEKIVD_LABOR": (-320, 680), "ZEKIVD_SPRACHE": (320, 680), "ZEKIVD_GLUTWERK": (950, 0), "ZEKIVD_TREIBSTATION": (950, 420),
+           "ZEKIVD_OBSERVATORIUM": (950, -420)}
 ORANGE = (color(150, 230, 120), color(220, 255, 200))
 
 
@@ -546,7 +638,9 @@ def entry_art(entry, seed):
     from PIL import ImageDraw
     rnd = random.Random(seed)
     tint = {"ZEKIVD_ABSTURZ": (150, 230, 120), "ZEKIVD_LAGER": (150, 200, 255), "ZEKIVD_AUSGUCK": (255, 210, 140),
-            "ZEKIVD_NETZ": (120, 190, 255), "ZEKIVD_KERNE": (190, 230, 255), "ZEKIVD_VIER": (255, 190, 220)}[entry]
+            "ZEKIVD_NETZ": (120, 190, 255), "ZEKIVD_KERNE": (190, 230, 255), "ZEKIVD_VIER": (255, 190, 220),
+            "ZEKIVD_LABOR": (140, 255, 170), "ZEKIVD_SPRACHE": (120, 255, 150), "ZEKIVD_GLUTWERK": (255, 140, 80),
+            "ZEKIVD_TREIBSTATION": (150, 230, 160), "ZEKIVD_OBSERVATORIUM": (200, 150, 255)}[entry]
     img = sb.starfield(512, seed, tint=tint)
     d = ImageDraw.Draw(img)
     c = 256
@@ -596,9 +690,9 @@ def main():
     write_json(f"systems/{SYSTEM}.json", system())
     write_json("planets/Herzdorn.json", herzdorn())
     write_json("planets/Erstling.json", erstling(A))
-    write_json("planets/Glutdorn.json", planet("Glutdorn", 220, 9))
-    write_json("planets/Nebelranke.json", nebelranke())
-    write_json("planets/Hohlsamen.json", planet("Hohlsamen", 300, 8))
+    write_json("planets/Glutdorn.json", glutdorn(A))
+    write_json("planets/Nebelranke.json", nebelranke(A))
+    write_json("planets/Hohlsamen.json", hohlsamen(A))
     write_json("planets/Ausguck.json", ausguck(A))
     write_json("planets/Fernlager.json", fernlager())
     write_json("planets/TimberHearth.json", timber_hearth())
@@ -606,7 +700,7 @@ def main():
     schlund["ShipLog"] = {"xmlFile": "planets/shiplogs/Absturz.xml", "spriteFolder": "planets/assets/shiplog/entries", "mapMode": {"remove": True}}
     write_json("planets/Samenschlund.json", schlund)
     write_json("systems/SolarSystem.json", home_system())
-    for rid in ("LAGER", "SYSTEM"):
+    for rid in ("LAGER", "SYSTEM", "HERZ", "OBSERVATORIUM"):
         sb.save(decal(rid), f"planets/assets/remotes/{rid.lower()}.png")
     for k, entry in enumerate(list(ENTRIES_HOME) + list(ENTRIES)):
         sb.save(entry_art(entry, 100 + k), f"planets/assets/shiplog/entries/{entry}.png")

@@ -74,6 +74,12 @@ VERDORNT = (
                  'Eine Dimension voller Eisdornen. Die Nomai haben hier Wegmarken hinterlassen.'),
             fact('ZEKIVD_KAELTE_FOUND',
                  'Eine dunkle, kalte Dimension. Etwas Großes lebt hier.'),
+            fact('ZEKIVD_GLUTPFORTE_FOUND',
+                 'Der Knoten von Glutdorn führt in eine glühende Dimension. Rues Karte endet hier.'),
+            fact('ZEKIVD_NEBELPFORTE_FOUND',
+                 'Der Knoten von Nebelranke führt in eine Dimension voller grünem Nebel. Von hier geht es zu den Nestern der Wächter.'),
+            fact('ZEKIVD_HOHLPFORTE_FOUND',
+                 'Der Knoten am Kristallkern von Hohlsamen führt in eine dunkle, violette Dimension. Dahinter liegt Tansys Werkstatt.'),
         ]),
     ], curiosity=True),
     entry('ZEKIVD_VIER', 'Hyssop, Rue, Tansy und Yarrow', [
@@ -83,6 +89,21 @@ VERDORNT = (
              'Hyssop glaubt, dass Dornenkranz der Ursprung von Dark Bramble ist: Unsere Dornen sind nur ein Samen von hier.'),
         fact('ZEKIVD_TANSY_WURF',
              'Tansy hat einen Samen in Richtung unseres Systems geworfen, als Weg für alle, die nach ihnen kommen. Er schlug auf Timber Hearth ein.'),
+    ], [
+        entry('ZEKIVD_LABOR', 'Das Wurzellabor', [
+            rumor('ZEKIVD_LABOR_RUMOR', 'Hyssop hört die Wurzeln',
+                  'Rue schreibt, dass Hyssop unten in der breitesten Schlucht von Erstling arbeitet. Er sagt, er hört die Wurzeln.'),
+            fact('ZEKIVD_LABOR_FOUND',
+                 'Unten in der breitesten Schlucht von Erstling steht Hyssops Labor auf einem Teller aus Wurzeln, direkt am leuchtenden Kern.'),
+        ]),
+        entry('ZEKIVD_SPRACHE', 'Die Dornensprache', [
+            fact('ZEKIVD_DORNSPRACHE_FAKT',
+                 'Im Wurzellabor ist eine Wurzel um einen Nomai-Übersetzer gewachsen. Seit ich ihn berührt habe, übersetzt mein Übersetzer die leuchtende Dornenschrift – aber nur die Wörter, die ich kenne.'),
+            fact('ZEKIVD_SPRACHE_1', 'Tansy kannte die ersten Wörter: Herz, tragen, Welten.'),
+            fact('ZEKIVD_SPRACHE_2', 'Tansy lernte die Wörter für hinaus, Fremde und schlafen.'),
+            fact('ZEKIVD_SPRACHE_3', 'Tansy lernte die Wörter für hören und Kern.'),
+            fact('ZEKIVD_SPRACHE_4', 'Tansy lernte die Wörter für Mutter-Kern, Kreis und niemand. Die Dornen sagen, einer der Nomai spreche mit niemand.'),
+        ]),
     ], curiosity=True),
     entry('ZEKIVD_KERNE', 'Die Planetenkerne', [
         rumor('ZEKIVD_MUTTERKERN_RUMOR', 'Der Mutterkern',
@@ -94,6 +115,36 @@ VERDORNT = (
         rumor('ZEKIVD_KERN_SCHREIN_RUMOR', 'Ein Schrein für vier Kerne',
               'Hyssop schreibt, dass alle vier Planetenkerne zum Kernschrein vor dem Herzdorn gehören. Dann öffnet sich der Weg nach innen.'),
     ], curiosity=True),
+)
+
+
+GLUTDORN = (
+    entry('ZEKIVD_GLUTWERK', 'Das Glutwerk', [
+        rumor('ZEKIVD_GLUTWERK_RUMOR', 'Ein Wärmewerk auf Glutdorn',
+              'Rue schreibt, dass Hyssop auf der größten Scholle von Glutdorn ein Wärmewerk baut.'),
+        fact('ZEKIVD_GLUTWERK_FOUND',
+             'Auf der größten Scholle von Glutdorn steht das Glutwerk. Eine Brücke führt über die Lavaspalte zur Scholle mit dem Knoten – wenn ihre Murmel richtig liegt.'),
+    ]),
+)
+NEBELRANKE = (
+    entry('ZEKIVD_TREIBSTATION', 'Die Treibstation', [
+        rumor('ZEKIVD_TREIBSTATION_RUMOR', 'Rues Station im Nebel',
+              'Tansy schreibt, dass Rue in einer Treibstation auf der größten Insel im Nebel von Nebelranke sitzt.'),
+        rumor('ZEKIVD_ERNESTO_RUMOR', 'Ein Fisch, der spricht',
+              'Rue behauptet, im Nebel habe ein Fisch mit ihr gesprochen – höflich, wie ein Gelehrter.'),
+        fact('ZEKIVD_TREIBSTATION_FOUND',
+             'Die Inseln von Nebelranke kreisen als Ring um einen Kern aus Dornen. Auf der größten steht Rues Treibstation.'),
+    ]),
+)
+HOHLSAMEN = (
+    entry('ZEKIVD_OBSERVATORIUM', 'Das Kristallobservatorium', [
+        rumor('ZEKIVD_OBSERVATORIUM_RUMOR', 'Tansys Wörter',
+              'Hyssop schreibt, dass Tansy in ihrem Observatorium auf Hohlsamen die Wörter der Dornen sammelt.'),
+        fact('ZEKIVD_OBSERVATORIUM_FOUND',
+             'Auf dem größten Splitter der Samenhülle von Hohlsamen steht Tansys Observatorium, offen zum Himmel.'),
+        fact('ZEKIVD_HERZ_BLICK',
+             'Das Becken im Observatorium zeigt den Herzdorn ganz nah: einen Stern hinter Ranken, dicker als Planeten.'),
+    ]),
 )
 
 
@@ -123,10 +174,10 @@ def xml(e, ind, tree=None):
     return out
 
 
-def write(filename, astro_id, comment, entries):
+def write(filename, astro_id, comment, entries, tree=None):
     lines = ['<?xml version="1.0" encoding="utf-8"?>', f"<!-- {comment} -->", f"<AstroObjectEntry {SCHEMA}>", f"  <ID>{astro_id}</ID>"]
     for e in entries:
-        lines += xml(e, "  ")
+        lines += xml(e, "  ", tree)
     lines.append("</AstroObjectEntry>")
     path = os.path.join(MOD, "planets", "shiplogs", filename)
     os.makedirs(os.path.dirname(path), exist_ok=True)
@@ -136,7 +187,10 @@ def write(filename, astro_id, comment, entries):
 
 def main():
     write("Absturz.xml", "ZEKIVD_TH", "Logbuch: der Absturzsamen auf Timber Hearth", ABSTURZ)
-    write("Verdornt.xml", "ZEKIVD_ERSTLING", "Logbuch: Dornenkranz, Etappe 1", VERDORNT)
+    write("Verdornt.xml", "ZEKIVD_ERSTLING", "Logbuch: Dornenkranz", VERDORNT)
+    write("Glutdorn.xml", "ZEKIVD_GLUTDORN", "Logbuch: Glutdorn", GLUTDORN, tree="ZEKIVD_VIER")
+    write("Nebelranke.xml", "ZEKIVD_NEBELRANKE", "Logbuch: Nebelranke", NEBELRANKE, tree="ZEKIVD_VIER")
+    write("Hohlsamen.xml", "ZEKIVD_HOHLSAMEN", "Logbuch: Hohlsamen", HOHLSAMEN, tree="ZEKIVD_VIER")
     print("ship logs written (Verdornt)")
 
 

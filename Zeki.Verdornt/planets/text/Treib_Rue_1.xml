@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Treibstation auf Nebelranke: die Wächter -->
+<NomaiObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/text_schema.xsd">
+  <TextBlock>
+    <ID>1</ID>
+    <Text>Rue: Die Wächter im Nebel gehorchen den Ranken. Wenn die Ranken singen, schwimmen sie fort.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>2</ID>
+    <ParentID>1</ParentID>
+    <Text>Rue: Ich habe ihre Lichter gezählt. Es werden mehr.</Text>
+  </TextBlock>
+</NomaiObject>

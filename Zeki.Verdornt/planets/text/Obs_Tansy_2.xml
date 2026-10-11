@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Kristallobservatorium: Wörter über uns -->
+<NomaiObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/text_schema.xsd">
+  <TextBlock>
+    <ID>1</ID>
+    <Text>Tansy: „essh“ heißt hinaus. „zhiv“ heißt Fremde – damit meinen sie uns.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>2</ID>
+    <ParentID>1</ParentID>
+    <Text>Tansy: „luum“ heißt schlafen. Die Dornen schlafen nie ganz.</Text>
+  </TextBlock>
+  <ShipLogConditions>
+    <RevealFact>
+      <FactID>ZEKIVD_SPRACHE_2</FactID>
+      <Condition>1,2</Condition>
+    </RevealFact>
+  </ShipLogConditions>
+</NomaiObject>

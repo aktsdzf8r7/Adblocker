@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Treibstation: Knoten und Glutwerk -->
+<NomaiObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/text_schema.xsd">
+  <TextBlock>
+    <ID>1</ID>
+    <Text>Rue: An einer Insel hängt ein Knoten in eine Pforte voller Nebel. Die Wächter bewachen ihn nicht – noch nicht.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>2</ID>
+    <ParentID>1</ParentID>
+    <Text>Rue: Hyssop baut auf Glutdorn ein Wärmewerk, auf der größten Scholle.</Text>
+  </TextBlock>
+  <ShipLogConditions>
+    <RevealFact>
+      <FactID>ZEKIVD_GLUTWERK_RUMOR</FactID>
+      <Condition>2</Condition>
+    </RevealFact>
+  </ShipLogConditions>
+</NomaiObject>

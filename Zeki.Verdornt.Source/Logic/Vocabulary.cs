@@ -64,6 +64,9 @@ public static class Vocabulary
     /// <summary>Set when the overgrown translator in the root lab was touched: the base words, and reading at all.</summary>
     public const string LanguageCondition = "ZEKIVD_DORNSPRACHE";
 
+    /// <summary>The ship log fact that tells about the translator (revealed by BrambleScript once the condition is set).</summary>
+    public const string LanguageFact = "ZEKIVD_DORNSPRACHE_FAKT";
+
     /// <summary>The persistent condition that remembers a learnt word.</summary>
     public static string WordCondition(string id) => "ZEKIVD_WORT_" + id.ToUpperInvariant();
 

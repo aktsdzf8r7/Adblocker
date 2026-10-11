@@ -3,9 +3,8 @@
   "name": "Nebelranke",
   "starSystem": "Verdornt",
   "Base": {
-    "surfaceSize": 640,
-    "surfaceGravity": 12,
-    "groundSize": 120,
+    "surfaceSize": 552,
+    "surfaceGravity": 10,
     "showMinimap": false
   },
   "Orbit": {
@@ -24,6 +23,89 @@
   },
   "MapMarker": {
     "enabled": true
+  },
+  "Bramble": {
+    "nodes": [
+      {
+        "position": {
+          "x": 521.042,
+          "y": 259.116,
+          "z": -80.302
+        },
+        "alignRadial": true,
+        "linksTo": "Nebelpforte",
+        "name": "ZEKIVD_Nebelranke_Knoten",
+        "scale": 0.5,
+        "fogTint": {
+          "r": 120,
+          "g": 230,
+          "b": 140,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 120,
+          "g": 230,
+          "b": 140,
+          "a": 255
+        }
+      }
+    ]
+  },
+  "Props": {
+    "translatorText": [
+      {
+        "type": "computer",
+        "xmlFile": "planets/text/Treib_Rue_1.xml",
+        "position": {
+          "x": 35.654,
+          "y": -19.193,
+          "z": -507.886
+        },
+        "rename": "VD_Treib_Rue_1",
+        "alignRadial": true
+      },
+      {
+        "type": "computer",
+        "xmlFile": "planets/text/Treib_Rue_2.xml",
+        "position": {
+          "x": 36.29,
+          "y": -12.501,
+          "z": -508.092
+        },
+        "rename": "VD_Treib_Rue_2",
+        "alignRadial": true
+      },
+      {
+        "type": "recorder",
+        "xmlFile": "planets/text/Treib_Aufzeichnung.xml",
+        "position": {
+          "x": 36.253,
+          "y": -25.885,
+          "z": -507.589
+        },
+        "rename": "VD_Treib_Aufzeichnung",
+        "alignRadial": true
+      }
+    ]
+  },
+  "ShipLog": {
+    "xmlFile": "planets/shiplogs/Nebelranke.xml",
+    "spriteFolder": "planets/assets/shiplog/entries"
+  },
+  "Volumes": {
+    "revealVolumes": [
+      {
+        "position": {
+          "x": 37.669,
+          "y": -19.306,
+          "z": -510.743
+        },
+        "radius": 30,
+        "reveals": [
+          "ZEKIVD_TREIBSTATION_FOUND"
+        ]
+      }
+    ]
   },
   "Atmosphere": {
     "size": 820,

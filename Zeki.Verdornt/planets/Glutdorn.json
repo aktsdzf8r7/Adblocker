@@ -23,5 +23,88 @@
   },
   "MapMarker": {
     "enabled": true
+  },
+  "Bramble": {
+    "nodes": [
+      {
+        "position": {
+          "x": -100.612,
+          "y": -82.592,
+          "z": -225.085
+        },
+        "alignRadial": true,
+        "linksTo": "Glutpforte",
+        "name": "ZEKIVD_Glutdorn_Knoten",
+        "scale": 0.5,
+        "fogTint": {
+          "r": 255,
+          "g": 140,
+          "b": 80,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 255,
+          "g": 140,
+          "b": 80,
+          "a": 255
+        }
+      }
+    ]
+  },
+  "Props": {
+    "translatorText": [
+      {
+        "type": "computer",
+        "xmlFile": "planets/text/Glutwerk_Hyssop.xml",
+        "position": {
+          "x": -155.318,
+          "y": 79.662,
+          "z": -134.513
+        },
+        "rename": "VD_Glutwerk_Hyssop",
+        "alignRadial": true
+      },
+      {
+        "type": "computer",
+        "xmlFile": "planets/text/Glutwerk_Rue.xml",
+        "position": {
+          "x": -162.297,
+          "y": 74.882,
+          "z": -128.902
+        },
+        "rename": "VD_Glutwerk_Rue",
+        "alignRadial": true
+      },
+      {
+        "type": "recorder",
+        "xmlFile": "planets/text/Glutwerk_Aufzeichnung.xml",
+        "position": {
+          "x": -160.353,
+          "y": 70.104,
+          "z": -133.925
+        },
+        "rename": "VD_Glutwerk_Aufzeichnung",
+        "alignRadial": true
+      }
+    ]
+  },
+  "ShipLog": {
+    "xmlFile": "planets/shiplogs/Glutdorn.xml",
+    "spriteFolder": "planets/assets/shiplog/entries"
+  },
+  "Volumes": {
+    "revealVolumes": [
+      {
+        "position": {
+          "x": -160.525,
+          "y": 76.271,
+          "z": -134.697
+        },
+        "radius": 30,
+        "reveals": [
+          "ZEKIVD_GLUTWERK_FOUND"
+        ]
+      }
+    ]
   }
 }
