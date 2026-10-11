@@ -95,4 +95,28 @@ public class MazeWalkTests
         Assert.Equal(0, walk.Heat);
         Assert.Equal(0, walk.Count);
     }
+
+    [Fact]
+    public void PeekShowsTheNextWayBackWithoutTakingIt()
+    {
+        var walk = new MazeWalk();
+        Assert.Null(walk.Peek());
+        walk.Enter(MazeGraph.Start, 1, false, A);
+        walk.Enter(A, 2, true, B);
+        Assert.Equal((A, 2, true), walk.Peek());
+        Assert.Equal(2, walk.Count);
+        walk.Back();
+        Assert.Equal((MazeGraph.Start, 1, false), walk.Peek());
+    }
+
+    [Fact]
+    public void RestartForgetsTheWayAndStandsSomewhereElse()
+    {
+        var walk = new MazeWalk();
+        walk.Enter(MazeGraph.Start, 0, false, Heat1);
+        walk.Restart(B);
+        Assert.Equal(B, walk.Current);
+        Assert.Equal(0, walk.Count);
+        Assert.Equal(0, walk.Heat);
+    }
 }

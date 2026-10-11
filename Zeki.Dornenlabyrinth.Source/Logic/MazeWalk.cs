@@ -42,11 +42,17 @@ public sealed class MazeWalk
         return last;
     }
 
-    public void Reset()
+    /// <summary>The way back from the current room, without taking it; null at the end.</summary>
+    public (ulong room, int slot, bool seed)? Peek() => _back.Count == 0 ? null : _back[_back.Count - 1];
+
+    public void Reset() => Restart(MazeGraph.Start);
+
+    /// <summary>Stand in the given instance with no way back (when the walk lost track of the player).</summary>
+    public void Restart(ulong at)
     {
         _back.Clear();
         Heat = 0;
-        Current = MazeGraph.Start;
+        Current = at;
     }
 
     public static int HeatAfter(RoomType from, RoomType to, int heat) =>
