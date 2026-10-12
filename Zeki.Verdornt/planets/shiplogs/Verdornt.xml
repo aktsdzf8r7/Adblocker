@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Logbuch: Dornenkranz -->
+<AstroObjectEntry xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/shiplog_schema.xsd">
+  <ID>ZEKIVD_ERSTLING</ID>
+  <Entry>
+    <ID>ZEKIVD_LAGER</ID>
+    <Name>Das Lager auf Erstling</Name>
+    <IsCuriosity/>
+    <RumorFact>
+      <ID>ZEKIVD_LAGER_RUMOR_TURM</ID>
+      <RumorName>Ein schlafender Warp-Turm</RumorName>
+      <Text>Der Lagerkern empfiehlt, den Warp-Turm zu wecken. Seine Murmel liegt in einer Röhre am Fuß des Turms.</Text>
+    </RumorFact>
+    <ExploreFact>
+      <ID>ZEKIVD_ANKUNFT</ID>
+      <Text>Der Strudel hat mich in ein fremdes System gezogen. Ich bin neben einem kleinen Samen auf einem eisgepanzerten Dornenplaneten zu mir gekommen.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKIVD_LAGER_FOUND</ID>
+      <Text>Auf Erstling steht ein verlassenes Nomai-Lager: drei Kuppeln, ein Kernrechner, eine verschlossene Höhle und ein Warp-Turm.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKIVD_RUECKSAMEN</ID>
+      <Text>Ein kleiner Samen in einer Kupferwiege im Lager führt zurück nach Timber Hearth.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKIVD_TUERME</ID>
+      <Text>Tansy hat auf jedem Planeten einen Warp-Turm gebaut. Jeder erwacht, wenn seine Murmel in die richtige Mulde rollt.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKIVD_TURM_WACH_FACT</ID>
+      <Text>Ich habe den Warp-Turm von Erstling geweckt. Er führt zum Ausguck hoch über dem System.</Text>
+    </ExploreFact>
+    <Entry>
+      <ID>ZEKIVD_AUSGUCK</ID>
+      <Name>Der Ausguck</Name>
+      <Curiosity>ZEKIVD_LAGER</Curiosity>
+      <RumorFact>
+        <ID>ZEKIVD_AUSGUCK_RUMOR</ID>
+        <SourceID>ZEKIVD_LAGER</SourceID>
+        <RumorName>Ein Ausguck über dem System</RumorName>
+        <Text>Tansy sagt, der Warp-Turm von Erstling führt zu einem Ausguck, von dem man alles sieht, was die drei hier gefunden haben.</Text>
+      </RumorFact>
+      <RumorFact>
+        <ID>ZEKIVD_HERZDORN_RUMOR</ID>
+        <RumorName>Ein gefangener Stern</RumorName>
+        <Text>In der Mitte des Systems ist ein Stern in einem Käfig aus Dornen gefangen. Die Dornen trinken sein Licht.</Text>
+      </RumorFact>
+      <ExploreFact>
+        <ID>ZEKIVD_SYSTEM_NAMEN</ID>
+        <Text>Die Nomai nannten das System Dornenkranz: Herzdorn in der Mitte, dann Erstling, Glutdorn, Nebelranke und Hohlsamen.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKIVD_BRAMBLESATION</ID>
+        <Text>Hyssop zählte die Samen, die der Herzdorn ins All wirft, und nannte das die Bramblesation. Sie wächst immer weiter.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKIVD_AUSGUCK_FOUND</ID>
+        <Text>Hoch über der Bahnebene schwebt eine Nomai-Plattform mit einem großen Projektionsbecken.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKIVD_SYSTEM_BLICK</ID>
+        <Text>Vom Ausguck aus sieht man das ganze System: vier verdornte Planeten um einen Stern, der in einem Käfig aus Dornen gefangen ist.</Text>
+      </ExploreFact>
+    </Entry>
+    <Entry>
+      <ID>ZEKIVD_NETZ</ID>
+      <Name>Das Dornen-Netz</Name>
+      <Curiosity>ZEKIVD_LAGER</Curiosity>
+      <RumorFact>
+        <ID>ZEKIVD_KAELTE_HINWEIS</ID>
+        <SourceID>ZEKIVD_LAGER</SourceID>
+        <RumorName>Ein Licht in der Kälte</RumorName>
+        <Text>Rue warnt vor einem Licht in einer kalten Dimension: Es ist kein Stern, sondern ein Anglerfisch.</Text>
+      </RumorFact>
+      <ExploreFact>
+        <ID>ZEKIVD_NETZ_RUE</ID>
+        <Text>Rue hat die Knoten kartiert: Die Dornen bilden ein Netz zwischen den Planeten. Der Weg zu den anderen führt über einen Kreuzweg.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKIVD_EISPFORTE_FOUND</ID>
+        <Text>Der große Knoten von Erstling führt in eine eisblaue Dimension mit zwei weiteren Knoten.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKIVD_SPLITTER_FOUND</ID>
+        <Text>Eine Dimension voller Eisdornen. Die Nomai haben hier Wegmarken hinterlassen.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKIVD_KAELTE_FOUND</ID>
+        <Text>Eine dunkle, kalte Dimension. Etwas Großes lebt hier.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKIVD_GLUTPFORTE_FOUND</ID>
+        <Text>Der Knoten von Glutdorn führt in eine glühende Dimension. Rues Karte endet hier.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKIVD_NEBELPFORTE_FOUND</ID>
+        <Text>Der Knoten von Nebelranke führt in eine Dimension voller grünem Nebel. Von hier geht es zu den Nestern der Wächter.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKIVD_HOHLPFORTE_FOUND</ID>
+        <Text>Der Knoten am Kristallkern von Hohlsamen führt in eine dunkle, violette Dimension. Dahinter liegt Tansys Werkstatt.</Text>
+      </ExploreFact>
+    </Entry>
+  </Entry>
+  <Entry>
+    <ID>ZEKIVD_VIER</ID>
+    <Name>Hyssop, Rue, Tansy und Yarrow</Name>
+    <IsCuriosity/>
+    <RumorFact>
+      <ID>ZEKIVD_VIER_RUMOR</ID>
+      <SourceID>ZEKIVD_LAGER</SourceID>
+      <RumorName>Vier Bewohner</RumorName>
+      <Text>Der Lagerkern nennt vier Bewohner des Lagers: Hyssop, Rue, Tansy und Yarrow.</Text>
+    </RumorFact>
+    <ExploreFact>
+      <ID>ZEKIVD_FALSCH_ABGEBOGEN</ID>
+      <Text>Drei Nomai vom Vessel – Hyssop, Rue und Tansy – suchten in den Dornen nach den Rettungskapseln. Ein alter Samen zog sie in dieses System.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKIVD_URSPRUNG</ID>
+      <Text>Hyssop glaubt, dass Dornenkranz der Ursprung von Dark Bramble ist: Unsere Dornen sind nur ein Samen von hier.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKIVD_TANSY_WURF</ID>
+      <Text>Tansy hat einen Samen in Richtung unseres Systems geworfen, als Weg für alle, die nach ihnen kommen. Er schlug auf Timber Hearth ein.</Text>
+    </ExploreFact>
+    <Entry>
+      <ID>ZEKIVD_LABOR</ID>
+      <Name>Das Wurzellabor</Name>
+      <Curiosity>ZEKIVD_VIER</Curiosity>
+      <RumorFact>
+        <ID>ZEKIVD_LABOR_RUMOR</ID>
+        <SourceID>ZEKIVD_GLUTWERK</SourceID>
+        <RumorName>Hyssop hört die Wurzeln</RumorName>
+        <Text>Das Glutwerk führt Hyssop als Personal im Wurzellabor, unten in der breitesten Schlucht von Erstling. Er hört die Wurzeln.</Text>
+      </RumorFact>
+      <ExploreFact>
+        <ID>ZEKIVD_LABOR_FOUND</ID>
+        <Text>Unten in der breitesten Schlucht von Erstling steht Hyssops Labor auf einem Teller aus Wurzeln, direkt am leuchtenden Kern.</Text>
+      </ExploreFact>
+    </Entry>
+    <Entry>
+      <ID>ZEKIVD_SPRACHE</ID>
+      <Name>Die Dornensprache</Name>
+      <Curiosity>ZEKIVD_VIER</Curiosity>
+      <RumorFact>
+        <ID>ZEKIVD_SPRACHE_RUMOR</ID>
+        <SourceID>ZEKIVD_LABOR</SourceID>
+        <RumorName>Ein Übersetzer, der die Dornen hört</RumorName>
+        <Text>Im Wurzellabor ist eine Wurzel um einen Übersetzer gewachsen. Er gibt Laute wieder, und die Wurzeln antworten.</Text>
+      </RumorFact>
+      <ExploreFact>
+        <ID>ZEKIVD_DORNSPRACHE_FAKT</ID>
+        <Text>Im Wurzellabor ist eine Wurzel um einen Nomai-Übersetzer gewachsen. Seit ich ihn berührt habe, übersetzt mein Übersetzer die leuchtende Dornenschrift – aber nur die Wörter, die ich kenne.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKIVD_SPRACHE_1</ID>
+        <Text>Tansy kannte die ersten Wörter: Herz, tragen, Welten.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKIVD_SPRACHE_2</ID>
+        <Text>Tansy lernte die Wörter für hinaus, Fremde und schlafen.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKIVD_SPRACHE_3</ID>
+        <Text>Tansy lernte die Wörter für hören und Kern.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKIVD_SPRACHE_4</ID>
+        <Text>Tansy lernte die Wörter für Mutter-Kern, Kreis und niemand. Die Dornen sagen, einer der Nomai spreche mit niemand.</Text>
+      </ExploreFact>
+    </Entry>
+  </Entry>
+  <Entry>
+    <ID>ZEKIVD_KERNE</ID>
+    <Name>Die Planetenkerne</Name>
+    <IsCuriosity/>
+    <RumorFact>
+      <ID>ZEKIVD_MUTTERKERN_RUMOR</ID>
+      <SourceID>ZEKIVD_LAGER</SourceID>
+      <RumorName>Der Mutterkern</RumorName>
+      <Text>Alle Planetenkerne gleichen einem Kern im Herzdorn: dem Mutterkern, der jeden Samen dieses Systems geworfen hat.</Text>
+    </RumorFact>
+    <RumorFact>
+      <ID>ZEKIVD_KERN_SCHREIN_RUMOR</ID>
+      <SourceID>ZEKIVD_LAGER</SourceID>
+      <RumorName>Ein Schrein für vier Kerne</RumorName>
+      <Text>Alle vier Planetenkerne gehören zum Kernschrein vor dem Herzdorn. Dann öffnet sich der Weg nach innen.</Text>
+    </RumorFact>
+    <ExploreFact>
+      <ID>ZEKIVD_KERN_PLAN</ID>
+      <Text>Ein Planetenkern ist der Samenkern, aus dem ein ganzer Planet gewachsen ist.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKIVD_KERN_ERSTLING_GENOMMEN</ID>
+      <Text>In der Höhle hinter dem Lagertor lag der Planetenkern von Erstling: das Herz des Samens, aus dem dieser Planet gewachsen ist.</Text>
+    </ExploreFact>
+  </Entry>
+</AstroObjectEntry>

@@ -1,0 +1,204 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+  "name": "TIMBER_HEARTH",
+  "starSystem": "SolarSystem",
+  "Props": {
+    "details": [
+      {
+        "path": "",
+        "position": {
+          "x": 0.0,
+          "y": 400.0,
+          "z": 0.0
+        },
+        "rename": "VD_Absturzstelle",
+        "keepLoaded": true
+      },
+      {
+        "path": "TimberHearth_Body/Sector_TH/Sector_ImpactCrater/Interactables_ImpactCrater/BrambleSeed/Effects_HEA_SmokeColumn_Crash",
+        "parentPath": "Sector_TH/VD_Absturzstelle",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 4.0,
+          "y": 8.0,
+          "z": 3.0
+        },
+        "rename": "VD_Rauch"
+      },
+      {
+        "path": "",
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "VD_Rankenvorlagen",
+        "keepLoaded": true
+      },
+      {
+        "path": "QuantumMoon_Body/Sector_QuantumMoon/State_DB/Interactables_DBState/DBState_QuantumObjects/DB_Q_Vine1/DB_Bramble_Vine1/State_1/Terrain_TH_Bramble_Vine1",
+        "parentPath": "Sector_TH/VD_Rankenvorlagen",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "Ranke_1",
+        "keepLoaded": true
+      },
+      {
+        "path": "QuantumMoon_Body/Sector_QuantumMoon/State_DB/Interactables_DBState/DBState_QuantumObjects/DB_Q_Vine2/DB_Bramble_Vine2/State_1/Terrain_TH_Bramble_Vine2",
+        "parentPath": "Sector_TH/VD_Rankenvorlagen",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "Ranke_2",
+        "keepLoaded": true
+      },
+      {
+        "path": "QuantumMoon_Body/Sector_QuantumMoon/State_DB/Interactables_DBState/DBState_QuantumObjects/DB_Q_Vine3/DB_Bramble_Vine3/State_1/Terrain_TH_Bramble_Vine3",
+        "parentPath": "Sector_TH/VD_Rankenvorlagen",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "Ranke_3",
+        "keepLoaded": true
+      },
+      {
+        "path": "QuantumMoon_Body/Sector_QuantumMoon/State_DB/Interactables_DBState/DBState_QuantumObjects/DB_Q_Vine4/DB_Bramble_Vine4/State_1/Terrain_TH_Bramble_Vine4",
+        "parentPath": "Sector_TH/VD_Rankenvorlagen",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "Ranke_4",
+        "keepLoaded": true
+      },
+      {
+        "path": "QuantumMoon_Body/Sector_QuantumMoon/State_DB/Interactables_DBState/DBState_QuantumObjects/DB_Q_Vine5/DB_Bramble_Vine5/State_1/Terrain_TH_Bramble_Vine5",
+        "parentPath": "Sector_TH/VD_Rankenvorlagen",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "Ranke_5",
+        "keepLoaded": true
+      },
+      {
+        "path": "TimberHearth_Body/Sector_TH/Sector_ImpactCrater/Interactables_ImpactCrater/ControlledByProxy_Structures/Terrain_DB_BrambleSphere_Seed_V2",
+        "parentPath": "Sector_TH/VD_Rankenvorlagen",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "Samen",
+        "keepLoaded": true
+      }
+    ],
+    "translatorText": [
+      {
+        "type": "computer",
+        "xmlFile": "planets/text/Absturz_Rinde.xml",
+        "position": {
+          "x": -8.0,
+          "y": 0.5,
+          "z": 49.0
+        },
+        "rename": "VD_Absturz_Rinde",
+        "rotation": {
+          "x": 0.0,
+          "y": 200.0,
+          "z": 0.0
+        },
+        "parentPath": "Sector_TH/VD_Absturzstelle",
+        "isRelativeToParent": true
+      }
+    ],
+    "dialogue": [
+      {
+        "parentPath": "Sector_TH/VD_Absturzstelle",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 1.6,
+          "z": 51.4
+        },
+        "radius": 2.5,
+        "xmlFile": "planets/dialogue/Absperrung.xml",
+        "rename": "VD_Absperrung_Notiz"
+      }
+    ],
+    "signals": [
+      {
+        "frequency": "Dornenrufe",
+        "name": "Absturzsamen",
+        "audio": "DB_Ambience_LP",
+        "parentPath": "Sector_TH/VD_Absturzstelle",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 12.0,
+          "z": 0.0
+        },
+        "sourceRadius": 20,
+        "identificationRadius": 40
+      }
+    ]
+  },
+  "Volumes": {
+    "revealVolumes": [
+      {
+        "parentPath": "Sector_TH/VD_Absturzstelle",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 10.0,
+          "z": 0.0
+        },
+        "radius": 60,
+        "reveals": [
+          "ZEKIVD_ABSTURZ_FOUND"
+        ]
+      }
+    ]
+  },
+  "Bramble": {
+    "nodes": [
+      {
+        "position": {
+          "x": 0.0,
+          "y": 406.0,
+          "z": 0.0
+        },
+        "linksTo": "Samenschlund",
+        "name": "ZEKIVD_Absturzsamen",
+        "scale": 0.25,
+        "fogTint": {
+          "r": 120,
+          "g": 255,
+          "b": 150,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 150,
+          "g": 255,
+          "b": 170,
+          "a": 255
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Logbuch: die Sonnenwacht nahe am Schleierstern -->
+<AstroObjectEntry xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/shiplog_schema.xsd">
+  <ID>SONNENWACHT</ID>
+  <Entry>
+    <ID>ZEKSCHLEIER_WACHT</ID>
+    <Name>Die Sonnenwacht</Name>
+    <Curiosity>ZEKSCHLEIER_SYSTEM</Curiosity>
+    <RumorFact>
+      <ID>ZEKSCHLEIER_WACHT_RUMOR</ID>
+      <SourceID>ZEKSCHLEIER_KERN</SourceID>
+      <RumorName>Eine Wache am Stern</RumorName>
+      <Text>Tansy ließ an einem kleinen Felsen dicht am Stern eine Messstation verankern. Ein Warp im Resonanzfeld auf Schleierkern führt hinauf.</Text>
+    </RumorFact>
+    <ExploreFact>
+      <ID>ZEKSCHLEIER_WACHT_FOUND</ID>
+      <Text>Auf einem Felsen in der Glut des Sterns steht die Sonnenwacht, eine Nomai-Station wie die über dem Sonnensystem.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKSCHLEIER_WACHT_STERN</ID>
+      <Text>Tansys Messungen: Die Helligkeit des Sterns schwankt, solange ihn niemand beobachtet, und wird sofort stabil, wenn jemand hinsieht.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKSCHLEIER_WACHT_PLAN</ID>
+      <Text>Aus diesen Messungen entstand Tansys Idee, das Sternenlicht mit dem Lichtbündler „für uns hinsehen“ zu lassen.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKSCHLEIER_WACHT_ILEX</ID>
+      <Text>Von der Sonnenwacht aus sah Ilex den Schleier als feinen Schimmer um das ganze System – und fragte sich, ob draußen jemand in diese Richtung schaut.</Text>
+    </ExploreFact>
+  </Entry>
+</AstroObjectEntry>

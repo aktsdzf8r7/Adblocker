@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Ericas Aufzeichnung auf Fokuskanone Alpha -->
+<NomaiObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/text_schema.xsd">
+  <TextBlock>
+    <ID>1</ID>
+    <Text>Hier spricht Erica. Ich habe die Schwerkraftkanone von Ember Twin dreimal vermessen.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>2</ID>
+    <ParentID>1</ParentID>
+    <Text>Dort wirft sie Fähren ins All. Hier soll sie Licht werfen – den Strom eines ganzen Sterns.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>3</ID>
+    <ParentID>2</ParentID>
+    <Text>Sedum will um jede Kanone ein Gerüst mit drei Dornen. Er sagt, der Stern soll sehen, wer ihn nimmt.</Text>
+  </TextBlock>
+  <ShipLogConditions>
+    <RevealFact>
+      <FactID>ZEKISAE_FOKUS_BAU</FactID>
+      <Condition>1,2,3</Condition>
+    </RevealFact>
+  </ShipLogConditions>
+</NomaiObject>

@@ -1,0 +1,182 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+  "name": "Hohlsamen",
+  "starSystem": "Verdornt",
+  "Base": {
+    "surfaceSize": 300,
+    "surfaceGravity": 8,
+    "showMinimap": false
+  },
+  "Orbit": {
+    "primaryBody": "Herzdorn",
+    "semiMajorAxis": 13500,
+    "inclination": 12,
+    "trueAnomaly": 330,
+    "eccentricity": 0,
+    "siderealPeriod": 0,
+    "tint": {
+      "r": 120,
+      "g": 230,
+      "b": 140,
+      "a": 255
+    }
+  },
+  "MapMarker": {
+    "enabled": true
+  },
+  "Bramble": {
+    "nodes": [
+      {
+        "position": {
+          "x": 145.154,
+          "y": -12.08,
+          "z": -87.661
+        },
+        "alignRadial": true,
+        "linksTo": "Hohlpforte",
+        "name": "ZEKIVD_Hohlsamen_Knoten",
+        "scale": 0.5,
+        "fogTint": {
+          "r": 190,
+          "g": 140,
+          "b": 255,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 190,
+          "g": 140,
+          "b": 255,
+          "a": 255
+        }
+      }
+    ]
+  },
+  "Props": {
+    "translatorText": [
+      {
+        "type": "computer",
+        "xmlFile": "planets/text/Obs_Tansy_1.xml",
+        "position": {
+          "x": 149.16,
+          "y": 83.246,
+          "z": -246.756
+        },
+        "rename": "VD_Obs_Tansy_1",
+        "alignRadial": true
+      },
+      {
+        "type": "computer",
+        "xmlFile": "planets/text/Obs_Tansy_2.xml",
+        "position": {
+          "x": 139.117,
+          "y": 83.246,
+          "z": -252.554
+        },
+        "rename": "VD_Obs_Tansy_2",
+        "alignRadial": true
+      },
+      {
+        "type": "computer",
+        "xmlFile": "planets/text/Obs_Tansy_3.xml",
+        "position": {
+          "x": 140.618,
+          "y": 72.045,
+          "z": -255.154
+        },
+        "rename": "VD_Obs_Tansy_3",
+        "alignRadial": true
+      },
+      {
+        "type": "computer",
+        "xmlFile": "planets/text/Obs_Tansy_4.xml",
+        "position": {
+          "x": 150.66,
+          "y": 72.045,
+          "z": -249.355
+        },
+        "rename": "VD_Obs_Tansy_4",
+        "alignRadial": true
+      }
+    ],
+    "remotes": [
+      {
+        "id": "ZEKIVD_OBSERVATORIUM",
+        "decalPath": "planets/assets/remotes/observatorium.png",
+        "platform": {
+          "position": {
+            "x": 144.889,
+            "y": 77.646,
+            "z": -250.955
+          },
+          "alignRadial": true,
+          "rename": "VD_Becken_Observatorium",
+          "reveals": "ZEKIVD_OBSERVATORIUM_FOUND"
+        }
+      },
+      {
+        "id": "ZEKIVD_HERZ",
+        "decalPath": "planets/assets/remotes/herz.png",
+        "stones": [
+          {
+            "position": {
+              "x": 141.234,
+              "y": 76.098,
+              "z": -254.022
+            },
+            "alignRadial": true,
+            "rename": "VD_Stein_Herz"
+          }
+        ]
+      }
+    ]
+  },
+  "ShipLog": {
+    "xmlFile": "planets/shiplogs/Hohlsamen.xml",
+    "spriteFolder": "planets/assets/shiplog/entries"
+  },
+  "Volumes": {
+    "revealVolumes": [
+      {
+        "position": {
+          "x": 146.338,
+          "y": 78.422,
+          "z": -253.465
+        },
+        "radius": 30,
+        "reveals": [
+          "ZEKIVD_OBSERVATORIUM_FOUND"
+        ]
+      }
+    ],
+    "interactionVolumes": [
+      {
+        "position": {
+          "x": -243.038,
+          "y": 171.682,
+          "z": -51.138
+        },
+        "radius": 1.0,
+        "range": 2.5,
+        "prompt": "Wortkern berühren",
+        "condition": "ZEKIVD_WORTKERN_HOHL_1",
+        "persistent": true,
+        "reusable": false,
+        "rename": "VD_Wortkern_HOHL_1"
+      },
+      {
+        "position": {
+          "x": -169.357,
+          "y": -226.297,
+          "z": 102.728
+        },
+        "radius": 1.0,
+        "range": 2.5,
+        "prompt": "Wortkern berühren",
+        "condition": "ZEKIVD_WORTKERN_HOHL_2",
+        "persistent": true,
+        "reusable": false,
+        "rename": "VD_Wortkern_HOHL_2"
+      }
+    ]
+  }
+}

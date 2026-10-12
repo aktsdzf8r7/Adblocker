@@ -1,0 +1,292 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/star_system_schema.json",
+  "name": "Schleiersystem",
+  "canEnterViaWarpDrive": true,
+  "factRequiredForWarp": "ZEKSCHLEIER_WARP_UNLOCKED",
+  "canExitViaWarpDrive": true,
+  "factRequiredToExitViaWarpDrive": "ZEKSCHLEIER_FINALE",
+  "warpDriveSpawnPointID": "ZEKSCHLEIER_WARP_ANKUNFT",
+  "destroyStockPlanets": true,
+  "enableTimeLoop": false,
+  "respawnHere": false,
+  "mapRestricted": false,
+  "farClipPlaneOverride": 50000,
+  "shipLogStartingPlanetID": "SCHLEIERSEE",
+  "StarChart": {
+    "position": {
+      "x": 7,
+      "y": -5
+    },
+    "color": {
+      "r": 170,
+      "g": 140,
+      "b": 255,
+      "a": 255
+    }
+  },
+  "GlobalMusic": {
+    "travelAudio": "TravelerNomai"
+  },
+  "Vessel": {
+    "coords": {
+      "x": [
+        1,
+        0,
+        5,
+        4
+      ],
+      "y": [
+        2,
+        5,
+        3
+      ],
+      "z": [
+        0,
+        3,
+        4,
+        1
+      ]
+    },
+    "alwaysPresent": true,
+    "promptFact": "ZEKSCHLEIER_LATERNE_KERRIA",
+    "vesselSpawn": {
+      "parentBody": "ZS_Laternenkammer",
+      "isRelativeToParent": true,
+      "position": {
+        "x": 0.0,
+        "y": -80.0,
+        "z": 0.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 30.0,
+        "z": 0.0
+      }
+    }
+  },
+  "initialReveal": [
+    "ZEKSCHLEIER_ANKUNFT"
+  ],
+  "curiosities": [
+    {
+      "id": "ZEKSCHLEIER_SYSTEM",
+      "color": {
+        "r": 150,
+        "g": 110,
+        "b": 255,
+        "a": 255
+      },
+      "highlightColor": {
+        "r": 205,
+        "g": 180,
+        "b": 255,
+        "a": 255
+      }
+    },
+    {
+      "id": "ZEKSCHLEIER_EXPEDITION",
+      "color": {
+        "r": 220,
+        "g": 160,
+        "b": 60,
+        "a": 255
+      },
+      "highlightColor": {
+        "r": 255,
+        "g": 215,
+        "b": 130,
+        "a": 255
+      }
+    },
+    {
+      "id": "ZEKSCHLEIER_LATERNE_SCHIFF",
+      "color": {
+        "r": 60,
+        "g": 190,
+        "b": 180,
+        "a": 255
+      },
+      "highlightColor": {
+        "r": 140,
+        "g": 255,
+        "b": 240,
+        "a": 255
+      }
+    }
+  ],
+  "entryPositions": [
+    {
+      "id": "ZEKSCHLEIER_SYSTEM",
+      "position": {
+        "x": 0,
+        "y": 350
+      }
+    },
+    {
+      "id": "ZEKSCHLEIER_KOORDINATEN",
+      "position": {
+        "x": 0,
+        "y": 760
+      }
+    },
+    {
+      "id": "ZEKSCHLEIER_KERN",
+      "position": {
+        "x": -760,
+        "y": 520
+      }
+    },
+    {
+      "id": "ZEKSCHLEIER_KERN_WACHE",
+      "position": {
+        "x": -1180,
+        "y": 800
+      }
+    },
+    {
+      "id": "ZEKSCHLEIER_KERN_RESONANZFELD",
+      "position": {
+        "x": -1220,
+        "y": 360
+      }
+    },
+    {
+      "id": "ZEKSCHLEIER_WACHT",
+      "position": {
+        "x": -420,
+        "y": 940
+      }
+    },
+    {
+      "id": "ZEKSCHLEIER_HERZ",
+      "position": {
+        "x": 760,
+        "y": 520
+      }
+    },
+    {
+      "id": "ZEKSCHLEIER_EXPEDITION",
+      "position": {
+        "x": 0,
+        "y": -250
+      }
+    },
+    {
+      "id": "ZEKSCHLEIER_SEE",
+      "position": {
+        "x": -700,
+        "y": -200
+      }
+    },
+    {
+      "id": "ZEKSCHLEIER_KAPSEL2",
+      "position": {
+        "x": -1150,
+        "y": -60
+      }
+    },
+    {
+      "id": "ZEKSCHLEIER_SEE_INSEL",
+      "position": {
+        "x": -1150,
+        "y": -420
+      }
+    },
+    {
+      "id": "ZEKSCHLEIER_BRUCH",
+      "position": {
+        "x": 700,
+        "y": -200
+      }
+    },
+    {
+      "id": "ZEKSCHLEIER_SPLITTERFELD",
+      "position": {
+        "x": 1150,
+        "y": -60
+      }
+    },
+    {
+      "id": "ZEKSCHLEIER_WRACK",
+      "position": {
+        "x": 1150,
+        "y": -420
+      }
+    },
+    {
+      "id": "ZEKSCHLEIER_LATERNE_SCHIFF",
+      "position": {
+        "x": 0,
+        "y": -1250
+      }
+    },
+    {
+      "id": "ZEKSCHLEIER_DORN",
+      "position": {
+        "x": -650,
+        "y": -900
+      }
+    },
+    {
+      "id": "ZEKSCHLEIER_KAPSEL1",
+      "position": {
+        "x": -1100,
+        "y": -1060
+      }
+    },
+    {
+      "id": "ZEKSCHLEIER_LABYRINTH",
+      "position": {
+        "x": 650,
+        "y": -900
+      }
+    },
+    {
+      "id": "ZEKSCHLEIER_KERRIAS_LAGER",
+      "position": {
+        "x": 1100,
+        "y": -760
+      }
+    },
+    {
+      "id": "ZEKSCHLEIER_KAPSEL3",
+      "position": {
+        "x": 1100,
+        "y": -1100
+      }
+    },
+    {
+      "id": "ZEKSCHLEIER_ECHOKAMMER_ENTRY",
+      "position": {
+        "x": 650,
+        "y": -1380
+      }
+    }
+  ],
+  "conditionalChecks": [
+    {
+      "check": {
+        "allFactsRevealed": [
+          "ZEKSCHLEIER_FINALE"
+        ]
+      },
+      "then": {
+        "setPersistentConditions": [
+          "ZEKSCHLEIER_SCHLEIER_GEHOBEN"
+        ]
+      }
+    },
+    {
+      "check": {
+        "allPersistentConditionsSet": [
+          "ZEKSCHLEIER_SCHLEIER_GEHOBEN"
+        ]
+      },
+      "then": {
+        "revealFacts": [
+          "ZEKSCHLEIER_KERN_LICHT"
+        ]
+      }
+    }
+  ]
+}

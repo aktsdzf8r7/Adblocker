@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Logbuch: Nebelranke -->
+<AstroObjectEntry xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/shiplog_schema.xsd">
+  <ID>ZEKIVD_NEBELRANKE</ID>
+  <Entry>
+    <ID>ZEKIVD_TREIBSTATION</ID>
+    <Name>Die Treibstation</Name>
+    <Curiosity>ZEKIVD_VIER</Curiosity>
+    <RumorFact>
+      <ID>ZEKIVD_TREIBSTATION_RUMOR</ID>
+      <SourceID>ZEKIVD_OBSERVATORIUM</SourceID>
+      <RumorName>Rues Station im Nebel</RumorName>
+      <Text>Das Wortarchiv führt Rue in einer Treibstation auf der größten Insel im Nebel von Nebelranke.</Text>
+    </RumorFact>
+    <RumorFact>
+      <ID>ZEKIVD_ERNESTO_RUMOR</ID>
+      <RumorName>Ein Fisch, der spricht</RumorName>
+      <Text>Rue behauptet, im Nebel habe ein Fisch mit ihr gesprochen – höflich, wie ein Gelehrter.</Text>
+    </RumorFact>
+    <ExploreFact>
+      <ID>ZEKIVD_TREIBSTATION_FOUND</ID>
+      <Text>Die Inseln von Nebelranke kreisen als Ring um einen Kern aus Dornen. Auf der größten steht Rues Treibstation.</Text>
+    </ExploreFact>
+  </Entry>
+</AstroObjectEntry>

@@ -1,0 +1,166 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+  "name": "ZS_Dornenhalle",
+  "starSystem": "Schleiersystem",
+  "canShowOnTitle": false,
+  "Orbit": {
+    "staticPosition": {
+      "x": 42000.0,
+      "y": 6000.0,
+      "z": 0.0
+    }
+  },
+  "Bramble": {
+    "dimension": {
+      "radius": 750,
+      "vinePrefab": "hub",
+      "fogTint": {
+        "r": 70,
+        "g": 50,
+        "b": 90,
+        "a": 255
+      },
+      "fogDensity": 4.5,
+      "linksTo": "ZS_Dornenschlund"
+    },
+    "nodes": [
+      {
+        "position": {
+          "x": 260.0,
+          "y": 120.0,
+          "z": -180.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "linksTo": "ZS_Kapselgrund",
+        "name": "ZS_Knoten_Gold",
+        "fogTint": {
+          "r": 255,
+          "g": 190,
+          "b": 70,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 255,
+          "g": 190,
+          "b": 70,
+          "a": 255
+        },
+        "scale": 1.0
+      },
+      {
+        "position": {
+          "x": -280.0,
+          "y": 60.0,
+          "z": 200.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "linksTo": "ZS_Rankengarten",
+        "name": "ZS_Knoten_Blau",
+        "fogTint": {
+          "r": 80,
+          "g": 140,
+          "b": 255,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 80,
+          "g": 140,
+          "b": 255,
+          "a": 255
+        },
+        "scale": 1.0
+      },
+      {
+        "position": {
+          "x": 60.0,
+          "y": -300.0,
+          "z": 220.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "linksTo": "ZS_Echokammer",
+        "name": "ZS_Knoten_Rot",
+        "fogTint": {
+          "r": 255,
+          "g": 60,
+          "b": 50,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 255,
+          "g": 60,
+          "b": 50,
+          "a": 255
+        },
+        "scale": 1.0
+      }
+    ]
+  },
+  "ShipLog": {
+    "mapMode": {
+      "remove": true
+    }
+  },
+  "Props": {
+    "details": [
+      {
+        "path": "DB_VesselDimension_Body/Sector_VesselDimension/Sector_VesselBridge/Interactibles_VesselBridge/UNSORTED/Wall Lamps/Prefab_NOM_Lamp_Glow_Vessel_Wall",
+        "position": {
+          "x": 0.0,
+          "y": -30.0,
+          "z": 0.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "Kerrias_Lampe"
+      }
+    ],
+    "translatorText": [
+      {
+        "type": "trailmarker",
+        "xmlFile": "planets/text/Lab_Halle.xml",
+        "position": {
+          "x": 0.0,
+          "y": -34.0,
+          "z": 0.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "Wegmarke_Farben"
+      }
+    ]
+  },
+  "Volumes": {
+    "revealVolumes": [
+      {
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "radius": 600,
+        "revealOn": "enter",
+        "reveals": [
+          "ZEKSCHLEIER_LAB_FOUND"
+        ]
+      }
+    ]
+  }
+}

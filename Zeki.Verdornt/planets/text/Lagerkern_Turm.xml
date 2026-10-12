@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Lagerkern: nachdem der Warp-Turm geweckt wurde -->
+<NomaiObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/text_schema.xsd">
+  <TextBlock>
+    <ID>1</ID>
+    <Text>LAGERKERN. Warp-Turm Erstling: wach. Ziel: der Ausguck über dem Kranz.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>2</ID>
+    <ParentID>1</ParentID>
+    <Text>Vom Ausguck aus zeigt das große Becken das ganze System.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>3</ID>
+    <ParentID>2</ParentID>
+    <Text>Kernhöhle: verschlossen. Die Murmel des Tores liegt am Rand der Plattform.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>4</ID>
+    <ParentID>3</ParentID>
+    <Text>Bewohner des Lagers: Hyssop, Rue, Tansy, Yarrow. Anwesend: keiner.</Text>
+  </TextBlock>
+  <ShipLogConditions>
+    <RevealFact>
+      <FactID>ZEKIVD_TURM_WACH_FACT</FactID>
+      <Condition>1</Condition>
+    </RevealFact>
+    <RevealFact>
+      <FactID>ZEKIVD_VIER_RUMOR</FactID>
+      <Condition>4</Condition>
+    </RevealFact>
+  </ShipLogConditions>
+</NomaiObject>

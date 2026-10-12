@@ -1,0 +1,26 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+  "name": "ORBITAL_PROBE_CANNON",
+  "starSystem": "SolarSystem",
+  "Props": {
+    "translatorText": [
+      {
+        "parentPath": "Sector_OrbitalProbeCannon/Sector_Module_Intact",
+        "isRelativeToParent": true,
+        "position": {
+          "x": -6.881,
+          "y": -6.93,
+          "z": 8.714
+        },
+        "rotation": {
+          "x": 270.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "type": "computer",
+        "xmlFile": "planets/text/OPC_Sedum.xml",
+        "rename": "Computer_Sedum"
+      }
+    ]
+  }
+}

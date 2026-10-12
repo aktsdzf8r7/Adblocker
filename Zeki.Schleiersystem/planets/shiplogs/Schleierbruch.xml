@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Logbuch: Schleierbruch, die äußere, zerbrechende Welt -->
+<AstroObjectEntry xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/shiplog_schema.xsd">
+  <ID>SCHLEIERBRUCH</ID>
+  <Entry>
+    <ID>ZEKSCHLEIER_BRUCH</ID>
+    <Name>Der Signalturm</Name>
+    <Curiosity>ZEKSCHLEIER_EXPEDITION</Curiosity>
+    <RumorFact>
+      <ID>ZEKSCHLEIER_BRUCH_RUMOR</ID>
+      <SourceID>ZEKSCHLEIER_SEE</SourceID>
+      <RumorName>Boragos Sonden</RumorName>
+      <Text>Borago baute auf dem äußeren Planeten Sonden, die den Schleier verlassen sollten.</Text>
+    </RumorFact>
+    <ExploreFact>
+      <ID>ZEKSCHLEIER_BRUCH_FOUND</ID>
+      <Text>Auf einem Hochplateau des äußeren Planeten stehen die Ruinen eines Nomai-Signalturms. Die Messwerte dieser Welt passen nicht zu ihrer Oberfläche: Sie ist viel leichter, als sie sein dürfte.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKSCHLEIER_BRUCH_SONDEN</ID>
+      <Text>Zehn Sonden scheiterten am Schleier. Ilex ließ eine elfte bauen – kleiner und leiser, damit der Schleier sie übersieht.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKSCHLEIER_BRUCH_ELF</ID>
+      <Text>Die elfte Sonde wurde auf das Signal des Auges ausgerichtet und gestartet. Borago hörte nie wieder von ihr. Ich weiß, wo sie gelandet ist.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKSCHLEIER_BRUCH_ABSCHIED</ID>
+      <Text>Ilex entschied, allein ins Herz des Bruchs hinabzusteigen und es zu beobachten, bis jemand von außen kommt – auch wenn das niemals geschehen sollte.</Text>
+    </ExploreFact>
+    <Entry>
+      <ID>ZEKSCHLEIER_SPLITTERFELD</ID>
+      <Name>Das Splitterfeld</Name>
+      <ExploreFact>
+        <ID>ZEKSCHLEIER_SPLITTER_GESEHEN</ID>
+        <Text>In einem Feld aus Kristallsplittern stehen die Splitter nie an derselben Stelle, wenn ich wieder hinsehe.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKSCHLEIER_SPLITTER</ID>
+        <Text>Borago warnte: Die Splitter wandern, sobald niemand hinsieht. Wer sie beobachtet, hält sie fest.</Text>
+      </ExploreFact>
+    </Entry>
+  </Entry>
+  <Entry>
+    <ID>ZEKSCHLEIER_HERZ</ID>
+    <Name>Das Herz des Bruchs</Name>
+    <Curiosity>ZEKSCHLEIER_SYSTEM</Curiosity>
+    <RumorFact>
+      <ID>ZEKSCHLEIER_HERZ_RUMOR</ID>
+      <SourceID>ZEKSCHLEIER_KERN</SourceID>
+      <RumorName>Ilex' Abstieg</RumorName>
+      <Text>Nach dem Scheitern des Lichtbündlers wollte Ilex selbst ins Herz des äußeren Planeten hinabsteigen.</Text>
+    </RumorFact>
+    <RumorFact>
+      <ID>ZEKSCHLEIER_HERZ_WEG</ID>
+      <SourceID>ZEKSCHLEIER_SEE</SourceID>
+      <RumorName>Der Warp am Ufer</RumorName>
+      <Text>Ein Nomai-Warp am unteren Ufer des Archivs führt direkt ins Herz des Bruchs.</Text>
+    </RumorFact>
+    <RumorFact>
+      <ID>ZEKSCHLEIER_HERZ_GESEHEN</ID>
+      <SourceID>ZEKSCHLEIER_SEE</SourceID>
+      <RumorName>Eine Gestalt im Dunkeln</RumorName>
+      <Text>Durch einen Projektionsstein aus dem Archiv habe ich einen dunklen Ort mit einem riesigen Kristall gesehen. Dort sitzt jemand.</Text>
+    </RumorFact>
+    <RumorFact>
+      <ID>ZEKSCHLEIER_SCHLUND</ID>
+      <SourceID>ZEKSCHLEIER_BRUCH</SourceID>
+      <RumorName>Der Schlund</RumorName>
+      <Text>Ein gewaltiger Krater führt tief in den äußeren Planeten hinein. Am Grund schimmert violettes Licht.</Text>
+    </RumorFact>
+    <ExploreFact>
+      <ID>ZEKSCHLEIER_HERZ_FOUND</ID>
+      <Text>Am Grund des Schlunds liegt eine Kammer um einen riesigen Kristallsplitter: das Herz des Bruchs.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKSCHLEIER_HERZ_ILEX</ID>
+      <Text>Ilex blieb im Herz und beobachtete den Splitter, bis sich die eigenen Augen schlossen. So lange hielt der Bruch.</Text>
+    </ExploreFact>
+  </Entry>
+</AstroObjectEntry>

@@ -1,0 +1,141 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+  "name": "Labyrinth_Spiegelkammer",
+  "starSystem": "SolarSystem",
+  "canShowOnTitle": false,
+  "Orbit": {
+    "staticPosition": {
+      "x": -36000.0,
+      "y": -90000.0,
+      "z": 12000.0
+    }
+  },
+  "ShipLog": {
+    "mapMode": {
+      "remove": true
+    }
+  },
+  "Bramble": {
+    "dimension": {
+      "radius": 300,
+      "fogTint": {
+        "r": 165,
+        "g": 175,
+        "b": 195,
+        "a": 255
+      },
+      "fogDensity": 4.0,
+      "linksTo": "ZEKIDL_Treibsamen",
+      "vinePrefab": "smallNest"
+    },
+    "nodes": [
+      {
+        "position": {
+          "x": 95.263,
+          "y": 95.263,
+          "z": 95.263
+        },
+        "linksTo": "Labyrinth_Vorhof",
+        "name": "ZEKIDL_Spiegelkammer_K0",
+        "scale": 0.5,
+        "fogTint": {
+          "r": 165,
+          "g": 175,
+          "b": 195,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 190,
+          "g": 215,
+          "b": 170,
+          "a": 255
+        },
+        "preventRecursionCrash": true
+      },
+      {
+        "position": {
+          "x": 95.263,
+          "y": -95.263,
+          "z": -95.263
+        },
+        "linksTo": "Labyrinth_Vorhof",
+        "name": "ZEKIDL_Spiegelkammer_K1",
+        "scale": 0.5,
+        "fogTint": {
+          "r": 165,
+          "g": 175,
+          "b": 195,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 190,
+          "g": 215,
+          "b": 170,
+          "a": 255
+        },
+        "preventRecursionCrash": true
+      },
+      {
+        "position": {
+          "x": -95.263,
+          "y": 95.263,
+          "z": -95.263
+        },
+        "linksTo": "Labyrinth_Vorhof",
+        "name": "ZEKIDL_Spiegelkammer_K2",
+        "scale": 0.5,
+        "fogTint": {
+          "r": 165,
+          "g": 175,
+          "b": 195,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 190,
+          "g": 215,
+          "b": 170,
+          "a": 255
+        },
+        "preventRecursionCrash": true
+      },
+      {
+        "position": {
+          "x": -95.263,
+          "y": -95.263,
+          "z": 95.263
+        },
+        "linksTo": "Labyrinth_Vorhof",
+        "name": "ZEKIDL_Spiegelkammer_K3",
+        "scale": 0.5,
+        "fogTint": {
+          "r": 165,
+          "g": 175,
+          "b": 195,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 190,
+          "g": 215,
+          "b": 170,
+          "a": 255
+        },
+        "preventRecursionCrash": true
+      }
+    ]
+  },
+  "Volumes": {
+    "revealVolumes": [
+      {
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "radius": 300,
+        "reveals": [
+          "ZEKIDL_SPIEGELKAMMER_FOUND"
+        ]
+      }
+    ]
+  }
+}

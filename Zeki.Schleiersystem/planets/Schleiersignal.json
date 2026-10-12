@@ -1,0 +1,202 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+  "name": "Schleiersignal",
+  "starSystem": "SolarSystem",
+  "canShowOnTitle": false,
+  "Base": {
+    "surfaceSize": 72,
+    "surfaceGravity": 3,
+    "gravityFallOff": "linear"
+  },
+  "Orbit": {
+    "primaryBody": "TIMBER_HEARTH",
+    "isMoon": true,
+    "semiMajorAxis": 2100,
+    "eccentricity": 0,
+    "inclination": 18,
+    "longitudeOfAscendingNode": 60,
+    "trueAnomaly": 120,
+    "siderealPeriod": 6,
+    "tint": {
+      "r": 190,
+      "g": 160,
+      "b": 255,
+      "a": 255
+    }
+  },
+  "HeightMap": {
+    "heightMap": "planets/assets/terrain/signal_height.png",
+    "textureMap": "planets/assets/terrain/signal_color.png",
+    "minHeight": 60.0,
+    "maxHeight": 80.0,
+    "resolution": 128,
+    "smoothness": 0.02,
+    "metallic": 0.0
+  },
+  "MapMarker": {
+    "enabled": true
+  },
+  "ShipLog": {
+    "xmlFile": "planets/shiplogs/Schleiersignal.xml",
+    "spriteFolder": "planets/assets/shiplog/entries"
+  },
+  "Props": {
+    "details": [
+      {
+        "path": "CaveTwin_Body/Sector_CaveTwin/Sector_SouthHemisphere/Sector_EscapePod/Interactables_EscapePod/EscapePod_VisibleFrom_Far/DistressBeaconTransmitter/Props_NOM_Transponder",
+        "position": {
+          "x": 67.777,
+          "y": 22.362,
+          "z": 11.951
+        },
+        "rotation": {
+          "x": 24.0,
+          "y": 35.0,
+          "z": 8.0
+        },
+        "alignRadial": true,
+        "scale": 2.2,
+        "rename": "Sonde_Elf"
+      },
+      {
+        "path": "CaveTwin_Body/Sector_CaveTwin/Sector_SouthHemisphere/Sector_EscapePod/Interactables_EscapePod/EscapePod_VisibleFrom_Far/DistressBeaconTransmitter/LightBeam",
+        "position": {
+          "x": 68.62,
+          "y": 22.64,
+          "z": 12.1
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "scale": 1.2,
+        "rename": "Sonde_Leuchtfeuer",
+        "keepLoaded": true
+      },
+      {
+        "path": "Comet_Body/Sector_CO/Sector_CometInterior/Props_CometInterior/Prefab_NOM_BoxBroken",
+        "position": {
+          "x": 65.174,
+          "y": 24.93,
+          "z": 16.549
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 80.0,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Sondentruemmer_1"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_CrashFragment/Interactables_CrashFragment/Platforms/Prefab_NOM_BrokenPlatform",
+        "position": {
+          "x": 65.65,
+          "y": 27.555,
+          "z": 5.555
+        },
+        "rotation": {
+          "x": 12.0,
+          "y": 200.0,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "scale": 0.6,
+        "rename": "Sondentruemmer_2"
+      }
+    ],
+    "translatorText": [
+      {
+        "type": "recorder",
+        "xmlFile": "planets/text/Sonde_Aufzeichnung.xml",
+        "position": {
+          "x": 67.49,
+          "y": 19.29,
+          "z": 14.941
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Beschaedigter_Nomai_Recorder"
+      },
+      {
+        "type": "whiteboard",
+        "xmlFile": "planets/text/Sonde_Protokoll.xml",
+        "position": {
+          "x": 69.027,
+          "y": 18.3,
+          "z": 7.114
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 314.3,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Whiteboard_Startprotokoll",
+        "seed": 71
+      }
+    ],
+    "signals": [
+      {
+        "frequency": "Schleier-Echo",
+        "name": "Nomai-Sonde",
+        "audio": "NomaiEscapePodDistressSignal_LP",
+        "position": {
+          "x": 70.025,
+          "y": 23.104,
+          "z": 12.347
+        },
+        "sourceRadius": 2,
+        "detectionRadius": 1500,
+        "identificationRadius": 180,
+        "reveals": "ZEKSCHLEIER_ECHO_RUMOR"
+      }
+    ],
+    "entryLocation": [
+      {
+        "id": "ZEKSCHLEIER_SIGNAL",
+        "position": {
+          "x": 70.025,
+          "y": 23.104,
+          "z": 12.347
+        }
+      }
+    ]
+  },
+  "Volumes": {
+    "revealVolumes": [
+      {
+        "position": {
+          "x": 70.025,
+          "y": 23.104,
+          "z": 12.347
+        },
+        "radius": 22,
+        "revealOn": "enter",
+        "reveals": [
+          "ZEKSCHLEIER_SONDE"
+        ]
+      },
+      {
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "radius": 90,
+        "revealOn": "observe",
+        "reveals": [
+          "ZEKSCHLEIER_ECHO_RUMOR"
+        ],
+        "maxDistance": 3500,
+        "maxAngle": 25
+      }
+    ]
+  }
+}

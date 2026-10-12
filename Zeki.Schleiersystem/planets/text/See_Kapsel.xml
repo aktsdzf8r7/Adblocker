@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Whiteboard an Kapsel 2: die drei Kapseln -->
+<NomaiObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/text_schema.xsd">
+  <TextBlock>
+    <ID>1</ID>
+    <Text>Sorrel: Als die Laterne in den Dorn gezogen wurde, lösten sich drei Kapseln. Wir in Kapsel 2 erreichten diese Welt.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>2</ID>
+    <ParentID>1</ParentID>
+    <Text>Sorrel: Kapsel 1 mit Borago, Hysop und Kerria stürzte auf den Dorn selbst. Sie leben – wir hören ihren Notruf.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>3</ID>
+    <ParentID>2</ParentID>
+    <Text>Sorrel: Von Kapsel 3 und Melisse fehlt jede Spur. Ihr Signal kommt aus dem Inneren des Dorns.</Text>
+  </TextBlock>
+  <ShipLogConditions>
+    <RevealFact>
+      <FactID>ZEKSCHLEIER_KAPSEL2_LOG</FactID>
+      <Condition>1</Condition>
+    </RevealFact>
+    <RevealFact>
+      <FactID>ZEKSCHLEIER_DORN_RUMOR</FactID>
+      <Condition>1,2</Condition>
+    </RevealFact>
+    <RevealFact>
+      <FactID>ZEKSCHLEIER_KAPSEL3_RUMOR</FactID>
+      <Condition>1,2,3</Condition>
+    </RevealFact>
+  </ShipLogConditions>
+</NomaiObject>

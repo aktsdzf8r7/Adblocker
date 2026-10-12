@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Aufzeichnung in der Kernkammer: Linum und Sedum über das Ziel -->
+<NomaiObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/text_schema.xsd">
+  <TextBlock>
+    <ID>1</ID>
+    <Text>Linum: Du hast den Heimatstern gefunden? Nach all den Jahren auf dem Vessel?</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>2</ID>
+    <ParentID>1</ParentID>
+    <Text>Sedum: Die Sternkarten des Vessels sind genau. Er liegt hinter dem Nebel des Auges, weiter als wir je gedacht haben.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>3</ID>
+    <ParentID>2</ParentID>
+    <Text>Linum: Dann wird die Sonde Jahrtausende brauchen. Vielleicht gibt es dort niemanden mehr, der sie liest.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>4</ID>
+    <ParentID>3</ParentID>
+    <Text>Sedum: Vielleicht. Aber wenn doch, verirrt sich wenigstens kein zweites Vessel in den Dornen.</Text>
+  </TextBlock>
+  <ShipLogConditions>
+    <RevealFact>
+      <FactID>ZEKISAE_NAVI_ZWEIFEL</FactID>
+      <Condition>1,2,3,4</Condition>
+    </RevealFact>
+  </ShipLogConditions>
+</NomaiObject>

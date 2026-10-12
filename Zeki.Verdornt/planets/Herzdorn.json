@@ -1,0 +1,60 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+  "name": "Herzdorn",
+  "starSystem": "Verdornt",
+  "Base": {
+    "surfaceSize": 1100,
+    "surfaceGravity": 12,
+    "centerOfSolarSystem": true,
+    "gravityFallOff": "inverseSquared",
+    "showMinimap": false
+  },
+  "Star": {
+    "size": 650,
+    "tint": {
+      "r": 255,
+      "g": 196,
+      "b": 120,
+      "a": 255
+    },
+    "lightTint": {
+      "r": 255,
+      "g": 214,
+      "b": 160,
+      "a": 255
+    },
+    "solarLuminosity": 0.35,
+    "lightRadius": 60000,
+    "supernovaTint": {
+      "r": 200,
+      "g": 255,
+      "b": 190,
+      "a": 255
+    }
+  },
+  "Orbit": {
+    "isStatic": true,
+    "showOrbitLine": false
+  },
+  "MapMarker": {
+    "enabled": true
+  },
+  "Props": {
+    "remotes": [
+      {
+        "id": "ZEKIVD_HERZ",
+        "decalPath": "planets/assets/remotes/herz.png",
+        "platform": {
+          "position": {
+            "x": 0.0,
+            "y": 1180.0,
+            "z": 0.0
+          },
+          "alignRadial": true,
+          "rename": "VD_Becken_Herz",
+          "reveals": "ZEKIVD_HERZ_BLICK"
+        }
+      }
+    ]
+  }
+}

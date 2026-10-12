@@ -1,0 +1,237 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+  "name": "Sonnenwacht",
+  "starSystem": "Schleiersystem",
+  "Base": {
+    "surfaceSize": 30.0,
+    "surfaceGravity": 1.5,
+    "gravityFallOff": "linear"
+  },
+  "Orbit": {
+    "primaryBody": "Schleierstern",
+    "semiMajorAxis": 3000,
+    "eccentricity": 0,
+    "inclination": 2,
+    "trueAnomaly": 250,
+    "isTidallyLocked": true,
+    "alignmentAxis": {
+      "x": -1.0,
+      "y": 0.0,
+      "z": 0.0
+    },
+    "tint": {
+      "r": 255,
+      "g": 200,
+      "b": 150,
+      "a": 255
+    }
+  },
+  "HeightMap": {
+    "heightMap": "planets/assets/terrain/wacht_height.png",
+    "textureMap": "planets/assets/terrain/wacht_color.png",
+    "minHeight": 22.0,
+    "maxHeight": 30.0,
+    "resolution": 128,
+    "smoothness": 0.05,
+    "metallic": 0.0,
+    "emissionMap": "planets/assets/terrain/wacht_emission.png"
+  },
+  "MapMarker": {
+    "enabled": true
+  },
+  "ShipLog": {
+    "xmlFile": "planets/shiplogs/Sonnenwacht.xml",
+    "spriteFolder": "planets/assets/shiplog/entries",
+    "mapMode": {
+      "revealedSprite": "planets/assets/shiplog/map/wacht.png",
+      "outlineSprite": "planets/assets/shiplog/map/wacht_outline.png"
+    }
+  },
+  "Props": {
+    "details": [
+      {
+        "path": "SunStation_Body/Sector_SunStation/Geometry_SunStation",
+        "position": {
+          "x": -68.076,
+          "y": -19.411,
+          "z": -24.777
+        },
+        "rotation": {
+          "x": 90.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Sonnenwacht_Station",
+        "keepLoaded": true,
+        "removeComponents": true
+      },
+      {
+        "path": "SunStation_Body/Sector_SunStation/Sector_ControlModule/Props/OtherComponentsGroup/StatueHead/Prefab_NOM_StatueHead",
+        "position": {
+          "x": 27.012,
+          "y": 3.139,
+          "z": 3.667
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 316.3,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Nomai_Statuenkopf"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
+        "position": {
+          "x": 19.638,
+          "y": 6.594,
+          "z": 17.996
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Wachtlampe_1"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
+        "position": {
+          "x": 20.645,
+          "y": 16.441,
+          "z": 7.514
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Wachtlampe_2"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
+        "position": {
+          "x": 26.611,
+          "y": 6.594,
+          "z": -1.163
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Wachtlampe_3"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
+        "position": {
+          "x": 25.604,
+          "y": -3.253,
+          "z": 9.319
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Wachtlampe_4"
+      }
+    ],
+    "translatorText": [
+      {
+        "type": "computer",
+        "xmlFile": "planets/text/Wacht_Messung.xml",
+        "position": {
+          "x": 20.487,
+          "y": 12.336,
+          "z": 13.558
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 106.3,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Computer_Messreihe"
+      },
+      {
+        "type": "recorder",
+        "xmlFile": "planets/text/Wacht_Ilex.xml",
+        "position": {
+          "x": 24.938,
+          "y": 11.4,
+          "z": 1.967
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Recorder_Ilex_Wacht"
+      }
+    ],
+    "warpReceivers": [
+      {
+        "frequency": "ZEKSCHLEIER_KERN_WACHT",
+        "position": {
+          "x": 24.952,
+          "y": 7.115,
+          "z": 9.082
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 250.0,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "detailed": true,
+        "rename": "Warpempfaenger_Sonnenwacht",
+        "computer": {
+          "position": {
+            "x": 22.442,
+            "y": 4.064,
+            "z": 15.347
+          },
+          "rotation": {
+            "x": 0.0,
+            "y": 171.8,
+            "z": 0.0
+          },
+          "alignRadial": true
+        }
+      }
+    ],
+    "entryLocation": [
+      {
+        "id": "ZEKSCHLEIER_WACHT",
+        "position": {
+          "x": 27.675,
+          "y": 7.891,
+          "z": 10.073
+        }
+      }
+    ]
+  },
+  "Volumes": {
+    "revealVolumes": [
+      {
+        "position": {
+          "x": 27.675,
+          "y": 7.891,
+          "z": 10.073
+        },
+        "radius": 14,
+        "revealOn": "enter",
+        "reveals": [
+          "ZEKSCHLEIER_WACHT_FOUND"
+        ]
+      }
+    ]
+  }
+}

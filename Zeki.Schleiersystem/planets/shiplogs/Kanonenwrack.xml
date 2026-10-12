@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Logbuch: das Wrack der Sondenkanone im Orbit des Dorns -->
+<AstroObjectEntry xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/shiplog_schema.xsd">
+  <ID>KANONENWRACK</ID>
+  <Entry>
+    <ID>ZEKSCHLEIER_WRACK</ID>
+    <Name>Das Kanonenwrack</Name>
+    <Curiosity>ZEKSCHLEIER_EXPEDITION</Curiosity>
+    <RumorFact>
+      <ID>ZEKSCHLEIER_WRACK_RUMOR</ID>
+      <SourceID>ZEKSCHLEIER_DORN</SourceID>
+      <RumorName>Trümmer im Orbit</RumorName>
+      <Text>Um den Dornenplaneten kreist ein Felsbrocken, an dem die Trümmer eines großen Nomai-Bauwerks hängen.</Text>
+    </RumorFact>
+    <ExploreFact>
+      <ID>ZEKSCHLEIER_WRACK_FOUND</ID>
+      <Text>Die Trümmer gehören zu einer Nomai-Sondenkanone, ähnlich der großen Kanone über Giant's Deep.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKSCHLEIER_WRACK_LOG</ID>
+      <Text>Borago und Hysop bauten die Kanone aus den Resten von Kapsel 1, um eine Sonde mit Gewalt durch den Schleier zu schießen. Die Sonde kam mit derselben Kraft zurück und zerriss die Kanone.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKSCHLEIER_WRACK_SPIEGEL</ID>
+      <Text>Der Schleier wirkt wie ein Spiegel: Er gibt alles zurück, was man ihm entgegenwirft. Die Sonde steckt noch genau dort im Fels, wo sie abgeschossen wurde.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKSCHLEIER_WRACK_BORAGO</ID>
+      <Text>Nach dem Fehlschlag beschloss Borago, viele kleine Sonden zu bauen – in der Hoffnung, dass der Schleier eine übersieht.</Text>
+    </ExploreFact>
+  </Entry>
+</AstroObjectEntry>

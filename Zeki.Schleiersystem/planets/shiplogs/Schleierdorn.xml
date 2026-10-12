@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Logbuch: Schleierdorn, der Dornenplanet, und das Labyrinth in seinem Inneren -->
+<AstroObjectEntry xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/shiplog_schema.xsd">
+  <ID>SCHLEIERDORN</ID>
+  <Entry>
+    <ID>ZEKSCHLEIER_LATERNE_SCHIFF</ID>
+    <Name>Die Laterne</Name>
+    <IsCuriosity/>
+    <RumorFact>
+      <ID>ZEKSCHLEIER_LATERNE_RUMOR</ID>
+      <SourceID>ZEKSCHLEIER_DORN</SourceID>
+      <RumorName>Das verschlungene Schiff</RumorName>
+      <Text>Die letzte Peilung der Laterne zeigte ins Innere des Dornenplaneten, hinter den großen Schlund.</Text>
+    </RumorFact>
+    <ExploreFact>
+      <ID>ZEKSCHLEIER_LATERNE_FOUND</ID>
+      <Text>Tief im Dornenlabyrinth treibt die Laterne, das Schiff des Clans. Es ist noch eingeschaltet.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKSCHLEIER_LATERNE_LOG</ID>
+      <Text>Das Logbuch der Laterne: Der Warpkern verlor im Schleier seine Kraft, der Dorn zog das Schiff hinein, und drei Kapseln wurden gestartet. Kerria fand das Schiff viel später – sein Kern glimmt noch.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKSCHLEIER_LATERNE_KERRIA</ID>
+      <Text>Kerria blieb bei der Laterne, nachdem sie Melisse nicht mehr lebend gefunden hatte. Sie hat die Koordinaten des Schleiers in das Schiff eingegeben.</Text>
+    </ExploreFact>
+  </Entry>
+  <Entry>
+    <ID>ZEKSCHLEIER_DORN</ID>
+    <Name>Der Schleierdorn</Name>
+    <Curiosity>ZEKSCHLEIER_LATERNE_SCHIFF</Curiosity>
+    <RumorFact>
+      <ID>ZEKSCHLEIER_DORN_RUMOR</ID>
+      <SourceID>ZEKSCHLEIER_SEE</SourceID>
+      <RumorName>Der Dornenplanet</RumorName>
+      <Text>Kapsel 1 mit Borago, Hysop und Kerria stürzte auf den Dornenplaneten, der die Laterne verschlungen hat.</Text>
+    </RumorFact>
+    <ExploreFact>
+      <ID>ZEKSCHLEIER_DORN_FOUND</ID>
+      <Text>Der äußerste Planet ist von Ranken überwuchert. In einem riesigen Krater öffnet sich ein Dornenknoten wie in Dark Bramble.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKSCHLEIER_DORN_LAGER</ID>
+      <Text>Hysop und Borago gingen über einen Warp zum Archiv. Kerria blieb, um Melisse und die Laterne zu suchen, und versprach, ihren Weg zu markieren.</Text>
+    </ExploreFact>
+    <Entry>
+      <ID>ZEKSCHLEIER_KAPSEL1</ID>
+      <Name>Kapsel 1</Name>
+      <ExploreFact>
+        <ID>ZEKSCHLEIER_KAPSEL1_FOUND</ID>
+        <Text>Auf dem Dorn liegt die abgestürzte Rettungskapsel 1. Ihr Notruf ist noch immer zu hören.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKSCHLEIER_KAPSEL1_LOG</ID>
+        <Text>Borago, Hysop und Kerria überlebten den Absturz von Kapsel 1 und hielten über Funk Kontakt zu Kapsel 2.</Text>
+      </ExploreFact>
+    </Entry>
+  </Entry>
+  <Entry>
+    <ID>ZEKSCHLEIER_LABYRINTH</ID>
+    <Name>Das Dornenlabyrinth</Name>
+    <Curiosity>ZEKSCHLEIER_LATERNE_SCHIFF</Curiosity>
+    <RumorFact>
+      <ID>ZEKSCHLEIER_LAB_RUMOR</ID>
+      <SourceID>ZEKSCHLEIER_DORN</SourceID>
+      <RumorName>Raum im Samen</RumorName>
+      <Text>Laut Kerria ist der Dorn ein riesiger Samen. Hinter dem Schlund verzweigen sich Kammern, die mehr Raum enthalten, als außen Platz hätte.</Text>
+    </RumorFact>
+    <ExploreFact>
+      <ID>ZEKSCHLEIER_LAB_FOUND</ID>
+      <Text>Hinter dem Schlund liegt die Dornenhalle. Von hier aus führen leuchtende Knoten in weitere Kammern.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKSCHLEIER_LAB_WEG</ID>
+      <Text>Kerria benannte die Knoten nach ihrem Licht: GOLD führt zur Laterne, BLAU zu ihrem Lager, ROT in die Höhle eines blinden Wesens.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKSCHLEIER_LAB_FARBEN</ID>
+      <Text>In der Dornenhalle hat Kerria ihre Wegregel hinterlassen: „Gold für die Laterne. Blau für mein Lager. Rot – niemals.“</Text>
+    </ExploreFact>
+    <Entry>
+      <ID>ZEKSCHLEIER_KERRIAS_LAGER</ID>
+      <Name>Kerrias Lager</Name>
+      <ExploreFact>
+        <ID>ZEKSCHLEIER_LAB_KERRIA</ID>
+        <Text>Im Rankengarten hat Kerria gelagert. Sie merkte, dass sich auch hier drinnen der Weg verändert, wenn niemand hinsieht, und folgte Melisses Signal ins Gold.</Text>
+      </ExploreFact>
+    </Entry>
+    <Entry>
+      <ID>ZEKSCHLEIER_KAPSEL3</ID>
+      <Name>Kapsel 3</Name>
+      <RumorFact>
+        <ID>ZEKSCHLEIER_KAPSEL3_RUMOR</ID>
+        <SourceID>ZEKSCHLEIER_SEE</SourceID>
+        <RumorName>Melisses Notruf</RumorName>
+        <Text>Von Kapsel 3 und Melisse fehlt jede Spur. Ihr Notruf kommt aus dem Inneren des Dorns.</Text>
+      </RumorFact>
+      <ExploreFact>
+        <ID>ZEKSCHLEIER_KAPSEL3_FOUND</ID>
+        <Text>Im Kapselgrund steckt die Rettungskapsel 3 zwischen den Ranken fest.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKSCHLEIER_KAPSEL3_MELISSE</ID>
+        <Text>Melisse sendete aus Kapsel 3, solange ihre Luft reichte. Sie hörte das Summen der Laterne hinter dem goldenen Licht.</Text>
+      </ExploreFact>
+    </Entry>
+    <Entry>
+      <ID>ZEKSCHLEIER_ECHOKAMMER_ENTRY</ID>
+      <Name>Die Echokammer</Name>
+      <ExploreFact>
+        <ID>ZEKSCHLEIER_ECHOKAMMER</ID>
+        <Text>Hinter dem roten Knoten lebt etwas Blindes, Großes, das jedes Geräusch hört. Kerria warnt: langsam treiben, nicht den Antrieb benutzen.</Text>
+      </ExploreFact>
+    </Entry>
+  </Entry>
+</AstroObjectEntry>

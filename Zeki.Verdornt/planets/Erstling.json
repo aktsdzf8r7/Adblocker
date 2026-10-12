@@ -1,0 +1,571 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+  "name": "Erstling",
+  "starSystem": "Verdornt",
+  "Base": {
+    "surfaceSize": 260,
+    "surfaceGravity": 10,
+    "showMinimap": false
+  },
+  "Orbit": {
+    "primaryBody": "Herzdorn",
+    "semiMajorAxis": 4200,
+    "inclination": 4,
+    "trueAnomaly": 30,
+    "eccentricity": 0,
+    "siderealPeriod": 0,
+    "tint": {
+      "r": 120,
+      "g": 230,
+      "b": 140,
+      "a": 255
+    }
+  },
+  "MapMarker": {
+    "enabled": true
+  },
+  "Spawn": {
+    "playerSpawnPoints": [
+      {
+        "position": {
+          "x": -154.904,
+          "y": 113.977,
+          "z": -175.528
+        },
+        "alignRadial": true,
+        "isDefault": true,
+        "startWithSuit": true
+      }
+    ]
+  },
+  "Bramble": {
+    "nodes": [
+      {
+        "position": {
+          "x": -145.532,
+          "y": 115.292,
+          "z": -186.272
+        },
+        "alignRadial": true,
+        "linksTo": "Ankunftskammer",
+        "name": "ZEKIVD_Ankunftssamen",
+        "scale": 0.12,
+        "fogTint": {
+          "r": 160,
+          "g": 255,
+          "b": 170,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 170,
+          "g": 255,
+          "b": 180,
+          "a": 255
+        }
+      },
+      {
+        "position": {
+          "x": 235.967,
+          "y": -115.92,
+          "z": 110.033
+        },
+        "alignRadial": true,
+        "linksTo": "Eispforte",
+        "name": "ZEKIVD_Erstling_Knoten",
+        "scale": 0.5,
+        "fogTint": {
+          "r": 150,
+          "g": 200,
+          "b": 255,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 170,
+          "g": 210,
+          "b": 255,
+          "a": 255
+        }
+      }
+    ]
+  },
+  "Props": {
+    "details": [
+      {
+        "path": "",
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "VD_Materialvorlagen",
+        "keepLoaded": true
+      },
+      {
+        "path": "QuantumMoon_Body/Sector_QuantumMoon/State_DB/Interactables_DBState/DBState_QuantumObjects/DB_Q_Vine1/DB_Bramble_Vine1/State_1/Terrain_TH_Bramble_Vine1",
+        "parentPath": "Sector/VD_Materialvorlagen",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "Ranke_1",
+        "keepLoaded": true
+      },
+      {
+        "path": "CaveTwin_Body/Sector_CaveTwin/Sector_SouthHemisphere/Sector_SouthUnderground/Sector_City/Interactables_City/CityDoors/Prefab_NOM_Gateway",
+        "parentPath": "Sector/VD_Materialvorlagen",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "Nomai_Tor",
+        "keepLoaded": true
+      },
+      {
+        "path": "QuantumMoon_Body/Sector_QuantumMoon/QuantumShrine/Structure_NOM_QuantumShrine",
+        "parentPath": "Sector/VD_Materialvorlagen",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "Nomai_Schrein",
+        "keepLoaded": true
+      },
+      {
+        "path": "",
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "VD_Rankenvorlagen",
+        "keepLoaded": true
+      },
+      {
+        "path": "QuantumMoon_Body/Sector_QuantumMoon/State_DB/Interactables_DBState/DBState_QuantumObjects/DB_Q_Vine1/DB_Bramble_Vine1/State_1/Terrain_TH_Bramble_Vine1",
+        "parentPath": "Sector/VD_Rankenvorlagen",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "Ranke_1",
+        "keepLoaded": true
+      },
+      {
+        "path": "QuantumMoon_Body/Sector_QuantumMoon/State_DB/Interactables_DBState/DBState_QuantumObjects/DB_Q_Vine2/DB_Bramble_Vine2/State_1/Terrain_TH_Bramble_Vine2",
+        "parentPath": "Sector/VD_Rankenvorlagen",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "Ranke_2",
+        "keepLoaded": true
+      },
+      {
+        "path": "QuantumMoon_Body/Sector_QuantumMoon/State_DB/Interactables_DBState/DBState_QuantumObjects/DB_Q_Vine3/DB_Bramble_Vine3/State_1/Terrain_TH_Bramble_Vine3",
+        "parentPath": "Sector/VD_Rankenvorlagen",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "Ranke_3",
+        "keepLoaded": true
+      },
+      {
+        "path": "QuantumMoon_Body/Sector_QuantumMoon/State_DB/Interactables_DBState/DBState_QuantumObjects/DB_Q_Vine4/DB_Bramble_Vine4/State_1/Terrain_TH_Bramble_Vine4",
+        "parentPath": "Sector/VD_Rankenvorlagen",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "Ranke_4",
+        "keepLoaded": true
+      },
+      {
+        "path": "QuantumMoon_Body/Sector_QuantumMoon/State_DB/Interactables_DBState/DBState_QuantumObjects/DB_Q_Vine5/DB_Bramble_Vine5/State_1/Terrain_TH_Bramble_Vine5",
+        "parentPath": "Sector/VD_Rankenvorlagen",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "Ranke_5",
+        "keepLoaded": true
+      },
+      {
+        "path": "TimberHearth_Body/Sector_TH/Sector_ImpactCrater/Interactables_ImpactCrater/ControlledByProxy_Structures/Terrain_DB_BrambleSphere_Seed_V2",
+        "parentPath": "Sector/VD_Rankenvorlagen",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "Samen",
+        "keepLoaded": true
+      },
+      {
+        "path": "TimberHearth_Body/Sector_TH/Sector_ImpactCrater/Interactables_ImpactCrater/ControlledByProxy_Structures/Terrain_DB_BrambleSphere_Seed_V2",
+        "position": {
+          "x": -72.259,
+          "y": 154.422,
+          "z": -198.531
+        },
+        "alignRadial": true,
+        "scale": 0.12,
+        "rename": "VD_Ruecksamen"
+      },
+      {
+        "path": "",
+        "position": {
+          "x": -42.249,
+          "y": 129.961,
+          "z": -226.222
+        },
+        "alignRadial": true,
+        "rename": "VD_Kern_Erstling",
+        "keepLoaded": true,
+        "item": {
+          "name": "Planetenkern Erstling",
+          "itemType": "Planetenkern",
+          "colliderRadius": 0.6,
+          "interactRange": 3,
+          "pickupFact": "ZEKIVD_KERN_ERSTLING_GENOMMEN",
+          "holdOffset": {
+            "x": 0.0,
+            "y": -0.1,
+            "z": 0.25
+          }
+        }
+      },
+      {
+        "path": "",
+        "position": {
+          "x": -108.088,
+          "y": 122.726,
+          "z": -205.814
+        },
+        "alignRadial": true,
+        "rename": "VD_Turm_Warp",
+        "activationCondition": "ZEKIVD_TURM_WACH"
+      }
+    ],
+    "translatorText": [
+      {
+        "type": "computer",
+        "xmlFile": "planets/text/Lagerkern_Start.xml",
+        "position": {
+          "x": -74.96,
+          "y": 139.899,
+          "z": -205.95
+        },
+        "alignRadial": true,
+        "rename": "Lagerkern_Start"
+      },
+      {
+        "type": "computer",
+        "xmlFile": "planets/text/Lagerkern_Ankunft.xml",
+        "position": {
+          "x": -74.96,
+          "y": 139.899,
+          "z": -205.95
+        },
+        "alignRadial": true,
+        "rename": "Lagerkern_Ankunft"
+      },
+      {
+        "type": "computer",
+        "xmlFile": "planets/text/Lagerkern_Turm.xml",
+        "position": {
+          "x": -74.96,
+          "y": 139.899,
+          "z": -205.95
+        },
+        "alignRadial": true,
+        "rename": "Lagerkern_Turm"
+      },
+      {
+        "type": "computer",
+        "xmlFile": "planets/text/Lagerkern_Kern.xml",
+        "position": {
+          "x": -74.96,
+          "y": 139.899,
+          "z": -205.95
+        },
+        "alignRadial": true,
+        "rename": "Lagerkern_Kern"
+      },
+      {
+        "type": "recorder",
+        "xmlFile": "planets/text/Lager_Hyssop.xml",
+        "position": {
+          "x": -67.273,
+          "y": 141.595,
+          "z": -207.62
+        },
+        "rename": "VD_Lager_Hyssop",
+        "alignRadial": true
+      },
+      {
+        "type": "recorder",
+        "xmlFile": "planets/text/Lager_Rue.xml",
+        "position": {
+          "x": -81.921,
+          "y": 141.595,
+          "z": -202.289
+        },
+        "rename": "VD_Lager_Rue",
+        "alignRadial": true
+      },
+      {
+        "type": "recorder",
+        "xmlFile": "planets/text/Lager_Tansy.xml",
+        "position": {
+          "x": -77.044,
+          "y": 130.147,
+          "z": -211.677
+        },
+        "rename": "VD_Lager_Tansy",
+        "alignRadial": true
+      },
+      {
+        "type": "computer",
+        "xmlFile": "planets/text/Turm_Erstling.xml",
+        "position": {
+          "x": -101.394,
+          "y": 122.514,
+          "z": -207.889
+        },
+        "rename": "VD_Turm_Erstling",
+        "alignRadial": true
+      },
+      {
+        "type": "computer",
+        "xmlFile": "planets/text/Hoehle_Kern.xml",
+        "position": {
+          "x": -43.71,
+          "y": 129.923,
+          "z": -224.586
+        },
+        "rename": "VD_Hoehle_Kern",
+        "alignRadial": true
+      },
+      {
+        "type": "computer",
+        "xmlFile": "planets/text/Labor_Hyssop_1.xml",
+        "position": {
+          "x": 40.508,
+          "y": 3.056,
+          "z": -110.846
+        },
+        "rename": "VD_Labor_Hyssop_1",
+        "alignRadial": true
+      },
+      {
+        "type": "computer",
+        "xmlFile": "planets/text/Labor_Hyssop_2.xml",
+        "position": {
+          "x": 49.109,
+          "y": -0.595,
+          "z": -107.563
+        },
+        "rename": "VD_Labor_Hyssop_2",
+        "alignRadial": true
+      },
+      {
+        "type": "computer",
+        "xmlFile": "planets/text/Labor_Hyssop_3.xml",
+        "position": {
+          "x": 48.978,
+          "y": 9.169,
+          "z": -107.234
+        },
+        "rename": "VD_Labor_Hyssop_3",
+        "alignRadial": true
+      }
+    ],
+    "warpTransmitters": [
+      {
+        "frequency": "ZEKIVD_AUSGUCK",
+        "parentPath": "Sector/VD_Turm_Warp",
+        "isRelativeToParent": true,
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        }
+      }
+    ],
+    "warpReceivers": [
+      {
+        "frequency": "ZEKIVD_ERSTLING",
+        "position": {
+          "x": -118.309,
+          "y": 122.514,
+          "z": -201.733
+        },
+        "alignRadial": true
+      }
+    ],
+    "remotes": [
+      {
+        "id": "ZEKIVD_LAGER",
+        "decalPath": "planets/assets/remotes/lager.png",
+        "platform": {
+          "position": {
+            "x": -85.361,
+            "y": 133.115,
+            "z": -206.676
+          },
+          "alignRadial": true,
+          "rename": "VD_Becken_Lager",
+          "reveals": "ZEKIVD_LAGER_FOUND"
+        }
+      },
+      {
+        "id": "ZEKIVD_SYSTEM",
+        "decalPath": "planets/assets/remotes/system.png",
+        "stones": [
+          {
+            "position": {
+              "x": -79.44,
+              "y": 147.171,
+              "z": -199.986
+            },
+            "alignRadial": true,
+            "rename": "VD_Stein_System_Lager"
+          },
+          {
+            "position": {
+              "x": -112.671,
+              "y": 122.514,
+              "z": -203.785
+            },
+            "alignRadial": true,
+            "rename": "VD_Stein_System_Turm"
+          }
+        ]
+      }
+    ],
+    "entryLocation": [
+      {
+        "id": "ZEKIVD_LAGER",
+        "position": {
+          "x": -77.153,
+          "y": 140.958,
+          "z": -211.976
+        }
+      },
+      {
+        "id": "ZEKIVD_KERNE",
+        "position": {
+          "x": -42.249,
+          "y": 129.961,
+          "z": -226.222
+        }
+      }
+    ]
+  },
+  "ShipLog": {
+    "xmlFile": "planets/shiplogs/Verdornt.xml",
+    "spriteFolder": "planets/assets/shiplog/entries"
+  },
+  "Volumes": {
+    "revealVolumes": [
+      {
+        "position": {
+          "x": -76.573,
+          "y": 139.899,
+          "z": -210.383
+        },
+        "radius": 32,
+        "reveals": [
+          "ZEKIVD_LAGER_FOUND"
+        ]
+      },
+      {
+        "position": {
+          "x": 44.744,
+          "y": 4.396,
+          "z": -112.338
+        },
+        "radius": 25,
+        "reveals": [
+          "ZEKIVD_LABOR_FOUND"
+        ]
+      }
+    ],
+    "interactionVolumes": [
+      {
+        "position": {
+          "x": -72.259,
+          "y": 154.422,
+          "z": -198.531
+        },
+        "radius": 2.5,
+        "range": 3.5,
+        "prompt": "Durch den Rücksamen heimkehren",
+        "condition": "ZEKIVD_HEIMREISE",
+        "persistent": false,
+        "reusable": true,
+        "rename": "VD_Ruecksamen_Volumen"
+      },
+      {
+        "position": {
+          "x": 194.668,
+          "y": 139.171,
+          "z": -91.516
+        },
+        "radius": 1.0,
+        "range": 2.5,
+        "prompt": "Wortkern berühren",
+        "condition": "ZEKIVD_WORTKERN_ERSTLING_1",
+        "persistent": true,
+        "reusable": false,
+        "rename": "VD_Wortkern_ERSTLING_1"
+      },
+      {
+        "position": {
+          "x": 42.357,
+          "y": -9.819,
+          "z": -109.993
+        },
+        "radius": 1.0,
+        "range": 2.5,
+        "prompt": "Wortkern berühren",
+        "condition": "ZEKIVD_WORTKERN_ERSTLING_2",
+        "persistent": true,
+        "reusable": false,
+        "rename": "VD_Wortkern_ERSTLING_2"
+      },
+      {
+        "position": {
+          "x": 43.702,
+          "y": 7.204,
+          "z": -110.813
+        },
+        "radius": 0.8,
+        "range": 2.5,
+        "prompt": "Verbrambelten Übersetzer berühren",
+        "condition": "ZEKIVD_DORNSPRACHE",
+        "persistent": true,
+        "reusable": false,
+        "rename": "VD_Uebersetzer_Volumen"
+      }
+    ]
+  }
+}

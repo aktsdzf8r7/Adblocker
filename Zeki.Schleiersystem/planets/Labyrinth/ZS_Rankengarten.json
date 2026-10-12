@@ -1,0 +1,109 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+  "name": "ZS_Rankengarten",
+  "starSystem": "Schleiersystem",
+  "canShowOnTitle": false,
+  "Orbit": {
+    "staticPosition": {
+      "x": 0.0,
+      "y": 6000.0,
+      "z": 42000.0
+    }
+  },
+  "Bramble": {
+    "dimension": {
+      "radius": 500,
+      "vinePrefab": "smallNest",
+      "fogTint": {
+        "r": 40,
+        "g": 60,
+        "b": 110,
+        "a": 255
+      },
+      "fogDensity": 4.5,
+      "linksTo": "ZS_Knoten_Blau"
+    }
+  },
+  "ShipLog": {
+    "mapMode": {
+      "remove": true
+    }
+  },
+  "Props": {
+    "details": [
+      {
+        "path": "Comet_Body/Sector_CO/Sector_CometInterior/Props_CometInterior/Prefab_NOM_Box",
+        "position": {
+          "x": 0.0,
+          "y": -12.0,
+          "z": 0.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "Kerrias_Kiste"
+      },
+      {
+        "path": "Comet_Body/Sector_CO/Sector_CometInterior/Props_CometInterior/Prefab_NOM_Container",
+        "position": {
+          "x": 3.0,
+          "y": -12.0,
+          "z": 2.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 40.0,
+          "z": 0.0
+        },
+        "rename": "Kerrias_Behaelter"
+      },
+      {
+        "path": "DB_VesselDimension_Body/Sector_VesselDimension/Sector_VesselBridge/Interactibles_VesselBridge/UNSORTED/Wall Lamps/Prefab_NOM_Lamp_Glow_Vessel_Wall",
+        "position": {
+          "x": -3.0,
+          "y": -10.0,
+          "z": 1.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "Kerrias_Lagerlicht"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge/BlackHoleForgePivot/Props_BlackHoleForge/Prefab_NOM_VaseThin",
+        "position": {
+          "x": 2.0,
+          "y": -11.0,
+          "z": -3.0
+        },
+        "rotation": {
+          "x": 10.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "Kerrias_Vase"
+      }
+    ],
+    "translatorText": [
+      {
+        "type": "recorder",
+        "xmlFile": "planets/text/Lab_Rankengarten.xml",
+        "position": {
+          "x": -1.0,
+          "y": -11.0,
+          "z": -2.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "Recorder_Kerria_Lager"
+      }
+    ]
+  }
+}

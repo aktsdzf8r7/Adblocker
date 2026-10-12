@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Logbuch: der Keimdorn um Dark Bramble und seine Samenkammer -->
+<AstroObjectEntry xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/shiplog_schema.xsd">
+  <ID>KEIMDORN</ID>
+  <Entry>
+    <ID>ZEKISAE_KEIMDORN</ID>
+    <Name>Der Keimdorn</Name>
+    <IsCuriosity/>
+    <RumorFact>
+      <ID>ZEKISAE_KEIM_RUMOR</ID>
+      <SourceID>ZEKISAE_PULSKERN</SourceID>
+      <RumorName>Ein kleiner Samen um Dark Bramble</RumorName>
+      <Text>Tamarisk forschte im Keimdorn, einem kleinen Dornensamen, der um Dark Bramble kreist. Im Herzen jedes Samens liegt ein Kern, der in Sedums Pulskern passt.</Text>
+    </RumorFact>
+    <ExploreFact>
+      <ID>ZEKISAE_KEIMDORN_FOUND</ID>
+      <Text>Um Dark Bramble kreist ein kleiner Dornensamen: ein grün leuchtender Knoten, aus dem riesige Dornen ins All stechen. Auf den Spitzen brennen Nomai-Lampen.</Text>
+    </ExploreFact>
+    <Entry>
+      <ID>ZEKISAE_SAMENKAMMER</ID>
+      <Name>Die Samenkammer</Name>
+      <Curiosity>ZEKISAE_KEIMDORN</Curiosity>
+      <RumorFact>
+        <ID>ZEKISAE_SAMENKAMMER_RUMOR</ID>
+        <SourceID>ZEKISAE_KEIMDORN</SourceID>
+        <RumorName>Eine Station im Samen</RumorName>
+        <Text>Tamarisk forschte in einer Station im Inneren des Keimdorns.</Text>
+      </RumorFact>
+      <ExploreFact>
+        <ID>ZEKISAE_SAMENKAMMER_FOUND</ID>
+        <Text>Im Keimdorn liegt eine kleine, grüne Dimension. Die Nomai haben dort eine Forschungsstation gebaut: eine Plattform mit einem Schrein, einem Warpkern und einem Steg zur Mitte.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKISAE_SAMENKERN_PLAN</ID>
+        <Text>Jeder Samen von Dark Bramble trägt einen Samenkern. In ihm liegt der ganze Plan des Gewächses.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKISAE_BABYSAMEN</ID>
+        <Text>Ein Babysamen am Rand der Samenkammer führt in die Dimension, in der das Vessel liegt.</Text>
+      </ExploreFact>
+    </Entry>
+    <Entry>
+      <ID>ZEKISAE_SAMENKERN</ID>
+      <Name>Der Samenkern</Name>
+      <Curiosity>ZEKISAE_KEIMDORN</Curiosity>
+      <RumorFact>
+        <ID>ZEKISAE_SAMENKERN_RUMOR</ID>
+        <SourceID>ZEKISAE_SAMENKAMMER</SourceID>
+        <RumorName>Das Herz des Samens</RumorName>
+        <Text>Die Forschungsstation untersucht den Samenkern, das Herz eines jeden Dornensamens.</Text>
+      </RumorFact>
+      <ExploreFact>
+        <ID>ZEKISAE_SAMENKERN_FOUND</ID>
+        <Text>In der Mitte der Samenkammer schwebt in einem Nomai-Gerüst der Samenkern: das Herz eines jeden Samens. Er pulsiert einmal alle elf Sekunden.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKISAE_SAMENKERN_GENOMMEN</ID>
+        <Text>Ich habe den Samenkern genommen. Die Samenkammer hat gebebt – und hinter mir ist der Keimdorn erloschen.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKISAE_SAMEN_ERLOESCHEN</ID>
+        <Text>Ohne seinen Kern verliert ein Samen seinen Halt. Der Keimdorn erlischt, sobald man ihn mit dem Kern verlässt.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKISAE_WURZEL_RISS</ID>
+        <Text>Tamarisk: Fällt der Samenkern in den Pulskern und die Einheit schießt, hält die Wirklichkeit um sie nicht mehr. Sie würde einen kranken Samen in die Sonne schießen.</Text>
+      </ExploreFact>
+      <ExploreFact>
+        <ID>ZEKISAE_WURZEL_WRACK</ID>
+        <Text>Tamarisk: Ist die Einheit abgeschaltet, halten nur die Wurzeln ihren Kern zusammen. Wird er instabil, fliegt die Sonde doch – mit einem Samen an ihr.</Text>
+      </ExploreFact>
+    </Entry>
+  </Entry>
+</AstroObjectEntry>

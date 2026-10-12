@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Glutwerk auf Glutdorn: Wärmemessung -->
+<NomaiObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/text_schema.xsd">
+  <TextBlock>
+    <ID>1</ID>
+    <Text>GLUTWERK – WÄRMEMESSUNG. Temperatur der Schollen: hoch. Quelle: der Kern, nicht die Sonne.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>2</ID>
+    <ParentID>1</ParentID>
+    <Text>Weg der Wärme: durch die Dornen nach oben. Die Dornen halten die Schollen – und wärmen sie.</Text>
+  </TextBlock>
+</NomaiObject>

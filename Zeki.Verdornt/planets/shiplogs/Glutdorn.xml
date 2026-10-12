@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Logbuch: Glutdorn -->
+<AstroObjectEntry xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/shiplog_schema.xsd">
+  <ID>ZEKIVD_GLUTDORN</ID>
+  <Entry>
+    <ID>ZEKIVD_GLUTWERK</ID>
+    <Name>Das Glutwerk</Name>
+    <Curiosity>ZEKIVD_VIER</Curiosity>
+    <RumorFact>
+      <ID>ZEKIVD_GLUTWERK_RUMOR</ID>
+      <SourceID>ZEKIVD_TREIBSTATION</SourceID>
+      <RumorName>Ein Wärmewerk auf Glutdorn</RumorName>
+      <Text>Die Karte der Treibstation verzeichnet ein Wärmewerk auf der größten Scholle von Glutdorn, erbaut von Hyssop.</Text>
+    </RumorFact>
+    <ExploreFact>
+      <ID>ZEKIVD_GLUTWERK_FOUND</ID>
+      <Text>Auf der größten Scholle von Glutdorn steht das Glutwerk. Eine Brücke führt über die Lavaspalte zur Scholle mit dem Knoten – wenn ihre Murmel richtig liegt.</Text>
+    </ExploreFact>
+  </Entry>
+</AstroObjectEntry>

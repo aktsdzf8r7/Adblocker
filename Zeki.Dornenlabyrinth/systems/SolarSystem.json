@@ -1,0 +1,64 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/star_system_schema.json",
+  "curiosities": [
+    {
+      "id": "ZEKIDL_TREIBSAMEN",
+      "color": {
+        "r": 140,
+        "g": 230,
+        "b": 130,
+        "a": 255
+      },
+      "highlightColor": {
+        "r": 210,
+        "g": 255,
+        "b": 200,
+        "a": 255
+      }
+    }
+  ],
+  "entryPositions": [
+    {
+      "id": "ZEKIDL_TREIBSAMEN",
+      "position": {
+        "x": 0,
+        "y": -3000
+      }
+    },
+    {
+      "id": "ZEKIDL_VORHOF",
+      "position": {
+        "x": -500,
+        "y": -3350
+      }
+    },
+    {
+      "id": "ZEKIDL_FARBEN",
+      "position": {
+        "x": 0,
+        "y": -3550
+      }
+    },
+    {
+      "id": "ZEKIDL_RAEUME",
+      "position": {
+        "x": -650,
+        "y": -3800
+      }
+    },
+    {
+      "id": "ZEKIDL_GNEIS",
+      "position": {
+        "x": 500,
+        "y": -3800
+      }
+    },
+    {
+      "id": "ZEKIDL_HERZ",
+      "position": {
+        "x": 150,
+        "y": -4150
+      }
+    }
+  ]
+}

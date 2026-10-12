@@ -1,0 +1,159 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+  "name": "Nebelranke",
+  "starSystem": "Verdornt",
+  "Base": {
+    "surfaceSize": 552,
+    "surfaceGravity": 10,
+    "showMinimap": false
+  },
+  "Orbit": {
+    "primaryBody": "Herzdorn",
+    "semiMajorAxis": 9800,
+    "inclination": 3,
+    "trueAnomaly": 260,
+    "eccentricity": 0,
+    "siderealPeriod": 0,
+    "tint": {
+      "r": 120,
+      "g": 230,
+      "b": 140,
+      "a": 255
+    }
+  },
+  "MapMarker": {
+    "enabled": true
+  },
+  "Bramble": {
+    "nodes": [
+      {
+        "position": {
+          "x": 521.042,
+          "y": 259.116,
+          "z": -80.302
+        },
+        "alignRadial": true,
+        "linksTo": "Nebelpforte",
+        "name": "ZEKIVD_Nebelranke_Knoten",
+        "scale": 0.5,
+        "fogTint": {
+          "r": 120,
+          "g": 230,
+          "b": 140,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 120,
+          "g": 230,
+          "b": 140,
+          "a": 255
+        }
+      }
+    ]
+  },
+  "Props": {
+    "translatorText": [
+      {
+        "type": "computer",
+        "xmlFile": "planets/text/Treib_Rue_1.xml",
+        "position": {
+          "x": 35.654,
+          "y": -19.193,
+          "z": -507.886
+        },
+        "rename": "VD_Treib_Rue_1",
+        "alignRadial": true
+      },
+      {
+        "type": "computer",
+        "xmlFile": "planets/text/Treib_Rue_2.xml",
+        "position": {
+          "x": 36.29,
+          "y": -12.501,
+          "z": -508.092
+        },
+        "rename": "VD_Treib_Rue_2",
+        "alignRadial": true
+      },
+      {
+        "type": "recorder",
+        "xmlFile": "planets/text/Treib_Aufzeichnung.xml",
+        "position": {
+          "x": 36.253,
+          "y": -25.885,
+          "z": -507.589
+        },
+        "rename": "VD_Treib_Aufzeichnung",
+        "alignRadial": true
+      }
+    ]
+  },
+  "ShipLog": {
+    "xmlFile": "planets/shiplogs/Nebelranke.xml",
+    "spriteFolder": "planets/assets/shiplog/entries"
+  },
+  "Volumes": {
+    "revealVolumes": [
+      {
+        "position": {
+          "x": 37.669,
+          "y": -19.306,
+          "z": -510.743
+        },
+        "radius": 30,
+        "reveals": [
+          "ZEKIVD_TREIBSTATION_FOUND"
+        ]
+      }
+    ],
+    "interactionVolumes": [
+      {
+        "position": {
+          "x": 276.518,
+          "y": 124.435,
+          "z": 399.053
+        },
+        "radius": 1.0,
+        "range": 2.5,
+        "prompt": "Wortkern berühren",
+        "condition": "ZEKIVD_WORTKERN_NEBEL_1",
+        "persistent": true,
+        "reusable": false,
+        "rename": "VD_Wortkern_NEBEL_1"
+      },
+      {
+        "position": {
+          "x": -433.358,
+          "y": -157.629,
+          "z": -285.865
+        },
+        "radius": 1.0,
+        "range": 2.5,
+        "prompt": "Wortkern berühren",
+        "condition": "ZEKIVD_WORTKERN_NEBEL_2",
+        "persistent": true,
+        "reusable": false,
+        "rename": "VD_Wortkern_NEBEL_2"
+      }
+    ]
+  },
+  "Atmosphere": {
+    "size": 820,
+    "fogTint": {
+      "r": 70,
+      "g": 160,
+      "b": 90,
+      "a": 255
+    },
+    "fogDensity": 0.55,
+    "fogSize": 820,
+    "useAtmosphereShader": true,
+    "atmosphereTint": {
+      "r": 90,
+      "g": 200,
+      "b": 120,
+      "a": 255
+    },
+    "atmosphereSunIntensity": 0.6
+  }
+}

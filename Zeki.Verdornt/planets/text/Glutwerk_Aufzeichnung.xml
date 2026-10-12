@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Aufzeichnung im Glutwerk -->
+<NomaiObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/text_schema.xsd">
+  <TextBlock>
+    <ID>1</ID>
+    <Text>Rue: Wer das hört: Lass die Murmel nicht in der Mitte liegen. Die Brücke mag nur ganz oder gar nicht.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>2</ID>
+    <ParentID>1</ParentID>
+    <Text>Yarrow: Wir haben die Brücke zweimal getestet. Sie hält.</Text>
+  </TextBlock>
+</NomaiObject>

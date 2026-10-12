@@ -1,0 +1,188 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+  "name": "Labyrinth_Stroemung",
+  "starSystem": "SolarSystem",
+  "canShowOnTitle": false,
+  "Orbit": {
+    "staticPosition": {
+      "x": -72000.0,
+      "y": -90000.0,
+      "z": 12000.0
+    }
+  },
+  "ShipLog": {
+    "mapMode": {
+      "remove": true
+    }
+  },
+  "Bramble": {
+    "dimension": {
+      "radius": 350,
+      "fogTint": {
+        "r": 70,
+        "g": 115,
+        "b": 135,
+        "a": 255
+      },
+      "fogDensity": 5.0,
+      "linksTo": "ZEKIDL_Treibsamen",
+      "vinePrefab": "smallNest"
+    },
+    "nodes": [
+      {
+        "position": {
+          "x": -72.278,
+          "y": 128.333,
+          "z": 123.947
+        },
+        "linksTo": "Labyrinth_Vorhof",
+        "name": "ZEKIDL_Stroemung_K0",
+        "scale": 0.5,
+        "fogTint": {
+          "r": 70,
+          "g": 115,
+          "b": 135,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 190,
+          "g": 215,
+          "b": 170,
+          "a": 255
+        },
+        "preventRecursionCrash": true
+      },
+      {
+        "position": {
+          "x": -40.825,
+          "y": 0.0,
+          "z": -188.121
+        },
+        "linksTo": "Labyrinth_Vorhof",
+        "name": "ZEKIDL_Stroemung_K1",
+        "scale": 0.5,
+        "fogTint": {
+          "r": 70,
+          "g": 115,
+          "b": 135,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 190,
+          "g": 215,
+          "b": 170,
+          "a": 255
+        },
+        "preventRecursionCrash": true
+      },
+      {
+        "position": {
+          "x": 117.153,
+          "y": -128.333,
+          "z": 82.837
+        },
+        "linksTo": "Labyrinth_Vorhof",
+        "name": "ZEKIDL_Stroemung_K2",
+        "scale": 0.5,
+        "fogTint": {
+          "r": 70,
+          "g": 115,
+          "b": 135,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 190,
+          "g": 215,
+          "b": 170,
+          "a": 255
+        },
+        "preventRecursionCrash": true
+      },
+      {
+        "position": {
+          "x": -120.214,
+          "y": 73.5,
+          "z": -41.897
+        },
+        "linksTo": "Labyrinth_Vorhof",
+        "name": "ZEKIDL_Stroemung_S0",
+        "isSeed": true,
+        "scale": 1.0,
+        "fogTint": {
+          "r": 70,
+          "g": 115,
+          "b": 135,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 190,
+          "g": 215,
+          "b": 170,
+          "a": 255
+        },
+        "hasFogLight": true,
+        "preventRecursionCrash": true
+      },
+      {
+        "position": {
+          "x": 116.943,
+          "y": -73.5,
+          "z": -50.31
+        },
+        "linksTo": "Labyrinth_Vorhof",
+        "name": "ZEKIDL_Stroemung_S1",
+        "isSeed": true,
+        "scale": 1.0,
+        "fogTint": {
+          "r": 70,
+          "g": 115,
+          "b": 135,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 190,
+          "g": 215,
+          "b": 170,
+          "a": 255
+        },
+        "hasFogLight": true,
+        "preventRecursionCrash": true
+      }
+    ]
+  },
+  "Volumes": {
+    "forces": {
+      "directionalVolumes": [
+        {
+          "radius": 315.0,
+          "force": 6,
+          "normal": {
+            "x": 0.94,
+            "y": 0.34,
+            "z": 0.0
+          },
+          "affectsAlignment": false,
+          "position": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "rename": "ZEKIDL_Stroemung"
+        }
+      ]
+    },
+    "revealVolumes": [
+      {
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "radius": 350,
+        "reveals": [
+          "ZEKIDL_STROEMUNG_FOUND"
+        ]
+      }
+    ]
+  }
+}

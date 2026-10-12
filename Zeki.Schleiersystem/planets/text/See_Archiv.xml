@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Computer im Archiv: Sorrels Chronik -->
+<NomaiObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/text_schema.xsd">
+  <TextBlock>
+    <ID>1</ID>
+    <Text>ARCHIV DES ZWEITEN ECHOS. Eintrag 1: Die Splitter des äußeren Planeten wandern. Wer sie beobachtet, hält sie fest.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>2</ID>
+    <ParentID>1</ParentID>
+    <Text>Eintrag 2: Ohne einen Beobachter von außen verliert das ganze System seinen Ort. Der äußere Planet zerbricht zuerst, denn sein Herz ist ein einziger gewaltiger Splitter.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>3</ID>
+    <ParentID>2</ParentID>
+    <Text>Eintrag 3: Tansys Lichtbündler auf der inneren Welt ist gescheitert. Borago baut auf dem äußeren Planeten Sonden, die den Schleier verlassen sollen.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>4</ID>
+    <ParentID>3</ParentID>
+    <Text>Eintrag 4: Ilex ist über den Warp am unteren Ufer ins Herz gegangen. Seitdem ist das Herz still. Der Bruch hält. Wir warten.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>5</ID>
+    <ParentID>4</ParentID>
+    <Text>Eintrag 5: Wir haben aufgehört, die Umläufe zu zählen. Wer dies liest: Nimm den Warp am Ufer. Ilex wartet dort unten auf dich – auf irgendjemanden.</Text>
+  </TextBlock>
+  <ShipLogConditions>
+    <RevealFact>
+      <FactID>ZEKSCHLEIER_SEE_ARCHIV</FactID>
+      <Condition>1,2</Condition>
+    </RevealFact>
+    <RevealFact>
+      <FactID>ZEKSCHLEIER_KERN_RUMOR</FactID>
+      <Condition>1,2,3</Condition>
+    </RevealFact>
+    <RevealFact>
+      <FactID>ZEKSCHLEIER_BRUCH_RUMOR</FactID>
+      <Condition>1,2,3</Condition>
+    </RevealFact>
+    <RevealFact>
+      <FactID>ZEKSCHLEIER_HERZ_WEG</FactID>
+      <Condition>1,2,3,4,5</Condition>
+    </RevealFact>
+  </ShipLogConditions>
+</NomaiObject>

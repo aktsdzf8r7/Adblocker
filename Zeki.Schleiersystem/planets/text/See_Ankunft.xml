@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Bodenschrift auf dem Platz der Siedlung: die Ankunft -->
+<NomaiObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/text_schema.xsd">
+  <TextBlock>
+    <ID>1</ID>
+    <Text>Ilex: Wir haben es geschafft. Die Kapsel hat die Wasserwelt erreicht. Aber die Laterne ist verloren – der Dornenplanet hat sie verschlungen.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>2</ID>
+    <ParentID>1</ParentID>
+    <Text>Sorrel: Hier gibt es Wasser und Bäume. Wir können atmen. Wir können bleiben, bis wir verstehen, was geschehen ist.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>3</ID>
+    <ParentID>2</ParentID>
+    <Text>Borago (über Funk vom Dorn): Bleiben? Das Echo, dem wir gefolgt sind, war falsch. Das Auge ist nicht hier. Es war nie hier.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>4</ID>
+    <ParentID>3</ParentID>
+    <Text>Ilex: Vielleicht nicht. Aber irgendetwas hat uns hierher gerufen. Und ich will wissen, was.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>5</ID>
+    <ParentID>2</ParentID>
+    <Text>Yarrow: Darf ich zu der kleinen Insel schwimmen? Myrte war schon da!</Text>
+  </TextBlock>
+  <ShipLogConditions>
+    <RevealFact>
+      <FactID>ZEKSCHLEIER_LATERNE</FactID>
+      <Condition>1</Condition>
+    </RevealFact>
+    <RevealFact>
+      <FactID>ZEKSCHLEIER_ECHO_FALSCH</FactID>
+      <Condition>1,2,3</Condition>
+    </RevealFact>
+    <RevealFact>
+      <FactID>ZEKSCHLEIER_KINDER_RUMOR</FactID>
+      <Condition>1,2,5</Condition>
+    </RevealFact>
+  </ShipLogConditions>
+</NomaiObject>

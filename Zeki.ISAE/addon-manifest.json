@@ -1,0 +1,48 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/addon_manifest_schema.json",
+  "credits": [
+    "Zeki"
+  ],
+  "popupMessage": "Die Aussendungseinheit: Zwischen der Sonne und Timber Hearth zielt eine riesige Nomai-Kanone auf die Sonne. Wenn du nichts tust, endet diese Schleife nicht mit einer Supernova.",
+  "gameOver": [
+    {
+      "text": "Das Universum endet, aber du endest vor ihm...",
+      "condition": "ZEKISAE_UNIVERSUM_ENDET",
+      "colour": {
+        "r": 255,
+        "g": 120,
+        "b": 70,
+        "a": 255
+      },
+      "creditsType": "custom",
+      "audio": "FinalCredits",
+      "length": 110
+    },
+    {
+      "text": "Das Universum hätte noch lange gelebt, wenn du nicht wärst...",
+      "condition": "ZEKISAE_ENDE_RISS",
+      "colour": {
+        "r": 190,
+        "g": 255,
+        "b": 200,
+        "a": 255
+      },
+      "creditsType": "custom",
+      "audio": "FinalCredits",
+      "length": 110
+    },
+    {
+      "text": "Das Universum endet, aber du pflanzt invasive Pflanzen in Sternen",
+      "condition": "ZEKISAE_ENDE_WURZEL",
+      "colour": {
+        "r": 130,
+        "g": 255,
+        "b": 150,
+        "a": 255
+      },
+      "creditsType": "custom",
+      "audio": "FinalCredits",
+      "length": 110
+    }
+  ]
+}

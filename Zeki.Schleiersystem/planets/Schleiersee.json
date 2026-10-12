@@ -1,0 +1,1177 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+  "name": "Schleiersee",
+  "starSystem": "Schleiersystem",
+  "Base": {
+    "surfaceSize": 700,
+    "surfaceGravity": 7,
+    "gravityFallOff": "linear"
+  },
+  "Orbit": {
+    "primaryBody": "Schleierstern",
+    "semiMajorAxis": 7200,
+    "eccentricity": 0.12,
+    "inclination": -4,
+    "longitudeOfAscendingNode": 140,
+    "trueAnomaly": 190,
+    "siderealPeriod": 7,
+    "axialTilt": 14,
+    "tint": {
+      "r": 90,
+      "g": 200,
+      "b": 220,
+      "a": 255
+    }
+  },
+  "Atmosphere": {
+    "size": 870,
+    "atmosphereTint": {
+      "r": 90,
+      "g": 170,
+      "b": 210,
+      "a": 255
+    },
+    "atmosphereSunIntensity": 1.0,
+    "useAtmosphereShader": true,
+    "fogTint": {
+      "r": 150,
+      "g": 190,
+      "b": 210,
+      "a": 255
+    },
+    "fogSize": 820,
+    "fogDensity": 0.45,
+    "hasOxygen": true,
+    "hasTrees": true
+  },
+  "Water": {
+    "size": 690,
+    "tint": {
+      "r": 35,
+      "g": 105,
+      "b": 150,
+      "a": 210
+    }
+  },
+  "HeightMap": {
+    "heightMap": "planets/assets/terrain/see_height.png",
+    "textureMap": "planets/assets/terrain/see_color.png",
+    "minHeight": 640.0,
+    "maxHeight": 740.0,
+    "resolution": 256,
+    "smoothness": 0.18,
+    "metallic": 0.0,
+    "emissionMap": "planets/assets/terrain/see_emission.png",
+    "emissionColor": {
+      "r": 80,
+      "g": 220,
+      "b": 230,
+      "a": 255
+    }
+  },
+  "MapMarker": {
+    "enabled": true
+  },
+  "ShipLog": {
+    "xmlFile": "planets/shiplogs/Schleiersee.xml",
+    "spriteFolder": "planets/assets/shiplog/entries",
+    "mapMode": {
+      "revealedSprite": "planets/assets/shiplog/map/see.png",
+      "outlineSprite": "planets/assets/shiplog/map/see_outline.png"
+    }
+  },
+  "Props": {
+    "details": [
+      {
+        "path": "CaveTwin_Body/Sector_CaveTwin/Sector_SouthHemisphere/Sector_SouthUnderground/Sector_City/Interactables_City/CityDoors/Prefab_NOM_Gateway",
+        "position": {
+          "x": 606.12,
+          "y": 52.682,
+          "z": -378.746
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 302.0,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Tor_der_Siedlung"
+      },
+      {
+        "path": "QuantumMoon_Body/Sector_QuantumMoon/QuantumShrine/Structure_NOM_QuantumShrine",
+        "position": {
+          "x": 592.407,
+          "y": 159.101,
+          "z": -370.177
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 122.0,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "scale": 1.2,
+        "rename": "Sorrels_Archivhaus"
+      },
+      {
+        "path": "QuantumMoon_Body/Sector_QuantumMoon/QuantumShrine/Structure_NOM_QuantumShrine",
+        "position": {
+          "x": 570.796,
+          "y": 137.382,
+          "z": -410.742
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 64.6,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Wohnhaus_West"
+      },
+      {
+        "path": "QuantumMoon_Body/Sector_QuantumMoon/QuantumShrine/Structure_NOM_QuantumShrine",
+        "position": {
+          "x": 619.393,
+          "y": 137.382,
+          "z": -332.97
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 179.4,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Wohnhaus_Ost"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_GravityCannon/Lighting_GravityCannon/Prefab_NOM_Doorway",
+        "position": {
+          "x": 573.214,
+          "y": 92.918,
+          "z": -420.031
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 15.6,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "scale": 1.2,
+        "rename": "Siedlungsbogen_1"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_GravityCannon/Lighting_GravityCannon/Prefab_NOM_Doorway",
+        "position": {
+          "x": 590.099,
+          "y": 64.03,
+          "z": -401.643
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 334.0,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "scale": 1.2,
+        "rename": "Siedlungsbogen_2"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_GravityCannon/Lighting_GravityCannon/Prefab_NOM_Doorway",
+        "position": {
+          "x": 610.904,
+          "y": 57.482,
+          "z": -370.306
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 291.3,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "scale": 1.2,
+        "rename": "Siedlungsbogen_3"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_GravityCannon/Lighting_GravityCannon/Prefab_NOM_Doorway",
+        "position": {
+          "x": 625.893,
+          "y": 76.337,
+          "z": -340.683
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 249.0,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "scale": 1.2,
+        "rename": "Siedlungsbogen_4"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_GravityCannon/Lighting_GravityCannon/Prefab_NOM_Doorway",
+        "position": {
+          "x": 628.053,
+          "y": 111.773,
+          "z": -326.634
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 208.2,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "scale": 1.2,
+        "rename": "Siedlungsbogen_5"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge/BlackHoleForgePivot/Props_BlackHoleForge/Prefab_NOM_Shelf (2)/Strucutre_NOM_Shelf",
+        "position": {
+          "x": 591.492,
+          "y": 121.975,
+          "z": -386.108
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 68.5,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Archivregal_1"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge/BlackHoleForgePivot/Props_BlackHoleForge/Prefab_NOM_Shelf (2)/Strucutre_NOM_Shelf",
+        "position": {
+          "x": 593.081,
+          "y": 125.925,
+          "z": -382.386
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 87.1,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Archivregal_2"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge/BlackHoleForgePivot/Props_BlackHoleForge/Prefab_NOM_Shelf (2)/Strucutre_NOM_Shelf",
+        "position": {
+          "x": 594.785,
+          "y": 128.883,
+          "z": -378.735
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 103.0,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Archivregal_3"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge/BlackHoleForgePivot/Props_BlackHoleForge/Prefab_NOM_Shelf (2)/Strucutre_NOM_Shelf",
+        "position": {
+          "x": 601.142,
+          "y": 128.883,
+          "z": -368.563
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 141.0,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Archivregal_4"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge/BlackHoleForgePivot/Props_BlackHoleForge/Prefab_NOM_Shelf (2)/Strucutre_NOM_Shelf",
+        "position": {
+          "x": 603.675,
+          "y": 125.925,
+          "z": -365.431
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 156.9,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Archivregal_5"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge/BlackHoleForgePivot/Props_BlackHoleForge/Prefab_NOM_Shelf (2)/Strucutre_NOM_Shelf",
+        "position": {
+          "x": 606.325,
+          "y": 121.975,
+          "z": -362.371
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 175.5,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Archivregal_6"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_CrashFragment/EscapePod_Socket",
+        "position": {
+          "x": 576.061,
+          "y": 74.232,
+          "z": -418.623
+        },
+        "rotation": {
+          "x": 14.0,
+          "y": 88.2,
+          "z": 6.0
+        },
+        "alignRadial": true,
+        "rename": "Kapsel_2",
+        "removeChildren": [
+          "Interactibles_EscapePod/Prefab_NOM_Vessel_Computer",
+          "Proxy_EscapePod"
+        ]
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge/BlackHoleForgePivot/Props_BlackHoleForge/Prefab_NOM_NomaiTree_Var_1",
+        "position": {
+          "x": 580.061,
+          "y": 115.937,
+          "z": -404.856
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 40.8,
+          "z": 0.0
+        },
+        "alignRadial": true
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge/BlackHoleForgePivot/Props_BlackHoleForge/Prefab_NOM_NomaiTree_Var_2",
+        "position": {
+          "x": 579.721,
+          "y": 110.004,
+          "z": -406.993
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 31.6,
+          "z": 0.0
+        },
+        "alignRadial": true
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge/BlackHoleForgePivot/Props_BlackHoleForge/Prefab_NOM_NomaiTree_Var_1",
+        "position": {
+          "x": 618.436,
+          "y": 113.965,
+          "z": -344.048
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 206.4,
+          "z": 0.0
+        },
+        "alignRadial": true
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge/BlackHoleForgePivot/Props_BlackHoleForge/Prefab_NOM_NomaiTree_Var_2",
+        "position": {
+          "x": 620.446,
+          "y": 106.056,
+          "z": -342.957
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 218.4,
+          "z": 0.0
+        },
+        "alignRadial": true
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge/BlackHoleForgePivot/Props_BlackHoleForge/Prefab_NOM_SimpleChair_NoSkeleton (1)",
+        "position": {
+          "x": 593.961,
+          "y": 72.489,
+          "z": -394.684
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 330.0,
+          "z": 0.0
+        },
+        "alignRadial": true
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge/BlackHoleForgePivot/Props_BlackHoleForge/Prefab_NOM_SimpleChair_NoSkeleton (1)",
+        "position": {
+          "x": 596.33,
+          "y": 70.516,
+          "z": -391.457
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 324.0,
+          "z": 0.0
+        },
+        "alignRadial": true
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge/BlackHoleForgePivot/Props_BlackHoleForge/Props_NOM_Table",
+        "position": {
+          "x": 614.586,
+          "y": 78.436,
+          "z": -360.489
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 270.1,
+          "z": 0.0
+        },
+        "alignRadial": true
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_GravityCannon/Props_GravityCannon/OtherComponentsGroup/Prefab_NOM_SmallBowl",
+        "position": {
+          "x": 616.22,
+          "y": 82.387,
+          "z": -356.799
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 261.7,
+          "z": 0.0
+        },
+        "alignRadial": true
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge/BlackHoleForgePivot/Props_BlackHoleForge/Prefab_NOM_VaseThick",
+        "position": {
+          "x": 612.914,
+          "y": 74.482,
+          "z": -364.156
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 278.0,
+          "z": 0.0
+        },
+        "alignRadial": true
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge/BlackHoleForgePivot/Props_BlackHoleForge/Prefab_NOM_VaseThin",
+        "position": {
+          "x": 580.811,
+          "y": 133.682,
+          "z": -398.256
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 70.3,
+          "z": 0.0
+        },
+        "alignRadial": true
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge/BlackHoleForgePivot/Props_BlackHoleForge/Prefab_NOM_VaseThick",
+        "position": {
+          "x": 612.561,
+          "y": 133.682,
+          "z": -347.445
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 173.7,
+          "z": 0.0
+        },
+        "alignRadial": true
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge/BlackHoleForgePivot/Props_BlackHoleForge/Prefab_NOM_Treepot",
+        "position": {
+          "x": 603.46,
+          "y": 86.399,
+          "z": -377.084
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 302.0,
+          "z": 0.0
+        },
+        "alignRadial": true
+      },
+      {
+        "path": "Comet_Body/Sector_CO/Sector_CometInterior/Props_CometInterior/Prefab_NOM_Box",
+        "position": {
+          "x": 577.984,
+          "y": 96.128,
+          "z": -412.934
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 15.0,
+          "z": 0.0
+        },
+        "alignRadial": true
+      },
+      {
+        "path": "Comet_Body/Sector_CO/Sector_CometInterior/Props_CometInterior/Prefab_NOM_Container",
+        "position": {
+          "x": 625.905,
+          "y": 92.157,
+          "z": -337.003
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 232.3,
+          "z": 0.0
+        },
+        "alignRadial": true
+      },
+      {
+        "path": "CaveTwin_Body/Sector_CaveTwin/Sector_SouthHemisphere/Sector_SouthSurface/Sector_SouthPole/Lighting_SouthPole/Prefab_NOM_Torch",
+        "position": {
+          "x": 612.781,
+          "y": 112.071,
+          "z": -354.626
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Archivfackel_1",
+        "activationCondition": "ZEKSCHLEIER_SCHLEIER_GEHOBEN"
+      },
+      {
+        "path": "CaveTwin_Body/Sector_CaveTwin/Sector_SouthHemisphere/Sector_SouthSurface/Sector_SouthPole/Lighting_SouthPole/Prefab_NOM_Torch",
+        "position": {
+          "x": 603.671,
+          "y": 132.587,
+          "z": -363.074
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Archivfackel_2",
+        "activationCondition": "ZEKSCHLEIER_SCHLEIER_GEHOBEN"
+      },
+      {
+        "path": "CaveTwin_Body/Sector_CaveTwin/Sector_SouthHemisphere/Sector_SouthSurface/Sector_SouthPole/Lighting_SouthPole/Prefab_NOM_Torch",
+        "position": {
+          "x": 590.961,
+          "y": 132.587,
+          "z": -383.414
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Archivfackel_3",
+        "activationCondition": "ZEKSCHLEIER_SCHLEIER_GEHOBEN"
+      },
+      {
+        "path": "CaveTwin_Body/Sector_CaveTwin/Sector_SouthHemisphere/Sector_SouthSurface/Sector_SouthPole/Lighting_SouthPole/Prefab_NOM_Torch",
+        "position": {
+          "x": 587.361,
+          "y": 112.071,
+          "z": -395.307
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Archivfackel_4",
+        "activationCondition": "ZEKSCHLEIER_SCHLEIER_GEHOBEN"
+      },
+      {
+        "path": "CaveTwin_Body/Sector_CaveTwin/Sector_SouthHemisphere/Sector_SouthSurface/Sector_SouthPole/Lighting_SouthPole/Prefab_NOM_Torch",
+        "position": {
+          "x": 596.472,
+          "y": 91.556,
+          "z": -386.858
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Archivfackel_5",
+        "activationCondition": "ZEKSCHLEIER_SCHLEIER_GEHOBEN"
+      },
+      {
+        "path": "CaveTwin_Body/Sector_CaveTwin/Sector_SouthHemisphere/Sector_SouthSurface/Sector_SouthPole/Lighting_SouthPole/Prefab_NOM_Torch",
+        "position": {
+          "x": 609.182,
+          "y": 91.556,
+          "z": -366.518
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Archivfackel_6",
+        "activationCondition": "ZEKSCHLEIER_SCHLEIER_GEHOBEN"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
+        "position": {
+          "x": 644.944,
+          "y": 115.364,
+          "z": -225.47
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Uferlampe_1"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
+        "position": {
+          "x": 640.14,
+          "y": 115.364,
+          "z": -238.768
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Uferlampe_2"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
+        "position": {
+          "x": 642.22,
+          "y": 101.398,
+          "z": -239.52
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Uferlampe_3"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_EscapePodCrashSite/Sector_NorthFragment/Interactables_NorthFragment/VisibleFrom_EscapePodCrashSite/Prefab_NOM_Lamp_EscapePodFlare",
+        "position": {
+          "x": 647.024,
+          "y": 101.398,
+          "z": -226.221
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Uferlampe_4"
+      },
+      {
+        "path": "CaveTwin_Body/Sector_CaveTwin/Sector_SouthHemisphere/Sector_SouthUnderground/Sector_City/Lighting_City/Lights_EyeDistrict/Props_NOM_EyeSymbolCopper",
+        "position": {
+          "x": 638.112,
+          "y": 108.375,
+          "z": -247.527
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 21.0,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "scale": 1.5,
+        "rename": "Augensymbol_Ufer"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_GravityCannon/Props_GravityCannon/OtherComponentsGroup/Prefab_NOM_Toys",
+        "position": {
+          "x": 555.544,
+          "y": 364.153,
+          "z": 216.906
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Spielzeug_1"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_GravityCannon/Props_GravityCannon/OtherComponentsGroup/Prefab_NOM_Toys",
+        "position": {
+          "x": 556.016,
+          "y": 353.86,
+          "z": 232.194
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 140.0,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Spielzeug_2"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_GravityCannon/Props_GravityCannon/OtherComponentsGroup/Prefab_NOM_SmallBowl",
+        "position": {
+          "x": 561.049,
+          "y": 355.571,
+          "z": 216.974
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Schale"
+      },
+      {
+        "path": "BrittleHollow_Body/Sector_BH/Sector_NorthHemisphere/Sector_NorthPole/Sector_HangingCity/Sector_HangingCity_BlackHoleForge/BlackHoleForgePivot/Props_BlackHoleForge/Prefab_NOM_NomaiTree_Var_2",
+        "position": {
+          "x": 555.104,
+          "y": 351.227,
+          "z": 238.293
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Inselbaum"
+      },
+      {
+        "position": {
+          "x": 600.971,
+          "y": 108.19,
+          "z": -375.528
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Epilog",
+        "activationCondition": "ZEKSCHLEIER_SCHLEIER_GEHOBEN"
+      }
+    ],
+    "translatorText": [
+      {
+        "type": "computer",
+        "xmlFile": "planets/text/See_Archiv.xml",
+        "position": {
+          "x": 598.774,
+          "y": 123.977,
+          "z": -374.155
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 122.0,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Computer_Archiv"
+      },
+      {
+        "type": "whiteboard",
+        "xmlFile": "planets/text/See_Geschwister.xml",
+        "position": {
+          "x": 596.608,
+          "y": 137.731,
+          "z": -372.802
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 122.0,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Whiteboard_Geschwister",
+        "seed": 203
+      },
+      {
+        "type": "wall",
+        "xmlFile": "planets/text/See_Ankunft.xml",
+        "position": {
+          "x": 587.86,
+          "y": 100.221,
+          "z": -397.974
+        },
+        "normal": {
+          "x": 0.82,
+          "y": 0.1398,
+          "z": -0.5551
+        },
+        "rename": "Bodenschrift_Ankunft",
+        "seed": 202,
+        "arcInfo": [
+          {
+            "type": "adult"
+          },
+          {
+            "type": "adult"
+          },
+          {
+            "type": "adult"
+          },
+          {
+            "type": "adult"
+          },
+          {
+            "type": "child"
+          }
+        ]
+      },
+      {
+        "type": "whiteboard",
+        "xmlFile": "planets/text/See_Kapsel.xml",
+        "position": {
+          "x": 584.106,
+          "y": 82.336,
+          "z": -407.35
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 354.7,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Whiteboard_Kapsel",
+        "seed": 204
+      },
+      {
+        "type": "wall",
+        "xmlFile": "planets/text/See_Augenlid.xml",
+        "position": {
+          "x": 642.424,
+          "y": 125.165,
+          "z": -227.824
+        },
+        "normal": {
+          "x": 0.927,
+          "y": 0.1806,
+          "z": -0.3287
+        },
+        "rename": "Bodenschrift_Augenlid",
+        "seed": 303
+      },
+      {
+        "type": "wall",
+        "xmlFile": "planets/text/See_Kinder.xml",
+        "position": {
+          "x": 555.455,
+          "y": 359.962,
+          "z": 224.418
+        },
+        "normal": {
+          "x": 0.7948,
+          "y": 0.515,
+          "z": 0.3211
+        },
+        "rename": "Bodenschrift_Kinder",
+        "seed": 404,
+        "arcInfo": [
+          {
+            "type": "child"
+          },
+          {
+            "type": "child"
+          },
+          {
+            "type": "child"
+          },
+          {
+            "type": "child"
+          },
+          {
+            "type": "child"
+          }
+        ]
+      },
+      {
+        "type": "cairnTH",
+        "xmlFile": "planets/text/See_Steinturm.xml",
+        "position": {
+          "x": 549.089,
+          "y": 365.02,
+          "z": 231.552
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "rename": "Yarrows_Steinturm"
+      },
+      {
+        "type": "wall",
+        "xmlFile": "planets/text/See_Epilog.xml",
+        "position": {
+          "x": 0.0,
+          "y": 0.12,
+          "z": 0.0
+        },
+        "normal": {
+          "x": 0.8383,
+          "y": 0.1509,
+          "z": -0.5238
+        },
+        "rename": "Bodenschrift_Epilog",
+        "seed": 505,
+        "parentPath": "Sector/Epilog",
+        "isRelativeToParent": true,
+        "arcInfo": [
+          {
+            "type": "adult"
+          },
+          {
+            "type": "adult"
+          },
+          {
+            "type": "adult"
+          },
+          {
+            "type": "child"
+          }
+        ]
+      }
+    ],
+    "scatter": [
+      {
+        "path": "QuantumMoon_Body/Sector_QuantumMoon/State_GD/Interactables_GDState/GDState_Quantum_Objects/Quantum_TreeClump_1/Rock_Tree",
+        "count": 40,
+        "seed": 2201,
+        "minHeight": 693,
+        "maxHeight": 713,
+        "scale": 1.0,
+        "preventOverlap": true
+      },
+      {
+        "path": "QuantumMoon_Body/Sector_QuantumMoon/State_TH/Interactables_THState/Crater_3/Crater_3_Sapling/QSapling/Tree_TH_Sapling",
+        "count": 30,
+        "seed": 2202,
+        "minHeight": 694,
+        "maxHeight": 712,
+        "scale": 1.3,
+        "preventOverlap": true
+      },
+      {
+        "path": "QuantumMoon_Body/Sector_QuantumMoon/State_TH/Interactables_THState/Crater_Surface/Surface_AlpineClump_S/Surface_AlpineClump_S/BatchedGroup",
+        "count": 10,
+        "seed": 2203,
+        "minHeight": 700,
+        "maxHeight": 714,
+        "scale": 1.0,
+        "preventOverlap": true
+      },
+      {
+        "path": "StatueIsland_Body/Sector_StatueIsland/DetailPatches_StatueIsland/Foliage_StatueIsland_TopBits/Clutter_NOM_Pottery (3)",
+        "count": 14,
+        "seed": 2204,
+        "minHeight": 691,
+        "maxHeight": 714,
+        "scale": 1.0,
+        "preventOverlap": true
+      }
+    ],
+    "remotes": [
+      {
+        "id": "ZEKSCHLEIER_REMOTE_SEE",
+        "decalPath": "planets/assets/decals/see.png",
+        "platform": {
+          "position": {
+            "x": 616.323,
+            "y": 100.199,
+            "z": -352.134
+          },
+          "rotation": {
+            "x": 0.0,
+            "y": 233.3,
+            "z": 0.0
+          },
+          "alignRadial": true,
+          "rename": "Projektionsbecken_Archiv"
+        }
+      },
+      {
+        "id": "ZEKSCHLEIER_REMOTE_KERN",
+        "decalPath": "planets/assets/decals/kern.png",
+        "stones": [
+          {
+            "position": {
+              "x": 612.626,
+              "y": 94.321,
+              "z": -360.417
+            },
+            "alignRadial": true,
+            "rename": "Projektionsstein_Kern"
+          }
+        ]
+      },
+      {
+        "id": "ZEKSCHLEIER_REMOTE_HERZ",
+        "decalPath": "planets/assets/decals/herz.png",
+        "stones": [
+          {
+            "position": {
+              "x": 613.966,
+              "y": 91.341,
+              "z": -358.902
+            },
+            "alignRadial": true,
+            "rename": "Projektionsstein_Herz"
+          }
+        ]
+      }
+    ],
+    "warpReceivers": [
+      {
+        "frequency": "ZEKSCHLEIER_KERN_SEE",
+        "position": {
+          "x": 601.039,
+          "y": 66.567,
+          "z": -384.984
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 312.4,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "detailed": true,
+        "rename": "Warpempfaenger_Observatorium",
+        "computer": {
+          "position": {
+            "x": 607.567,
+            "y": 64.587,
+            "z": -374.944
+          },
+          "rotation": {
+            "x": 0.0,
+            "y": 297.0,
+            "z": 0.0
+          },
+          "alignRadial": true
+        }
+      },
+      {
+        "frequency": "ZEKSCHLEIER_DORN_SEE",
+        "position": {
+          "x": 616.952,
+          "y": 62.576,
+          "z": -359.648
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 276.7,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "detailed": true,
+        "rename": "Warpempfaenger_Dorn"
+      }
+    ],
+    "warpTransmitters": [
+      {
+        "frequency": "ZEKSCHLEIER_SEE_HERZ",
+        "position": {
+          "x": 643.696,
+          "y": 108.4,
+          "z": -232.536
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 289.9,
+          "z": 0.0
+        },
+        "alignRadial": true,
+        "alignmentWindow": 360,
+        "rename": "Warp_zum_Herz"
+      }
+    ],
+    "entryLocation": [
+      {
+        "id": "ZEKSCHLEIER_SEE",
+        "position": {
+          "x": 603.8,
+          "y": 112.768,
+          "z": -377.296
+        }
+      },
+      {
+        "id": "ZEKSCHLEIER_SEE_INSEL",
+        "position": {
+          "x": 557.775,
+          "y": 361.466,
+          "z": 225.356
+        }
+      },
+      {
+        "id": "ZEKSCHLEIER_KAPSEL2",
+        "position": {
+          "x": 576.786,
+          "y": 74.325,
+          "z": -419.15
+        }
+      },
+      {
+        "id": "ZEKSCHLEIER_KOORDINATEN",
+        "position": {
+          "x": 602.647,
+          "y": 108.491,
+          "z": -376.576
+        }
+      }
+    ]
+  },
+  "Volumes": {
+    "revealVolumes": [
+      {
+        "position": {
+          "x": 605.475,
+          "y": 113.081,
+          "z": -378.343
+        },
+        "radius": 75,
+        "revealOn": "enter",
+        "reveals": [
+          "ZEKSCHLEIER_SEE_FOUND"
+        ]
+      },
+      {
+        "position": {
+          "x": 576.786,
+          "y": 74.325,
+          "z": -419.15
+        },
+        "radius": 10,
+        "revealOn": "enter",
+        "reveals": [
+          "ZEKSCHLEIER_KAPSEL2_FOUND"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+  "name": "CAVE_TWIN",
+  "starSystem": "SolarSystem",
+  "Props": {
+    "translatorText": [
+      {
+        "type": "recorder",
+        "xmlFile": "planets/text/ET_Erica.xml",
+        "position": {
+          "x": 28.494,
+          "y": 75.851,
+          "z": -103.293
+        },
+        "rotation": {
+          "x": 35.5,
+          "y": 223.9,
+          "z": 50.5
+        },
+        "rename": "Aussendungseinheit_ET_Erica"
+      }
+    ]
+  }
+}

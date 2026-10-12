@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Computer im Kontrollmodul der Aussendungseinheit -->
+<NomaiObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/text_schema.xsd">
+  <TextBlock>
+    <ID>1</ID>
+    <Text>INTERSTELLARE SONDEN AUSSENDUNGSEINHEIT. Zustand: erwacht. Ausrichtung: auf den Stern.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>2</ID>
+    <ParentID>1</ParentID>
+    <Text>Weckbedingung erfüllt: Das Aschezwilling-Projekt hat zum ersten Mal Erinnerungen in die Vergangenheit geschickt. Schlafdauer: 281 042 Jahre.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>3</ID>
+    <ParentID>2</ParentID>
+    <Text>Auslöser des Schusses: Tod des Sterns. Sobald er zusammenbricht, trinken Linse und Fokuskanonen alle verbleibende Energie.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>4</ID>
+    <ParentID>3</ParentID>
+    <Text>Fokuskanonen Alpha, Beta und Gamma: ausgerichtet. Phasenkoppler: verbunden. Sonde in der Wiege an der Mündung: bereit. Ziel im Navigationsmodul: berechnet.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>5</ID>
+    <ParentID>4</ParentID>
+    <Text>Erwartete Folgen für dieses System: keine. Begründung: Der Stern stirbt ohnehin. Bewertet von: Sedum.</Text>
+  </TextBlock>
+  <ShipLogConditions>
+    <RevealFact>
+      <FactID>ZEKISAE_ZWECK</FactID>
+      <Condition>1,3</Condition>
+    </RevealFact>
+    <RevealFact>
+      <FactID>ZEKISAE_ERWACHT</FactID>
+      <Condition>2</Condition>
+    </RevealFact>
+    <RevealFact>
+      <FactID>ZEKISAE_FOKUS_RUMOR</FactID>
+      <Condition>4</Condition>
+    </RevealFact>
+    <RevealFact>
+      <FactID>ZEKISAE_START_RUMOR</FactID>
+      <Condition>4</Condition>
+    </RevealFact>
+    <RevealFact>
+      <FactID>ZEKISAE_NAVI_RUMOR</FactID>
+      <Condition>4</Condition>
+    </RevealFact>
+  </ShipLogConditions>
+</NomaiObject>

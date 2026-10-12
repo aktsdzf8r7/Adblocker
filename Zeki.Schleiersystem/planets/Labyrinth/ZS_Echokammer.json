@@ -1,0 +1,67 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+  "name": "ZS_Echokammer",
+  "starSystem": "Schleiersystem",
+  "canShowOnTitle": false,
+  "Orbit": {
+    "staticPosition": {
+      "x": 0.0,
+      "y": 6000.0,
+      "z": -42000.0
+    }
+  },
+  "Bramble": {
+    "dimension": {
+      "radius": 500,
+      "vinePrefab": "cluster",
+      "fogTint": {
+        "r": 90,
+        "g": 20,
+        "b": 20,
+        "a": 255
+      },
+      "fogDensity": 4.5,
+      "linksTo": "ZS_Knoten_Rot"
+    }
+  },
+  "ShipLog": {
+    "mapMode": {
+      "remove": true
+    }
+  },
+  "Props": {
+    "details": [
+      {
+        "path": "DB_HubDimension_Body/Sector_HubDimension/Interactables_HubDimension/Anglerfish_Body",
+        "position": {
+          "x": -150.0,
+          "y": 40.0,
+          "z": 120.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 140.0,
+          "z": 0.0
+        },
+        "rename": "Blindes_Wesen"
+      }
+    ],
+    "translatorText": [
+      {
+        "type": "recorder",
+        "xmlFile": "planets/text/Lab_Echokammer.xml",
+        "position": {
+          "x": 0.0,
+          "y": -6.0,
+          "z": 0.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rename": "Recorder_Warnung"
+      }
+    ]
+  }
+}

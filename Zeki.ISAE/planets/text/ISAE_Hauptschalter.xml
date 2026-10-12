@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Wegmarke am Hauptschalter (erscheint, wenn alle Koppler getrennt sind) -->
+<NomaiObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/text_schema.xsd">
+  <TextBlock>
+    <ID>1</ID>
+    <Text>Linum: Die Koppler sind getrennt. Nur dieses Interface hält die Einheit noch wach. Schalte sie ab.</Text>
+  </TextBlock>
+</NomaiObject>

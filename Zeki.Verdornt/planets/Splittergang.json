@@ -1,0 +1,66 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+  "name": "Splittergang",
+  "starSystem": "Verdornt",
+  "canShowOnTitle": false,
+  "Orbit": {
+    "staticPosition": {
+      "x": -60000.0,
+      "y": 33000.0,
+      "z": -24000.0
+    }
+  },
+  "ShipLog": {
+    "mapMode": {
+      "remove": true
+    }
+  },
+  "Bramble": {
+    "dimension": {
+      "radius": 320,
+      "fogTint": {
+        "r": 170,
+        "g": 220,
+        "b": 235,
+        "a": 255
+      },
+      "fogDensity": 2.4,
+      "linksTo": "ZEKIVD_Zu_Splittergang",
+      "vinePrefab": "cluster"
+    }
+  },
+  "Volumes": {
+    "revealVolumes": [
+      {
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "radius": 320,
+        "reveals": [
+          "ZEKIVD_SPLITTER_FOUND"
+        ]
+      }
+    ]
+  },
+  "Props": {
+    "translatorText": [
+      {
+        "type": "computer",
+        "xmlFile": "planets/text/Splitter_Rue.xml",
+        "position": {
+          "x": 30.0,
+          "y": 20.0,
+          "z": -60.0
+        },
+        "rename": "VD_Splitter_Rue",
+        "rotation": {
+          "x": 0.0,
+          "y": 40.0,
+          "z": 0.0
+        }
+      }
+    ]
+  }
+}

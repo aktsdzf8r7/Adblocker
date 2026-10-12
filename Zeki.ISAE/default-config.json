@@ -1,0 +1,62 @@
+{
+  "$schema": "https://raw.githubusercontent.com/ow-mods/owml/master/schemas/config_schema.json",
+  "enabled": true,
+  "settings": {
+    "onlyAfterDiscovery": {
+      "type": "toggle",
+      "value": false,
+      "title": "Erst nach der Entdeckung scharf",
+      "tooltip": "Die Sonne wird erst entzogen, wenn du die Aussendungseinheit einmal besucht hast."
+    },
+    "drainSeconds": {
+      "type": "slider",
+      "value": 60,
+      "min": 20,
+      "max": 180,
+      "title": "Dauer des Energieentzugs (Sekunden)",
+      "tooltip": "Wie lange die Sonne am Ende der Schleife schrumpft, bevor sie erlischt."
+    },
+    "cinematic": {
+      "type": "toggle",
+      "value": true,
+      "title": "Filmische Kamera im Finale",
+      "tooltip": "Im Finale dreht sich die Kamera zur Sonne und folgt dem Schuss. Aus: Du behältst die Steuerung."
+    },
+    "showOnTitle": {
+      "type": "toggle",
+      "value": true,
+      "title": "Kanone im Hauptmenü",
+      "tooltip": "Zeigt die Aussendungseinheit am Himmel des Titelbildschirms."
+    },
+    "materialSource": {
+      "type": "selector",
+      "value": "Vessel",
+      "options": [
+        "Vessel",
+        "Sondenkanone",
+        "Einfach"
+      ],
+      "title": "Materialien der Hauptkanone",
+      "tooltip": "Vessel: die Materialien des Vessels. Sondenkanone: die der echten Sondenkanone. Einfach: schlichte Farben."
+    },
+    "wreckSeconds": {
+      "type": "slider",
+      "value": 300,
+      "min": 60,
+      "max": 600,
+      "title": "Ende 3: Zeit im Wrack (Sekunden)",
+      "tooltip": "Wie lange du im Ende \"Verwurzelt\" nach der Explosion noch lebst, bevor der Energiekern instabil wird."
+    },
+    "endingKeys": {
+      "type": "selector",
+      "value": "Strg + 1/2/3",
+      "options": [
+        "Strg + 1/2/3",
+        "1/2/3",
+        "Aus"
+      ],
+      "title": "Skip-Tasten für die Enden",
+      "tooltip": "Springt sofort zu einem Ende: 1 = Aussendung, 2 = Riss, 3 = Verwurzelt."
+    }
+  }
+}

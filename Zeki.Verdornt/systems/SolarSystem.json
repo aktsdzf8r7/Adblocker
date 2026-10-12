@@ -1,0 +1,36 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/star_system_schema.json",
+  "curiosities": [
+    {
+      "id": "ZEKIVD_ABSTURZ",
+      "color": {
+        "r": 120,
+        "g": 230,
+        "b": 140,
+        "a": 255
+      },
+      "highlightColor": {
+        "r": 200,
+        "g": 255,
+        "b": 200,
+        "a": 255
+      }
+    }
+  ],
+  "entryPositions": [
+    {
+      "id": "ZEKIVD_ABSTURZ",
+      "position": {
+        "x": 2900,
+        "y": -400
+      }
+    },
+    {
+      "id": "ZEKIVD_SCHLUND",
+      "position": {
+        "x": 3350,
+        "y": -400
+      }
+    }
+  ]
+}

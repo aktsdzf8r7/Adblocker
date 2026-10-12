@@ -1,0 +1,7 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/addon_manifest_schema.json",
+  "credits": [
+    "Zeki"
+  ],
+  "popupMessage": "Das Dornenlabyrinth: Zwischen Giant's Deep und Dark Bramble treibt ein einzelner Dornensamen. Er ruft auf der Frequenz Dornenrufe."
+}

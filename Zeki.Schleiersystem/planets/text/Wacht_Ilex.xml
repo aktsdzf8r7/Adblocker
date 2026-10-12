@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Recorder in der Sonnenwacht -->
+<NomaiObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/text_schema.xsd">
+  <TextBlock>
+    <ID>1</ID>
+    <Text>Hier ist Ilex, auf der Sonnenwacht. Von hier aus kann man den Schleier sehen: ein feiner Schimmer, der das ganze System umschließt.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>2</ID>
+    <ParentID>1</ParentID>
+    <Text>Der Stern ist darin gefangen wie wir. Er strahlt und strahlt, und niemand außerhalb sieht sein Licht.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>3</ID>
+    <ParentID>2</ParentID>
+    <Text>Ich frage mich, ob irgendwo jemand gerade in unsere Richtung schaut – und nur Dunkelheit sieht.</Text>
+  </TextBlock>
+  <ShipLogConditions>
+    <RevealFact>
+      <FactID>ZEKSCHLEIER_WACHT_ILEX</FactID>
+      <Condition>1,2,3</Condition>
+    </RevealFact>
+  </ShipLogConditions>
+</NomaiObject>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Kerrias letzte Aufzeichnung neben der Laterne -->
+<NomaiObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/text_schema.xsd">
+  <TextBlock>
+    <ID>1</ID>
+    <Text>Hier ist Kerria. Ich habe die Laterne erreicht. Melisse habe ich nicht mehr lebend gefunden.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>2</ID>
+    <ParentID>1</ParentID>
+    <Text>Ich habe Melisses Koordinaten des Schleiers in das Schiff eingegeben. Wer sie kennt, findet hierher zurück.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>3</ID>
+    <ParentID>2</ParentID>
+    <Text>Ich bleibe bei der Laterne. Sie war unser Zuhause. Jemand sollte bei ihr sein.</Text>
+  </TextBlock>
+  <ShipLogConditions>
+    <RevealFact>
+      <FactID>ZEKSCHLEIER_LATERNE_KERRIA</FactID>
+      <Condition>1,2,3</Condition>
+    </RevealFact>
+  </ShipLogConditions>
+</NomaiObject>

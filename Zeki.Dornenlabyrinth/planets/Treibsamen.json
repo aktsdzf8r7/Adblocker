@@ -1,0 +1,95 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+  "name": "Treibsamen",
+  "starSystem": "SolarSystem",
+  "Base": {
+    "surfaceSize": 80,
+    "surfaceGravity": 0,
+    "showMinimap": false
+  },
+  "Orbit": {
+    "primaryBody": "SUN",
+    "semiMajorAxis": 18000,
+    "inclination": 4,
+    "trueAnomaly": 230,
+    "longitudeOfAscendingNode": 40,
+    "isMoon": false
+  },
+  "MapMarker": {
+    "enabled": true
+  },
+  "ShipLog": {
+    "xmlFile": "planets/shiplogs/Treibsamen.xml",
+    "spriteFolder": "planets/assets/shiplog/entries"
+  },
+  "Bramble": {
+    "nodes": [
+      {
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "linksTo": "Labyrinth_Vorhof",
+        "name": "ZEKIDL_Treibsamen",
+        "scale": 1.0,
+        "fogTint": {
+          "r": 120,
+          "g": 200,
+          "b": 120,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 150,
+          "g": 255,
+          "b": 160,
+          "a": 255
+        },
+        "hasFogLight": true
+      }
+    ]
+  },
+  "Props": {
+    "signals": [
+      {
+        "frequency": "Dornenrufe",
+        "name": "Treibsamen",
+        "audio": "DB_Ambience_LP",
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "sourceRadius": 80,
+        "identificationRadius": 500,
+        "reveals": "ZEKIDL_TREIBSAMEN_SIGNAL",
+        "rename": "ZEKIDL_Signal"
+      }
+    ],
+    "entryLocation": [
+      {
+        "id": "ZEKIDL_TREIBSAMEN",
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        }
+      }
+    ]
+  },
+  "Volumes": {
+    "revealVolumes": [
+      {
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "radius": 400,
+        "reveals": [
+          "ZEKIDL_TREIBSAMEN_FOUND"
+        ]
+      }
+    ]
+  }
+}

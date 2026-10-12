@@ -1,0 +1,143 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+  "name": "Ausguck",
+  "starSystem": "Verdornt",
+  "Base": {
+    "surfaceSize": 25,
+    "surfaceGravity": 0,
+    "showMinimap": false
+  },
+  "Orbit": {
+    "staticPosition": {
+      "x": 0.0,
+      "y": 9000.0,
+      "z": 2500.0
+    },
+    "showOrbitLine": false
+  },
+  "MapMarker": {
+    "enabled": true
+  },
+  "Props": {
+    "entryLocation": [
+      {
+        "id": "ZEKIVD_AUSGUCK",
+        "position": {
+          "x": 0.0,
+          "y": 4.0,
+          "z": 0.0
+        }
+      }
+    ],
+    "translatorText": [
+      {
+        "type": "computer",
+        "xmlFile": "planets/text/Ausguck_System.xml",
+        "position": {
+          "x": -2.0,
+          "y": 0.0,
+          "z": -10.0
+        },
+        "rename": "VD_Ausguck_System",
+        "rotation": {
+          "x": 0.0,
+          "y": 20.0,
+          "z": 0.0
+        }
+      }
+    ],
+    "remotes": [
+      {
+        "id": "ZEKIVD_SYSTEM",
+        "decalPath": "planets/assets/remotes/system.png",
+        "platform": {
+          "position": {
+            "x": -7.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "rotation": {
+            "x": 0.0,
+            "y": 90.0,
+            "z": 0.0
+          },
+          "rename": "VD_Becken_System",
+          "reveals": "ZEKIVD_SYSTEM_BLICK"
+        }
+      },
+      {
+        "id": "ZEKIVD_LAGER",
+        "decalPath": "planets/assets/remotes/lager.png",
+        "stones": [
+          {
+            "position": {
+              "x": -5.5,
+              "y": 0.4,
+              "z": 9.526
+            },
+            "rename": "VD_Stein_Lager"
+          }
+        ]
+      }
+    ],
+    "warpReceivers": [
+      {
+        "frequency": "ZEKIVD_AUSGUCK",
+        "position": {
+          "x": 12.0,
+          "y": -21.9,
+          "z": 0.0
+        }
+      }
+    ],
+    "warpTransmitters": [
+      {
+        "frequency": "ZEKIVD_ERSTLING",
+        "position": {
+          "x": 8.0,
+          "y": 0.1,
+          "z": -8.0
+        }
+      }
+    ]
+  },
+  "Volumes": {
+    "revealVolumes": [
+      {
+        "position": {
+          "x": 0.0,
+          "y": 2.0,
+          "z": 0.0
+        },
+        "radius": 40,
+        "reveals": [
+          "ZEKIVD_AUSGUCK_FOUND",
+          "ZEKIVD_SYSTEM_BLICK"
+        ]
+      }
+    ],
+    "forces": {
+      "directionalVolumes": [
+        {
+          "position": {
+            "x": 0.0,
+            "y": -8.0,
+            "z": 0.0
+          },
+          "force": 9,
+          "normal": {
+            "x": 0.0,
+            "y": -1.0,
+            "z": 0.0
+          },
+          "shape": {
+            "type": "cylinder",
+            "radius": 20,
+            "height": 34
+          },
+          "rename": "Ausguck_Schwerkraft"
+        }
+      ]
+    }
+  }
+}

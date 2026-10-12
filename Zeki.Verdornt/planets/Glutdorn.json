@@ -1,0 +1,140 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+  "name": "Glutdorn",
+  "starSystem": "Verdornt",
+  "Base": {
+    "surfaceSize": 220,
+    "surfaceGravity": 9,
+    "showMinimap": false
+  },
+  "Orbit": {
+    "primaryBody": "Herzdorn",
+    "semiMajorAxis": 6500,
+    "inclination": 9,
+    "trueAnomaly": 150,
+    "eccentricity": 0,
+    "siderealPeriod": 0,
+    "tint": {
+      "r": 120,
+      "g": 230,
+      "b": 140,
+      "a": 255
+    }
+  },
+  "MapMarker": {
+    "enabled": true
+  },
+  "Bramble": {
+    "nodes": [
+      {
+        "position": {
+          "x": -100.612,
+          "y": -82.592,
+          "z": -225.085
+        },
+        "alignRadial": true,
+        "linksTo": "Glutpforte",
+        "name": "ZEKIVD_Glutdorn_Knoten",
+        "scale": 0.5,
+        "fogTint": {
+          "r": 255,
+          "g": 140,
+          "b": 80,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 255,
+          "g": 140,
+          "b": 80,
+          "a": 255
+        }
+      }
+    ]
+  },
+  "Props": {
+    "translatorText": [
+      {
+        "type": "computer",
+        "xmlFile": "planets/text/Glutwerk_Hyssop.xml",
+        "position": {
+          "x": -155.318,
+          "y": 79.662,
+          "z": -134.513
+        },
+        "rename": "VD_Glutwerk_Hyssop",
+        "alignRadial": true
+      },
+      {
+        "type": "computer",
+        "xmlFile": "planets/text/Glutwerk_Rue.xml",
+        "position": {
+          "x": -162.297,
+          "y": 74.882,
+          "z": -128.902
+        },
+        "rename": "VD_Glutwerk_Rue",
+        "alignRadial": true
+      },
+      {
+        "type": "recorder",
+        "xmlFile": "planets/text/Glutwerk_Aufzeichnung.xml",
+        "position": {
+          "x": -160.353,
+          "y": 70.104,
+          "z": -133.925
+        },
+        "rename": "VD_Glutwerk_Aufzeichnung",
+        "alignRadial": true
+      }
+    ]
+  },
+  "ShipLog": {
+    "xmlFile": "planets/shiplogs/Glutdorn.xml",
+    "spriteFolder": "planets/assets/shiplog/entries"
+  },
+  "Volumes": {
+    "revealVolumes": [
+      {
+        "position": {
+          "x": -160.525,
+          "y": 76.271,
+          "z": -134.697
+        },
+        "radius": 30,
+        "reveals": [
+          "ZEKIVD_GLUTWERK_FOUND"
+        ]
+      }
+    ],
+    "interactionVolumes": [
+      {
+        "position": {
+          "x": -82.642,
+          "y": -77.571,
+          "z": 188.134
+        },
+        "radius": 1.0,
+        "range": 2.5,
+        "prompt": "Wortkern berühren",
+        "condition": "ZEKIVD_WORTKERN_GLUT_1",
+        "persistent": true,
+        "reusable": false,
+        "rename": "VD_Wortkern_GLUT_1"
+      },
+      {
+        "position": {
+          "x": -190.474,
+          "y": 19.94,
+          "z": 106.681
+        },
+        "radius": 1.0,
+        "range": 2.5,
+        "prompt": "Wortkern berühren",
+        "condition": "ZEKIVD_WORTKERN_GLUT_2",
+        "persistent": true,
+        "reusable": false,
+        "rename": "VD_Wortkern_GLUT_2"
+      }
+    ]
+  }
+}

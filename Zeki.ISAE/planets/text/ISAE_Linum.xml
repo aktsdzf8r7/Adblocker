@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Linums Aufzeichnung im Kontrollmodul -->
+<NomaiObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/text_schema.xsd">
+  <TextBlock>
+    <ID>1</ID>
+    <Text>Hier spricht Linum. Ich habe Sedums Rechnungen geprüft. Sie stimmen. Aber er hat etwas übersehen.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>2</ID>
+    <ParentID>1</ParentID>
+    <Text>Auf dem Aschezwilling bauen die anderen ein Projekt, das die Energie der sterbenden Sonne einfängt, um Erinnerungen in die Vergangenheit zu schicken.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>3</ID>
+    <ParentID>2</ParentID>
+    <Text>Nimmt die Aussendungseinheit diese Energie zuerst, gibt es keine Supernova mehr. Keine Supernova, kein Projekt. Keine Schleife.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>4</ID>
+    <ParentID>3</ParentID>
+    <Text>Wer in der Schleife gefangen ist, kehrt dann nicht zurück. Das Universum endet – aber er endet vor ihm.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>5</ID>
+    <ParentID>4</ParentID>
+    <Text>Ich habe heimlich eine Abschaltung eingebaut: Trenne die Phasenkoppler auf allen drei Fokuskanonen. Dann erwacht der Hauptschalter hier im Kontrollmodul.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>6</ID>
+    <ParentID>5</ParentID>
+    <Text>Sedum hat sich in die Kernkammer zurückgezogen. Die Luke liegt in der Panzerung unter der ersten Schiene.</Text>
+  </TextBlock>
+  <ShipLogConditions>
+    <RevealFact>
+      <FactID>ZEKISAE_GEFAHR</FactID>
+      <Condition>1,2,3,4</Condition>
+    </RevealFact>
+    <RevealFact>
+      <FactID>ZEKISAE_ANLEITUNG</FactID>
+      <Condition>5</Condition>
+    </RevealFact>
+    <RevealFact>
+      <FactID>ZEKISAE_KERN_RUMOR</FactID>
+      <Condition>6</Condition>
+    </RevealFact>
+    <RevealFact>
+      <FactID>ZEKISAE_SEDUM_RUMOR</FactID>
+      <Condition>1</Condition>
+    </RevealFact>
+  </ShipLogConditions>
+</NomaiObject>

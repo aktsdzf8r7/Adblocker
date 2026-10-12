@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Recorder an der abgestürzten Sonde (Schleiersignal, Sonnensystem) -->
+<NomaiObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/text_schema.xsd">
+  <TextBlock>
+    <ID>1</ID>
+    <Text>[SIGNAL SCHWACH] … wiederhole … Hier spricht Ilex vom Clan des Zweiten Echos. Diese Sonde trägt unsere letzte Nachricht.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>2</ID>
+    <ParentID>1</ParentID>
+    <Text>An unsere Geschwister auf dem großen Schiff: Wir sind nicht dem Auge gefolgt, sondern seinem Echo. Es hat uns in ein System geführt, das von außen niemand sehen kann. Wir nennen es den Schleier.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>3</ID>
+    <ParentID>2</ParentID>
+    <Text>Der Schleier lässt alles herein, aber nichts hinaus. Unser Schiff, die Laterne, verlor beim Eintritt seinen Warpkern und wurde von einem Dornenplaneten verschlungen. Nur unsere Kapseln entkamen. [DATENFEHLER]</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>4</ID>
+    <ParentID>3</ParentID>
+    <Text>Drei Welten umkreisen den blassen Stern, dazu der Dorn. Auf der inneren bündelt Tansy das Sternenlicht. Auf der Welt der stillen Wasser bewahrt Sorrel unser Archiv. Die äußere zerbricht – in ihrem Herzen liegt der Grund für all das.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>5</ID>
+    <ParentID>4</ParentID>
+    <Text>Uns bleibt nicht viel Zeit. [SIGNALVERLUST] … das System vergisst, wo es ist, wenn niemand von außen hinsieht. Es braucht ein Auge, das nicht zu uns gehört.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>6</ID>
+    <ParentID>5</ParentID>
+    <Text>Die Koordinaten des Schleiers sind in dieser Sonde gespeichert. Ein Warpantrieb kann ihnen folgen. Wer auch immer du bist: Bitte komm. Sieh uns an. [AUFZEICHNUNG ENDE]</Text>
+  </TextBlock>
+  <ShipLogConditions>
+    <RevealFact>
+      <FactID>ZEKSCHLEIER_RECORDING_1</FactID>
+      <Condition>1,2</Condition>
+    </RevealFact>
+    <RevealFact>
+      <FactID>ZEKSCHLEIER_RECORDING_2</FactID>
+      <Condition>1,2,3,4</Condition>
+    </RevealFact>
+    <RevealFact>
+      <FactID>ZEKSCHLEIER_WARP_UNLOCKED</FactID>
+      <Condition>1,2,3,4,5,6</Condition>
+    </RevealFact>
+  </ShipLogConditions>
+</NomaiObject>

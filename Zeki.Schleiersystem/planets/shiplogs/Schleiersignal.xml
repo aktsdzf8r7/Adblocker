@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Logbuch im Sonnensystem: der kleine Mond "Schleiersignal" über Timber Hearth -->
+<AstroObjectEntry xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/shiplog_schema.xsd">
+  <ID>SCHLEIERSIGNAL</ID>
+  <Entry>
+    <ID>ZEKSCHLEIER_SIGNAL</ID>
+    <Name>Das Schleier-Echo</Name>
+    <IsCuriosity/>
+    <RumorFact>
+      <ID>ZEKSCHLEIER_ECHO_RUMOR</ID>
+      <RumorName>Ein Licht über Timber Hearth</RumorName>
+      <Text>Über Timber Hearth kreist ein kleiner Mond, von dem ein heller Lichtstrahl ins All zeigt. Mein Signalskop empfängt von dort ein Signal auf einer Frequenz, die ich nicht kenne.</Text>
+    </RumorFact>
+    <ExploreFact>
+      <ID>ZEKSCHLEIER_SONDE</ID>
+      <Text>Auf dem kleinen Mond ist eine Nomai-Sonde abgestürzt. Sie sendet noch immer.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKSCHLEIER_SONDE_ELF</ID>
+      <Text>Die Sonde ist die elfte, die ein Nomai namens Borago gebaut hat. Sie sollte einen „Schleier“ durchdringen und wurde auf das Signal des Auges ausgerichtet.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKSCHLEIER_RECORDING_1</ID>
+      <Text>Die Sonde trägt eine Nachricht von Ilex vom „Clan des Zweiten Echos“. Diese Nomai folgten nicht dem Signal des Auges, sondern einem Echo – und landeten in einem System, das von außen niemand sehen kann.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKSCHLEIER_RECORDING_2</ID>
+      <Text>Drei Welten umkreisen dort einen blassen Stern: eine innere mit einem Lichtbündler, eine Wasserwelt mit einem Archiv und eine äußere, die zerbricht. Der Schleier lässt alles herein, aber nichts hinaus.</Text>
+    </ExploreFact>
+    <ExploreFact>
+      <ID>ZEKSCHLEIER_WARP_UNLOCKED</ID>
+      <Text>Die Sonde enthält die Koordinaten des Schleiersystems. Ich kann es jetzt anfliegen: im Schiffslogbuch den Interstellar-Modus öffnen, das Schleiersystem wählen und den Autopiloten aktivieren.</Text>
+    </ExploreFact>
+  </Entry>
+</AstroObjectEntry>

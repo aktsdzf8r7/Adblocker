@@ -1,0 +1,219 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/star_system_schema.json",
+  "initialReveal": [
+    "ZEKISAE_SIGNATUR"
+  ],
+  "curiosities": [
+    {
+      "id": "ZEKISAE_ISAE",
+      "color": {
+        "r": 235,
+        "g": 90,
+        "b": 50,
+        "a": 255
+      },
+      "highlightColor": {
+        "r": 255,
+        "g": 170,
+        "b": 120,
+        "a": 255
+      }
+    },
+    {
+      "id": "ZEKISAE_KEIMDORN",
+      "color": {
+        "r": 110,
+        "g": 255,
+        "b": 140,
+        "a": 255
+      },
+      "highlightColor": {
+        "r": 200,
+        "g": 255,
+        "b": 190,
+        "a": 255
+      }
+    }
+  ],
+  "entryPositions": [
+    {
+      "id": "ZEKISAE_ISAE",
+      "position": {
+        "x": 1650,
+        "y": 450
+      }
+    },
+    {
+      "id": "ZEKISAE_KONTROLLE",
+      "position": {
+        "x": 2080,
+        "y": 640
+      }
+    },
+    {
+      "id": "ZEKISAE_KERN",
+      "position": {
+        "x": 2080,
+        "y": 260
+      }
+    },
+    {
+      "id": "ZEKISAE_START",
+      "position": {
+        "x": 2500,
+        "y": 780
+      }
+    },
+    {
+      "id": "ZEKISAE_NAVI",
+      "position": {
+        "x": 2500,
+        "y": 470
+      }
+    },
+    {
+      "id": "ZEKISAE_FOKUS",
+      "position": {
+        "x": 1650,
+        "y": 880
+      }
+    },
+    {
+      "id": "ZEKISAE_SEDUM",
+      "position": {
+        "x": 1650,
+        "y": 30
+      }
+    },
+    {
+      "id": "ZEKISAE_SPUREN",
+      "position": {
+        "x": 1220,
+        "y": 450
+      }
+    },
+    {
+      "id": "ZEKISAE_PULSKERN",
+      "position": {
+        "x": 2500,
+        "y": 160
+      }
+    },
+    {
+      "id": "ZEKISAE_WURZELN",
+      "position": {
+        "x": 2080,
+        "y": -60
+      }
+    },
+    {
+      "id": "ZEKISAE_KEIMDORN",
+      "position": {
+        "x": 2950,
+        "y": 450
+      }
+    },
+    {
+      "id": "ZEKISAE_SAMENKAMMER",
+      "position": {
+        "x": 3380,
+        "y": 620
+      }
+    },
+    {
+      "id": "ZEKISAE_SAMENKERN",
+      "position": {
+        "x": 3380,
+        "y": 260
+      }
+    }
+  ],
+  "conditionalChecks": [
+    {
+      "check": {
+        "allFactsRevealed": [
+          "ZEKISAE_FOUND"
+        ]
+      },
+      "then": {
+        "setPersistentConditions": [
+          "ZEKISAE_ENTDECKT"
+        ]
+      }
+    },
+    {
+      "check": {
+        "allPersistentConditionsSet": [
+          "ZEKISAE_KOPPLER_A",
+          "ZEKISAE_KOPPLER_B",
+          "ZEKISAE_KOPPLER_C"
+        ]
+      },
+      "then": {
+        "setPersistentConditions": [
+          "ZEKISAE_KOPPLER_ALLE"
+        ]
+      }
+    },
+    {
+      "check": {
+        "allPersistentConditionsSet": [
+          "ZEKISAE_KOPPLER_A"
+        ]
+      },
+      "then": {
+        "revealFacts": [
+          "ZEKISAE_KOPPLER_A_FACT"
+        ]
+      }
+    },
+    {
+      "check": {
+        "allPersistentConditionsSet": [
+          "ZEKISAE_KOPPLER_B"
+        ]
+      },
+      "then": {
+        "revealFacts": [
+          "ZEKISAE_KOPPLER_B_FACT"
+        ]
+      }
+    },
+    {
+      "check": {
+        "allPersistentConditionsSet": [
+          "ZEKISAE_KOPPLER_C"
+        ]
+      },
+      "then": {
+        "revealFacts": [
+          "ZEKISAE_KOPPLER_C_FACT"
+        ]
+      }
+    },
+    {
+      "check": {
+        "allPersistentConditionsSet": [
+          "ZEKISAE_DEAKTIVIERT"
+        ]
+      },
+      "then": {
+        "revealFacts": [
+          "ZEKISAE_ABGESCHALTET"
+        ]
+      }
+    },
+    {
+      "check": {
+        "allConditionsSet": [
+          "ZEKISAE_SAMEN_EINGESETZT"
+        ]
+      },
+      "then": {
+        "revealFacts": [
+          "ZEKISAE_WURZELN_FOUND"
+        ]
+      }
+    }
+  ]
+}

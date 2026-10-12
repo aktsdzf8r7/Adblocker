@@ -1,0 +1,12 @@
+{
+  "$schema": "https://raw.githubusercontent.com/ow-mods/owml/master/schemas/manifest_schema.json",
+  "filename": "ZekiISAE.dll",
+  "author": "Zeki",
+  "name": "Die Aussendungseinheit",
+  "uniqueName": "Zeki.ISAE",
+  "version": "1.5.1",
+  "owmlVersion": "2.15.5",
+  "dependencies": [
+    "xen.NewHorizons"
+  ]
+}

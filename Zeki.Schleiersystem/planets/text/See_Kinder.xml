@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Bodenschrift auf Yarrows Insel (Kinderschrift) -->
+<NomaiObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/text_schema.xsd">
+  <TextBlock>
+    <ID>1</ID>
+    <Text>Yarrow: Myrte sagt, die Sterne draußen gibt es gar nicht mehr, weil wir sie nicht sehen können.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>2</ID>
+    <ParentID>1</ParentID>
+    <Text>Myrte: Das hab ich nicht gesagt! Ich hab gesagt, VIELLEICHT gibt es sie nicht mehr.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>3</ID>
+    <ParentID>2</ParentID>
+    <Text>Yarrow: Ilex sagt, sie sind noch da. Sie können uns nur nicht sehen. Das ist etwas anderes.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>4</ID>
+    <ParentID>3</ParentID>
+    <Text>Myrte: Und wenn uns niemand sieht – sind wir dann auch nicht mehr da?</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>5</ID>
+    <ParentID>4</ParentID>
+    <Text>Yarrow: Doch. Wir sehen uns ja gegenseitig. Das zählt auch.</Text>
+  </TextBlock>
+  <ShipLogConditions>
+    <RevealFact>
+      <FactID>ZEKSCHLEIER_SEE_KINDER</FactID>
+      <Condition>1,2,3,4,5</Condition>
+    </RevealFact>
+  </ShipLogConditions>
+</NomaiObject>

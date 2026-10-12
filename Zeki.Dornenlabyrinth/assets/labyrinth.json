@@ -1,0 +1,181 @@
+{
+  "eingang": "ZEKIDL_Treibsamen",
+  "raeume": {
+    "Vorhof": {
+      "body": "Labyrinth_Vorhof",
+      "knoten": [
+        "ZEKIDL_Vorhof_K0",
+        "ZEKIDL_Vorhof_K1",
+        "ZEKIDL_Vorhof_K2"
+      ],
+      "samen": [
+        "ZEKIDL_Vorhof_S0",
+        "ZEKIDL_Vorhof_S1"
+      ]
+    },
+    "Dornengang": {
+      "body": "Labyrinth_Dornengang",
+      "knoten": [
+        "ZEKIDL_Dornengang_K0",
+        "ZEKIDL_Dornengang_K1",
+        "ZEKIDL_Dornengang_K2",
+        "ZEKIDL_Dornengang_K3"
+      ],
+      "samen": [
+        "ZEKIDL_Dornengang_S0",
+        "ZEKIDL_Dornengang_S1",
+        "ZEKIDL_Dornengang_S2"
+      ]
+    },
+    "Dornenwald": {
+      "body": "Labyrinth_Dornenwald",
+      "knoten": [
+        "ZEKIDL_Dornenwald_K0",
+        "ZEKIDL_Dornenwald_K1",
+        "ZEKIDL_Dornenwald_K2",
+        "ZEKIDL_Dornenwald_K3"
+      ],
+      "samen": [
+        "ZEKIDL_Dornenwald_S0",
+        "ZEKIDL_Dornenwald_S1",
+        "ZEKIDL_Dornenwald_S2"
+      ]
+    },
+    "Hitzekammer": {
+      "body": "Labyrinth_Hitzekammer",
+      "knoten": [
+        "ZEKIDL_Hitzekammer_K0"
+      ],
+      "samen": [
+        "ZEKIDL_Hitzekammer_S0",
+        "ZEKIDL_Hitzekammer_S1",
+        "ZEKIDL_Hitzekammer_S2",
+        "ZEKIDL_Hitzekammer_S3",
+        "ZEKIDL_Hitzekammer_S4",
+        "ZEKIDL_Hitzekammer_S5"
+      ]
+    },
+    "Frostkammer": {
+      "body": "Labyrinth_Frostkammer",
+      "knoten": [
+        "ZEKIDL_Frostkammer_K0",
+        "ZEKIDL_Frostkammer_K1",
+        "ZEKIDL_Frostkammer_K2"
+      ],
+      "samen": [
+        "ZEKIDL_Frostkammer_S0",
+        "ZEKIDL_Frostkammer_S1"
+      ]
+    },
+    "Nest": {
+      "body": "Labyrinth_Nest",
+      "knoten": [
+        "ZEKIDL_Nest_K0",
+        "ZEKIDL_Nest_K1",
+        "ZEKIDL_Nest_K2"
+      ],
+      "samen": [
+        "ZEKIDL_Nest_S0"
+      ]
+    },
+    "Samenkammer": {
+      "body": "Labyrinth_Samenkammer",
+      "knoten": [
+        "ZEKIDL_Samenkammer_K0"
+      ],
+      "samen": [
+        "ZEKIDL_Samenkammer_S0",
+        "ZEKIDL_Samenkammer_S1",
+        "ZEKIDL_Samenkammer_S2",
+        "ZEKIDL_Samenkammer_S3",
+        "ZEKIDL_Samenkammer_S4",
+        "ZEKIDL_Samenkammer_S5",
+        "ZEKIDL_Samenkammer_S6",
+        "ZEKIDL_Samenkammer_S7"
+      ]
+    },
+    "Nebelkammer": {
+      "body": "Labyrinth_Nebelkammer",
+      "knoten": [
+        "ZEKIDL_Nebelkammer_K0",
+        "ZEKIDL_Nebelkammer_K1",
+        "ZEKIDL_Nebelkammer_K2"
+      ],
+      "samen": [
+        "ZEKIDL_Nebelkammer_S0",
+        "ZEKIDL_Nebelkammer_S1"
+      ]
+    },
+    "Leere": {
+      "body": "Labyrinth_Leere",
+      "knoten": [
+        "ZEKIDL_Leere_K0"
+      ],
+      "samen": []
+    },
+    "Stroemung": {
+      "body": "Labyrinth_Stroemung",
+      "knoten": [
+        "ZEKIDL_Stroemung_K0",
+        "ZEKIDL_Stroemung_K1",
+        "ZEKIDL_Stroemung_K2"
+      ],
+      "samen": [
+        "ZEKIDL_Stroemung_S0",
+        "ZEKIDL_Stroemung_S1"
+      ]
+    },
+    "Echokammer": {
+      "body": "Labyrinth_Echokammer",
+      "knoten": [
+        "ZEKIDL_Echokammer_K0",
+        "ZEKIDL_Echokammer_K1",
+        "ZEKIDL_Echokammer_K2"
+      ],
+      "samen": [
+        "ZEKIDL_Echokammer_S0",
+        "ZEKIDL_Echokammer_S1"
+      ]
+    },
+    "Wrack": {
+      "body": "Labyrinth_Wrack",
+      "knoten": [
+        "ZEKIDL_Wrack_K0",
+        "ZEKIDL_Wrack_K1",
+        "ZEKIDL_Wrack_K2"
+      ],
+      "samen": [
+        "ZEKIDL_Wrack_S0"
+      ]
+    },
+    "Spiegelkammer": {
+      "body": "Labyrinth_Spiegelkammer",
+      "knoten": [
+        "ZEKIDL_Spiegelkammer_K0",
+        "ZEKIDL_Spiegelkammer_K1",
+        "ZEKIDL_Spiegelkammer_K2",
+        "ZEKIDL_Spiegelkammer_K3"
+      ],
+      "samen": []
+    },
+    "Herzpfad": {
+      "body": "Labyrinth_Herzpfad",
+      "knoten": [
+        "ZEKIDL_Herzpfad_K0",
+        "ZEKIDL_Herzpfad_K1",
+        "ZEKIDL_Herzpfad_K2"
+      ],
+      "samen": [
+        "ZEKIDL_Herzpfad_S0",
+        "ZEKIDL_Herzpfad_S1"
+      ]
+    },
+    "Herzkammer": {
+      "body": "Labyrinth_Herzkammer",
+      "knoten": [
+        "ZEKIDL_Herzkammer_K0"
+      ],
+      "samen": []
+    }
+  }
+}

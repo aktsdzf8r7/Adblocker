@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Computer auf Fokuskanone Alpha -->
+<NomaiObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/text_schema.xsd">
+  <TextBlock>
+    <ID>1</ID>
+    <Text>FOKUSKANONE ALPHA. Aufgabe: den Energiestrom des Sterns bündeln und in die Hauptkanone lenken.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>2</ID>
+    <ParentID>1</ParentID>
+    <Text>Ausrichtung: auf den Stern. Phasenkoppler: verbunden, auf dem Deck.</Text>
+  </TextBlock>
+  <TextBlock>
+    <ID>3</ID>
+    <ParentID>2</ParentID>
+    <Text>Wartungsnotiz (Linum): Koppler 1 offen gelassen. Trennen löscht die rote Leitung zur Hauptkanone.</Text>
+  </TextBlock>
+  <ShipLogConditions>
+    <RevealFact>
+      <FactID>ZEKISAE_FOKUS_ZWECK</FactID>
+      <Condition>1,2</Condition>
+    </RevealFact>
+    <RevealFact>
+      <FactID>ZEKISAE_FOKUS_LEITUNG</FactID>
+      <Condition>3</Condition>
+    </RevealFact>
+  </ShipLogConditions>
+</NomaiObject>

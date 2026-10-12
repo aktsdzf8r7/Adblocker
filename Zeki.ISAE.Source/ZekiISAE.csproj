@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>ZekiISAE</AssemblyName>
+    <RootNamespace>ZekiISAE</RootNamespace>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <NoWarn>MSB3270</NoWarn>
+    <DebugType>portable</DebugType>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="OWML" Version="2.15.5" />
+    <PackageReference Include="OuterWildsGameLibs" Version="1.1.16.1372" />
+  </ItemGroup>
+  <!-- the built DLL is copied next to the NH configs of the mod -->
+  <ItemGroup>
+    <!-- the ship log layout rule, tested in Zeki.Verdornt.Tests -->
+    <Compile Include="..\Zeki.Verdornt.Source\Logic\ShipLogLayout.cs" Link="Logic\ShipLogLayout.cs" />
+  </ItemGroup>
+  <Target Name="CopyToMod" AfterTargets="Build">
+    <Copy SourceFiles="$(OutDir)ZekiISAE.dll" DestinationFolder="..\Zeki.ISAE" />
+  </Target>
+</Project>

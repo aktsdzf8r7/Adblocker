@@ -1,0 +1,129 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/star_system_schema.json",
+  "enableTimeLoop": true,
+  "loopDuration": 22,
+  "canEnterViaWarpDrive": false,
+  "canExitViaWarpDrive": true,
+  "destroyStockPlanets": true,
+  "respawnHere": false,
+  "startHere": false,
+  "curiosities": [
+    {
+      "id": "ZEKIVD_LAGER",
+      "color": {
+        "r": 120,
+        "g": 230,
+        "b": 140,
+        "a": 255
+      },
+      "highlightColor": {
+        "r": 200,
+        "g": 255,
+        "b": 200,
+        "a": 255
+      }
+    },
+    {
+      "id": "ZEKIVD_VIER",
+      "color": {
+        "r": 255,
+        "g": 170,
+        "b": 210,
+        "a": 255
+      },
+      "highlightColor": {
+        "r": 255,
+        "g": 220,
+        "b": 235,
+        "a": 255
+      }
+    },
+    {
+      "id": "ZEKIVD_KERNE",
+      "color": {
+        "r": 150,
+        "g": 200,
+        "b": 255,
+        "a": 255
+      },
+      "highlightColor": {
+        "r": 210,
+        "g": 235,
+        "b": 255,
+        "a": 255
+      }
+    }
+  ],
+  "entryPositions": [
+    {
+      "id": "ZEKIVD_LAGER",
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "ZEKIVD_KERNE",
+      "position": {
+        "x": -550,
+        "y": 0
+      }
+    },
+    {
+      "id": "ZEKIVD_AUSGUCK",
+      "position": {
+        "x": 550,
+        "y": 260
+      }
+    },
+    {
+      "id": "ZEKIVD_NETZ",
+      "position": {
+        "x": 550,
+        "y": -260
+      }
+    },
+    {
+      "id": "ZEKIVD_VIER",
+      "position": {
+        "x": -550,
+        "y": 460
+      }
+    },
+    {
+      "id": "ZEKIVD_GLUTWERK",
+      "position": {
+        "x": 0,
+        "y": 620
+      }
+    },
+    {
+      "id": "ZEKIVD_LABOR",
+      "position": {
+        "x": -460,
+        "y": 1020
+      }
+    },
+    {
+      "id": "ZEKIVD_SPRACHE",
+      "position": {
+        "x": -980,
+        "y": 1020
+      }
+    },
+    {
+      "id": "ZEKIVD_TREIBSTATION",
+      "position": {
+        "x": 460,
+        "y": 1020
+      }
+    },
+    {
+      "id": "ZEKIVD_OBSERVATORIUM",
+      "position": {
+        "x": 0,
+        "y": 1420
+      }
+    }
+  ]
+}

@@ -1,0 +1,175 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/body_schema.json",
+  "name": "Labyrinth_Nest",
+  "starSystem": "SolarSystem",
+  "canShowOnTitle": false,
+  "Orbit": {
+    "staticPosition": {
+      "x": -24000.0,
+      "y": -90000.0,
+      "z": -12000.0
+    }
+  },
+  "ShipLog": {
+    "mapMode": {
+      "remove": true
+    }
+  },
+  "Bramble": {
+    "dimension": {
+      "radius": 400,
+      "fogTint": {
+        "r": 80,
+        "g": 14,
+        "b": 14,
+        "a": 255
+      },
+      "fogDensity": 7.0,
+      "linksTo": "ZEKIDL_Treibsamen",
+      "vinePrefab": "smallNest"
+    },
+    "nodes": [
+      {
+        "position": {
+          "x": 130.745,
+          "y": 146.667,
+          "z": 98.968
+        },
+        "linksTo": "Labyrinth_Vorhof",
+        "name": "ZEKIDL_Nest_K0",
+        "scale": 0.5,
+        "fogTint": {
+          "r": 80,
+          "g": 14,
+          "b": 14,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 190,
+          "g": 215,
+          "b": 170,
+          "a": 255
+        },
+        "preventRecursionCrash": true
+      },
+      {
+        "position": {
+          "x": -219.035,
+          "y": 0.0,
+          "z": 20.581
+        },
+        "linksTo": "Labyrinth_Vorhof",
+        "name": "ZEKIDL_Nest_K1",
+        "scale": 0.5,
+        "fogTint": {
+          "r": 80,
+          "g": 14,
+          "b": 14,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 190,
+          "g": 215,
+          "b": 170,
+          "a": 255
+        },
+        "preventRecursionCrash": true
+      },
+      {
+        "position": {
+          "x": 110.02,
+          "y": -146.667,
+          "z": -121.592
+        },
+        "linksTo": "Labyrinth_Vorhof",
+        "name": "ZEKIDL_Nest_K2",
+        "scale": 0.5,
+        "fogTint": {
+          "r": 80,
+          "g": 14,
+          "b": 14,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 190,
+          "g": 215,
+          "b": 170,
+          "a": 255
+        },
+        "preventRecursionCrash": true
+      },
+      {
+        "position": {
+          "x": -161.784,
+          "y": 0.0,
+          "z": -45.276
+        },
+        "linksTo": "Labyrinth_Vorhof",
+        "name": "ZEKIDL_Nest_S0",
+        "isSeed": true,
+        "scale": 1.0,
+        "fogTint": {
+          "r": 80,
+          "g": 14,
+          "b": 14,
+          "a": 255
+        },
+        "lightTint": {
+          "r": 190,
+          "g": 215,
+          "b": 170,
+          "a": 255
+        },
+        "hasFogLight": true,
+        "preventRecursionCrash": true
+      }
+    ]
+  },
+  "Props": {
+    "details": [
+      {
+        "path": "DB_HubDimension_Body/Sector_HubDimension/Interactables_HubDimension/Anglerfish_Body",
+        "position": {
+          "x": 110.0,
+          "y": -50.0,
+          "z": 60.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 200.0,
+          "z": 0.0
+        },
+        "rename": "ZEKIDL_Anglerfisch_A"
+      },
+      {
+        "path": "DB_HubDimension_Body/Sector_HubDimension/Interactables_HubDimension/Anglerfish_Body",
+        "position": {
+          "x": -90.0,
+          "y": 70.0,
+          "z": -110.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 30.0,
+          "z": 0.0
+        },
+        "rename": "ZEKIDL_Anglerfisch_B"
+      }
+    ]
+  },
+  "Volumes": {
+    "revealVolumes": [
+      {
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "radius": 400,
+        "reveals": [
+          "ZEKIDL_NEST_FOUND"
+        ]
+      }
+    ]
+  }
+}
