@@ -20,3 +20,18 @@ public static class WarpPatch
         }
     }
 }
+
+/// <summary>
+/// New Horizons makes every seed scout-only (SphericalFogWarpVolume.IsProbeOnly). The baby seeds of the labyrinth are
+/// real exits, so the player may fly through them too.
+/// </summary>
+[HarmonyPatch(typeof(SphericalFogWarpVolume), nameof(SphericalFogWarpVolume.IsProbeOnly))]
+public static class SeedPatch
+{
+    [HarmonyPostfix]
+    [HarmonyPriority(Priority.Last)]
+    public static void Postfix(SphericalFogWarpVolume __instance, ref bool __result)
+    {
+        if (__result && Labyrinth.IsPlayerSeed(__instance)) __result = false;
+    }
+}

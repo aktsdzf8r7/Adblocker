@@ -61,6 +61,12 @@ public static class Labyrinth
     private static readonly Dictionary<OuterFogWarpVolume, Rig> OuterIndex = new();
     private static readonly OuterFogWarpVolume[] Vanilla = new OuterFogWarpVolume[MazeGraph.VanillaBodies.Length];
     private static InnerFogWarpVolume _entrance;
+    /// <summary>The target New Horizons gave every node (the Vorhof): where a node leads when its target is missing.</summary>
+    private static readonly Dictionary<InnerFogWarpVolume, OuterFogWarpVolume> Original = new();
+    /// <summary>Our baby seeds: New Horizons makes seeds scout-only, in the labyrinth the player flies through them.</summary>
+    private static readonly HashSet<FogWarpVolume> PlayerSeeds = new();
+
+    public static bool IsPlayerSeed(FogWarpVolume volume) => volume != null && PlayerSeeds.Contains(volume);
 
     // the ship and the player inside it can fly through the same volume together: decide once
     private static FogWarpVolume _lastVolume;
@@ -74,6 +80,8 @@ public static class Labyrinth
         Walk.Reset();
         Rigs.Clear();
         NodeIndex.Clear();
+        Original.Clear();
+        PlayerSeeds.Clear();
         OuterIndex.Clear();
         Array.Clear(Vanilla, 0, Vanilla.Length);
         _entrance = null;
@@ -149,7 +157,23 @@ public static class Labyrinth
         for (var i = 0; i < rig.Nodes.Length; i++)
             if (rig.Nodes[i] != null) NodeIndex[rig.Nodes[i]] = (rig, i, false);
         for (var i = 0; i < rig.Seeds.Length; i++)
-            if (rig.Seeds[i] != null) NodeIndex[rig.Seeds[i]] = (rig, i, true);
+            if (rig.Seeds[i] != null)
+            {
+                NodeIndex[rig.Seeds[i]] = (rig, i, true);
+                OpenSeed(rig.Seeds[i]);
+            }
+        foreach (var n in NodeIndex.Keys.Where(n => !Original.ContainsKey(n))) Original[n] = n._linkedOuterWarpVolume;
+    }
+
+    /// <summary>
+    /// A seed the player can fly into: not scout-only (WarpPatch), and its solid shell does not stop the player
+    /// before the warp radius (the trigger volumes stay).
+    /// </summary>
+    private static void OpenSeed(InnerFogWarpVolume seed)
+    {
+        PlayerSeeds.Add(seed);
+        foreach (var c in seed.GetComponentsInChildren<Collider>(true))
+            if (!c.isTrigger) c.enabled = false;
     }
 
     private static IEnumerator AfterNewHorizons(ZekiDornenlabyrinth mod)
@@ -197,7 +221,7 @@ public static class Labyrinth
                 ExitColor.Gruen => Rigs.TryGetValue(RoomType.Vorhof, out var home) ? home.Outer : null,
                 _ => Rigs.TryGetValue(MazeGraph.Get(exit.Target).Type, out var next) ? next.Outer : null,
             };
-            if (target != null) node._linkedOuterWarpVolume = target;
+            node._linkedOuterWarpVolume = target != null ? target : Original.TryGetValue(node, out var nh) ? nh : node._linkedOuterWarpVolume;
             NodeTint.Apply(_mod, node, exit.Color);
             if (exit.Color != ExitColor.Normal) colours.Add($"{(seed ? "S" : "K")}{slot}={exit.Color}");
         }

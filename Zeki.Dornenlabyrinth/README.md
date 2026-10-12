@@ -32,7 +32,7 @@ Um besondere Knoten liegt ein leuchtender **Farbkranz**. Normale Knoten haben ei
 
 ## Die Räume
 
-Es gibt erwachsene Knoten und Baby-Samen. Beide führen weiter. Beim Betreten zeigt eine Meldung den Raum und seine Tiefe.
+Es gibt erwachsene Knoten und Baby-Samen. Beide führen weiter. Anders als in Dark Bramble kannst du hier auch selbst in einen Baby-Samen fliegen, nicht nur der Scout. Am besten geht das im Raumanzug, denn die Samen sind nur 10 m groß. Beim Betreten zeigt eine Meldung den Raum und seine Tiefe.
 
 | Raum | Was dort ist |
 |---|---|
@@ -75,6 +75,7 @@ Wichtig ist, was das OWML-Log schreibt. Die Mod schreibt viel mit, beim Laden un
 - [ ] Der Treibsamen führt in den Vorhof, und aus dem Vorhof führt die Wand wieder hinaus.
 - [ ] Im Log steht `Labyrinth: 15 von 15 Räumen, 74 Knoten, 7 von 7 Dark-Bramble-Dimensionen.`
 - [ ] Jeder Knoten hat einen Farbkranz, und die Farben passen zur Tabelle.
+- [ ] Im Raumanzug kommt man durch Baby-Samen, nicht nur der Scout.
 - [ ] Durch die Wand zurück: Man kommt aus dem Knoten heraus, durch den man kam.
 - [ ] Die Hitzestufe steigt in der Hitzekammer (Meldung „HITZE STUFE n“) und fällt beim Verlassen.
 - [ ] Gelbe Knoten führen in Dark Bramble.

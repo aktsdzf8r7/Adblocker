@@ -48,7 +48,14 @@ public static class NodeTint
         {
             mod.Log($"Knoten {node.name} einfärben: {e.Message}", true);
         }
-        Ring(mod, node, color);
+        try
+        {
+            Ring(mod, node, color);
+        }
+        catch (Exception e)
+        {
+            mod.Log($"Farbkranz um {node.name}: {e.Message}", true);
+        }
     }
 
     /// <summary>The colour ring: built once per node, scaled to its warp radius; normal nodes get a faint one.</summary>
